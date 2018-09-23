@@ -1,0 +1,83 @@
+<div class="modal-header mBottom">
+    <h3 class="modal-title">Manage stats and charts</h3>
+</div>
+
+<form  name="addChart" class="form-inline manageCustomer formStylePadding">
+    <div class="form-style">
+
+        <div class="form-group col-md-3">
+            <label for="exampleInputPassword3">1. Give your report a name.<b style="color: red">*</b></label>
+            <input type="text" class="form-control" required    ng-model="selectedChart.stat_table_name">
+            <span style="color: red"    class="validationMsg"   >{{chart_name_valid}}</span>
+        </div> 
+
+        <div class="form-group col-md-3">
+            <label>2. Choose the data you want to analyze.<b style="color: red">*</b></label>
+            <select class="form-control"  required  ng-options="a.field_name as a.field_label for a in field1array"
+                    ng-model="selectedChart.field_id1">              
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label>3. Add a second data type to your analysis.</label>
+            <select class="form-control"   ng-options="a.field_name as a.field_label for a in field2array"
+                    ng-model="selectedChart.field_id3">              
+            </select>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label>4. Choose a timeframe.</label>
+            <input   date-range-picker class="form-control date-picker"  options="options" type="text" ng-model="selectedChart.time_frame">
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="form-group  col-md-6">
+            <label for="">5. Choose the formula.<b style="color: red">*</b></label>
+            <div class="form-group" ng-repeat="formula in formulalist" >
+                <input type="radio" class="form-control" name="formulas" ng-change="checkDecimalFields(formula.operation_code);" value="{{formula.operation_id}}"  ng-model="selectedChart.operation_id"> 
+                {{formula.operation_name}} 
+            </div>
+            <div class="pull-right">
+                <select class="form-control"  ng-hide="hideCount"  ng-options="a.field_name as a.field_label for a in decimalarray"
+                        ng-model="selectedChart.field_id2">              
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group  col-md-6">
+            <label for="">6. Choose the output.<b style="color: red">*</b></label>
+            <img src="resources/images/Table.jpg" ng-click="GenerateIncidentChart('table');"  > 
+            <img src="resources/images/Column.jpg" ng-click="GenerateIncidentChart('column');"  > 
+            <img src="resources/images/Line.jpg" ng-click="GenerateIncidentChart('line');"  > 
+            <img src="resources/images/bar.jpg" ng-click="GenerateIncidentChart('bar');"  > 
+            <img src="resources/images/Pie.jpg" ng-click="GenerateIncidentChart('pie');"  >
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="col-md-7" style=" margin-top: 10px; width: 100%">
+            <button class="btn btn-primary mTop pull-right" ng-click="addIncidentChart()"   data-ng-disabled="addChart.$invalid">  
+                <span>Save & close</span>
+            </button>
+
+            <button class="btn btn-primary mTop pull-right"   data-ng-disabled="addChart.$invalid">  
+                <span>Save without closing current report</span>
+            </button>
+
+            <button class="btn btn-primary mTop pull-right" data-ui-sref="chartgrid"> 
+                <i class="fa fa-backward"></i> <span>Cancel</span>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group ">
+            <label>7. If you make changes to your chart, click again on the output type to refresh it.</label>
+
+            <canvas id="line" class="chart chart-line" chart-data="data"
+                    chart-labels="labels" chart-series="series" chart-options="options"
+                    chart-dataset-override="datasetOverride" chart-click="onClick">
+            </canvas>
+        </div>
+    </div>
+</form>
+
+
+

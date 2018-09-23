@@ -1,0 +1,24 @@
+<h2>Statical tables: {{selectedReport.report_id}} <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+<div class="searchSection">
+    <div class="form-style">
+        <div class="form-group">
+            <label for="exampleInputPassword3">Report type:</label>
+            <select class="form-control"  
+                    ng-options="a.product_code as a.product_name for a in products"
+                    ng-model="product_code">               
+            </select>
+        </div>
+    </div>
+</div>
+<div class="toolbar">
+    <a href="" ng-click="addStatTable();"  uib-tooltip="Add record"><i class="fa fa-plus"></i></a>
+    <a href="" ng-click="editStatTable()"  uib-tooltip="Edit record"><i class="fa fa-edit"></i></a>
+    <a href="" ng-click="deleteStatTable()" uib-tooltip="Delete record"><i class="fa fa-remove red"></i></a>
+    <a href="" ng-click="clearSearch()" uib-tooltip="Clear"><i class="fa fa-history"></i></a>
+    <a href="" ng-click="downloadCSV()" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+    <a href="" ng-click="openHelp()"  uib-tooltip="Help"><i class="fa fa-question"></i></a>
+</div>
+
+<div id="grid1" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+

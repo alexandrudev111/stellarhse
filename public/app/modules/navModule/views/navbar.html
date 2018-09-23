@@ -1,0 +1,63 @@
+<nav class="navbar navbar-default"  ng-hide="login" ng-controller="navController">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+
+                <li class="active"><a href="" ng-click="clickDashboard()" data-ui-sref="dashboard">Dashboard</a></li>
+                <li ng-if="products.HSE"><a  ng-click="clickHseProgram()" data-ui-sref="hseProgram" >HSE Program</a></li>
+
+                <li ng-if="products.HSETracking"><a href="#/HseTrackingReport" ng-click="clickHSE()">HSE Tracking Tools</a></li>
+                <!-- ng-show="permissions.GenerateStatsandCharts"   data-ui-sref="ManageKPIFactor" -->
+                <li ng-if="products.Analytics"><a href="#/analytics" ng-click="clickAnalytics()" >Analytics</a></li>
+
+                <li ng-if="products.myadmintools"><a href="#/administrativeTools" ng-click="clickAdmin()">Admin Tools</a></li>
+
+
+               <!-- <li class="orglogo">
+                    <img   class="thumb pull-right img-{{currentOrg.org_id}}" 
+                           src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" >
+
+                </li>-->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+<li class="dropdown orgDropDown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sitemap" aria-hidden="true"></i>
+ Company site <span class="caret"></span></a>
+                    <ul class="dropdown-menu"  ng-scrollbars ng-scrollbars-config="config">
+                        <li  ng-repeat="org in userOrgs track by $index">    
+                                <span ng-click="switchUser(org)">{{org.org_name}}</span>
+                            <!-- <img class="thumb pull-right img-{{org.org_id}}"  src="{{org.logourl}}" ng-click="switchUser(org)"
+                                 alt="{{org.org_name}}" title="{{org.org_name}}"> -->
+                        </li>
+                    </ul>
+                </li> 
+                <li class="dropdown">
+                    <a href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>{{loggedonName}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-if="Myaccount.myaccount || user.permissions[0]"><a href="#/myProfile" ng-click="clickmyProfile()">My Account</a></li>
+                        <li ng-if="Myaccount.accesscontactinfowithadmin || user.permissions[3]"><a href="" ng-click="openInfo()">STELLAR HSE Administrators</a></li>
+                        <li ng-if="Myaccount.viewtutoriallibrary || user.permissions[4]"><a ng-click="showLearning()" href="#/tutorials">Learning Center</a></li>
+                        <li ng-if="Myaccount.chattechsupport || user.permissions[3]"><a href="" ng-click="SupportPopup()">Support</a></li>
+                        <li><a href="" ng-click="logout()">Logout</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>

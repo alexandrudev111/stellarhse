@@ -1,0 +1,43 @@
+
+<div class="form-group Crewinvolved" ng-if="report_labels['crew_involved']['is_hidden'] === 'No' || custom">
+    <label  for="exampleInputPassword3">{{report_labels['crew_involved']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['crew_involved'])" uib-tooltip="{{report_labels['crew_involved']['help_me_name']}}"
+           ng-if="report_labels['crew_involved']['help_me_name'] && report_labels['crew_involved']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['crew_involved'], 'exceptTraining')" ng-if="custom && report_labels['crew_involved']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+    <select class="form-control" ng-model="report.crew_id"
+            ng-options="crew.crew_id as crew.crew_name for crew in crews"
+            ng-required="report_labels['crew_involved']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()">
+        <option value="" selected>Select one</option>
+    </select>
+
+</div>
+
+<div class="form-group" ng-if="report_labels['operation_type_id']['is_hidden'] === 'No' || custom">
+    <label  for="exampleInputPassword3">{{report_labels['operation_type_id']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['operation_type_id'])" uib-tooltip="{{report_labels['operation_type_id']['help_me_name']}}"
+           ng-if="report_labels['operation_type_id']['help_me_name'] && report_labels['operation_type_id']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['operation_type_id'], 'exceptTraining')" ng-if="custom && report_labels['operation_type_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+    <select class="form-control" ng-model="report.operation_type_id"
+            ng-options="operationType.operation_type_id as operationType.operation_type_name for operationType in operationTypes"
+            ng-required="report_labels['operation_type_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()">
+        <option value="" selected>Select one</option>
+    </select>
+</div>
+
+
+
+<div class="form-group" ng-if="report_labels['department_responsible_id']['is_hidden'] === 'No' || custom">
+    <label  for="exampleInputPassword3">{{report_labels['department_responsible_id']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['department_responsible_id'])" uib-tooltip="{{report_labels['department_responsible_id']['help_me_name']}}"
+           ng-if="report_labels['department_responsible_id']['help_me_name'] && report_labels['department_responsible_id']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['department_responsible_id'], 'exceptTraining')" ng-if="custom && report_labels['department_responsible_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+     <select class="form-control autoWidth" ng-model="report.department_responsible_id"
+            ng-options="department.department_responsible_id as department.department_responsible_name for department in departments"
+            ng-required="report_labels['department_responsible_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()">
+
+        <option value="" selected>Select one</option>
+    </select>
+    
+</div>
+<div class="clearfix"></div>

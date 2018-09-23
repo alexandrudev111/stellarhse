@@ -1,0 +1,3 @@
+[14-Nov-2017 00:19:52 Africa/Cairo] PHP Strict Standards:  Only variables should be passed by reference in C:\Apache24\htdocs\STELLAR\src\chart.php on line 619
+[06-Feb-2018 23:48:44 Africa/Cairo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\Apache24\htdocs\STELLAR\vendor\container-interop\container-interop\src\Interop\Container\ContainerInterface.php on line 13
+[07-Feb-2018 00:06:12 Africa/Cairo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\Apache24\htdocs\STELLAR\vendor\composer\ClassLoader.php on line 354

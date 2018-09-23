@@ -1,0 +1,28 @@
+
+<!--{{labels.whatHappened.reportType}}-->
+<!--<ng-form name="reportForm1">-->
+
+
+
+<div class="clearfix"></div>
+<div ng-if="report_labels['event_type_id']['is_hidden'] === 'No' || custom">
+    <label for="exampleInputEmail3">{{report_labels['event_type_id']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['event_type_id'])" uib-tooltip="{{report_labels['event_type_id']['help_me_name']}}"
+           ng-if="report_labels['event_type_id']['help_me_name'] && report_labels['event_type_id']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['event_type_id'])" ng-if="custom && report_labels['event_type_id']['is_editable']==='Yes'"><i class="fa fa-edit"></i></a> </label>
+    <select class="form-control" ng-model="report.report_type_id" id="reportType"
+            ng-options="type.id as type.name for type in reportTypes"
+            ng-change="getReportTypeName()" 
+            ng-required="report_labels['event_type_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue">
+        <option value="" selected>Select one</option>
+    </select>
+    <!--{{report_labels['event_type_id']['is_mandatory']}}-->
+    <!-- The following part is only for hazard report -->
+    <input type="text" class="form-control otherstatus" id="exampleInputEmail3" ng-model="report.other_event_type" 
+           ng-if="hazard_type_name === 'Other'" placeholder="other ID process" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()" ng-required>
+    <input type="text" class="form-control" id="exampleInputEmail3" ng-model="report.hazard_record_number" 
+           ng-if="hazard_type_name === 'Formal hazard assessment'" placeholder="record #" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()">
+    <input type="text" class="form-control  otherstatus" id="exampleInputEmail3" ng-model="report.other_event_type" 
+           ng-if="incident_type_name === 'Other'" placeholder="Other incident type" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()" ng-required>
+</div>
+<!--</ng-form>-->

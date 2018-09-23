@@ -1,0 +1,226 @@
+  
+    <div class="managePeopleStyle">
+<h2>Manage Groups and Permissions: <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+<h3>Add/Edit Groups and Permissions</h3>
+
+<form name="groupForm" novalidate>
+     <div class="col-md-12">
+    <div class="form-group">
+        <label for="">
+            
+            Group Name:
+        </label>
+        <input type="text" class="form-control" placeholder="Group Name" ng-model='groupInfo.group_name' required>
+         <div class="showbutton">
+        <button class="btn btn-primary pull-right" ng-click="submitGroup()"
+ng-disabled="groupForm.$invalid">Save</button>
+
+<button class="btn btn-primary pull-right" ng-click="cancel()">Cancel</button>
+
+        </div>
+    </div>
+    </div>
+     <div class="col-md-12">
+    <div class="form-group">
+        <label for="">
+         Description
+        </label>
+        <textarea class="form-control" placeholder="Group Description" ng-model='groupInfo.description'></textarea>
+    </div>
+    </div>
+     <div class="col-md-12 labelFullWidth">
+    <div class="col-md-4 noPadding">
+        <label for="">
+         This group is based on the group: 
+        </label>
+        <select class="form-control" ng-options="group.id as group.name for group in groupTypes"
+        ng-model='groupInfo.group_type_id'>
+        </select>
+    </div>
+    <div class="col-md-5 labelNewWidth">
+      <table>
+      <tr>
+       <td> 
+        <label for="">
+         This group has access to:
+        </label>
+           </td>
+           
+           <td>
+               <span ng-repeat="type in moduleTypes">
+                <span>
+                    <input type="checkbox" ng-model="type.checked" ng-change='chooseModule()'> {{type.name}}
+                </span>
+                <div class="clearfix"></div>
+            </span>
+        </td>
+        </tr>
+        </table>
+    </div>
+    <div class="col-md-4">
+        
+        
+    </div>
+    </div>
+    <div class="col-md-12">
+        <label for="">Permission</label>
+        
+ <div class="insideAccordion form-style">
+    <uib-accordion close-others="oneAtATime" is-open="status.permisionContainer">
+    
+    <div  uib-accordion-group class="panel-default" heading="Click to see Permissions by Module" is-open="status.Permision" >
+        <div class="accStyle">
+            <uib-accordion close-others="oneAtATime">
+                    <div  uib-accordion-group class="panel-default" heading="Default Permissions"  >
+                       <!-- <div ng-scrollbars ng-scrollbars-config="config"> -->
+                            <div class="accStyle">
+                            
+                             <div class="form-group block describLeft">
+                                <label for="exampleInputPassword3">Description:</label>
+
+                                <textarea class="form-control" placeholder="Description" disabled
+                                ng-model="category.category_definition"></textarea>
+                            </div>
+                      
+                       <table class="table tableNewStyle table-bordered">
+                           <tr>
+                               <td>Additionals Controls:</td>
+                               <!--<td>Definition</td>-->
+                           </tr>
+                           <tr ng-repeat="permission in groupInfo.defaultPermissions">
+                               <td><input type="checkbox" ng-model="permission.checked" disabled> {{permission.permission_name}}</td>
+                              <!-- <td>{{permission.permission_definition}}</td>-->
+                           </tr>
+                       </table>
+                    </div>
+                        <!-- </div> -->
+                    </div>
+            </uib-accordion>
+        </div>
+        <div class="accStyle" ng-if="groupInfo.general">
+            <uib-accordion close-others="oneAtATime">
+                    <div  uib-accordion-group class="panel-default" heading="HSE Tracking General Permissions"  >
+                       <!-- <div ng-scrollbars ng-scrollbars-config="config"> -->
+                        <div class="accStyle" ng-repeat="category in groupInfo.general.categories">
+                            <div  uib-accordion-group class="panel-default" heading="{{category.permission_category_name}}">
+                                <span ng-if="category.permissions.length > 1">
+                                    <input type="checkbox" ng-model="category.checked" ng-change="applyCategoryCheck(category)" 
+                                    ng-disabled="category.disabled">
+                                    {{category.permission_category_name}}
+                                </span>
+                                
+                                <div class="form-group block describLeft">
+                                    <label for="exampleInputPassword3">Description:</label>
+
+                                    <textarea class="form-control" placeholder="Description" disabled
+                                    ng-model="category.category_definition"></textarea>
+                                </div>
+                               
+                                <table class="table tableNewStyle table-bordered">
+                                    <tr>
+                                        <td>Selected Permission</td>
+                                        <td>Description</td>
+                                        <td>Additional Controls</td>
+                                    </tr>
+                                    <tr ng-repeat="permission in category.permissions">
+                                        <td><input type="checkbox" ng-model="permission.checked" 
+                                            ng-change="applyPermissionCheck(module, permission)" ng-disabled="permission.disabled"> 
+                                            {{permission.permission_name}}
+                                        </td>
+                                        <td>{{permission.permission_definition}}</td>
+                                        <td>
+                                            <ul>
+                                                <li ng-repeat="child in permission.children" style="color:#aaa">
+                                                    <input type="checkbox" ng-model="child.checked" 
+                                                    ng-change="applyPermissionCheck(module, child)" ng-disabled="child.disabled">
+                                                    {{child.permission_name}}</li>    
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+            </uib-accordion>
+        </div>
+        <div class="accStyle" ng-repeat="module in groupInfo.moduleTypes">
+            <uib-accordion close-others="oneAtATime">
+                    <div  uib-accordion-group class="panel-default" heading="{{module.name}}"  >
+                       <!-- <div ng-scrollbars ng-scrollbars-config="config"> -->
+                       
+                    <div class="accStyle" ng-repeat="category in module.permissions_categories">
+                        <div  uib-accordion-group class="panel-default" heading="{{category.permission_category_name}}">
+                            <span ng-if="category.permissions.length > 1">
+                                <input type="checkbox" ng-model="category.checked" ng-change="applyCategoryCheck(category)" 
+                                ng-disabled="category.disabled">
+                                {{category.permission_category_name}}
+                            </span>
+                            
+                               <div class="form-group block describLeft">
+                                    <label for="exampleInputPassword3">Description:</label>
+
+                                    <textarea class="form-control" placeholder="Description" disabled
+                                    ng-model="category.category_definition"></textarea>
+                                </div>
+                           
+                            <table class="table tableNewStyle table-bordered">
+                                <tr>
+                                    <td>Selected Permission</td>
+                                   <td>Description</td>
+                                   <td>Additional Controls</td>
+                                </tr>
+                                <tr ng-repeat="permission in category.permissions">
+                                    <td><input type="checkbox" ng-model="permission.checked" 
+                                        ng-change="applyPermissionCheck(module, permission)" ng-disabled="permission.disabled"> 
+                                        {{permission.permission_name}}
+                                    </td>
+                                    <td>{{permission.permission_definition}}</td>
+                                    <td>
+                                        <ul>
+                                            <li ng-repeat="child in permission.children" style="color:#aaa">
+                                                    <input type="checkbox" ng-model="child.checked" 
+                                                    ng-change="applyPermissionCheck(module, child)" ng-disabled="child.disabled">
+                                                    {{child.permission_name}}</li>    
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                        <!-- </div> -->
+                    </div>
+            </uib-accordion>
+        </div>
+    
+</div>
+</uib-accordion>
+
+</div>
+        
+    </div>
+    
+    
+</form>
+<div class="clearfix"></div>
+
+<div class="col-md-12">
+<label for="">Add/Remove group members (Users)</label>
+<span>Note: Any action to this grid will not be applied to the database until you press 'Apply'</span>
+<div class="AddMembersUser">
+<div class="toolbar">
+        
+        <a href="" ng-click="openUsersPopUp()" uib-tooltip="Add User"><i class="fa fa-plus" aria-hidden="true"></i></a>
+        <a href="" ng-click="removeUser()"  uib-tooltip="Delete User"><i class="fa fa-close" aria-hidden="true"></i></a>
+    </div>
+    
+<div>
+<div id="grid1" ui-grid="ManageGroupUsersOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+</div>
+</div>
+</div>
+<div class="clearfix"></div>
+
+
+</div>

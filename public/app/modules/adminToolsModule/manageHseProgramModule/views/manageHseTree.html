@@ -1,0 +1,22 @@
+<treecontrol class="tree-light" context-menu="menuOptions"
+    tree-model="treedata"
+    options="treeOptions"
+    on-selection="getSelected(node,selected,$parentNode)"
+    on-node-toggle="getToggled(node,expanded,$parentNode)"
+    selected-node="selectedNode"
+    expanded-nodes="parents">
+    {{node.name}} 
+</treecontrol>
+
+<!-- <treecontrol class="tree-light tree" context-menu="db.tree.menuOptions"
+        tree-model="db.tree.treedata"
+        on-selection="getSelected(node,selected,$parentNode)"
+        on-node-toggle="getToggled(node,expanded,$parentNode)"
+        selected-node="db.tree.selectedNode"
+        expanded-nodes="db.tree.parents">
+<span ng-switch on="leaftype">
+    <span ng-switch-when="folder" class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+    <span ng-switch-when="file" class="glyphicon glyphicon-file" aria-hidden="true"></span>
+</span>
+<span class="{{nameclass}}">{{node.name}}</span>
+</treecontrol> -->

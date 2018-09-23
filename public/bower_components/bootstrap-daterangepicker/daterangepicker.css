@@ -1,0 +1,294 @@
+/* line 111, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+.daterangepicker {
+  position: absolute;
+  color: inherit;
+  background: #fff;
+  border-radius: 4px;
+  width: 278px;
+  padding: 4px;
+  margin-top: 1px;
+  top: 100px;
+  left: 20px;
+  /* Calendars */ }
+  /* line 129, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker:before, .daterangepicker:after {
+    position: absolute;
+    display: inline-block;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    content: ''; }
+  /* line 137, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker:before {
+    top: -7px;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+    border-bottom: 7px solid #ccc; }
+  /* line 145, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker:after {
+    top: -6px;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #fff;
+    border-left: 6px solid transparent; }
+  /* line 154, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker.opensleft:before {
+    right: 9px; }
+  /* line 159, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker.opensleft:after {
+    right: 10px; }
+  /* line 166, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker.openscenter:before {
+    left: 0;
+    right: 0;
+    width: 0;
+    margin-left: auto;
+    margin-right: auto; }
+  /* line 174, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker.openscenter:after {
+    left: 0;
+    right: 0;
+    width: 0;
+    margin-left: auto;
+    margin-right: auto; }
+  /* line 184, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker.opensright:before {
+    left: 9px; }
+  /* line 189, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker.opensright:after {
+    left: 10px; }
+  /* line 195, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker.dropup {
+    margin-top: -5px; }
+    /* line 199, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker.dropup:before {
+      top: initial;
+      bottom: -7px;
+      border-bottom: initial;
+      border-top: 7px solid #ccc; }
+    /* line 206, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker.dropup:after {
+      top: initial;
+      bottom: -6px;
+      border-bottom: initial;
+      border-top: 6px solid #fff; }
+  /* line 214, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker.dropdown-menu {
+    max-width: none;
+    z-index: 3001; }
+  /* line 220, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker.single .ranges, .daterangepicker.single .calendar {
+    float: none; }
+  /* line 227, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker.show-calendar .calendar {
+    display: block; }
+  /* line 232, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker .calendar {
+    display: none;
+    max-width: 270px;
+    margin: 4px; }
+    /* line 238, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker .calendar.single .calendar-table {
+      border: none; }
+    /* line 243, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker .calendar th, .daterangepicker .calendar td {
+      white-space: nowrap;
+      text-align: center;
+      min-width: 32px; }
+  /* line 252, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker .calendar-table {
+    border: 1px solid #fff;
+    padding: 4px;
+    border-radius: 4px;
+    background: #fff; }
+  /* line 259, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker table {
+    width: 100%;
+    margin: 0; }
+  /* line 264, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker td, .daterangepicker th {
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    cursor: pointer; }
+    /* line 274, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker td.available:hover, .daterangepicker th.available:hover {
+      background: #eee; }
+    /* line 279, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker td.week, .daterangepicker th.week {
+      font-size: 80%;
+      color: #ccc; }
+  /* line 287, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker td.off, .daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date {
+    background-color: #fff;
+    border-color: transparent;
+    color: #999; }
+  /* line 296, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker td.in-range {
+    background-color: #ebf4f8;
+    border-color: transparent;
+    color: #000;
+    border-radius: 0; }
+  /* line 305, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker td.start-date {
+    border-radius: 4px 0 0 4px; }
+  /* line 309, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker td.end-date {
+    border-radius: 0 4px 4px 0; }
+  /* line 313, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker td.start-date.end-date {
+    border-radius: 4px; }
+  /* line 318, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker td.active, .daterangepicker td.active:hover {
+    background-color: #357ebd;
+    border-color: transparent;
+    color: #fff; }
+  /* line 327, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker th.month {
+    width: auto; }
+  /* line 336, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker td.disabled, .daterangepicker option.disabled {
+    color: #999;
+    cursor: not-allowed;
+    text-decoration: line-through; }
+  /* line 344, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker select.monthselect, .daterangepicker select.yearselect {
+    font-size: 12px;
+    padding: 1px;
+    height: auto;
+    margin: 0;
+    cursor: default; }
+  /* line 352, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker select.monthselect {
+    margin-right: 2%;
+    width: 56%; }
+  /* line 357, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker select.yearselect {
+    width: 40%; }
+  /* line 361, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker select.hourselect, .daterangepicker select.minuteselect, .daterangepicker select.secondselect, .daterangepicker select.ampmselect {
+    width: 50px;
+    margin-bottom: 0; }
+  /* line 370, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker .input-mini {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #555;
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    vertical-align: middle;
+    margin: 0 0 5px 0;
+    padding: 0 6px 0 28px;
+    width: 100%; }
+    /* line 384, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker .input-mini.active {
+      border: 1px solid #08c;
+      border-radius: 4px; }
+  /* line 390, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker .daterangepicker_input {
+    position: relative; }
+    /* line 393, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker .daterangepicker_input i {
+      position: absolute;
+      left: 8px;
+      top: 8px; }
+  /* line 405, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker .calendar-time {
+    text-align: center;
+    margin: 5px auto;
+    line-height: 30px;
+    position: relative;
+    padding-left: 28px; }
+    /* line 413, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker .calendar-time select.disabled {
+      color: #ccc;
+      cursor: not-allowed; }
+
+/* line 425, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+.ranges {
+  font-size: 11px;
+  float: none;
+  margin: 4px;
+  text-align: left; }
+  /* line 431, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .ranges ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%; }
+  /* line 438, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .ranges li {
+    font-size: 13px;
+    background: #f5f5f5;
+    border: 1px solid #f5f5f5;
+    border-radius: 4px;
+    color: #08c;
+    padding: 3px 12px;
+    margin-bottom: 8px;
+    cursor: pointer; }
+    /* line 448, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .ranges li:hover {
+      background: #08c;
+      border: 1px solid #08c;
+      color: #fff; }
+    /* line 454, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .ranges li.active {
+      background: #08c;
+      border: 1px solid #08c;
+      color: #fff; }
+
+/*  Larger Screen Styling */
+@media (min-width: 564px) {
+  /* line 463, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker {
+    width: auto; }
+    /* line 468, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker .ranges ul {
+      width: 160px; }
+    /* line 475, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker.single .ranges ul {
+      width: 100%; }
+    /* line 480, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker.single .calendar.left {
+      clear: none; }
+    /* line 484, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker.single .ranges, .daterangepicker.single .calendar {
+      float: left; }
+    /* line 490, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker .calendar.left {
+      clear: left;
+      margin-right: 0; }
+      /* line 494, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+      .daterangepicker .calendar.left .calendar-table {
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0; }
+    /* line 501, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker .calendar.right {
+      margin-left: 0; }
+      /* line 504, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+      .daterangepicker .calendar.right .calendar-table {
+        border-left: none;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0; }
+    /* line 512, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker .left .daterangepicker_input {
+      padding-right: 12px; }
+    /* line 516, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker .calendar.left .calendar-table {
+      padding-right: 12px; }
+    /* line 520, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+    .daterangepicker .ranges, .daterangepicker .calendar {
+      float: left; } }
+
+@media (min-width: 730px) {
+  /* line 528, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker .ranges {
+    width: auto;
+    float: left; }
+  /* line 533, C:/xampp/htdocs/stellarhse/public/bower_components/bootstrap-daterangepicker/daterangepicker.scss */
+  .daterangepicker .calendar.left {
+    clear: none; } }
+
+/*# sourceMappingURL=daterangepicker.css.map */

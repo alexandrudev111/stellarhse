@@ -1,0 +1,20 @@
+<h2>Manage HSE Program: <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2> 
+
+ <div class="clearfix"></div>
+ 
+<span class="currentPath"><span>Current path:</span> {{managecurrentPath}}</span>
+ 
+ <div class="toolbar">
+    <a href="" ng-click="openAddFile()"  uib-tooltip="upload file"><i class="fa fa-plus"></i></a>
+    <a href="" ng-click="openEditFile()"  uib-tooltip="Edit record"><i class="fa fa-edit"></i></a>
+    <a href="" ng-click="viewFile()"  uib-tooltip="view file"><i class="fa fa-eye"></i></a>
+    <a href="" ng-click="getVersions()" uib-tooltip="Get versions"><i class="fa fa-clone"></i></a>
+    <a href="" ng-click="deleteFile()" uib-tooltip="Delete this version"><i class="fa fa-close"></i></a>
+    <a href="" ng-click="deleteVersions()" uib-tooltip="Delete previous versions"><i class="fa fa-scissors"></i></a>
+</div>
+
+<div>
+<div id="grid1" ui-grid="HSEDocumentsOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+</div>
+

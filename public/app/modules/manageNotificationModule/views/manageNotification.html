@@ -1,0 +1,30 @@
+<h2>Create and manage notifications: <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+<!-- <form action="" class="form-inline ng-pristine ng-valid ng-scope">
+
+    <div class="form-group">
+        <label for="reportType">Report Type </label>
+        <select id="reportType" class="form-control" ng-model="choosedReportType"
+                ng-options="reportType.id as reportType.name for reportType in reportTypes"
+                ng-change="getNotifications()">
+        </select>
+
+    </div>
+
+</form> -->
+
+<div class="toolbar">
+    <a href="#/addNotification" ng-click=""  uib-tooltip="Add new notification"><i class="fa fa-plus"></i></a>
+    <a href="" uib-tooltip="Edit notification" ng-click="editNotification()"><i class="fa fa-edit"></i></a>
+    <a href="" uib-tooltip="Delete notification" ng-click="deleteNotification()"><i class="fa fa-remove red"></i></a>    
+       
+    <a href="" ng-click="downloadCSV()" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+<!--    <a href="" ng-click="downloadPDF()" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a> -->
+ 
+   
+</div>
+
+<div id="grid1" ui-grid="ManageNotificationOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+
+
+

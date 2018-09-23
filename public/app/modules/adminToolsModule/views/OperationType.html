@@ -1,0 +1,18 @@
+<h2>Operation type: <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+
+
+<div class="toolbar">
+    <a href="" ng-click="clearSearch()" uib-tooltip="Clear"><i class="fa fa-history"></i></a>
+    <a href="" ng-click="downloadCSV()" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+    <!--<a href="" ng-click="downloadPDF()" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a> -->
+    <a href="" ng-click="openHelp()"  uib-tooltip="Help"><i class="fa fa-question"></i></a>
+    <a href="" ng-click="addOpType()"  uib-tooltip="Add"><i class="fa fa-plus"></i></a>
+</div>
+
+
+
+
+<div id="grid1" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns ></div>
+
+

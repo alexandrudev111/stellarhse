@@ -1,0 +1,37 @@
+<div>
+    <div class="toolbar ng-scope">
+
+<!--        <a ng-if="permissions.Dashboard.datatabletoolbarview" ng-click="previewSummary('my')" uib-tooltip="Preview summary"><i class="fa fa-eye"></i></a>-->
+        <a  ng-click="openReport('my')" uib-tooltip="Open report"><i class="fa fa-edit"></i></a>
+        <a ng-if="permissions.Dashboard.exportfromdashboard" ng-click="downloadCSV('myRecentReport')" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+        <!--<a ng-if="permissions.Dashboard.exportfromdashboard" ng-click="downloadPDF('myRecentReport')" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a> -->
+        <a href="#/HseTrackingReport" ng-click="clickHSE()" uib-tooltip="Add Recent Report">
+            <i class="fa fa-plus"></i>
+        </a>
+        <!-- i added hossam code after merge -->
+        <a ng-if="permissions.Dashboard.datatabletoolbarview" href="" ng-click="openRecentPopUp('my')" uib-tooltip="view Recent Report">
+            <i class="fa fa-eye"></i>
+        </a>
+        <!-- end hossam code after merge -->
+        
+        <!-- hossam code after merge -->
+        <!--    <a href="" uib-tooltip="Edit Recent Report">
+            <i class="fa fa-edit"></i>
+            </a>
+            
+            
+             <a href="" ng-click="recentPopUp()" uib-tooltip="view Recent Report">
+            <i class="fa fa-eye"></i>
+            </a>
+            
+            
+            <a href="" uib-tooltip="Delete "><i class="fa fa-remove red"></i></a>    
+               
+            <a href="" ng-click="" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+            
+            <a href="" ng-click="" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a> -->
+
+
+    </div> 
+    <div id="grid1" ui-grid="rescentReportOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+</div>

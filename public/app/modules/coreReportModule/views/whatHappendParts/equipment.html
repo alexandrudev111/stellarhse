@@ -1,0 +1,86 @@
+
+<!--{{labels.whatHappened.equipment}}-->
+
+<div ng-if="report_labels['equipment_id']['is_hidden'] === 'No' || custom">
+    <h2> {{report_labels['equipment_id']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['equipment_id'])" uib-tooltip="{{report_labels['equipment_id']['help_me_name']}}"
+           ng-if="report_labels['equipment_id']['help_me_name'] && report_labels['equipment_id']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['equipment_id'])" ng-if="custom && report_labels['equipment_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></h2>
+    <div id="equipmentConainer"  >
+        <div id="ParentCustomer" class="parentCusomer"  ng-repeat="equipment in report.equipment_involved track by $index" ng-init="equipmentIndex = $index">
+            <div class="form-group" ng-if="report_labels['equipment_name']['is_hidden'] === 'No' || custom">
+                <label>{{report_labels['equipment_name']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['equipment_name'])" uib-tooltip="{{report_labels['equipment_name']['help_me_name']}}"
+                       ng-if="report_labels['equipment_name']['help_me_name'] && report_labels['equipment_name']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['equipment_name'])" ng-if="custom && report_labels['equipment_name']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <ui-select class="form-control" ng-model="equipment" reset-search-input="false" theme="bootstrap" on-select="onEquipmentSelected($item,equipmentIndex)"
+                           ng-required="report_labels['equipment_name']['is_mandatory']=='Yes' || report_labels['equipment_id']['is_mandatory']=='Yes'"
+                           ng-class="{'required':(report_labels['equipment_name']['is_mandatory'] == 'Yes' || report_labels['equipment_id']['is_mandatory']=='Yes') && equipment == null}" ng-disabled = "disabeldTrue">
+                    <ui-select-match  allow-clear="true"  placeholder="Equipment name">{{$select.selected.equipment_name}}
+                    <button class="btn btn-primary pull-right" ng-click="removeEquipment(equipment, $index, $select, $event)" ng-hide="equipmentIndex == 0">Remove</button>
+                    </ui-select-match>
+                    <ui-select-choices refresh="getEquipments($select, equipmentIndex)" refresh-delay="0" 
+                                       repeat="e.equipment_id as e in equipments[equipmentIndex] | filter: $select.search">
+                        <div>{{e.equipment_name}}</div>
+                    </ui-select-choices>
+                </ui-select>
+               <!--  allow-clear="true"  -->
+
+                
+                <!-- <ui-select class="form-control" ng-model="equipment.equipment_name" theme="bootstrap" on-select="onEquipmentSelected($item,equipmentIndex)"
+                           ng-required="report_labels['equipment_name']['is_mandatory']=='Yes' || report_labels['equipment_id']['is_mandatory']=='Yes'"
+                           ng-class="{'required':(report_labels['equipment_name']['is_mandatory'] == 'Yes' || report_labels['equipment_id']['is_mandatory']=='Yes') && equipment == null}">
+                    <ui-select-match placeholder="Equipment name">{{$select.selected.equipment_name}}
+                    </ui-select-match>
+                    <ui-select-choices refresh="getEquipments($select.search, equipmentIndex)" refresh-delay="0" 
+                                       repeat="e in ( equipments|filter: {equipment_name: $select.search}) track by e.equipment_id">
+                        <span>{{e.equipment_name}}</span>>
+                    </ui-select-choices>
+                </ui-select> -->
+
+                <button class="btn btn-primary btnStyle" ng-click="openEquipment()" ng-disabled="initializeReport.equipment || equipments[equipmentIndex].length != 0" uib-tooltip="Equipment not found - add to database."><i class="fa fa-plus"></i></button>
+                <!--<a href="" class="btn btn-primary btnStyle" ng-click="openEquipment(equipmentIndex)" ng-class="{disabled: equipment != null}"><i class="fa fa-plus" uib-tooltip="Equipment not found - add to database."></i></a>-->
+           
+            </div>
+            <!-- 
+             <a href="" class="pull-left" ng-click="clearEquipment(equipmentIndex)"><i class="fa fa-close"></i></a> -->
+            <div class="form-group" ng-if="report_labels['equipment_type']['is_hidden'] === 'No' || custom">
+                <label for="exampleInputPassword3">{{report_labels['equipment_type']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['equipment_type'])" uib-tooltip="{{report_labels['equipment_type']['help_me_name']}}"
+                       ng-if="report_labels['equipment_type']['help_me_name'] && report_labels['equipment_type']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['equipment_type'])" ng-if="custom && report_labels['equipment_type']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <input type="text" class="form-control" placeholder="Equipment type" ng-model="equipment.equipment_type"
+                       ng-required="report_labels['equipment_type']['is_mandatory']=='Yes' || report_labels['equipment_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"/>
+                       
+              
+            </div>
+
+            <div class="form-group" ng-if="report_labels['equipment_category_name']['is_hidden'] === 'No' || custom">
+                <label for="exampleInputPassword3">{{report_labels['equipment_category_name']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['equipment_category_name'])" uib-tooltip="{{report_labels['equipment_category_name']['help_me_name']}}"
+                       ng-if="report_labels['equipment_category_name']['help_me_name'] && report_labels['equipment_category_name']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['equipment_category_name'])" ng-if="custom && report_labels['equipment_category_name']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <input type="text" class="form-control" placeholder="Equipment category" ng-model="equipment.equipment_category_name" 
+                       ng-required="report_labels['equipment_category_name']['is_mandatory']=='Yes' || report_labels['equipment_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"/>
+                       
+               
+            </div>
+
+            <div class="form-group newWidth" ng-if="report_labels['equipment_number']['is_hidden'] === 'No' || custom">
+                <label for="exampleInputPassword3" >{{report_labels['equipment_number']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['equipment_number'])" uib-tooltip="{{report_labels['equipment_number']['help_me_name']}}"
+                       ng-if="report_labels['equipment_number']['help_me_name'] && report_labels['equipment_number']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['equipment_number'])" ng-if="custom && report_labels['equipment_number']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <input type="text" class="form-control newInputWidth " placeholder="Equipment #" ng-model="equipment.equipment_number" 
+                       ng-required="report_labels['equipment_number']['is_mandatory']=='Yes' || report_labels['equipment_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"/>
+                       
+                
+            </div>
+            <!-- <button class="btn btn-primary btnmTop removeEqu" ng-click="removeEquipment(equipment, $index)" ng-hide="equipmentIndex == 0">Remove</button> -->
+             
+        </div>
+
+    </div>
+  
+    <button class="btn btnmTop" ng-click="newEquipment()">More</button>
+</div>

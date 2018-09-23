@@ -1,0 +1,69 @@
+
+<h2><img src="resources/images/heading-icon.png" alt="">Inspection <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+       <div class="customTabs">
+        <uib-tabset active="activeForm">
+            <uib-tab index="0" heading="What happened?">
+                <div ng-include="'app/modules/inspectionReportModule/views/whatHappend.html'"></div>
+                <div ng-include="'app/modules/inspectionCustomModule/views/whatInspectionView.html'"></div>
+            </uib-tab>
+
+            <uib-tab index="1" heading="Hazard Classifications">
+                <div ng-include="'app/modules/coreReportModule/views/hazardDetails.html'"></div>
+                <div ng-include="'app/modules/inspectionCustomModule/views/detailsInspectionView.html'"></div>
+            </uib-tab>   
+
+            <uib-tab index="2" heading="People involved">
+                <div ng-include="'app/modules/coreReportModule/views/peopleInvolved.html'"></div>
+                <div ng-include="'app/modules/inspectionCustomModule/views/peopleInspectionView.html'"></div>
+            </uib-tab>
+
+            <uib-tab index="4" heading="Corrective actions">
+                <div ng-include="'app/modules/coreReportModule/views/remedialActions.html'"></div>
+                <div ng-include="'app/modules/inspectionCustomModule/views/actionInspectionView.html'"></div>
+            </uib-tab>
+
+            <uib-tab index="5" heading="Supporting documents">
+                <div ng-include="'app/modules/coreReportModule/views/supportingDocuments.html'"></div>
+            </uib-tab>
+            
+            <uib-tab index="6" heading="Inspection Details ({{report_type_name}})" ng-if="report.report_type_id">
+                <div ng-include=""></div>
+
+            </uib-tab>
+            
+            
+            <div class="customCompnent" ng-controller="inspectionController">
+                <a class="col-md-12 slideButton" ng-click="slideButton()"><i class="fa fa-angle-double-down" aria-hidden="true"></i></a>
+                <div class="clearfix"></div>
+                <div class="" ng-show="hideSlide">
+                    <div class="instructions col-md-7">
+                        <h2>Instructions</h2>
+                        <ul class="list-unstyled">
+
+                            <li>1. Scroll to the custom fields area at the bottom of the page.</li>
+                            <li>2. Drag and drop custom fields into the highlighted area.</li>
+                            <li>3. Click on the field title to open the text editor.</li>
+                            <li>4. Save your changes to close the text editor.</li>
+                            <li>5. Reorganize your new fields by dragging and dropping them.</li>
+                            <li>6. Save your changes and open the form in the HSE Tracking module to verify.</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-5 customizButton">
+                        <h2>Customizable fields</h2>
+                        <button class="btn btn-primary pull-right" ng-click='formsubmit()' >Save</button>
+                        <button class="btn btn-primary pull-right" ng-click='cancelSubmit()'>Cancel</button>
+                           <div class="clearfix"></div>
+                        <div fb-components></div>
+
+
+                     
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </uib-tabset>
+</div>

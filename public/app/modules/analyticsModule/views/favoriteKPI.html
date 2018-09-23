@@ -1,0 +1,35 @@
+<!--<h2>Recent Stats and Charts for: {{selectedReport.report_id}}</h2>-->
+<!--<div class="searchSection">
+    <div class="form-style">
+        <div class="form-group">
+            <label for="exampleInputPassword3">Report Type:</label>
+            <select class="form-control"  
+                    ng-options="a.product_code as a.product_name for a in products"
+                    ng-model="product_code">               
+            </select>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="toolbar">
+    <a ng-if="permissions.Analytics.addeditchart" href="" ng-click="addChart();"  uib-tooltip="Add chart"><i class="fa fa-plus"></i></a>
+    <a ng-if="permissions.Analytics.editfavorchartkpi" href="" ng-click="editChart()"  uib-tooltip="Edit"><i class="fa fa-edit"></i></a>
+    <a href="" ng-click="deleteChart()" uib-tooltip="Delete"><i class="fa fa-remove red"></i></a>
+    <a href="" ng-click="view('chartDivFav')" uib-tooltip="View"><i class="fa fa-eye"></i></a>
+    <a href="" ng-click="clearSearch()" uib-tooltip="Clear"><i class="fa fa-history"></i></a>    
+    <a ng-if="permissions.Analytics.sharedkptchart" href="" ng-click="shareChart()"  uib-tooltip="Share"><i class="fa fa-share-alt"></i></a>  
+    <a ng-if="permissions.Analytics.exportchartstats" href="" ng-click="downloadCSV()" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+    <a href="" ng-click="openHelp()"  uib-tooltip="Help"><i class="fa fa-question"></i></a>
+</div>
+
+<div id="grid1" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+
+<div class="clearfix"></div>
+<span id="tableTitle" ng-show="showTable"></span>
+<br>
+<div id="gridDiv" class="tableStyle  tableScroller" style="padding:0; margin:0 0 0 10px"   ng-show="showTable"  >    </div>
+<div id="chartDivFav"  ng-show="showChartFav"   style="float: left; width: 95%; margin: 10px 1%">  
+    <h1> Favourit chart</h1>
+    <div id="myChartFav" style="min-width: 310px; height: 400px;"></div>
+</div>

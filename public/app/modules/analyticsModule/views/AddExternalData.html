@@ -1,0 +1,47 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add  external data </h3>
+</div>
+<div class="modal-body ExternalData">
+
+    <div class="contentCheckboxs">
+        <form name="updateOrganization">
+            <div class="col-md-3">
+                <label>Year</label>
+                <select  class="form-control" ng-model="externalDataObj.org_year"  required ng-options="year.id as year.name for year in years">
+                    <!--<option value="">-year-</option>-->
+
+                </select>
+            </div>
+
+            <div class="col-md-3">
+
+                <label >Month</label>
+                <select  class="form-control" ng-model="externalDataObj.org_month"  required 
+                         ng-options="month.id as month.name for month in months" >
+                    <!--<option  value="">-month-</option>-->
+
+                </select>
+            </div>
+
+            <div class="col-md-3 kmmessage" ng-if="hoursEntered" >
+                <label >Hour</label>
+                <input type="text" class="form-control" required  ng-model="externalDataObj.total_hour"
+                       name="total_hour" ng-pattern="/^([0-9]{1,11})[\.]{0,10}([0-9]){0,3}$/">
+                <span ng-show="updateOrganization.total_hour.$error.pattern"   style="color: red">{{decimal_valid}}</span>
+            </div>
+
+            <div class="col-md-3 kmmessage" ng-if="kmEntered" >
+                <label >KM</label>
+                <input type="text" class="form-control" required  ng-model="externalDataObj.total_km"
+                       name="total_km" ng-pattern="/^([0-9]{1,11})[\.]{0,10}([0-9]){0,3}$/">
+                <span ng-show="updateOrganization.total_km.$error.pattern"   style="color: red">{{decimal_valid}}</span>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="clearfix"></div>
+
+    <button class="btn btn-primary pull-right" type="button"  ng-click="submitFunction()" data-ng-disabled="updateOrganization.$invalid">Submit</button>
+    <button class="btn btn-primary pull-right" type="button" ng-click="cancel()">Cancel</button>
+</div>

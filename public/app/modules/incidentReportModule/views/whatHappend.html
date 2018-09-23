@@ -1,0 +1,208 @@
+<form class="form-inline">
+    <div class="form-style">
+        <div class="row">
+           <div class="col-md-12">
+               
+               <div class="form-group pull-right">
+                    <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportStatus.html'"></div>
+                </div>
+                
+           </div>
+           
+           
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportType.html'"></div>
+                </div>
+                <div class="form-group pull-right timeSpace">
+                    <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportTime.html'"></div>
+                </div>
+                <div class="form-group dateStyle pull-right">
+                    <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportDate.html'"></div>
+                </div>
+                
+                <div class="form-group fullWidth">
+                    <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportOwner.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/whoIdentified.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="form-style location">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/location.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="form-style">
+        <span  ng-include="'app/modules/coreReportModule/views/whatHappendParts/crewOperationType.html'"></span>
+
+        <div class="form-group bottomCloseIcon" ng-if="report_labels['is_emergency_response']['is_hidden'] === 'No' || custom">
+            <label ng-class="{'required':report_labels['is_emergency_response']['is_mandatory'] == 'Yes' && report.is_emergency_response == null}"> 
+                {{report_labels['is_emergency_response']['field_label']}}
+                <a href="" ng-click="openHelp(report_labels['is_emergency_response'])" uib-tooltip="{{report_labels['is_emergency_response']['help_me_name']}}"
+                   ng-if="report_labels['is_emergency_response']['help_me_name'] && report_labels['is_emergency_response']['help_me_description']"><i class="fa fa-question"></i></a>
+                <a href="" ng-click="editField(report_labels['is_emergency_response'])" ng-if="custom && report_labels['is_emergency_response']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                
+            <span>
+            <input type="radio" class="form-control" ng-model="report.is_emergency_response" name="emergency" value="1"
+                   ng-required="report_labels['is_emergency_response']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"><span>yes</span>
+            <input type="radio" class="form-control" ng-model="report.is_emergency_response" name="emergency" value="0"
+                   ng-required="report_labels['is_emergency_response']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"><span>No</span>
+            <a href="" ng-click="Emergencyresponse()"><i class="fa fa-close"></i></a>
+            </span>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/thirdParties.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/equipment.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportDescription.html'"></div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="form-style" ng-if="report_labels['sequence_of_events']['is_hidden'] === 'No' || custom">
+        <h2>{{report_labels['sequence_of_events']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['sequence_of_events'])" uib-tooltip="{{report_labels['sequence_of_events']['help_me_name']}}"
+               ng-if="report_labels['sequence_of_events']['help_me_name'] && report_labels['sequence_of_events']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['sequence_of_events'])" ng-if="custom && report_labels['sequence_of_events']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></h2>
+        <div class="form-group block blockLabel" ng-if="report_labels['event_sequence']['is_hidden'] === 'No' || custom">
+            <label>{{report_labels['event_sequence']['field_label']}}
+                <a href="" ng-click="openHelp(report_labels['event_sequence'])" uib-tooltip="{{report_labels['event_sequence']['help_me_name']}}"
+                   ng-if="report_labels['event_sequence']['help_me_name'] && report_labels['event_sequence']['help_me_description']"><i class="fa fa-question"></i></a>
+                <a href="" ng-click="editField(report_labels['event_sequence'])" ng-if="custom && report_labels['event_sequence']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+            <textarea class="form-control" placeholder="describe sequence of activities and actions" ng-model="report.event_sequence"
+                      ng-required="report_labels['event_sequence']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+ 
+    <div class="form-style" ng-if="report_labels['env_conditions']['is_hidden'] === 'No' || custom">
+      
+         
+    <div  class="accNewStyle cause">
+     <uib-accordion class="accordionIcon" close-others="oneAtATime" >
+     
+     <div uib-accordion-group class="panel-default" heading="{{report_labels['env_conditions']['field_label']}}" is-open="status.env">
+     
+      <a href="" ng-click="openHelp(report_labels['env_conditions'])" uib-tooltip="{{report_labels['env_conditions']['help_me_name']}}"
+               ng-if="report_labels['env_conditions']['help_me_name'] && report_labels['env_conditions']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['env_conditions'])" ng-if="custom && report_labels['env_conditions']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a>
+     
+        
+                <div class="form-group block blockLabel" ng-repeat="condition in envConditions">
+            <label  ng-if="condition.is_multi == 0" ng-class="{'required':report_labels['env_conditions']['is_mandatory'] == 'Yes' 
+                         && condition.envCondRequired}"> 
+                {{condition.env_condition_name}}  </label>
+            <span class="pull-left" ng-repeat="parameter in condition.parameters" ng-if="condition.is_multi == 0">
+                <input type="radio" ng-model="parameter.parameter_choice" value="true" name="{{condition.env_condition_name}}"
+                       ng-required="report_labels['env_conditions']['is_mandatory']=='Yes'"
+                       ng-change="checkEnvCondRequired(condition, parameter)" ng-disabled = "disabeldTrue"> <span>{{parameter.env_cond_parameter_name}}</span>
+            </span>
+            <a href="" class="pull-left" ng-click="clearEnvCond(condition)" ng-if="condition.is_multi == 0"><i class="fa fa-close"></i></a>
+            <!--<a href="" class="pull-left" ng-click="clearEnvironmentalCondition(parameter.parameter_choice)" ng-if="condition.is_multi == 0"><i class="fa fa-close"></i></a>-->            
+            <label  ng-if="condition.is_multi == 1" ng-class="{'required':report_labels['env_conditions']['is_mandatory'] == 'Yes' 
+                    && condition.envCondRequired}"> 
+                {{condition.env_condition_name}}  </label>
+            <span ng-repeat="parameter in condition.parameters" ng-if="condition.is_multi == 1">
+                <input type="checkbox" ng-model="parameter.parameter_choice"
+                       ng-required="report_labels['env_conditions']['is_mandatory']=='Yes' && condition.envCondRequired"
+                       ng-change="checkEnvCondRequired(condition, parameter)" ng-disabled = "disabeldTrue"> <span>{{parameter.env_cond_parameter_name}}</span>
+            </span>
+        </div>
+        
+         </div>
+     
+        </uib-accordion>
+    
+    </div>
+
+      
+       
+            <!--<h2>{{report_labels['env_conditions']['field_label']}}
+           </h2>-->
+
+        <div class="form-group block blockLabel" ng-if="report_labels['env_condition_note']['is_hidden'] === 'No' || custom">
+            <label>{{report_labels['env_condition_note']['field_label']}}
+                <a href="" ng-click="openHelp(report_labels['env_condition_note'])" uib-tooltip="{{report_labels['env_condition_note']['help_me_name']}}"
+                   ng-if="report_labels['env_condition_note']['help_me_name'] && report_labels['env_condition_note']['help_me_description']"><i class="fa fa-question"></i></a>
+                <a href="" ng-click="editField(report_labels['env_condition_note'])" ng-if="custom && report_labels['env_condition_note']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+            <textarea class="form-control" placeholder="describe environmental conditions" ng-model="report.env_condition_note"
+                      ng-required="report_labels['env_condition_note']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+        </div>
+    </div>
+
+    <div class="clearfix"></div> 
+    
+    
+     
+        
+          <div class="form-style" ng-if="report_labels['oe_department_id']['is_hidden'] === 'No' || custom">
+          
+           <div  class="accNewStyle cause">
+     <uib-accordion class="accordionIcon" close-others="oneAtATime" >
+     
+     <div uib-accordion-group class="panel-default" heading=" {{report_labels['oe_department_id']['field_label']}}" is-open="status.mustBeOpen">
+         
+         
+          <a href="" ng-click="openHelp(report_labels['oe_department_id'])" uib-tooltip="{{report_labels['oe_department_id']['help_me_name']}}"
+               ng-if="report_labels['oe_department_id']['help_me_name'] && report_labels['oe_department_id']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['oe_department_id'])" ng-if="custom && report_labels['oe_department_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a>
+            
+    <!--    <h2 ng-class="{'required':report_labels['oe_department_id']['is_mandatory'] == 'Yes' && oeRequired}"> 
+            {{report_labels['oe_department_id']['field_label']}}
+           </h2>
+            
+            -->
+        <div class="form-group block">
+            <span class="blockElement" ng-repeat="department in oeDepartments">
+                <input type="checkbox" ng-model="department.department_choice"
+                       ng-required="report_labels['oe_department_id']['is_mandatory']=='Yes' && oeRequired"
+                       ng-change="checkOERequired()" ng-disabled = "disabeldTrue || !reportPermissions.reportedto"> <span>{{department.oe_department_name}}</span>
+            </span>
+        </div>
+        
+        
+                 </div>
+     
+        </uib-accordion>
+        
+    </div>
+       
+        
+
+    
+    </div>
+    
+  
+
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/riskLevels.html'"></div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="ristList">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/riskControls.html'"></div>
+    </div>
+</form>

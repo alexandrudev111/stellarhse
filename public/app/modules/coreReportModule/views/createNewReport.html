@@ -1,0 +1,74 @@
+
+
+
+<h2><img src="resources/images/heading-icon.png" alt="">Hazard ID </h2>
+<div class="clearfix"></div>
+<div class="com-md-12 contentP">
+<!--<span class="text-right pull-right reportID">Hazard ID #{{hazardReport.hazard_number}}</span>-->
+    <div class="clearfix"></div>
+    <a href="">Customize</a>
+    <button class="btn btn-success pull-right" ng-click="submitHazardReport()">
+        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        Submit
+    </button>
+
+    <button class="btn btn-danger pull-right">
+        <i class="fa fa-undo" aria-hidden="true"></i>
+        Undo changes
+    </button>
+
+    <button class="btn btn-primary pull-right">
+        <i class="fa fa-envelope" aria-hidden="true"></i>  Email / Print
+    </button>
+
+
+    <button class="btn btn-primary pull-right">
+        <i class="fa fa-times" aria-hidden="true"></i> Save draft
+    </button>
+    
+    <a href="" class="customize" ng-click="customize()">Customize </a>
+   
+   
+   
+ <div class="clearfix"></div>
+    
+    <uib-tabset active="activeForm">
+        <uib-tab index="0" heading="What happened?">
+            <div ng-include="'app/modules/hazardReportModule/views/whatHappend.html'"></div>
+        </uib-tab>
+        
+        <uib-tab index="1" heading="Hazard details">
+
+            <div ng-include="'app/modules/hazardReportModule/views/hazardDetails.html'"></div>
+
+        </uib-tab>   
+        
+        <uib-tab index="2" heading="People involved">
+
+            <div ng-include="'app/modules/hazardReportModule/views/PeopleInvolved.html'"></div>
+
+        </uib-tab>             
+
+        
+
+        <uib-tab index="3" heading="Corrective actions">
+
+
+            <div ng-include="'app/modules/hazardReportModule/views/remedialActions.html'"></div>
+
+        </uib-tab>
+
+    
+    <uib-tab index="4" heading="Supporting documents">
+
+            <div ng-include="'app/modules/hazardReportModule/views/supportingDocuments.html'"></div>
+
+        </uib-tab>
+
+    </uib-tabset>
+
+
+
+
+
+</div>

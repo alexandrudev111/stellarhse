@@ -1,0 +1,40 @@
+.table {
+    font-size: 0.7em;
+}
+.table thead {
+    background-color: teal;
+    color: whitesmoke;
+    font-weight: bolder;
+}
+
+.input-sm {
+  height: 25px;
+  padding: 3px 6px;
+  font-size: 0.8em;
+  line-height: 1;
+  border-radius: 2px;
+}
+select.input-sm {
+  height:25px;
+  line-height: 25px;
+}
+textarea.input-sm,
+select[multiple].input-sm {
+  height: auto;
+}
+
+.lb-sm {
+    font-size: .9em;
+}
+
+.left-inner-addon {
+    position: relative;
+}
+.left-inner-addon input {
+    padding-left: 30px;    
+}
+.left-inner-addon i {
+    position: absolute;
+    padding: 10px 12px;
+    pointer-events: none;
+}

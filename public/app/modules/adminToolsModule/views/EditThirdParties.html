@@ -1,0 +1,142 @@
+<h2>Customize HSE tracking report forms: <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}"> </h2>
+                          
+<div class="clearfix"></div>                                
+<div class="form-style   questionStyle">
+    <div class="form-group form-inline">
+        <label >What would you like to do ?</label>
+        <select class="form-control fullWidth" ng-change="changeShownData()" ng-model="hse_tracking_report_choice">
+            <option value="">-Please select -</option>
+            <option value="form_fields">Customize forms fields</option>
+            <option value="custom_fields">Add custom fields</option>
+            <option value="form_locations">Define locations</option>
+            <option value="operation_types">Define operation types</option>
+            <option value="third_parties">Add/edit third parties</option>
+            <option value="trainning_provider">Add/edit training providers</option>
+            <option value="form_equipment">Add/edit equipment</option>
+        </select>
+    </div>
+
+</div>
+
+<div class="clearfix"></div>
+
+
+<h2>Edit a third party: </h2>
+
+<div class="clearfix"></div>
+
+<div class="form-style  noBorder questionStyle">
+    <div class="form-group form-inline">
+        <label >What would you like to do ?</label>
+        <select class="form-control fullWidth" ng-change="changeShownData()" ng-model="hse_tracking_report_choice">
+            <option value="">-Please select -</option>
+            <option value="form_fields">Customize forms fields</option>
+            <option value="custom_fields">Add custom fields</option>
+            <option value="form_locations">Define locations</option>
+            <option value="operation_types">Define operation types</option>
+            <option value="third_parties">Add/edit third parties</option>
+            <option value="trainning_provider">Add/edit training providers</option>
+            <option value="form_equipment">Add/edit equipment</option>
+        </select>
+    </div>
+
+</div>
+
+<div class="clearfix"></div>
+<form action=""  class="form-inline addPeople formStylePadding">
+    <div class="form-style">
+ 
+        <div class="form-group">
+            <label for="exampleInputPassword3">Third party name:</label>
+            <input type="text" class="form-control">
+        </div>
+        
+        
+        <div class="form-group">
+            <label for="exampleInputPassword3">Contact name:</label>
+            <input type="text" class="form-control">
+        </div>
+        
+        
+        
+        <div class="form-group">
+            <label for="exampleInputPassword3">Third party type:</label>
+         <select class="form-control">
+                <option value="">Type one</option>
+                <option value="">Type Two</option>
+            </select>
+            
+        </div>
+        
+        
+        <div class="form-group">
+            <label for="exampleInputPassword3">Primary phone:</label>
+            <input type="text" class="form-control">
+        </div>
+        
+        
+               <div class="form-group">
+            <label for="exampleInputPassword3">Country:</label>
+            
+             <select class="form-control">
+                <option value="">Canada</option>
+                <option value="">USA</option>
+            </select>         
+        </div>
+        
+        
+        
+         <div class="form-group">
+            <label for="exampleInputPassword3"> Province/State:</label>
+            
+             <select class="form-control">
+                <option value="">Alberta</option>
+                <option value="">Manitoba</option>
+            </select>         
+        </div>
+        
+        
+        <div class="form-group">
+            <label for="exampleInputPassword3"> City:</label>
+            
+             <select class="form-control">
+                <option value="">Abee</option>
+                <option value="">Acme</option>
+            </select>         
+        </div>
+        
+        
+        
+        <div class="form-group">
+            <label for="exampleInputPassword3"> Address:</label>
+            <input type="text" class="form-control"> 
+        </div>
+        
+        <div class="form-group">
+            <label for="exampleInputPassword3"> Postal/Zip code:</label>
+            <input type="text" class="form-control"> 
+        </div>
+         
+         
+         
+        <div class="form-group">
+            <label for="exampleInputPassword3"> Status:</label>
+            <select name="" id=""  class="form-control">
+                <option value="">Active</option>
+                <option value="">Inactive</option>
+            </select>
+        </div>
+          <div class="clearfix"></div>
+         <button class="btn btn-primary pull-right">Submit</button>
+         <button class="btn btn-primary pull-right">Cancel</button>
+        
+        
+
+ </div>
+    
+    
+    
+    
+    
+    
+</form>

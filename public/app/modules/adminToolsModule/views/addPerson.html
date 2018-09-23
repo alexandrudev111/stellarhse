@@ -1,0 +1,253 @@
+<h2>Add a person: <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+<form name="addPeople"  class="form-inline addPeople formStylePadding">
+    <div class="form-style">
+    <h2>Person details:</h2>
+        <div class="form-group">
+            <label>{{peopleLabels.firstName}}:</label>
+            <input type="text" class="form-control" ng-disabled="disabled" required ng-model="selectedPerson.first_name">
+        </div>
+
+
+        <div class="form-group">
+            <label>{{peopleLabels.lastName}}:</label>
+            <input type="text" class="form-control" ng-disabled="disabled" required ng-model="selectedPerson.last_name">
+        </div>
+        
+         <div class="form-group">
+            <label>{{peopleLabels.company}}:</label>
+            <input type="text" class="form-control" ng-disabled="disabled" ng-model="selectedPerson.company">
+        </div>
+        
+
+        <div class="form-group">
+            <label>{{peopleLabels.crew}}:</label>
+            <select class="form-control" ng-options="cl.crew_id as cl.crew_name for cl in crewList"  
+                    ng-model="selectedPerson.crew_id" ng-disabled="disabled">
+                <option ng-model="selectedPerson.crew_id" value="" selected>Please select one.</option>
+            </select>                    
+        </div>
+
+
+
+        <div class="form-group">
+            <label>{{peopleLabels.position}}:</label>
+            <input type="text" class="form-control" ng-disabled="disabled" ng-model="selectedPerson.position">
+        </div>
+
+
+        <div class="form-group">
+            <label>{{peopleLabels.classification}}:</label>
+            <select class="form-control"  ng-disabled="disabled" ng-options="cf.classification_id  as cf.classification_name for cf in classificationList"  
+                    ng-model="selectedPerson.classification_id">
+                <option ng-model="selectedPerson.classification_id" value="" selected>Please select one.</option>
+            </select>
+        </div>
+
+ 
+       
+
+        <div class="form-group">
+            <label> {{peopleLabels.department}}:</label>
+            <input type="text" class="form-control" ng-disabled="disabled" ng-model="selectedPerson.department">           
+        </div>
+        
+         <div class="form-group">
+                <label>{{peopleLabels.area_of_resp}}:</label>
+                <select type="text" class="form-control"  ng-disabled="disabled" ng-model="selectedPerson.area"> 
+                <option value="">Select one</option>
+                <option value="">Manager</option>
+                <option value="">Senior manager</option>
+                <option value="">Supervisor</option>
+                <option value="">Foreman</option>
+                <option value="">Executive</option>
+                <option value="">General staff </option>
+             </select>
+            </div>
+        
+        <div class="form-group">
+            <label> {{peopleLabels.emp_id}}:</label>
+            <input type="text" class="form-control" ng-disabled="disabled" ng-model="selectedPerson.emp_id">           
+        </div>
+
+
+        <div class="form-group">
+            <label>{{peopleLabels.phone}}:</label>
+
+            <input type="text" class="form-control" ui-mask="999-999-9999" ng-disabled="disabled" ng-model="selectedPerson.primary_phone">           
+        </div>
+
+
+        <div class="form-group">
+            <label>{{peopleLabels.alternate_phone}}:</label>
+            <input type="text" class="form-control" ng-disabled="disabled" ui-mask="999-999-9999" ng-model="selectedPerson.alternate_phone">         
+        </div>
+        
+        
+        <div class="form-group">
+                <label>{{peopleLabels.email}}:</label>
+                <input type="text" class="form-control" ng-disabled="disabled"  required ng-model="selectedPerson.email" ng-blur="validEmail()" > 
+                <div class="validationMsg"   style="color: red"> {{checkEmail}}  </div>
+                <div class="validationMsg"   style="color: red"> {{checkEmailUser}}  </div>
+            </div>
+            
+             <div class="form-group">
+                <label>{{peopleLabels.supervisor}}:</label>
+                <ui-select class="form-control"  ng-model="selectedPerson.supervisor_id" theme="bootstrap" >
+                    <ui-select-match placeholder="Enter Supervisor Name">{{$select.selected.full_name|| selectedPerson.supervisor_name}}</ui-select-match>
+                    <ui-select-choices refresh="getActiveEmployees($select.search)" refresh-delay="0" 
+                                       repeat="emp.employee_id as emp in activeEmployees | filter: $select.search ">
+                        <div>{{emp.full_name}}</div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            
+        <div class=" borderTop">
+            <h2 class="">{{peopleLabels.location}}:</h2>
+            <div class="clearfix"></div>
+            <div class="form-group locationWidth">
+                <label>{{peopleLabels.country}}:</label>
+
+                <select class="form-control" ng-options="c.country_id as c.country_name for c in countries"  
+                        ng-model="selectedPerson.country_id" ng-disabled="disabled">
+                    <option ng-model="selectedPerson.country_id" value="" selected>Please select one.</option>
+                </select>         
+            </div>
+
+
+
+            <div class="form-group locationWidth">
+                <label> {{peopleLabels.province_state}}:</label>
+
+                <select class="form-control" ng-options="p.province_id as p.province_name for p in provinces"
+                        ng-model="selectedPerson.province_id" ng-disabled="disabled" ng-model="selectedPerson.province_id">
+                    <option ng-model="selectedPerson.province_id" value="" selected>Please select one.</option>
+                </select>         
+            </div>
+
+
+            <div class="form-group locationWidth">
+                <label> {{peopleLabels.city}}:</label>
+
+                <select class="form-control" ng-model="selectedPerson.city_id" 
+                        ng-disabled="disabled" ng-options="c.city_id as c.city_name for c in cities">
+                    <option ng-model="selectedPerson.city_id" value="" selected>Please select one.</option>
+                </select>         
+            </div>
+
+            <div class="form-group locationWidth">
+                <label>{{peopleLabels.address}}:</label>
+                <input type="text" class="form-control" ng-disabled="disabled" ng-model="selectedPerson.address"> 
+            </div>
+
+            <div class="form-group">
+                <label>{{peopleLabels.postal_code}}:</label>
+                <input type="text" class="form-control" ng-disabled="disabled" ng-model="selectedPerson.postal_code"> 
+            </div>
+
+
+            <!--<div class="form-group">
+                <label>{{peopleLabels.email}}:</label>
+                <input type="text" class="form-control" ng-disabled="disabled" ng-required="user_required" ng-model="selectedPerson.email" ng-blur="validEmail()"  > 
+                <div class="validationMsg"   style="color: red"> {{checkEmail}}  </div>
+                <div class="validationMsg"   style="color: red"> {{checkEmailUser}}  </div>
+            </div>-->
+
+
+
+           
+
+
+          
+
+<!--
+            <div class="form-group">
+                <label>{{peopleLabels.work_location}}:</label>
+                <input type="text" class="form-control" ng-disabled="disabled" ng-model="selectedPerson.location"> 
+            </div>-->
+
+<!--
+            <div class="form-group">
+                <label>{{peopleLabels.status}}:</label>
+                <select    class="form-control" ng-options="a.item_id as a.item_value for a in statuslist" 
+                           ng-model="selectedPerson.emp_status" ng-disabled="disabled">  
+                    <option ng-model="selectedPerson.emp_status" value="" selected>Please select one.</option>
+                </select> 
+            </div>-->
+            
+            
+            
+        </div>
+        <div class="clearfix"></div>
+           <!-- <div class="form-group setup">
+                <label>{{peopleLabels.check_ques}}:</label>
+                <input name="check_ques" type="radio" value="yes" ng-checked ="selectedPerson.check_ques === 'yes'" ng-change="accountTypeChecker()" ng-model="selectedPerson.check_ques"><span>{{peopleLabels.yes}}</span>
+                <input name="check_ques" type="radio" ng-checked ="selectedPerson.check_ques === 'no'" value="no" ng-change="accountTypeChecker()" ng-model="selectedPerson.check_ques"><span>{{peopleLabels.no}}</span> 
+
+            </div>-->
+            <div class="clearfix"></div>
+           
+                
+            <div class="borderTop">
+                
+
+                <div class="form-group ">
+                    <label> {{peopleLabels.user_group}}: </label>
+                    <select  class="form-control" ng-options="gl.group_id as gl.group_name for gl in groupList"  
+                            ng-required="true" ng-model="selectedPerson.group_id" ng-disabled="disabled" ng-change="groupChange()">
+                        <!--<option ng-model="selectedPerson.group_id" value="" selected>Please select one.</option>-->
+                        
+                        <option  selected>Please select one.</option>
+                    </select>
+
+                </div>
+                
+                <div class="form-group " >
+                    <label> {{peopleLabels.user_name}}: </label>
+                    <input type="text" class="form-control" ng-readonly="true"  ng-model="selectedPerson.email">
+                </div>
+                
+
+<!--
+                <div class="form-group ">
+                    <label> {{peopleLabels.access_code}}: </label>
+
+                    <input type="text" class="form-control" ng-disabled="disabled" ng-model="selectedPerson.direct_access_code">
+
+                </div>-->
+                
+               
+                <div class="clearfix"></div>
+<!--
+                <div class="form-style checkbox block packages">
+
+                    <h2>{{peopleLabels.subscribed_mod}}:</h2>
+
+                    <div class="col-md-4">
+                        <p><label>{{peopleLabels.hse_tracking}}<b style="color: red">*</b>:</label>
+
+                        <div class="clearfix"></div>
+
+                        <span class="productCheckbox" ng-repeat="product in productlist" >
+                            <input type="checkbox" ng-disabled="true"  ng-model="product.product_choice"> <label>{{product.product_name}}</label>
+                        </span>
+                        </p>
+
+                    </div>
+
+
+                </div>
+            
+            -->
+            </div>
+
+
+      
+        <div class="clearfix"></div>
+        <button class="btn btn-primary pull-right" ng-click="addPeopleFunction()"    data-ng-disabled="addPeople.$invalid" ng-show="!disabled">{{peopleLabels.submit}}</button>
+        <button class="btn btn-primary mTop pull-right" ng-click="updateInfo()" ng-show="disabled" >  
+            <span>{{peopleLabels.Update}}</span>
+        </button>
+        <button class="btn btn-primary pull-right" data-ui-sref="ManagePeople">{{peopleLabels.cancel}}</button>
+
+</form>

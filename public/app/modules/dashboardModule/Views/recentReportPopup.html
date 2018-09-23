@@ -1,0 +1,744 @@
+<div class="modal-header">
+    <h3 class="modal-title">View recent report</h3>
+</div>
+<div class="modal-body labelStyle recentStyle">
+    <div class="form-style">
+        <div class="form-group col-md-6">
+            <label for="">Type of ID process:</label>
+            <input type="text" class="form-control" ng-model="selectedReport.Report_one.event_type_name" disabled>
+        </div>
+
+
+
+        <div class="form-group col-md-6 popupDate">
+            <label for="">Date:</label>
+            <p class="input-group">
+                <input type="text" ng-model="selectedReport.Report_one.date" class="form-control" placeholder="Select" my-datepicker  disabled>
+                <span class="input-group-btn calenderIcon">
+                    <button type="button" class="btn btn-default " ><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+        </div>
+
+
+        <div class="form-group col-md-6">
+            <label for="">Hour:</label>
+            <!--<select class="form-control" ng-model="selectedReport.Report_one.hour" disabled>
+                <option>1</option>
+            </select>-->
+            <input type="text" ng-model="selectedReport.Report_one.hour" class="form-control"  disabled>
+
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="">Min:</label>
+            <!--<select class="form-control" ng-model="selectedReport.Report_one.min" disabled>
+            <option>1</option>
+           </select>-->
+            <input type="text" ng-model="selectedReport.Report_one.min" class="form-control"   disabled>
+
+        </div>
+
+        <div class="clearfix"></div>
+        <h2 class="headingDesign"> Who identified the hazard(s):</h2>
+        <div class="form-group col-md-6">
+            <label for="">Name:</label>
+
+            <input type="text" class="form-control" ng-model="selectedReport.Report_one.rep_name" disabled> <!-- report_id -->
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="">ID:</label>
+
+            <input type="text" class="form-control" ng-model="selectedReport.Report_one.rep_emp_id" disabled>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="">Position:</label>
+
+            <input type="text" class="form-control" ng-model="selectedReport.Report_one.rep_position" disabled>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="">Crew assignment:</label>
+
+            <input type="text" class="form-control" ng-model="selectedReport.Report_one.rep_crew" disabled>
+        </div>
+        
+        <div class="form-group col-md-6">
+            <label for="">Department:</label>
+
+            <input type="text" class="form-control"  disabled>
+        </div>
+        
+        <div class="form-group col-md-6">
+            <label for="">Email:</label>
+
+            <input type="text" class="form-control" ng-model="selectedReport.Report_one.rep_email" disabled>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="">Company:</label>
+
+            <input type="text" class="form-control" ng-model="selectedReport.Report_one.rep_company" disabled>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="">Primary phone:</label>
+
+            <input type="text" class="form-control" ng-model="selectedReport.Report_one.rep_primary_phone" disabled>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="">Alternate phone:</label>
+
+            <input type="text" class="form-control" ng-model="selectedReport.Report_one.rep_alternate_phone" disabled>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="">Supervisor:</label>
+
+            <input type="text" class="form-control" ng-model="selectedReport.Report_one.rep_supervisor" disabled>
+        </div>
+
+
+
+        <div class="clearfix"></div>
+        
+        
+        
+        
+        
+        
+        <h2 class="headingDesign">Location of hazard(s):</h2>
+
+
+        <div class="form-group col-md-6">
+            <label for="">Country:</label>
+            <!--<ui-select ng-model="Country" theme="bootstrap" ng-change="" ng-required="" disabled>
+                <!-- allow-clear="true" -->
+                <!--<ui-select-match placeholder="Country">
+                    {{selectedReport.Report_one.country}}</ui-select-match>
+                <ui-select-choices refresh="" refresh-delay="0" repeat=" ">
+                    <div>{{employee.full_name}}</div>
+                </ui-select-choices>-->
+            <!--</ui-select>-->
+            <input type="text" class="form-control" ng-model="selectedReport.Report_one.country" disabled>
+        </div>
+
+
+        <div class="form-group col-md-6">
+            <label for="">Province/State :</label>
+            <!--<ui-select ng-model="Province_State" theme="bootstrap" ng-change="" ng-required="" disabled>
+                <!-- allow-clear="true" -->
+                <!--<ui-select-match placeholder="Province/State">{{$select.selected.selectedValue}}</ui-select-match>
+                <ui-select-choices refresh="" refresh-delay="0" repeat=" ">
+                    <div>{{employee.full_name}}</div>
+                </ui-select-choices>-->
+           <!-- </ui-select>-->
+           <input type="text" class="form-control" ng-model="selectedReport.Report_one.state" disabled>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="">City:</label>
+            <!--<ui-select ng-model="City" theme="bootstrap" ng-change="" ng-required="" disabled>
+                <!-- allow-clear="true" -->
+                <!--<ui-select-match placeholder="City">
+                    {{$select.selected.selectedValue}}</ui-select-match>
+                <ui-select-choices refresh="" refresh-delay="0" repeat=" ">
+                    <div>{{employee.full_name}}</div>
+                </ui-select-choices>
+            </ui-select>-->
+                <input type="text" class="form-control" ng-model="selectedReport.Report_one.city" disabled>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="">Community:</label>
+            <!--<ui-select ng-model="Community" theme="bootstrap" ng-change="" ng-required="" disabled>
+                <!-- allow-clear="true" -->
+                <!--<ui-select-match placeholder="Community ">
+                    {{$select.selected.selectedValue}}</ui-select-match>
+                <ui-select-choices refresh="" refresh-delay="0" repeat=" ">
+                    <div>{{employee.full_name}}</div>
+                </ui-select-choices>
+            </ui-select>-->
+                <input type="text" class="form-control" ng-model="selectedReport.Report_one.community" disabled>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="">Other:</label>
+            <input type="text" ng-model="selectedReport.Report_one.other_location" class="form-control" disabled>
+        </div>
+
+
+
+
+
+        <div class="clearfix"></div>
+
+
+        <div class="form-group col-md-6">
+            <label for="">Crew involved:</label>
+           <!-- <select class="form-control" disabled>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+            </select>-->
+           <input type="text" ng-model="selectedReport.Report_one.crew_involved" class="form-control" disabled>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="">Operation type:</label>
+            <!--<select class="form-control" disabled>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+            </select>-->
+            <input type="text" ng-model="selectedReport.Report_one.operation_type_name" class="form-control" disabled>
+        </div>
+        
+        
+        <div class="form-group col-md-6">
+            <label for="">Department responsible:</label>
+            <!--<select class="form-control" disabled>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+            </select>-->
+            <input type="text" class="form-control" disabled>
+        </div>
+        
+        
+       
+        
+        <div class="form-group labelWidth col-md-12">
+            <label for=""> Emergency Response Plan activated?:</label>
+            <span>
+                <input  type="radio" disabled> <span>Yes </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled> <span> No </span>
+            </span>
+        </div>
+        
+        
+
+
+        <div class="clearfix"></div>
+        <h2 class="headingDesign"> Third-parties involved: </h2>
+
+        <div ng-repeat="x in selectedReport.Report_two">
+        <div class="form-group col-md-6">
+            <label for="">Contractor Name:</label>
+            <!--<ui-select ng-model="Contractor" theme="bootstrap" ng-change="" ng-required="" disabled>
+                <!-- allow-clear="true" -->
+                <!--<ui-select-match placeholder="Contractor Name ">
+                    {{$select.selected.selectedValue}}</ui-select-match>
+                <ui-select-choices refresh="" refresh-delay="0" repeat=" ">
+                    <div>{{employee.full_name}}</div>
+                </ui-select-choices>
+            </ui-select>-->
+                <input type="text" ng-model="x.contractor_name" class="form-control" disabled>
+        </div>
+
+
+
+        <div class="form-group col-md-6">
+            <label for="">Contractor's job #:</label>
+            <input type="text" ng-model="x.jop_number" class="form-control">
+        </div>
+
+
+
+        <div class="form-group col-md-6">
+            <label for="">Contractor's representative:</label>
+            <input type="text" class="form-control" ng-model="x.contact_name" >
+        </div>
+        </div>
+        <div ng-repeat="x in selectedReport.Report_three">
+        <div class="form-group col-md-6">
+            <label for="">Customer:</label>
+            <input type="text" ng-model="x.customer_name" class="form-control" disabled>
+            <!--<ui-select ng-model="Customer" theme="bootstrap" ng-change="" ng-required="" disabled>
+                <!-- allow-clear="true" -->
+                <!--<ui-select-match placeholder="Customer">
+                    {{$select.selected.selectedValue}}</ui-select-match>
+                <ui-select-choices refresh="" refresh-delay="0" repeat=" ">
+                    <div>{{employee.full_name}}</div>
+                </ui-select-choices>
+            </ui-select>-->
+        </div>         
+        <div class="form-group col-md-6">
+            <label for="">Customer's job #:</label>
+            <input type="text" ng-model="x.jop_number" class="form-control">
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="">Customer's representative:</label>
+            <input type="text" class="form-control" ng-model="x.contact_name">
+        </div>
+
+</div>
+
+
+
+        <div class="clearfix"></div>
+        <h2 class="headingDesign">Equipment involved:</h2>
+
+        <div ng-repeat="x in selectedReport.Report_four">
+        <div class="form-group col-md-6">
+            <label for="">Equipment name:</label>
+           <!-- <ui-select ng-model="Customer" theme="bootstrap" ng-change="" ng-required="" disabled>
+                <!-- allow-clear="true" -->
+                <!--<ui-select-match placeholder="Equipment">
+                    {{$select.selected.selectedValue}}</ui-select-match>
+                <ui-select-choices refresh="" refresh-delay="0" repeat=" ">
+                    <div>{{employee.full_name}}</div>
+                </ui-select-choices>
+            </ui-select>-->
+                 <input type="text" ng-model="x.equipment_name" class="form-control">
+        </div>         
+        <div class="form-group col-md-6">
+            <label for="">Equipment type:</label>
+            <input type="text" ng-model="x.equipment_type" class="form-control">
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="">Equipment category:</label>
+            <input type="text" ng-model="x.equipment_category_name" class="form-control">
+        </div>
+
+
+
+        <div class="form-group col-md-6">
+            <label for="">Equipment #:</label>
+            <input type="text" ng-model="x.equipment_number" class="form-control">
+        </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group autoHeight col-md-12" ng-show="['ABCanTrack'].indexOf(selectedReport.ReportType)!=-1">
+            <label for="">  Incident description:</label>
+            <textarea class="form-control"  disabled ng-model="selectedReport.Report_one.inc_description"></textarea>
+        </div>
+        <div ng-show="['ABCanTrack'].indexOf(selectedReport.ReportType)!=-1">
+        <h2 class="headingDesign">Sequence of activities and actions:</h2>
+        
+        <div class="form-group autoHeight col-md-12" ng-show="['ABCanTrack'].indexOf(selectedReport.ReportType)!=-1">
+            <label for="">  What was happening before, during and after the event that might have contributed to the outcome?: </label>
+            <textarea class="form-control"  disabled ng-model="selectedReport.Report_one.event_sequence"></textarea>
+        </div>
+        <h2 class="headingDesign">Sequence of activities and actions:</h2>
+        
+        
+        
+        <div class="form-group labelWidth clearheight col-md-12">
+            <label for="">  Indoor Lighting:</label>
+            <span>
+                <input  type="radio" disabled ng-checked="indoor_lighting_condition_sub_type == 'Bright'"> <span>Bright </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="indoor_lighting_condition_sub_type == 'Dark'"> <span> Dark </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="indoor_lighting_condition_sub_type == 'Poorly lit'"> <span> Poorly lit</span>
+            </span>
+        </div>
+        
+        
+        
+        
+        <div class="form-group labelWidth clearheight col-md-12">
+            <label for="">   Outdoor Lighting :</label>
+           <span>
+                <input  type="radio" disabled ng-checked="outdoor_lighting_condition_sub_type == 'Area in shadow'"> <span> Area in shadow </span>
+            </span>
+            <span>
+                <input  type="radio" disabled ng-checked="outdoor_lighting_condition_sub_type == 'Bright'"> <span>Bright </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="outdoor_lighting_condition_sub_type == 'Dark'"> <span> Dark </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="outdoor_lighting_condition_sub_type == 'Daylight'"> <span> Daylight</span>
+            </span>
+            
+            <span>
+                <input  type="radio" disabled ng-checked="outdoor_lighting_condition_sub_type == 'Dusk'"> <span> Dusk</span>
+            </span>
+        </div>
+        
+        
+        
+     
+        
+         <div class="form-group labelWidth clearheight col-md-12">
+            <label for="">   Outdoor Temperature:</label>
+           <span>
+                <input  type="radio" disabled ng-checked="outdoor_temp_condition_sub_type == 'Bitter cold (<-30°C)'"> <span> Bitter cold (<-30°C) </span>
+            </span>
+            <span>
+                <input  type="radio" disabled ng-checked="outdoor_temp_condition_sub_type == 'Cold (-30°C to -15°C)'"> <span>Cold (-30°C to -15°C)  </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="outdoor_temp_condition_sub_type == 'Moderate (-15°C to 10°C)'"> <span> Moderate (-15°C to 10°C)  </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="outdoor_temp_condition_sub_type == 'Warm (10°C to 25°C)'"> <span> Warm (10°C to 25°C) </span>
+            </span>
+            
+            <span>
+                <input  type="radio" disabled ng-checked="outdoor_temp_condition_sub_type == 'Hot (>25°C)'"> <span> Hot (>25°C) </span>
+            </span>
+        </div>
+       
+        
+        
+        
+         <div class="form-group labelWidth clearheight col-md-12">
+            <label for="">Road Conditions:</label>
+           <span>
+                <input  type="checkbox" disabled ng-checked="roadString.indexOf('Blowing snow')!=-1"> <span>Blowing snow </span>
+            </span>
+            <span>
+                <input  type="checkbox" disabled ng-checked="roadString.indexOf('Mainly clear skies')!=-1"> <span>Mainly clear skies   </span>
+            </span>
+
+            <span>
+                <input  type="checkbox" disabled ng-checked="roadString.indexOf('Dirt')!=-1"> <span>Dirt </span>
+            </span>
+
+            <span>
+                <input  type="checkbox" disabled ng-checked="roadString.indexOf('Dry')!=-1"> <span> Dry </span>
+            </span>
+            
+            <span>
+                <input  type="checkbox" disabled ng-checked="roadString.indexOf('Gravel')!=-1"> <span>Gravel</span>
+            </span>
+            
+            
+             
+            <span>
+                <input  type="checkbox" disabled ng-checked="roadString.indexOf('Icy')!=-1"> <span> Icy </span>
+            </span>
+            
+            <span>
+                <input  type="checkbox" disabled ng-checked="roadString.indexOf('Muddy')!=-1"> <span>Muddy</span>
+            </span>
+            
+            
+             
+            <span>
+                <input  type="checkbox" disabled ng-checked="roadString.indexOf('Paved')!=-1"> <span> Paved </span>
+            </span>
+            
+            <span>
+                <input  type="checkbox" disabled ng-checked="roadString.indexOf('Snow-Covered')!=-1"> <span> Snow-Covered </span>
+            </span>
+            
+            
+            <span>
+                <input  type="checkbox" disabled ng-checked="roadString.indexOf('Muddy')!=-1"> <span> Muddy </span>
+            </span>
+            
+            <span>
+                <input  type="checkbox" disabled ng-checked="roadString.indexOf('Wet')!=-1"> <span>Wet</span>
+            </span>
+            
+              <span>
+                <input  type="checkbox" disabled ng-checked="roadString.indexOf('Not applicable')!=-1"> <span>Not applicable</span>
+            </span>
+            
+        </div>
+        
+        
+         <div class="form-group labelWidth clearheight col-md-12">
+            <label for="">Weather:</label>
+           <span>
+                <input  type="checkbox" disabled ng-checked="weatherString.indexOf('Area in shadow')!=-1"> <span>Area in shadow  </span>
+            </span>
+            <span>
+                <input  type="checkbox" disabled ng-checked="weatherString.indexOf('Clear')!=-1"> <span>Clear</span>
+            </span>
+
+            <span>
+                <input  type="checkbox" disabled ng-checked="weatherString.indexOf('Cloudy')!=-1"> <span>Cloudy </span>
+            </span>
+
+            <span>
+                <input  type="checkbox" disabled ng-checked="weatherString.indexOf('Ice-fog')!=-1"> <span> Ice-fog </span>
+            </span>
+            
+            <span>
+                <input  type="checkbox" disabled ng-checked="weatherString.indexOf('Raining')!=-1"> <span>Raining</span>
+            </span>
+            
+            
+             
+            <span>
+                <input  type="checkbox" disabled ng-checked="weatherString.indexOf('Sleeting')!=-1"> <span> Sleeting </span>
+            </span>
+            
+            <span>
+                <input  type="checkbox" disabled ng-checked="weatherString.indexOf('Snowing')!=-1"> <span>Snowing</span>
+            </span>
+        
+            
+        </div>
+        
+        
+        
+       
+        
+        
+         <div class="form-group labelWidth clearheight col-md-12">
+            <label for="">Wind Direction:</label>
+           <span>
+                <input  type="radio" disabled ng-checked="windDir_condition_sub_type == 'North'"> <span>North </span>
+            </span>
+            <span>
+                <input  type="radio" disabled ng-checked="windDir_condition_sub_type == 'South'"> <span>South</span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="windDir_condition_sub_type == 'East'"> <span>East </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="windDir_condition_sub_type == 'West'"> <span> West </span>
+            </span>
+            
+            <span>
+                <input  type="radio" disabled ng-checked="windDir_condition_sub_type == 'Northeast'"> <span>Northeast</span>
+            </span>
+            <span>
+                <input  type="radio" disabled ng-checked="windDir_condition_sub_type == 'Southeast'"> <span> Southeast </span>
+            </span>
+            
+            <span>
+                <input  type="radio" disabled ng-checked="windDir_condition_sub_type == 'Northwest'"> <span>Northwest</span>
+            </span>
+            
+             <span>
+                <input  type="radio" disabled ng-checked="windDir_condition_sub_type == 'Southwest'"> <span>Southwest</span>
+            </span>
+        
+            
+        </div>
+        
+        
+        
+          
+         <div class="form-group labelWidth clearheight col-md-12">
+            <label for=""> Wind Speed:</label>
+           <span>
+                <input  type="radio" disabled ng-checked="windSP_condition_sub_type == '<30km/hr'"> <span><30km/hr </span>
+            </span>
+            <span>
+                <input  type="radio" disabled ng-checked="windSP_condition_sub_type == '30-50km/hr'"> <span>30-50km/hr</span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="windSP_condition_sub_type == '50-100km/hr'"> <span>50-100km/hr </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="windSP_condition_sub_type == '100km/hr'"> <span> >100km/hr </span>
+            </span>
+        </div>
+        
+        
+        
+        <div class="form-group autoHeight col-md-12" ng-show="['ABCanTrack'].indexOf(selectedReport.ReportType)!=-1">
+            <label for="">  Additional information about the environmental conditions: </label>
+            <textarea class="form-control"  disabled ng-model="selectedReport.Report_one.env_condition_note" ></textarea>
+        </div>
+        
+        
+        
+        <div class="form-group labelWidth clearheight col-md-12">
+            <label for="">Incident must be reported to:</label>
+           <span>
+                <input  type="checkbox" disabled ng-checked="reported_to.indexOf('Federal Dangerous Goods Agency')!=-1" > <span>Federal Dangerous Goods Agency</span>
+            </span>
+            <span>
+                <input  type="checkbox" disabled ng-checked="reported_to.indexOf('Fisheries and Oceans Agency')!=-1"> <span>Fisheries and Oceans Agency </span>
+            </span>
+
+            <span>
+                <input  type="checkbox" disabled ng-checked="reported_to.indexOf('Landowner(s)')!=-1"> <span>Landowner(s)</span>
+            </span>
+
+            <span>
+                <input  type="checkbox" disabled ng-checked="reported_to.indexOf('Province/State Environmental Regulator')!=-1"> <span>Province/State Environmental Regulator</span>
+            </span>
+            
+            
+            
+            <span>
+                <input  type="checkbox" disabled ng-checked="reported_to.indexOf('Province/State OHS')!=-1"> <span>Province/State OHS</span>
+            </span>
+
+            <span>
+                <input  type="checkbox" disabled ng-checked="reported_to.indexOf('Tenant(s)')!=-1"> <span>Tenant(s)</span>
+            </span>
+            
+            <span>
+                <input  type="checkbox" disabled ng-checked="reported_to.indexOf('WCB')!=-1"> <span>WCB</span>
+            </span>
+            
+        </div>
+        
+        </div>
+        
+        
+        
+        
+        
+        
+        <div class="clearfix"></div>
+
+
+        <div class="form-group autoHeight col-md-12" ng-hide="['ABCanTrack','SafetyMeeting','Training','MaintenanceManagement'].indexOf(selectedReport.ReportType)!=-1">
+            <label for=""> Description:</label>
+            <textarea class="form-control" ng-model="selectedReport.Report_one.report_description" disabled></textarea>
+        </div>
+
+
+        <div class="form-group autoHeight col-md-12" ng-hide="['ABCanTrack','Inspection','SafetyMeeting','Training','MaintenanceManagement'].indexOf(selectedReport.ReportType)!=-1" >
+            <label for=""> Suspected cause(s) of hazard(s):</label>
+            <textarea class="form-control" ng-model="selectedReport.Report_one.hazard_suspected_cause" disabled></textarea>
+        </div>
+
+
+        <div class="form-group autoHeight col-md-12" ng-hide="['ABCanTrack','SafetyMeeting','Training','MaintenanceManagement'].indexOf(selectedReport.ReportType)!=-1">
+            <label for=""> Initial actions taken to eliminate or mitigate the hazard(s):</label>
+            <textarea class="form-control" ng-model="selectedReport.Report_one.initial_action_token" disabled></textarea>
+        </div>
+
+
+
+<!--
+        <div class="form-group labelWidth col-md-12">
+            <label for=""> Status of reported hazard(s):</label>
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.Report_one.report_status == 'Present'" > <span>Present </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.Report_one.report_status == 'Eliminated'"> <span> Eliminated </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.Report_one.report_status == 'Mitigated'"> <span> Mitigated  </span>
+            </span>
+        </div>
+-->
+
+        <div class="form-group labelWidth col-md-12">
+            <label for="">  Are additional corrective actions required?</label>
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.Report_one.are_additional_corrective_actions_required == 'Yes'"> <span>Yes </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.Report_one.are_additional_corrective_actions_required == 'No'"> <span> No </span>
+            </span>
+        </div>
+
+
+
+        <div class="form-group autoHeight col-md-12" ng-hide="['ABCanTrack','SafetyMeeting','Training'].indexOf(selectedReport.ReportType)!=-1">
+            <label for="">Summary of recommended corrective actions:
+            </label>
+            <textarea class="form-control" ng-model="selectedReport.Report_one.recommended_corrective_actions_summary" disabled></textarea>
+        </div>
+
+
+        <div class="form-group autoHeight col-md-12" ng-hide="['ABCanTrack','SafetyMeeting','Training','MaintenanceManagement'].indexOf(selectedReport.ReportType)!=-1">
+            <label for=""> Description of potential impacts:</label>
+            <textarea class="form-control" ng-model="selectedReport.Report_one.potential_impacts_desc" disabled></textarea>
+        </div>
+
+
+
+        <div class="clearfix"></div>
+
+
+
+
+
+        <div class="form-group labelWidth col-md-12" ng-hide="['Inspection','SafetyMeeting','Training','MaintenanceManagement'].indexOf(selectedReport.ReportType)!=-1">
+            <label for="">Impact:</label>
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.Report_one.risk_level_sup_impact_name == 'Insignificant'"> <span> Insignificant </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.Report_one.risk_level_sup_impact_name == 'Minor'"> <span>  Minor </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.Report_one.risk_level_sup_impact_name == 'Moderate'"> <span>   Moderate </span>
+            </span>
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.Report_one.risk_level_sup_impact_name == 'Major'"> <span>   Major </span>
+            </span>
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.Report_one.risk_level_sup_impact_name == 'Catastrophic'"> <span>   Catastrophic </span>
+            </span>
+        </div>
+
+
+        <div class="form-group labelWidth col-md-12" ng-hide="['Inspection','SafetyMeeting','Training','MaintenanceManagement'].indexOf(selectedReport.ReportType)!=-1">
+            <label for="">Likelihood:</label>
+            <span>
+                <input  type="radio" disabled ng-model="" ng-checked="selectedReport.Report_one.risk_level_sup_likelyhood_name == 'Rare'"> <span>  Rare </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.Report_one.risk_level_sup_likelyhood_name == 'Unlikely'"> <span>  Unlikely </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.Report_one.risk_level_sup_likelyhood_name == 'Possible'"> <span>   Possible </span>
+            </span>
+            
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.Report_one.risk_level_sup_likelyhood_name == 'Likely'"> <span>  Likely </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.Report_one.risk_level_sup_likelyhood_name == 'Almost Certain'"> <span>   Almost Certain </span>
+            </span>
+        </div>
+
+
+        <div class="form-group labelWidth col-md-12">
+            <label for=""> Should work in the area be stopped immediately to protect workers?: </label>
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.should_work_stopped_yes"> <span> Yes </span>
+            </span>
+
+            <span>
+                <input  type="radio" disabled ng-checked="selectedReport.should_work_stopped_no"> <span>  No </span>
+            </span>
+        </div>
+
+
+      
+
+
+
+    </div>
+    <div class="clearfix"></div>
+
+
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="ok()">Upload attachments</button>
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="ok()">Print </button>
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="ok()">Open related report</button>
+</div>

@@ -1,0 +1,41 @@
+
+<div>
+    <div class="toolbar ng-scope">
+<!--        <a ng-if="permissions.Dashboard.datatabletoolbarview" ng-click="notificationSummary('all')" uib-tooltip="View summary"><i class="fa fa-eye"></i></a>-->
+        <a ng-if="permissions.Dashboard.datatabletoolbarview" ng-click="viewEmailNotification('all')" uib-tooltip="View email"><i class="fa fa-eye"></i></a> 
+        <!-- i added hossam code after merge -->
+        <a ng-if="permissions.Dashboard.datatabletoolbarview" href="" ng-click="NotificationPopup()" uib-tooltip="View notification">
+            <i class="fa fa-eye"></i>
+        </a>
+        <!-- end hossam code after merge -->
+        <a ng-if="permissions.Dashboard.exportfromdashboard" ng-click="downloadCSV('allRecentNotifications')" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+        <!--<a ng-if="permissions.Dashboard.exportfromdashboard" ng-click="downloadPDF('allRecentNotifications')" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a> -->
+    </div> 
+    <div id="grid1" ui-grid="allRecentOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+</div>
+
+<!-- hossam code after merge -->
+<!--<div class="toolbar ng-scope">
+    <a href="" ng-click="" uib-tooltip="Add notification">
+        <i class="fa fa-plus"></i>
+    </a>
+
+    <a href="" uib-tooltip="Edit notification">
+        <i class="fa fa-edit"></i>
+    </a>
+
+
+    <a href="" ng-click="NotificationPopup()" uib-tooltip="View notification">
+        <i class="fa fa-eye"></i>
+    </a>
+
+    <a href="" uib-tooltip="Delete "><i class="fa fa-remove red"></i></a>    
+
+    <a href="" ng-click="" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+
+    <a href="" ng-click="" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a> 
+
+
+</div> 
+
+<div id="grid1" ui-grid="allRecentOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>-->

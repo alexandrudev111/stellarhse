@@ -1,0 +1,138 @@
+<h2 class="col-md-12 dashboardImg">Dashboard <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" 
+    src="{{currentOrg.logourl}}" 
+    alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" >
+
+
+               </h2>
+
+
+<!-- ng-scrollbars ng-scrollbars-config="config" -->
+<div class="charts" ng-scrollbars ng-scrollbars-config="config" ng-if="permissions.Dashboard.viewkpicharts">
+
+    <div class="col-md-4">
+        <h2>Annual Hazard Ids vs. Incidents </h2>
+        <canvas id="bar" class="chart chart-bar"
+                chart-data="lineData" chart-labels="lineLabels"> chart-series="series"
+        </canvas>
+    </div>
+    <div class="col-md-4">
+        <h2>2017 Incidents by risk level</h2>
+        <canvas id="pie" class="chart chart-pie"
+                chart-data="data" chart-labels="labels" chart-options="options">
+        </canvas> 
+    </div>
+    <div class="col-md-4">
+        <h2>2017 Days Lost from LTI and RWI </h2>
+        <canvas id="line" class="chart chart-line" chart-data="thirdData"
+                chart-labels="thirdLabels" chart-series="thirdSeries" chart-options="thirdOptions"
+                chart-dataset-override="datasetOverride" chart-click="onClick">
+        </canvas>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-md-4">
+        <h2>Contractor vs. Company incident rates</h2>
+        <canvas id="line" class="chart chart-line" chart-data="thirdData"
+                chart-labels="thirdLabels" chart-series="thirdSeries" chart-options="thirdOptions"
+                chart-dataset-override="datasetOverride" chart-click="onClick">
+        </canvas>
+    </div>
+    <div class="col-md-4">
+        <h2>Training Hours completed vs. planned</h2>
+        <canvas id="bar" class="chart chart-bar"
+                chart-data="lineData" chart-labels="lineLabels"> chart-series="series"
+        </canvas>
+    </div>
+    <div class="col-md-4">
+        <h2>Current incident investigations by status</h2>
+        <canvas id="pie" class="chart chart-pie"
+                chart-data="data" chart-labels="labels" chart-options="options">
+        </canvas> 
+    </div>
+
+</div>
+
+
+
+
+
+<div class="clearfix"></div>
+<div class="dashboardTab" cg-busy="{promise:promise,backdrop:true}">
+    <uib-tabset active="activeForm">
+
+
+        <uib-tab index="0" heading="My recent notifications" ng-if="products.HSETracking">
+            <div ng-include="'app/modules/dashboardModule/Views/myRecentNotification.html'"></div>
+
+        </uib-tab>   
+
+
+        <uib-tab index="1" heading="My incomplete actions" ng-if="products.HSETracking" ng-hide="user.org_code==='sandbox'">
+
+
+            <div ng-include="'app/modules/dashboardModule/Views/myIncompleteAction.html'"></div>
+
+        </uib-tab>             
+
+
+
+        <uib-tab index="2" heading="My incomplete training" ng-if="products.Training">
+
+            <div ng-include="'app/modules/dashboardModule/Views/myIncompleteTraining.html'"></div>
+
+        </uib-tab>
+
+
+        <uib-tab index="3" heading="My recent reports" ng-if="products.HSETracking">
+
+            <div ng-include="'app/modules/dashboardModule/Views/myRecentReport.html'"></div>
+
+        </uib-tab>
+
+
+        <uib-tab index="4" heading="My HSE documents" ng-if="products.HSE" ng-hide="user.org_code==='sandbox'">
+
+
+            <div ng-include="'app/modules/dashboardModule/Views/myHseDocument.html'"></div>
+
+        </uib-tab>
+
+       <!-- <uib-tab index="5" heading="My BookMarks">
+            <div ng-include="'app/modules/dashboardModule/Views/myBookMark.html'"></div>
+
+
+        </uib-tab>-->
+
+
+        <uib-tab index="6" heading="All recent notifications" ng-if="products.HSETracking">
+            <div ng-include="'app/modules/dashboardModule/Views/allRecentNotification.html'"></div>
+
+
+        </uib-tab>
+
+
+
+        <uib-tab index="7" heading="All incomplete actions" ng-if="products.HSETracking" ng-hide="user.org_code==='sandbox'">
+
+            <div ng-include="'app/modules/dashboardModule/Views/allIncompleteActions.html'"></div>
+
+        </uib-tab>
+
+        <uib-tab index="8" heading="All incomplete training" ng-if="products.Training">
+            <div ng-include="'app/modules/dashboardModule/Views/allincompleteTrainingOptions.html'"></div>
+
+
+        </uib-tab>
+
+        <uib-tab index="9" heading="All recent reports" ng-if="products.HSETracking">
+            <div ng-include="'app/modules/dashboardModule/Views/allRecentReports.html'"></div>
+
+
+        </uib-tab>
+
+
+
+
+
+    </uib-tabset>
+
+</div>

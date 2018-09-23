@@ -1,0 +1,90 @@
+<form class="form-inline">
+    <div class="form-style">
+       
+       
+        <div class="form-group pull-right">
+            <div ng-include="'app/modules/reportModule/views/whatHappendParts/reportStatus.html'"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <div ng-include="'app/modules/reportModule/views/whatHappendParts/reportType.html'"></div>
+        </div>
+
+        <div class="form-group pull-right">
+            <div ng-include="'app/modules/reportModule/views/whatHappendParts/reportTime.html'"></div>
+        </div>
+
+        <div class="form-group pull-right dateStyle">
+            <div ng-include="'app/modules/reportModule/views/whatHappendParts/reportDate.html'"></div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="form-style">
+        <div ng-include="'app/modules/reportModule/views/whatHappendParts/whoIdentified.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="form-style location">
+        <div ng-include="'app/modules/reportModule/views/whatHappendParts/location.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="form-style">
+        <div ng-include="'app/modules/reportModule/views/whatHappendParts/crewOperationType.html'"></div>
+    </div>
+
+    <div class="clearfix"></div> 
+
+    <div class="form-style">
+        <div ng-include="'app/modules/reportModule/views/whatHappendParts/thirdParties.html'"></div>
+    </div>
+
+    <div class="clearfix"></div> 
+    <div class="form-style">
+        <div ng-include="'app/modules/reportModule/views/whatHappendParts/equipment.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="form-style">
+        <div ng-include="'app/modules/reportModule/views/whatHappendParts/reportDescription.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="form-style">
+        <div ng-include="'app/modules/reportModule/views/whatHappendParts/suspectedCause.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="form-style">
+        <div ng-include="'app/modules/reportModule/views/whatHappendParts/extraPart.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="form-style">
+        <div ng-include="'app/modules/reportModule/views/whatHappendParts/impacts.html'"></div>
+    </div> 
+
+    <div class="clearfix"></div> 
+    <div class="form-style riskLevel">
+        <div ng-include="'app/modules/reportModule/views/whatHappendParts/riskLevels.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="clearfix"></div>
+    <div class="ristList">
+        <uib-accordion close-others="oneAtATime">
+            <div uib-accordion-group class="panel-default" heading="Risk controls required" is-open="status.risk">
+                <div class="form-style ristItems">
+                    <div class="clearfix"></div>
+                    <div ng-include="'app/modules/reportModule/views/whatHappendParts/riskControls.html'"></div>
+                </div>
+            </div>
+        </uib-accordion>
+    </div>
+
+
+</form>

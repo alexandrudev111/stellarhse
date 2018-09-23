@@ -1,0 +1,138 @@
+
+<div class="ristList form-style noPadding" ng-repeat="observ in observationAndAnalysis track by $index" ng-init="observIndex = $index">
+    <div ng-if="observ.observation_and_analysis_code === 'EnergyForm' && (report_labels['energy_form']['is_hidden'] === 'No' || custom)">
+        <h2>{{report_labels['energy_form']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['energy_form'])" uib-tooltip="{{report_labels['energy_form']['help_me_name']}}"
+               ng-if="report_labels['energy_form']['help_me_name'] && report_labels['energy_form']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['energy_form'])" ng-if="custom && report_labels['energy_form']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></h2>
+        <!--<h2>{{observ.observation_and_analysis_name}}</h2>-->
+        <uib-accordion close-others="Energy" ng-repeat="parameter in observ.parameters track by $index">
+
+            <div uib-accordion-group class="panel-default" heading="{{parameter.observation_and_analysis_param_name}}" 
+                 is-open="status.observParameters[$index]">
+                <div class="form-group block" ng-repeat="param in parameter.parameters">
+                    <input type="checkbox" ng-model="param.paramChoice"
+                           ng-required="report_labels['energy_form']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"> <span>{{param.observation_and_analysis_param_name}} </span>
+                </div>
+            </div>
+        </uib-accordion>
+        <!-- <uib-accordion class="panel-default" heading="Note" is-open="status.Note">
+             <div uib-accordion-group class="panel-default" heading="Note" is-open="status.observation[observIndex]">
+             </div>
+         </uib-accordion>-->
+
+        <div class="form-group block" ng-if="report_labels['energy_form_note']['is_hidden'] === 'No' || custom">
+            <label>{{report_labels['energy_form_note']['field_label']}}
+                <a href="" ng-click="openHelp(report_labels['energy_form_note'])" uib-tooltip="{{report_labels['energy_form_note']['help_me_name']}}"
+                   ng-if="report_labels['energy_form_note']['help_me_name'] && report_labels['energy_form_note']['help_me_description']" ><i class="fa fa-question"></i></a>
+                <a href="" ng-click="editField(report_labels['energy_form_note'])" ng-if="custom && report_labels['energy_form_note']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+            <!--<label>Note :</label>-->
+            <textarea class="form-control" ng-model="observ.note"
+                      ng-required="report_labels['energy_form_note']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+        </div>
+    </div>
+    <div ng-if="observ.observation_and_analysis_code === 'SubActions' && (report_labels['substandard_actions']['is_hidden'] === 'No' || custom)">
+       
+       
+                        <div  class="accNewStyle cause">
+     <uib-accordion class="accordionIcon" close-others="oneAtATime" >
+     
+     <div uib-accordion-group class="panel-default" heading=" {{report_labels['substandard_actions']['field_label']}}" is-open="status.substandardActions">
+            <a href="" ng-click="openHelp(report_labels['substandard_actions'])" uib-tooltip="{{report_labels['substandard_actions']['help_me_name']}}"
+               ng-if="report_labels['substandard_actions']['help_me_name'] && report_labels['substandard_actions']['help_me_description']"  tooltip-placement="left">><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['substandard_actions'])" ng-if="custom && report_labels['substandard_actions']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a>
+       
+      
+       
+
+        <div class="form-group block noBottomMargin" ng-repeat="parameter in observ.parameters track by $index">
+
+            <input type="checkbox" ng-model="parameter.paramChoice"
+                   ng-required="report_labels['substandard_actions']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"> <span>{{parameter.observation_and_analysis_param_name}} </span>
+
+        </div>
+       
+              </div>
+     
+        </uib-accordion>
+        
+    </div>
+       
+    <div class="clearfix"></div>
+        <div class="form-group block" ng-if="report_labels['substandard_actions_note']['is_hidden'] === 'No' || custom">
+           
+            <label>{{report_labels['substandard_actions_note']['field_label']}}
+                <a href="" ng-click="openHelp(report_labels['substandard_actions_note'])" uib-tooltip="{{report_labels['substandard_actions_note']['help_me_name']}}"
+                   ng-if="report_labels['substandard_actions_note']['help_me_name'] && report_labels['substandard_actions_note']['help_me_description']"><i class="fa fa-question"></i></a>
+                <a href="" ng-click="editField(report_labels['substandard_actions_note'])" ng-if="custom && report_labels['substandard_actions_note']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+            <!--<label>Note :</label>-->
+            <textarea class="form-control" ng-model="observ.note"
+                      ng-required="report_labels['substandard_actions_note']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+        </div>
+    </div>
+    <div ng-if="observ.observation_and_analysis_code === 'SubConditions' && (report_labels['substandard_conditions']['is_hidden'] === 'No' || custom)">
+          <div  class="accNewStyle  cause">
+     <uib-accordion class="accordionIcon" close-others="oneAtATime" >
+     
+     <div uib-accordion-group class="panel-default" heading=" {{report_labels['substandard_conditions']['field_label']}}" is-open="status.substandardConditions">
+       
+            <a href="" ng-click="openHelp(report_labels['substandard_conditions'])" uib-tooltip="{{report_labels['substandard_conditions']['help_me_name']}}"
+               ng-if="report_labels['substandard_conditions']['help_me_name'] && report_labels['substandard_conditions']['help_me_description']"  tooltip-placement="left">><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['substandard_conditions'])" ng-if="custom && report_labels['substandard_conditions']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a>
+        <!--<h2>{{observ.observation_and_analysis_name}}</h2>-->
+        <!--<h2>Unwanted Energy Forms:</h2>-->
+        <div class="form-group block noBottomMargin" ng-repeat="parameter in observ.parameters track by $index">
+            <input type="checkbox" ng-model="parameter.paramChoice"
+                   ng-required="report_labels['substandard_conditions']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"> <span>{{parameter.observation_and_analysis_param_name}} </span>
+
+        </div>
+            </div>
+     
+        </uib-accordion>
+        
+    </div>
+       
+        
+        
+        
+        
+        <div class="form-group block" ng-if="report_labels['substandard_conditions_note']['is_hidden'] === 'No' || custom">
+            <label>{{report_labels['substandard_conditions_note']['field_label']}}
+                <a href="" ng-click="openHelp(report_labels['substandard_conditions_note'])" uib-tooltip="{{report_labels['substandard_conditions_note']['help_me_name']}}"
+                   ng-if="report_labels['substandard_conditions_note']['help_me_name'] && report_labels['substandard_conditions_note']['help_me_description']"><i class="fa fa-question"></i></a>
+                <a href="" ng-click="editField(report_labels['substandard_conditions_note'])" ng-if="custom && report_labels['substandard_conditions_note']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+            <!--<label>Note :</label>-->
+            <textarea class="form-control" ng-model="observ.note"
+                      ng-required="report_labels['substandard_conditions_note']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+        </div>
+    </div>
+    
+    <div class="clearfix"></div>
+    <div ng-if="observ.observation_and_analysis_code === 'UnderLyingCauses' && (report_labels['underlying_causes_title']['is_hidden'] === 'No' || custom)">
+        <h2>{{report_labels['underlying_causes_title']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['underlying_causes_title'])" uib-tooltip="{{report_labels['underlying_causes_title']['help_me_name']}}"
+               ng-if="report_labels['underlying_causes_title']['help_me_name'] && report_labels['underlying_causes_title']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['underlying_causes_title'])" ng-if="custom && report_labels['underlying_causes_title']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></h2>
+        <!--<h2>{{observ.observation_and_analysis_name}}</h2>-->
+        <!--<h2>Unwanted Energy Forms:</h2>-->
+        <uib-accordion close-others="Energy" ng-repeat="parameter in observ.parameters track by $index">
+            <div uib-accordion-group class="panel-default" heading="{{parameter.observation_and_analysis_param_name}}" 
+                 is-open="status.observParameters[$index]">
+                <div class="form-group block" ng-repeat="param in parameter.parameters">
+                    <input type="checkbox" ng-model="param.paramChoice"
+                           ng-required="report_labels['underlying_causes_title']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"> <span>{{param.observation_and_analysis_param_name}} </span>
+                </div>
+            </div>
+        </uib-accordion>
+
+        <div class="form-group block" ng-if="report_labels['underlying_cause_note']['is_hidden'] === 'No' || custom">
+            <label>{{report_labels['underlying_cause_note']['field_label']}}
+                <a href="" ng-click="openHelp(report_labels['underlying_cause_note'])" uib-tooltip="{{report_labels['underlying_cause_note']['help_me_name']}}"
+                   ng-if="report_labels['underlying_cause_note']['help_me_name'] && report_labels['underlying_cause_note']['help_me_description']"><i class="fa fa-question"></i></a>
+                <a href="" ng-click="editField(report_labels['underlying_cause_note'])" ng-if="custom && report_labels['underlying_cause_note']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+            <!--<label>Note :</label>-->
+            <textarea class="form-control" ng-model="observ.note"
+                      ng-required="report_labels['underlying_cause_note']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+        </div>
+    </div>
+</div>

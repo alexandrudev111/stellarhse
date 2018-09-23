@@ -1,0 +1,70 @@
+<h2>{{db.title}} <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+
+<div class="searchSection">
+    <form class="form-inline">
+        <div class="form-style">
+            <div class="form-group" ng-repeat="selectMenu in db.select">
+                <label>{{selectMenu.name}}:</label>
+                <select id="defaultType" class="form-control" ng-options="s.id as s.name for s in selectMenu.selectArray" ng-model="db.selectArrays[selectMenu.name]"
+                        ng-change="getSelectArrays(selectMenu.name)">
+                </select>
+            </div>
+            <button class="btn btn-primary" ng-click="chooseView()">Search</button>
+        
+            
+            
+           
+        </div>
+    </form>
+</div>
+
+<div class="clearfix"></div>
+<div ng-show="hideGrid">
+<div>
+    
+     <button class="btn btn-primary"  ng-click="saveAsFavorit()" ng-show="canSave">Save as favorite</button>
+   <!--  <button class="btn btn-primary">Save Favorit Table</button>  -->
+     <button class="btn btn-primary" ng-click="updateFavoritFun('update')" ng-show="canUpdateSaved">Save Changes</button>
+     <button class="btn btn-primary" ng-click="renameFavorit()" ng-show="canUpdateSaved">Rename favorite Table</button>
+     <button class="btn btn-primary" ng-click="updateFavoritFun('delete')"  ng-show="canUpdateSaved">Delete favorite Table</button>
+            
+</div>
+
+<div class="toolbar">
+    <a ng-if="!dataTablesPermissions[db.selectArrays['Report Type']].readonlyallreport" href="" ng-click="openAddCustomer();"  uib-tooltip="Add report"><i class="fa fa-plus"></i></a>
+    <a ng-if="(dataTablesPermissions[db.selectArrays['Report Type']].ownreport && user.employee_id === db.selectedItem.creator_id) ||
+    (dataTablesPermissions[db.selectArrays['Report Type']].readonlyreport && user.employee_id !== db.selectedItem.creator_id) ||
+    (dataTablesPermissions[db.selectArrays['Report Type']].otherreport && user.employee_id !== db.selectedItem.creator_id) || dataTablesPermissions[db.selectArrays['Report Type']].readonlyallreport" href="" ng-click="openReport()"  uib-tooltip="View/Edit"><i class="fa fa-eye"></i></a>
+    <a ng-if="dataTablesPermissions[db.selectArrays['Report Type']].delete" href="" ng-click="deleteCustomer()" uib-tooltip="Delete report"><i class="fa fa-remove red"></i></a>
+    <a href="" ng-click="clearSearch()" uib-tooltip="Clear"><i class="fa fa-history"></i></a>
+    <a href="" ng-click="downloadCSV()" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+    <!-- <a href="" ng-click="downloadPDF()" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a> -->
+
+   
+    <a href="" class="pull-right" ng-click="openHelp()"  uib-tooltip="Help"><i class="fa fa-question"></i></a>
+
+    
+
+    <a href="" ng-click="fileManagerPopUp('lg')"  uib-tooltip="Attach files"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a>    
+
+
+     <a href="" ng-click="CustomizationPopUp()"  uib-tooltip="Select columns"><i class="fa fa-bars"></i></a>
+
+
+    <a ng-show="dataTablesPermissions['general'].downloadandemailprintreports" href="" ng-click="templatePopUp()"  uib-tooltip="Print/Email Report"> <i class="fa fa-file-text-o"></i> </a>
+</div>
+
+<div class="dataTable">
+<div id="grid1" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection  class="grid" ui-grid-pagination ="" ui-grid-auto-resize ui-grid-resize-columns></div>
+
+
+<!-- ui-grid-auto-resize ui-grid-resize-columns -->
+<!--<div ng-if='columnChanged'>
+    Column Visibility Changed - name: {{ columnChanged.name }} visible: {{ columnChanged.visible }}
+</div>-->
+    <script type="text/ng-template" id="ui-grid/uiGridCell">
+      <div class="ui-grid-cell-contents my-cell" ng-dblclick="grid.appScope.blah()">{{COL_FIELD CUSTOM_FILTERS}}</div>
+    </script>
+</div>
+</div>

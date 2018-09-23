@@ -1,0 +1,101 @@
+<!--{{labels.whatHappened.thirdParties}}-->
+
+<div ng-if="report_labels['third_parties_involved']['is_hidden'] === 'No' || custom">
+    <h2> {{report_labels['third_parties_involved']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['third_parties_involved'])" uib-tooltip="{{report_labels['third_parties_involved']['help_me_name']}}"
+           ng-if="report_labels['third_parties_involved']['help_me_name'] && report_labels['third_parties_involved']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['third_parties_involved'])" ng-if="custom && report_labels['third_parties_involved']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></h2>
+    <div id="contractorParent"  ng-repeat="contractor in contractors_involved track by $index" ng-init="contractorIndex = $index">
+        <div class="cloneContractor">
+
+            <div class="form-group" ng-if="report_labels['contractor_id']['is_hidden'] === 'No' || custom">
+                <label  for="exampleInputPassword3">{{report_labels['contractor_id']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['contractor_id'])" uib-tooltip="{{report_labels['contractor_id']['help_me_name']}}"
+                       ng-if="report_labels['contractor_id']['help_me_name'] && report_labels['contractor_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['contractor_id'])" ng-if="custom && report_labels['contractor_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                    <!-- allow-clear="true" reset-search-input="false" -->
+                <ui-select class="form-control"  reset-search-input="true" id="exampleInputPassword3" ng-model="contractor" theme="bootstrap" on-select="onContractorThirdPartySelected($item,$index)"
+                           ng-required="report_labels['contractor_id']['is_mandatory']=='Yes' || report_labels['third_parties_involved']['is_mandatory']=='Yes'"
+
+                           ng-class="{'required':(report_labels['contractor_id']['is_mandatory'] == 'Yes' || report_labels['third_parties_involved']['is_mandatory']=='Yes') && contractor == null}" ng-disabled = "disabeldTrue">
+                    <ui-select-match allow-clear="true" placeholder="Contractor name">{{$select.selected.third_party_name}}</ui-select-match>
+
+                    <ui-select-choices refresh="getThirdpartiesInvolved($select.search,'Contractor', contractorIndex)" refresh-delay="0" 
+                                       repeat="tp.third_party_id as tp in contractor_thirdparties[contractorIndex] | filter: $select.search">
+                        <div>{{tp.third_party_name}}</div>
+                    </ui-select-choices>
+                </ui-select>
+                <button class="btn btn-primary" ng-click="opencontractor()" ng-disabled="initializeReport.thirdPartyContract || contractor_thirdparties[contractorIndex].length != 0" uib-tooltip="Contractor not found - add to database."><i class="fa fa-plus"></i></button>
+            </div>
+
+            <div class="form-group helfWidth" ng-if="report_labels['contractor_jop_number']['is_hidden'] === 'No' || custom">
+                <label for="exampleInputPassword3">{{report_labels['contractor_jop_number']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['contractor_jop_number'])" uib-tooltip="{{report_labels['contractor_jop_number']['help_me_name']}}"
+                       ng-if="report_labels['contractor_jop_number']['help_me_name'] && report_labels['contractor_jop_number']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['contractor_jop_number'])" ng-if="custom && report_labels['contractor_jop_number']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <input type="text" class="form-control" placeholder="Contractor's job #" ng-model="contractor.jop_number"
+                       ng-required="report_labels['contractor_jop_number']['is_mandatory']=='Yes' || report_labels['third_parties_involved']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"/>
+
+            </div>
+
+            <div class="form-group" ng-if="report_labels['contractor_contact_name']['is_hidden'] === 'No' || custom">
+                <label  for="exampleInputPassword3">{{report_labels['contractor_contact_name']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['contractor_contact_name'])" uib-tooltip="{{report_labels['contractor_contact_name']['help_me_name']}}"
+                       ng-if="report_labels['contractor_contact_name']['help_me_name'] && report_labels['contractor_contact_name']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['contractor_contact_name'])" ng-if="custom && report_labels['contractor_contact_name']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <input type="text" class="form-control" placeholder="Contractor's representative" ng-model="contractor.contact_name" ng-change="contractorThirdPartyNameChanged(contractorIndex)"
+                       ng-required="report_labels['contractor_contact_name']['is_mandatory']=='Yes' || report_labels['third_parties_involved']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"/>
+            </div>
+
+            <button class="btn btn-danger" ng-click="removeContractor($index, contractor)" ng-hide="contractorIndex == 0">Remove</button>
+
+        </div>
+    </div>
+
+    <button class="btn btn-primary btnmTop" ng-hide="!custom && report_labels['contractor_jop_number']['is_hidden'] === 'Yes'&&report_labels['contractor_id']['is_hidden'] === 'Yes'&&report_labels['contractor_contact_name']['is_hidden'] === 'Yes'" ng-click="newContract()">More</button>
+    <div class="clearfix"></div>
+    <div id="ParentCustomer" ng-repeat="customer in customer_involved track by $index" ng-init="customerIndex = $index">
+
+        <div class="clonecustomer">
+            <div class="form-group" ng-if="report_labels['customer_id']['is_hidden'] === 'No' || custom">
+                <label for="exampleInputPassword3">{{report_labels['customer_id']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['customer_id'])" uib-tooltip="{{report_labels['customer_id']['help_me_name']}}"
+                       ng-if="report_labels['customer_id']['help_me_name'] && report_labels['customer_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['customer_id'])" ng-if="custom && report_labels['customer_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <ui-select class="form-control" allow-clear="true" reset-search-input="false"  id="exampleInputPassword3" ng-model="customer" theme="bootstrap" on-select="onCustomerThirdPartySelected($item,customerIndex)"
+                           ng-required="report_labels['customer_id']['is_mandatory']=='Yes' || report_labels['third_parties_involved']['is_mandatory']=='Yes'"
+                           ng-class="{'required':(report_labels['customer_id']['is_mandatory'] == 'Yes' || report_labels['third_parties_involved']['is_mandatory']=='Yes') && customer == null}" ng-disabled = "disabeldTrue">
+                    <ui-select-match  allow-clear="true" placeholder="Enter name">{{$select.selected.third_party_name}}</ui-select-match>
+                    <ui-select-choices refresh="getThirdpartiesInvolved($select.search,'Customer', customerIndex)" refresh-delay="0" 
+                                       repeat="tp.third_party_id as tp in customer_thirdparties[customerIndex] | filter: $select.search ">
+                        <div>{{tp.third_party_name}}</div>
+                    </ui-select-choices>
+                </ui-select>
+                <button class="btn btn-primary" ng-click="opencustomer()" ng-disabled="initializeReport.thirdPartyCustomer || customer_thirdparties[customerIndex].length != 0" uib-tooltip="Customer not found - add to database."><i class="fa fa-plus"></i></button>
+            </div>
+            <div class="form-group helfWidth" ng-if="report_labels['customer_job_number']['is_hidden'] === 'No' || custom">
+                <label  for="exampleInputPassword3">{{report_labels['customer_job_number']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['customer_job_number'])" uib-tooltip="{{report_labels['customer_job_number']['help_me_name']}}"
+                       ng-if="report_labels['customer_job_number']['help_me_name'] && report_labels['customer_job_number']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['customer_job_number'])" ng-if="custom && report_labels['customer_job_number']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+                <input type="text" class="form-control" placeholder="Customer's job's" ng-model="customer.jop_number"
+                       ng-required="report_labels['customer_job_number']['is_mandatory']=='Yes' || report_labels['third_parties_involved']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"/>
+
+            </div>
+
+            <div class="form-group" ng-if="report_labels['customer_contact_name']['is_hidden'] === 'No' || custom">
+                <label  for="exampleInputPassword3">{{report_labels['customer_contact_name']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['customer_contact_name'])" uib-tooltip="{{report_labels['customer_contact_name']['help_me_name']}}"
+                       ng-if="report_labels['customer_contact_name']['help_me_name'] && report_labels['customer_contact_name']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['customer_contact_name'])" ng-if="custom && report_labels['customer_contact_name']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <input type="text" class="form-control" placeholder="
+Customer's representative" ng-model="customer.contact_name" ng-change="customerThirdPartyNameChanged(customerIndex)"
+                       ng-required="report_labels['customer_contact_name']['is_mandatory']=='Yes' || report_labels['third_parties_involved']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"/>
+            </div>
+            <button class="btn btn-danger" ng-click="removeCustomer($index, customer)" ng-hide="customerIndex == 0">Remove</button>
+        </div>
+
+    </div>
+    <button class="btn btn-primary btnmTop" ng-hide="!custom && report_labels['customer_id']['is_hidden'] === 'Yes'&&report_labels['customer_job_number']['is_hidden'] === 'Yes'&&report_labels['customer_contact_name']['is_hidden'] === 'Yes'" ng-click="newCustomer(customerIndex)">More</button>
+</div>

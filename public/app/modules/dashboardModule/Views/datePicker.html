@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h3 class="modal-title" > Close action </h3>
+</div>
+<div class="modal-body">   
+    <h3>Please select actual end date</h3>
+    <div class="clearfix"></div>
+    <div class="form-group col-md-6">
+        <label> Actual end date :</label>
+        <input type='text'  class="form-control" my-datepicker ng-model="selected_action_to_close.selected_end_date" >
+    </div>
+    <div class="clearfix"></div>
+    <a href="" class="btn btn-primary pull-right" ng-click="cancel()" style="margin-left: 20px">
+        <span>Cancel</span>
+    </a>
+    <a href="" class="btn btn-primary pull-right" ng-click="update_action_status()" style="margin-left: 20px">
+        <span>Ok</span>
+    </a>
+</div>

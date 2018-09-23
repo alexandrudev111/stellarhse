@@ -1,0 +1,71 @@
+
+
+
+<h2><img src="resources/images/heading-icon.png" alt="">Hazard ID <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+<div class="clearfix"></div>
+<div class="com-md-12 contentP">
+    <form class="form-inline" name="reportForm" novalidate>
+        <!--<span class="text-right pull-right reportID">Hazard ID #{{report.hazard_number}}</span>-->
+        <div class="clearfix"></div>
+        <button ng-if="reportPermissions.ownwhathappened"
+        class="btn btn-success pull-right" ng-click="submitHazardReport()" ng-disabled="custom || reportForm.$invalid || reportForm.$pristine">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            Submit
+        </button>
+
+        <button ng-if="reportPermissions.ownwhathappened" ng-click="deleteDraft('discard')"
+        class="btn btn-danger pull-right" ng-disabled="custom">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+             Discard draft report
+        </button>
+
+        <button class="btn btn-primary pull-right" ng-disabled="custom" ng-if="permissions.general.printindividualreport">
+            <i class="fa fa-envelope" aria-hidden="true"></i>  Email / Print
+        </button>
+
+        <a href="#/viewDataTables" class="btn btn-primary pull-right" ng-disabled="custom" ng-click="closeReport()"
+        ng-if="reportPermissions.closereport">
+            <i class="fa fa-times" aria-hidden="true"></i> Save draft
+        </a>
+        
+         
+       
+        <a href="" class="customize" ng-click="customize()"
+        ng-if="reportPermissions.ownwhathappened">Customize </a>
+
+        <div class="clearfix"></div>
+
+        <uib-tabset active="activeForm">
+            <uib-tab index="0" heading="What happened?" ng-if="reportPermissions.ownwhathappened">
+                <div ng-include="'app/modules/hazardReportModule/views/whatHappend.html'"></div>
+                <div ng-include="'app/modules/coreReportModule/views/whatHappenedCustom.html'"></div>
+            </uib-tab>
+
+            <uib-tab index="1" heading="Hazard classifications" ng-if="reportPermissions.ownhazarddetails">
+                <div ng-include="'app/modules/coreReportModule/views/hazardDetails.html'"></div>
+                <div ng-include="'app/modules/coreReportModule/views/detailsCustom.html'"></div>
+
+            </uib-tab>   
+
+            <uib-tab index="2" heading="People involved" ng-if="reportPermissions.ownpeopleinvolved">
+                <div ng-include="'app/modules/coreReportModule/views/peopleInvolved.html'"></div>
+<!--                <div ng-include="'app/modules/coreReportModule/views/peoplesCustom.html'"></div>-->
+            </uib-tab>             
+
+            <uib-tab index="3" heading="Corrective actions" ng-if="reportPermissions.ownaction">
+                <div ng-include="'app/modules/coreReportModule/views/remedialActions.html'"></div>
+                <!--<div ng-include="'app/modules/coreReportModule/views/actionsCustom.html'"></div>-->
+            </uib-tab>
+
+            <uib-tab index="4" heading="Supporting documents" ng-if="reportPermissions.owndocuments">
+
+                <div ng-include="'app/modules/coreReportModule/views/supportingDocuments.html'"></div>
+
+            </uib-tab>
+
+        </uib-tabset>
+
+    </form>
+
+</div>

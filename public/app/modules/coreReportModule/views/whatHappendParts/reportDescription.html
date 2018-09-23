@@ -1,0 +1,10 @@
+<!--{{labels.whatHappened.reportDescription}}-->
+<div class="form-group block" ng-if="report_labels['description']['is_hidden'] === 'No' || custom">
+    <label for="exampleInputPassword3"> {{report_labels['description']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['description'])" uib-tooltip="{{report_labels['description']['help_me_name']}}"
+           ng-if="report_labels['description']['help_me_name'] && report_labels['description']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['description'])" ng-if="custom && report_labels['description']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+    <textarea  class="form-control" placeholder="Describe report" ng-model="report.report_description"  
+               ng-required="report_labels['description']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+</div>

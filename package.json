@@ -1,0 +1,23 @@
+{
+  "name": "stellarhse",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bs-config.js",
+  "dependencies": {},
+  "devDependencies": {
+    "connect-history-api-fallback": "^1.5.0",
+    "http-proxy-middleware": "^0.18.0",
+    "lite-server": "^2.3.0"
+  },
+  "scripts": {
+    "php": "php -S DESKTOP-0ITM120:8181 -t public",
+    "dev": "./node_modules/lite-server/bin/lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.itcanint.ca:alliance/stellarhse.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

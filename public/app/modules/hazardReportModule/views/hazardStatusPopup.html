@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3 class="modal-title">Update Hazard status:</h3>
+</div>
+
+<div class="modal-body info">
+      
+      <label class="labelFullWidth" for="exampleInputEmail3">{{hazardStatusName}}:</label>
+       <div class="form-group heightAuto">
+           <div class="pull-right ng-scope">
+    
+    <label for="exampleInputEmail3">Status:</label>
+    
+     <span class="pull-left blockItem" ng-repeat="status in correctiveStatus">
+                                        <input type="radio" value="{{status.status_id}}" 
+                                               ng-model="correctieAction.corrective_action_result_id"
+                                               ng-required="report_labels['corrective_action_result_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"> <span>
+                                            {{status.status_Name}}</span>
+                                    </span>
+
+    
+                </div>
+                </div> 
+    <div class="clearfix"></div>
+ 
+         
+    <button class="btn btn-primary pull-right" ng-click="updateHazardStatus()">Submit</button>
+    <button class="btn btn-primary pull-right" ng-click="cancel()">cancel</button>
+</div>

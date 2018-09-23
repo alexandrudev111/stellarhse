@@ -1,0 +1,50 @@
+<h2>Select KPI factors and formulas <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+<div class="calcuulation">
+    <div class="form-style">
+        <form name="updateOrganization">
+            <div class="form-group">
+                <label for="exampleInputPassword3">1- Select beginning of fiscal year(mm/dd):</label> 
+                <input type="text" id="fiscal_year" class="form-control" readonly required ng-model="selectedOrg.fiscal_year" 
+                ng-disabled="!permissions.Analytics.selectfiscalyear"/>           
+                <a href="" class="pull-left" ng-click="clearFiscalYear()" 
+                ><i class="fa fa-close"></i></a>
+            </div>
+<div class="clearfix"></div>
+            <div class="form-group ">
+                <label for="exampleInputPassword3">2- Adjust industry factor for work hours used in frequency rate calculations:</label>
+                <input type="text" class="form-control" required  name="work_hour" ng-model="selectedOrg.work_hour" ng-pattern="/^([0-9]{1,11})[\.]{0,10}([0-9]){0,3}$/" maxlength="12"
+                ng-disabled="!permissions.Analytics.addeditworkhour">
+                <span ng-show="updateOrganization.work_hour.$error.pattern"   style="color: red">{{decimal_valid}}</span>
+            </div>
+<div class="clearfix"></div>
+            <div class="form-group ">
+                <label for="exampleInputPassword3">3- Adjust industry factor for KM driven used in vehicle incident frequency rate calculations:</label>
+                <input type="text" class="form-control" required name="km_driven" ng-model="selectedOrg.km_driven"  ng-pattern="/^([0-9]{1,11})[\.]{0,10}([0-9]){0,3}$/" maxlength="12"
+                ng-disabled="!permissions.Analytics.adjustindustryfactor">
+                <span ng-show="updateOrganization.km_driven.$error.pattern"   style="color: red">{{decimal_valid}}</span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="alert alert-warning">
+                <p>
+                    Caution: Industry factor provided with this application (e.g, 200,000 for work hours and 1,000.000 for KM driven) affect many calculations and should only be changed if a different  standard is being used by your industry for comparing metrics.  
+                </p>            
+            </div>
+            <div class="row">
+                <div class="col-md-7" style=" margin-top: 10px; width: 100%">
+                    <button class="btn btn-primary mTop pull-right" ng-click="updateOrgSetting()"   data-ng-disabled="updateOrganization.$invalid">  
+                        <span>Save</span>
+                    </button>
+                    <button class="btn btn-primary mTop pull-right" ng-click="cancel();"> 
+                        <span>Cancel</span>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+          </div>
+        <label for="exampleInputPassword3">4- Enter and update external data here :</label>
+        <div class="clearfix"></div>
+        <div ng-include="'app/modules/analyticsModule/views/externalData.html'" ng-controller="analyticsCtrl"></div>
+  
+</div>

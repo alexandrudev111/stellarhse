@@ -1,0 +1,147 @@
+<form class="form-inline">
+
+    <div class="form-style">
+       
+        <div class="form-group">
+            <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportType.html'"></div>
+        </div>
+
+        <div class="form-group" ng-if="report_labels['inspection_reason_id']['is_hidden'] === 'No' || custom">
+            <label for="exampleInputEmail3"> {{report_labels['inspection_reason_id']['field_label']}}
+                <a href="" ng-click="openHelp(report_labels['inspection_reason_id'])" uib-tooltip="{{report_labels['inspection_reason_id']['help_me_name']}}"
+                   ng-if="report_labels['inspection_reason_id']['help_me_name'] && report_labels['inspection_reason_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                <a href="" ng-click="editField(report_labels['inspection_reason_id'])" ng-if="custom && report_labels['inspection_reason_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+            <select class="form-control" id="exampleInputEmail3" ng-model="report.inspection_reason_id" 
+                    ng-options="inspectionReason.inspection_reason_id as inspectionReason.inspection_reason_name for inspectionReason in inspectionReasons"
+                    ng-required="report_labels['inspection_reason_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue">
+                <option value="" selected>Select</option>
+            </select>
+        </div>
+
+        <div class="form-group pull-right">
+            <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportTime.html'"></div>
+        </div>
+
+        <div class="form-group pull-right dateStyle">
+            <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportDate.html'"></div>
+        </div>
+
+        <div class="form-group ">
+            <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportOwner.html'"></div>
+        </div>
+
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/whoIdentified.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="form-style location">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/location.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/crewOperationType.html'"></div>
+    </div>
+
+    <div class="clearfix"></div> 
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/thirdParties.html'"></div>
+    </div>
+    <div class="clearfix"></div> 
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/equipment.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportDescription.html'"></div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-style">
+        <div class="form-group block" ng-if="report_labels['hazard_description']['is_hidden'] === 'No' || custom">
+            <label for="exampleInputPassword3">{{report_labels['hazard_description']['field_label']}}
+                <a href="" ng-click="openHelp(report_labels['hazard_description'])" uib-tooltip="{{report_labels['hazard_description']['help_me_name']}}"
+                   ng-if="report_labels['hazard_description']['help_me_name'] && report_labels['hazard_description']['help_me_description']"><i class="fa fa-question"></i></a>
+                <a href="" ng-click="editField(report_labels['hazard_description'])" ng-if="custom && report_labels['hazard_description']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+            <textarea  class="form-control" placeholder="Describe Inspection" ng-model="report.hazard_description"
+                       ng-required="report_labels['hazard_description']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"></textarea>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/suspectedCause.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/extraPart.html'"></div>
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/additionalActionSummary.html'"></div>
+    </div>
+    <!--    <div class="form-style">
+            <div class="form-group block">
+                <label for="exampleInputPassword3">Initial actions taken to eliminate or mitigate the hazard(s):  </label>
+                <textarea  class="form-control" placeholder="Describe Initial actions" ng-model="report.initial_action_token"></textarea>
+            </div>
+    
+            <div class="form-group ">
+                <label for="exampleInputEmail3">Status of reported hazard(s):</label>
+    
+                <div class="form-group pull-left" ng-repeat="hs in hazardStatuses">
+                    <input type="radio" value="{{hs.status_id}}" class="form-control" name="status" ng-model="report.inspection_status_id"> 
+                    {{hs.status_Name}} 
+                </div>
+    
+                <a href="" style="margin-top:8px;" class="pull-left" ng-click="clearReportedHazard()"><i class="fa fa-close close-margin"></i></a>
+    
+            </div>
+    
+    
+            <div class="clearfix"></div>
+            <div class="pull-left">
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Are additional corrective actions required?</label>
+                </div>
+                <div class="form-group">
+                    <input type="radio" class="form-control" name="corrective" ng-model="report.are_additional_corrective_actions_required" value="Yes"> Yes 
+    
+                </div>
+                <div class="form-group">
+                    <input type="radio" class="form-control" name="corrective" ng-model="report.are_additional_corrective_actions_required" value="No">  No
+                </div>
+            </div>
+            <a href="" style="margin-top:8px;"  class="pull-left" ng-click="clearInspectionRequired()"><i class="fa fa-close close-margin"></i></a>
+    
+    
+            <div class="clearfix"></div>
+    
+    
+            <div class="form-group block">
+                <label for="exampleInputPassword3">Summary of 
+                    recommended 
+                    corrective actions:  </label>
+    
+                <textarea  class="form-control" placeholder="Describe recommended corrective actions" ng-model="report.recommended_corrective_actions_summary"></textarea>
+            </div>
+        </div>-->
+
+    <div class="clearfix"></div>
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/impacts.html'"></div>
+    </div> 
+    <div class="clearfix"></div> 
+    <div class="form-style riskLevel bottomCloseIcon">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/riskLevels.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="clearfix"></div>
+    <div class="ristList">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/riskControls.html'"></div>
+    </div>
+</form>

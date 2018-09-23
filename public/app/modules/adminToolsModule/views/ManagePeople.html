@@ -1,0 +1,80 @@
+<h2> Manage people and user groups: <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+<!--<div ng-bind-html="peopleLabels.empgridinst">
+
+</div>-->
+<form action="" class="form-inline">
+
+    <div class="form-group">
+        <label for="selector">What would you like to do ? </label>
+        <select  ng-change="changeShownDataPeople()" ng-model="manage_people_choice" name="selector" class="form-control fullWidth">
+            <option value="">-Please select -</option>
+            <option value="">View email history</option>
+            <option value="">View log-in history</option>            
+            <option ng-if="permissions.myadmintools.peopleandgroup" value="people">Add/Edit people</option>
+            <option ng-if="permissions.myadmintools.peopleandgroup" value="user_groups">Add/Edit user groups</option>
+           <!-- <option value="user_account">Assign/ manage user account</option>-->
+        </select>
+
+    </div>
+
+</form>
+
+<div   class="grid-style col-md-12" ng-if="manage_people_choice === 'people'"   ng-controller="peopleCtrl">
+    <h2>Manage people</h2>
+    <div class="toolbar">
+
+        <a href="" ng-if="permissions.myadmintools.peopleandgroup" ng-click="addPeople()" uib-tooltip="Add person"><i class="fa fa-plus"></i></a>
+        <a href="" ng-if="permissions.myadmintools.peopleandgroup" ng-click="editPeople()" uib-tooltip="Edit person"><i class="fa fa-edit"></i></a>
+        <a href="" ng-click="deletePeople()" uib-tooltip="Delete person"><i class="fa fa-remove red" ></i></a>
+        <a href="" ng-click="clearSearch()" uib-tooltip="Clear search"><i class="fa fa-history"></i></a>
+        <a href="" ng-click="downloadCSV()" uib-tooltip="Csv export"><i class="fa fa-file-excel-o"></i></a>
+
+
+        <!--<a href="" ng-click="downloadPDF()" uib-tooltip="PDF export"><i class="fa fa-file-pdf-o"></i></a>-->
+        <a href="" ng-click="activePeople()" uib-tooltip="Active"><i class="fa fa-unlock"></i></a>
+        <a href="" ng-click="inActivePeople()" uib-tooltip="Deactivate"><i class="fa fa-lock"></i></a>
+        <a href="" ng-click="uploadFile()" uib-tooltip="Bulk upload"><i class="fa  fa-upload"></i></a>
+
+
+        <a href="" ng-if="permissions.myadmintools.reassignmemberstodiffgroups" ng-click="groupAssign()" uib-tooltip="Assign/re-assign group"><i class="fa fa-exchange"></i></a>
+        <a href="" ng-if="permissions.myadmintools.viewmemberprofilehistory" ng-click="peopleHistory()" uib-tooltip="People history"><i class="fa fa-info-circle"></i></a>
+        <a href="" ng-if="permissions.myadmintools.reassignmemberstodiffgroups" ng-click="setAdmin()" uib-tooltip="Set As admin"><i class="fa fa-user" aria-hidden="true"></i>
+        </a>
+
+        <a href="" ng-click="openHelp()"  uib-tooltip="Help"><i class="fa fa-question"></i></a>
+
+        <!--<a href="" ng-click="clearFilters()"><i class="fa fa-trash-o"></i></a>-->
+    </div>
+    <div id="grid1" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+
+
+</div>
+
+<div class="Groups col-md-12" ng-if="manage_people_choice === 'user_groups'">
+    <div ng-include="'app/modules/adminToolsModule/manageGroupsModule/views/manageGroups.html'"  ng-controller="ManageGroupsController"></div>
+</div>
+
+<div id="users" class="col-md-12" ng-controller="ManageGroupsController" ng-if="manage_people_choice === 'user_account'">
+    <h2>Manage user accounts</h2>
+    <div class="toolbar">
+
+        <a href="#/addNewUserAccount"  uib-tooltip="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>
+
+        <a href=""  uib-tooltip="View"><i class="fa fa-edit" aria-hidden="true"></i></a>
+
+        <a href="" uib-tooltip="Delete"><i class="fa fa-remove" ></i></a>
+
+        <a href=""  uib-tooltip="activate">  <i class="fa fa-lock" aria-hidden="true"></i></a>
+
+        <a href=""  uib-tooltip="Deactivate">
+            <i class="fa fa-unlock" aria-hidden="true"></i>
+        </a>
+
+    </div>
+
+    <div>
+        <div id="grid1" ui-grid="myLoginHistory" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+    </div>
+
+</div>

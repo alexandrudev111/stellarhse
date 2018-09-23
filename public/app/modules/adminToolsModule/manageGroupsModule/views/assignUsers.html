@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h3 class="modal-title"  ng-bind-html="msgTitle"></h3>
+</div>
+<div class="modal-body">    
+    <div ng-bind-html="msgBody">
+    </div>
+    <select  ng-options="user as user.full_name for user in users"
+    ng-model='selectedUser'>
+        <option>Please select one.</option>
+    </select>
+    <div ng-if="selectedUser.group_name">
+        NOTE: This user is already assigned to the following group: {{selectedUser.group_name}}
+    </div>
+    <a href="" class="btn btn-primary pull-right" ng-click="ok()" style="margin-left: 20px">
+        <span>Save</span>
+    </a>
+    <a href="" class="btn btn-primary pull-right" ng-click="cancel()" style="margin-left: 20px">
+        <span>Cancel</span>
+    </a>
+</div>

@@ -1,0 +1,42 @@
+<form action="" name="reportForm" class="form-inline addPeople addTraining">
+   
+   <h2>{{pageTitle}}: <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+    <div class="form-style">
+
+        <div class="form-group">
+            <label class="ng-binding">{{trainingProviderLabels.trainingProviderName}}:</label>
+            <input class="form-control" required="required" type="text"  ng-model="trainingProvider.provider_name" ng-disabled="disabled">
+            <span style="color: red"    class="validationMsg"   >{{name_valid}}</span>
+        </div>
+        
+        
+         <div class="form-group">
+            <label class="ng-binding">{{trainingProviderLabels.Phone}}:</label>
+
+            <input class="form-control" type="text" ng-model="trainingProvider.phone" ng-disabled="disabled" ui-mask="999-999-9999">           
+        </div>
+
+    
+        <div class="form-group websiteStyle">
+            <label class="ng-binding"> {{trainingProviderLabels.Website}}:</label>
+            <input class="form-control" type="text" ng-model="trainingProvider.website" ng-disabled="disabled">           
+        </div>
+        
+
+        <div class="clearfix"></div>
+      
+
+
+            
+        <div class="clearfix"></div>
+        <button class="btn btn-primary pull-right" ng-click="addTrainingProvider()" ng-disabled="  reportForm.$invalid || reportForm.$pristine" ng-show="!disabled">{{trainingProviderLabels.Submit}}</button>
+        <button class="btn btn-primary mTop pull-right" ng-click="updateInfo()" ng-show="disabled" >  
+            <span>{{trainingProviderLabels.Update}}</span>
+        </button>
+        
+        <button class="btn btn-primary pull-right" ng-click="Cancel()">{{trainingProviderLabels.Cancel}}</button>
+    </div>
+
+
+</form>

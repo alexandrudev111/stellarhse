@@ -1,0 +1,17 @@
+<!--<h2  class="col-md-12">External Data :</h2> -->
+<div cg-busy="{promise:promise,backdrop:true}">
+    <uib-tabset active="activeForm">
+        <uib-tab index="0" heading="Employee hours worked" ng-click="index = 0">
+            <div ng-include="'app/modules/analyticsModule/views/employeeHour.html'" ></div>
+        </uib-tab>   
+        <uib-tab index="1" heading="Contractor hours worked"  ng-click="index = 1;" >
+            <div ng-include="'app/modules/analyticsModule/views/contractorHour.html'" ></div>
+        </uib-tab>         
+        <uib-tab index="2" heading="Employee KM driven"    ng-click="index = 2" >
+            <div ng-include="'app/modules/analyticsModule/views/employeeKm.html'"></div>
+        </uib-tab>
+        <uib-tab index="3" heading="Contractor KM driven"    ng-click="index = 3" >
+            <div ng-include="'app/modules/analyticsModule/views/conractorKm.html'"></div>
+        </uib-tab>
+    </uib-tabset>
+</div>

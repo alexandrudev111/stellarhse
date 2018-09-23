@@ -1,0 +1,13 @@
+<div class="toolbar">
+    <a href="" ng-click="addToFavourit();"  uib-tooltip="Add to favourit"><i class="fa fa-plus"></i></a>
+    <a href="" ng-click="previewKPI('chartDiv')"  uib-tooltip="Preview"><i class="fa fa-eye"></i></a>
+    <a href="" ng-click="clearSearchDef()" uib-tooltip="Clear"><i class="fa fa-history"></i></a>  
+    <a href="" ng-click="downloadCSVKPI()" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a> 
+</div>
+
+<div id="grid1" ui-grid="gridOptionsMenu" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+
+<div id="chartDiv"  ng-show="showChart"   style="float: left; width: 95%; margin: 10px 1%">  
+    <h1> Static data default chart</h1>
+    <div id="myChart" style="min-width: 310px; height: 400px;"></div>
+</div>

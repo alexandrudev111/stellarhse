@@ -1,0 +1,102 @@
+<div class="modal-header mBottom">
+    <h3 class="modal-title">Add company admin</h3>
+</div>
+
+<div class="generalStyle AddAdminStyle">
+    <form  name="addAdmin">      
+        <div class="form-group col-md-6">
+            <label>First name:</label>
+            <input class="form-control"  required type="text" ng-model="selectedAdmin.first_name" />
+        </div>
+        <div class="form-group col-md-6">
+            <label>Last name:</label>
+            <input class="form-control"   required  type="text" ng-model="selectedAdmin.last_name"   />
+        </div>
+        <div class="form-group col-md-6">
+            <label>Company:</label>
+            <input class="form-control"   type="text" ng-model="selectedAdmin.company">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Address:</label>
+            <input class="form-control"   type="text" ng-model="selectedAdmin.address">
+        </div>                
+        <div class="form-group col-md-6">
+            <label>Department:</label>
+            <input class="form-control"   type="text" ng-model="selectedAdmin.department">
+        </div>                    
+        <div class="form-group col-md-6">
+            <label>Email:</label>
+            <input class="form-control" required  name="email"   type="email" ng-model="selectedAdmin.email">
+            <span class="validationMsg" ng-show="addAdmin.email.$error.email"   style="color: red"> {{checkEmail}}  </span>
+        </div> 
+        <div class="form-group col-md-6">
+            <label>Phone</label>
+            <input class="form-control"  type="tel"   name="primary_phone"    ng-pattern="/^[0-9\-]{1,15}$/"   maxlength="15"  ng-model="selectedAdmin.primary_phone">
+            <span ng-show="addAdmin.primary_phone.$error.pattern"   style="color: red">{{number_valid}}</span>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Alternate phone:</label>
+            <input class="form-control" type="tel"   name="alternate_phone"    ng-pattern="/^[0-9\-]{1,15}$/"   maxlength="15"  ng-model="selectedAdmin.alternate_phone">
+            <span ng-show="addAdmin.alternate_phone.$error.pattern"   style="color: red">{{number_valid}}</span>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Position:</label>
+            <input class="form-control"   type="text" ng-model="selectedAdmin.position">
+        </div>
+        <div class="form-group col-md-6">
+            <label >Country:</label>
+            <select class="form-control"    ng-options="c.country_id as c.country_name for c in countries"  
+                    ng-model="selectedAdmin.country_id"      >
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label >Province/State:</label>
+            <select class="form-control"        ng-model="selectedAdmin.province_id" 
+                    ng-options="p.province_id as p.province_name for p in provinces"   > 
+
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label >City:</label>
+            <select class="form-control"    ng-model="selectedAdmin.city_id"  ng-options="c.city_id as c.city_name for c in cities" > 
+            </select>
+        </div>
+        <div class="form-group  col-md-6 smallInput">
+            <label >Postal/Zip code:</label>
+            <input type="text" class="form-control"     ng-model="selectedAdmin.postal_code" >           
+        </div>
+        <div class="form-group col-md-6">
+            <label>Area:</label>
+            <input class="form-control"   type="text" ng-model="selectedAdmin.area">
+        </div>
+        <div class="form-group col-md-6">
+            <label >Status:</label>           
+            <select class="form-control"   ng-disabled="true"    ng-model="selectedAdmin.is_active"
+                    ng-options="a.item_id as a.item_value for a in statuslist"
+                    >                
+            </select>         
+        </div>
+        <div class="form-group col-md-6">
+            <label >User group:</label>           
+            <select class="form-control"   ng-disabled="true"    ng-model="selectedAdmin.group_id"
+                    ng-options="a.group_id as a.group_name for a in grouplist"
+                    >                
+            </select>         
+        </div>
+        <div class="form-group col-md-6">
+            <label>Access code:</label>
+            <input class="form-control"   type="text" ng-model="selectedAdmin.direct_access_code">
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12" style="margin-top:10px">
+            <button href="" class="btn btn-primary pull-right" ng-click="saveCompanyAdmin()" ng-disabled="addAdmin.$invalid" >                
+                <span>Save</span>
+            </button>
+
+            <a href="" class="btn btn-primary pull-right" ng-click="cancel()" style="margin-left: 20px">
+                <span>Cancel</span>
+            </a>
+
+        </div>
+    </form>
+</div>

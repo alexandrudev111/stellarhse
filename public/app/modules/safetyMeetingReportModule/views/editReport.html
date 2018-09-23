@@ -1,0 +1,76 @@
+<h2><img src="resources/images/heading-icon.png" alt="">Safety Meeting<img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+<div class="clearfix"></div>
+<div class="com-md-12 contentP">
+    <form class="form-inline" name="reportForm" novalidate>
+    <span class="pull-right reportID">Safety Meeting #{{report.safetymeeting_number}}</span>
+    <div class="clearfix"></div>
+    <div ng-if="!reportPermissions.readonlyallreport || !reportPermissions.readonlyreport">
+        <button class="btn btn-success pull-right" ng-click="submitSafetyMeetingReport()" 
+        ng-disabled="custom || reportForm.$invalid || reportForm.$pristine"
+        ng-if="reportPermissions.ownwhathappened">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            Submit
+        </button>
+
+        <button class="btn btn-danger pull-right"
+        ng-if="reportPermissions.ownwhathappened">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            Discard
+        </button>
+
+        <button class="btn btn-primary pull-right" ng-if="permissions.general.printindividualreport">
+            <i class="fa fa-envelope" aria-hidden="true"></i>  Email / Print
+        </button>
+
+
+        <button class="btn btn-primary pull-right" ng-if="reportPermissions.closereport">
+            <i class="fa fa-times" aria-hidden="true"></i> Close Report
+        </button>
+        
+        <button class="btn btn-primary pull-right" ng-click="EditMode()" ng-disabled="custom">
+            <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+        </button>
+    </div>
+    <div class="clearfix"></div>
+    <uib-tabset active="activeForm">
+        <uib-tab index="0" heading="What happened?" ng-if="reportPermissions.ownwhathappened || reportPermissions.readonlywhathappened || reportPermissions.readonlyallreport
+        || reportPermissions.otherwhathappened">
+            <div ng-include="'app/modules/safetyMeetingReportModule/views/whatHappend.html'"></div>
+            <div ng-include="'app/modules/coreReportModule/views/whatHappenedCustom.html'"></div>
+        </uib-tab>
+        <uib-tab index="1" heading="People involved" ng-if="reportPermissions.ownpeopleinvolved || reportPermissions.readonlypeopleinvolved || reportPermissions.readonlyallreport
+        || reportPermissions.otherpeopleinvolved">
+            <div ng-include="'app/modules/coreReportModule/views/peopleInvolved.html'"></div>
+            <!--<div ng-include="'app/modules/coreReportModule/views/peoplesCustom.html'"></div>-->
+        </uib-tab>
+        <uib-tab index="2" heading="Follow up actions" ng-if="reportPermissions.ownaction || reportPermissions.readonlyaction || reportPermissions.readonlyallreport
+        || reportPermissions.otheraction">
+            <div ng-include="'app/modules/coreReportModule/views/remedialActions.html'"></div>
+            <!--<div ng-include="'app/modules/coreReportModule/views/actionsCustom.html'"></div>-->
+            <!--  
+              <div ng-include="'app/modules/newReportSafetyModule/views/hazardDetails.html'"></div>-->
+
+        </uib-tab>  
+        <uib-tab index="3" heading="Supporting documents" ng-if="reportPermissions.owndocuments || reportPermissions.readonlydocuments || reportPermissions.readonlyallreport
+        || reportPermissions.otherdocuments">
+
+            <div ng-include="'app/modules/coreReportModule/views/supportingDocuments.html'"></div>
+
+        </uib-tab>
+
+        <!--<uib-tab index="4" heading="Corrective actions">
+            
+            
+            <div ng-include="'app/modules/newReportSafetyModule/views/remedialActions.html'"></div>
+            
+        </uib-tab>
+        -->
+
+    </uib-tabset>
+
+
+    </form>
+
+
+</div>

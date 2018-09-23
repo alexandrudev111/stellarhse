@@ -1,0 +1,382 @@
+<form class="form-inline">
+
+    <div class="form-style">
+        <div class="row">
+           <div class="alert alert-danger col-md-10 col-md-offset-1" ng-show=
+"investegationMessage" >
+              <p>Are you trying to close this investigation? </p>
+ <p>If you want to close the investigation, complete all of the following fields. Otherwise, clear them all.</p>
+<ul>
+    <li>Investigation status (must be marked "Closed")</li>
+    <li>Date investigation signed off (must contain a date)</li>
+    <li>Investigation signed off by (must contain a name)</li>
+</ul>
+
+           </div>
+            <div class="col-md-6">
+                <div class="form-group" ng-if="report_labels['inv_status_id']['is_hidden'] === 'No' || custom">
+                    <label>{{report_labels['inv_status_id']['field_label']}}
+                        <a href="" ng-click="openHelp(report_labels['inv_status_id'])" uib-tooltip="{{report_labels['inv_status_id']['help_me_name']}}"
+                           ng-if="report_labels['inv_status_id']['help_me_name'] && report_labels['inv_status_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                        <a href="" ng-click="editField(report_labels['inv_status_id'])" ng-if="custom && report_labels['inv_status_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                    <span class="pull-left"  ng-repeat="status in invStatus" ng-class="{'statusEnabled': status.field_code === 'closed' && report.statusDisabled === false}">
+                        <input type="radio" value="{{status.inv_status_id}}"
+                               ng-model="report.inv_status_id" ng-change="changeInvStatus(status)"
+                               ng-required="report_labels['inv_status_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"> <span>
+                            {{status.inv_status_name}}</span>
+                    </span>
+
+
+                    <a href="" class="pull-left" ng-click="clearInvestigation()"><i class="fa fa-close"></i></a>
+                    <div class="clearfix"></div>
+                    <span>{{invMesssage}}</span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group pull-right dateStyle" ng-if="report_labels['investigation_date']['is_hidden'] === 'No' || custom">
+                    <label>{{report_labels['investigation_date']['field_label']}}
+                        <a href="" ng-click="openHelp(report_labels['investigation_date'])" uib-tooltip="{{report_labels['investigation_date']['help_me_name']}}"
+                           ng-if="report_labels['investigation_date']['help_me_name'] && report_labels['investigation_date']['help_me_description']"><i class="fa fa-question"></i></a>
+                        <a href="" ng-click="editField(report_labels['investigation_date'])" ng-if="custom && report_labels['investigation_date']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                    <!--<input type="text" class="form-control" my-datepicker>-->
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="report.investigation_date" 
+                               is-open="datePopUps.investigation_date" datepicker-options="dateOptions" close-text="Close" 
+                               ng-click="datePopUps.investigation_date = !datePopUps.investigation_date"
+                               alt-input-formats="altInputFormats" placeholder="Select "
+                               ng-required="report_labels['investigation_date']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"/>
+                        <span class="input-group-btn calenderIcon">
+                            <button type="button" class="btn btn-default " ng-click="datePopUps.investigation_date = !datePopUps.investigation_date"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        
+        
+        <div class="form-style ">
+            <div class="row">
+                <div class="col-md-6 StyleAutoComplete">
+                    <div class="form-group" ng-if="report_labels['sign_off_investigator_id']['is_hidden'] === 'No' || custom">
+                        <label>{{report_labels['sign_off_investigator_id']['field_label']}}
+                            <a href="" ng-click="openHelp(report_labels['sign_off_investigator_id'])" uib-tooltip="{{report_labels['sign_off_investigator_id']['help_me_name']}}"
+                               ng-if="report_labels['sign_off_investigator_id']['help_me_name'] && report_labels['sign_off_investigator_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                            <a href="" ng-click="editField(report_labels['sign_off_investigator_id'])" ng-if="custom && report_labels['sign_off_investigator_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                        <ui-select class="form-control statusDisabled" ng-model="report.sign_off_investigator"  on-select="onSelectSignOffBy($item)"
+                                   theme="bootstrap" ng-disabled="report.statusDisabled"
+                                   ng-class="{'statusEnabled': report.statusDisabled === false,'enableColor':investegationMessage}"
+                                   ng-required="report_labels['sign_off_investigator_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue">
+                                   <!-- required:report_labels['sign_off_investigator_id']['is_mandatory'] == 'Yes' && report.sign_off_investigator == null -->
+                            <ui-select-match placeholder="Investigation Name">{{$select.selected.full_name}}</ui-select-match>
+                            <ui-select-choices refresh="getInvestigatorsEmployees($select.search, 4)" refresh-delay="0" 
+                                               repeat="emp.employee_id as emp in investigatorsEmployees[4] | filter: $select.search ">
+                                <div>{{emp.full_name}}</div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+    
+                <div class="col-md-6">
+                    <div class="form-group pull-right dateStyle" ng-if="report_labels['sign_off_date']['is_hidden'] === 'No' || custom">
+                        <label>{{report_labels['sign_off_date']['field_label']}}
+                            <a href="" ng-click="openHelp(report_labels['sign_off_date'])" uib-tooltip="{{report_labels['sign_off_date']['help_me_name']}}"
+                               ng-if="report_labels['sign_off_date']['help_me_name'] && report_labels['sign_off_date']['help_me_description']"><i class="fa fa-sign_off_date"></i></a>
+                            <a href="" ng-click="editField(report_labels['sign_off_date'])" ng-if="custom && report_labels['sign_off_date']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                        <!--<input type="text" class="form-control" my-datepicker>-->
+                        <p class="input-group">
+                            <input type="text" class="form-control statusDisabled" uib-datepicker-popup="{{format}}" ng-model="report.investigation_sign_off_date" 
+                                   is-open="datePopUps.investigation_sign_off_date" datepicker-options="dateOptions" close-text="Close" 
+                                   ng-click="datePopUps.investigation_sign_off_date = !datePopUps.investigation_sign_off_date"
+                                   alt-input-formats="altInputFormats" placeholder="Select Date" ng-disabled="report.statusDisabled"
+                                   ng-class="{'statusEnabled': status.field_code === 'closed' && report.statusDisabled === false, 'enableColor':investegationMessage}"
+                                   ng-required="report_labels['sign_off_date']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"/>
+                            <span class="input-group-btn calenderIcon">
+                                <button type="button" class="btn btn-default " ng-click="datePopUps.sign_off_date = !datePopUps.sign_off_date"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-style" ng-if="report_labels['investigators']['is_hidden'] === 'No' || custom">
+        <h2>{{report_labels['investigators']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['investigators'])" uib-tooltip="{{report_labels['investigators']['help_me_name']}}"
+               ng-if="report_labels['investigators']['help_me_name'] && report_labels['investigators']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['investigators'])" ng-if="custom && report_labels['investigators']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></h2>
+        <div class="form-group" ng-if="report_labels['investigator_id1']['is_hidden'] === 'No' || custom">
+            <ui-select class="form-control" ng-model="report.investigators[1]" theme="bootstrap" on-select="onSelectInvestigator($item, 1)"
+                       ng-required="report_labels['investigator_id1']['is_mandatory']=='Yes'"
+                       ng-class="{'required':report_labels['investigator_id1']['is_mandatory'] == 'Yes' && report.investigators[1] == null}" ng-disabled = "disabeldTrue">
+                <ui-select-match placeholder="Name">{{$select.selected.full_name}}</ui-select-match>
+                <ui-select-choices refresh="getInvestigatorsEmployees($select.search, 1)" refresh-delay="0" 
+                                   repeat="emp.employee_id as emp in investigatorsEmployees[1] | filter: $select.search ">
+                    <div>{{emp.full_name}}</div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="form-group" ng-if="report_labels['investigator_id2']['is_hidden'] === 'No' || custom">
+            <ui-select class="form-control" ng-model="report.investigators[2]" theme="bootstrap" on-select="onSelectInvestigator($item, 2)"
+                       ng-required="report_labels['investigator_id2']['is_mandatory']=='Yes'"
+                       ng-class="{'required':report_labels['investigator_id2']['is_mandatory'] == 'Yes' && report.investigators[2] == null}" ng-disabled = "disabeldTrue">
+                <ui-select-match placeholder="Name">{{$select.selected.full_name}}</ui-select-match>
+                <ui-select-choices refresh="getInvestigatorsEmployees($select.search,2)" refresh-delay="0" 
+                                   repeat="emp.employee_id as emp in investigatorsEmployees[2] | filter: $select.search ">
+                    <div>{{emp.full_name}}</div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="form-group" ng-if="report_labels['investigator_id3']['is_hidden'] === 'No' || custom">
+            <ui-select class="form-control" ng-model="report.investigators[3]" theme="bootstrap" on-select="onSelectInvestigator($item, 3)"
+                       ng-required="report_labels['investigator_id3']['is_mandatory']=='Yes'"
+                       ng-class="{'required':report_labels['investigator_id3']['is_mandatory'] == 'Yes' && report.investigators[3] == null}" ng-disabled = "disabeldTrue">
+                <ui-select-match placeholder="Name">{{$select.selected.full_name}}</ui-select-match>
+                <ui-select-choices refresh="getInvestigatorsEmployees($select.search,3)" refresh-delay="0" 
+                                   repeat="emp.employee_id as emp in investigatorsEmployees[3] | filter: $select.search ">
+                    <div>{{emp.full_name}}</div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+
+    <div class="form-style" ng-if="report_labels['investigation_summary']['is_hidden'] === 'No' || custom">
+
+        <div class="form-group block blockLabel">
+            <label>{{report_labels['investigation_summary']['field_label']}}
+                <a href="" ng-click="openHelp(report_labels['investigation_summary'])" uib-tooltip="{{report_labels['investigation_summary']['help_me_name']}}"
+                   ng-if="report_labels['investigation_summary']['help_me_name'] && report_labels['investigation_summary']['help_me_description']"><i class="fa fa-question"></i></a>
+                <a href="" ng-click="editField(report_labels['investigation_summary'])" ng-if="custom && report_labels['investigation_summary']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+            <textarea class="form-control" ng-model="report.investigation_summary"
+                      ng-required="report_labels['investigation_summary']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+        </div>
+
+    </div>
+
+    <div class="form-style">
+
+        <div class="form-group block" ng-if="report_labels['investigation_follow_up_note']['is_hidden'] === 'No' || custom">
+            <label>{{report_labels['investigation_follow_up_note']['field_label']}}
+                <a href="" ng-click="openHelp(report_labels['investigation_follow_up_note'])" uib-tooltip="{{report_labels['investigation_follow_up_note']['help_me_name']}}"
+                   ng-if="report_labels['investigation_follow_up_note']['help_me_name'] && report_labels['investigation_follow_up_note']['help_me_description']"><i class="fa fa-question"></i></a>
+                <a href="" ng-click="editField(report_labels['investigation_follow_up_note'])" ng-if="custom && report_labels['investigation_follow_up_note']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+            <textarea class="form-control" ng-model="report.investigation_follow_up_note"
+                      ng-required="report_labels['investigation_follow_up_note']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+        </div>
+
+        <div class="form-style" ng-if="report_labels['investigation_costs']['is_hidden'] === 'No' || custom">
+
+            <h2>{{report_labels['investigation_costs']['field_label']}}
+                <a href="" ng-click="openHelp(report_labels['investigation_costs'])" uib-tooltip="{{report_labels['investigation_costs']['help_me_name']}}"
+                   ng-if="report_labels['investigation_costs']['help_me_name'] && report_labels['investigation_costs']['help_me_description']"><i class="fa fa-question"></i></a>
+                <a href="" ng-click="editField(report_labels['investigation_costs'])" ng-if="custom && report_labels['investigation_costs']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></h2>
+
+            <div class="form-group" ng-if="report_labels['investigation_response_cost']['is_hidden'] === 'No' || custom">
+                <label>{{report_labels['investigation_response_cost']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['investigation_response_cost'])" uib-tooltip="{{report_labels['investigation_response_cost']['help_me_name']}}"
+                       ng-if="report_labels['investigation_response_cost']['help_me_name'] && report_labels['investigation_response_cost']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['investigation_response_cost'])" ng-if="custom && report_labels['investigation_response_cost']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <input type="number" name="investigation_response_cost" class="form-control" ng-model="report.investigation_response_cost" 
+                       ng-change="calculateInvestigationTotalCost()"
+
+                       ng-required="report_labels['investigation_response_cost']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" placeholder="Response costs" ng-pattern='/^([0-9]{0,8})?(\.[0-9]{1,2})?$/'  onKeyPress="if(this.value.length==11) return false;">
+                       <span class="costValid" ng-show="reportForm.investigation_response_cost.$invalid">
+                        Enter value from 00000000.00 to 99999999.99
+                       </span> <span>$</span>
+
+
+            </div>
+
+            <div class="form-group" ng-if="report_labels['investigation_repair_cost']['is_hidden'] === 'No' || custom">
+                <label>{{report_labels['investigation_repair_cost']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['investigation_repair_cost'])" uib-tooltip="{{report_labels['investigation_repair_cost']['help_me_name']}}"
+                       ng-if="report_labels['investigation_repair_cost']['help_me_name'] && report_labels['investigation_repair_cost']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['investigation_repair_cost'])" ng-if="custom && report_labels['investigation_repair_cost']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <input type="number" name="investigation_repair_cost" class="form-control" ng-model="report.investigation_repair_cost" 
+                       ng-change="calculateInvestigationTotalCost()"
+                       ng-required="report_labels['investigation_repair_cost']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" placeholder="Repair costs" ng-pattern='/^([0-9]{0,8})?(\.[0-9]{1,2})?$/'  onKeyPress="if(this.value.length==11) return false;">
+                <span class="costValid" ng-show="reportForm.investigation_repair_cost.$invalid">
+                  Enter value from 00000000.00 to 99999999.99
+                </span> <span>$</span>
+
+            </div>
+
+            <div class="form-group" ng-if="report_labels['investigation_insurance_cost']['is_hidden'] === 'No' || custom">
+                <label>{{report_labels['investigation_insurance_cost']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['investigation_insurance_cost'])" uib-tooltip="{{report_labels['investigation_insurance_cost']['help_me_name']}}"
+                       ng-if="report_labels['investigation_insurance_cost']['help_me_name'] && report_labels['investigation_insurance_cost']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['investigation_insurance_cost'])" ng-if="custom && report_labels['investigation_insurance_cost']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <input type="number" name="investigation_insurance_cost" class="form-control" ng-model="report.investigation_insurance_cost" 
+                       ng-change="calculateInvestigationTotalCost()"
+                       ng-required="report_labels['investigation_insurance_cost']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" placeholder="Insurance costs" ng-pattern='/^([0-9]{0,8})?(\.[0-9]{1,2})?$/'  onKeyPress="if(this.value.length==11) return false;">
+                <span class="costValid" ng-show="reportForm.investigation_insurance_cost.$invalid">
+                  Enter value from 00000000.00 to 99999999.99
+                </span> <span>$</span>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="form-group" ng-if="report_labels['investigation_wcb_cost']['is_hidden'] === 'No' || custom">
+                <label>{{report_labels['investigation_wcb_cost']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['investigation_wcb_cost'])" uib-tooltip="{{report_labels['investigation_wcb_cost']['help_me_name']}}"
+                       ng-if="report_labels['investigation_wcb_cost']['help_me_name'] && report_labels['investigation_wcb_cost']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['investigation_wcb_cost'])" ng-if="custom && report_labels['investigation_wcb_cost']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <input type="number" name="investigation_wcb_cost" class="form-control" ng-model="report.investigation_wcb_cost" 
+                       ng-change="calculateInvestigationTotalCost()"
+                       ng-required="report_labels['investigation_wcb_cost']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" placeholder="WCB costs" ng-pattern='/^([0-9]{0,8})?(\.[0-9]{1,2})?$/'  onKeyPress="if(this.value.length==11) return false;">
+                <span class="costValid" ng-show="reportForm.investigation_wcb_cost.$invalid">
+                  Enter value from 00000000.00 to 99999999.99
+                </span>  <span>$</span>
+            </div>
+
+            <div class="form-group" ng-if="report_labels['investigation_other_cost']['is_hidden'] === 'No' || custom">
+                <label>{{report_labels['investigation_other_cost']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['investigation_other_cost'])" uib-tooltip="{{report_labels['investigation_other_cost']['help_me_name']}}"
+                       ng-if="report_labels['investigation_other_cost']['help_me_name'] && report_labels['investigation_other_cost']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['investigation_other_cost'])" ng-if="custom && report_labels['investigation_other_cost']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <input type="number" name="investigation_other_cost" class="form-control" ng-model="report.investigation_other_cost" 
+                       ng-change="calculateInvestigationTotalCost()"
+                       ng-required="report_labels['investigation_other_cost']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" placeholder="Other costs" ng-pattern='/^([0-9]{0,8})?(\.[0-9]{1,2})?$/'  onKeyPress="if(this.value.length==11) return false;">
+                <span class="costValid" ng-show="reportForm.investigation_other_cost.$invalid">
+                  Enter value from 00000000.00 to 99999999.99
+                </span>  <span>$</span>
+            </div>
+
+            <div class="form-group" ng-if="report_labels['investigation_total_cost']['is_hidden'] === 'No' || custom">
+                <label>{{report_labels['investigation_total_cost']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['investigation_total_cost'])" uib-tooltip="{{report_labels['investigation_total_cost']['help_me_name']}}"
+                       ng-if="report_labels['investigation_total_cost']['help_me_name'] && report_labels['investigation_total_cost']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['investigation_total_cost'])" ng-if="custom && report_labels['investigation_total_cost']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <input type="number" name="investigation_total_cost" class="form-control" ng-model="report.investigation_total_cost" disabled 
+                       ng-required="report_labels['investigation_total_cost']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" placeholder="TOTAL costs" ng-pattern='/^([0-9]{0,8})?(\.[0-9]{1,2})?$/'  onKeyPress="if(this.value.length==11) return false;">
+                <span class="costValid" ng-show="reportForm.investigation_total_cost.$invalid">
+                  Enter value from 00000000.00 to 99999999.99
+                </span>  <span>$</span>
+            </div>
+    
+        </div>
+    
+        <div class="form-style">
+
+            <div class="form-group" ng-if="report_labels['investigation_risk_of_recurrence_id']['is_hidden'] === 'No' || custom">
+                <label>{{report_labels['investigation_risk_of_recurrence_id']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['investigation_risk_of_recurrence_id'])" uib-tooltip="{{report_labels['investigation_risk_of_recurrence_id']['help_me_name']}}"
+                       ng-if="report_labels['investigation_risk_of_recurrence_id']['help_me_name'] && report_labels['investigation_risk_of_recurrence_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['investigation_risk_of_recurrence_id'])" ng-if="custom && report_labels['investigation_risk_of_recurrence_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <select class="form-control" ng-model="report.investigation_risk_of_recurrence_id"
+                        ng-options="risk.risk_of_recurrence_id as risk.risk_of_recurrence_name for risk in invRiskOfRecurrence"
+                        ng-required="report_labels['investigation_risk_of_recurrence_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()">
+                    <option value="">Select</option>
+                </select>
+            </div>
+
+            <div class="form-group" ng-if="report_labels['investigation_severity_id']['is_hidden'] === 'No' || custom">
+                <label>{{report_labels['investigation_severity_id']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['investigation_severity_id'])" uib-tooltip="{{report_labels['investigation_severity_id']['help_me_name']}}"
+                       ng-if="report_labels['investigation_severity_id']['help_me_name'] && report_labels['investigation_severity_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['investigation_severity_id'])" ng-if="custom && report_labels['investigation_severity_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <select class="form-control" ng-model="report.investigation_severity_id"
+                        ng-options="sev.severity_id as sev.severity_name for sev in invSeverity"
+                        ng-required="report_labels['investigation_severity_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()">
+                    <option value="">Select</option>
+                </select>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-style">
+            <div class="ristList" ng-if="report_labels['inv_source_param_id']['is_hidden'] === 'No' || custom">
+                <uib-accordion close-others="oneAtATime" class="accordionIcon">
+                    <div class="accordionIcons">     
+                        <a href="" ng-click="openHelp(report_labels['inv_source_param_id'])" uib-tooltip="{{report_labels['inv_source_param_id']['help_me_name']}}"
+                           ng-if="report_labels['inv_source_param_id']['help_me_name'] && report_labels['inv_source_param_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                        <a href="" ng-click="editField(report_labels['inv_source_param_id'])" ng-if="custom && report_labels['inv_source_param_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a>
+                    </div>
+                    <div uib-accordion-group class="panel-default" heading="{{report_labels['inv_source_param_id']['field_label']}}" is-open="status.investigation">
+                        <div class="form-style ristItems">
+                            <div class="block" ng-repeat="source in report.invsources track by $index">
+                                <input type="checkbox" ng-model="source.sourceChoice"
+                                       ng-required="report_labels['inv_source_param_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"> 
+                                <span>{{source.inv_source_name}}</span>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <!--</div>-->
+                <div class="clearfix"></div>
+                <!--<div class="form-style">-->
+    
+ <!--                <div class="form-group block" ng-if="report_labels['investigation_source_details']['is_hidden'] === 'No' || custom">
+                    <label>{{report_labels['investigation_source_details']['field_label']}}
+                        <a href="" ng-click="openHelp(report_labels['investigation_source_details'])" uib-tooltip="{{report_labels['investigation_source_details']['help_me_name']}}"
+                           ng-if="report_labels['investigation_source_details']['help_me_name'] && report_labels['investigation_source_details']['help_me_description']"><i class="fa fa-question"></i></a>
+                        <a href="" ng-click="editField(report_labels['investigation_source_details'])" ng-if="custom && report_labels['investigation_source_details']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                    <textarea class="form-control" ng-model="report.investigation_source_details"
+                              ng-required="report_labels['investigation_source_details']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"></textarea>
+                </div> -->
+    
+            </div>
+            <div class="clearfix"></div>
+            <!--<div class="form-style">-->
+
+            <div class="form-group block" ng-if="report_labels['investigation_source_details']['is_hidden'] === 'No' || custom">
+                <label>{{report_labels['investigation_source_details']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['investigation_source_details'])" uib-tooltip="{{report_labels['investigation_source_details']['help_me_name']}}"
+                       ng-if="report_labels['investigation_source_details']['help_me_name'] && report_labels['investigation_source_details']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['investigation_source_details'])" ng-if="custom && report_labels['investigation_source_details']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <textarea class="form-control" ng-model="report.investigation_source_details"
+                          ng-required="report_labels['investigation_source_details']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-style" ng-if="report_labels['root_cause_param_id']['is_hidden'] === 'No' || custom">
+            <h2>{{report_labels['root_cause_param_id']['field_label']}}
+                <a href="" ng-click="openHelp(report_labels['root_cause_param_id'])" uib-tooltip="{{report_labels['root_cause_param_id']['help_me_name']}}"
+                   ng-if="report_labels['root_cause_param_id']['help_me_name'] && report_labels['root_cause_param_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                <a href="" ng-click="editField(report_labels['root_cause_param_id'])" ng-if="custom && report_labels['root_cause_param_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></h2>
+
+            <div class="ristList">
+                <uib-accordion close-others="oneAtATime">
+                    <div uib-accordion-group class="panel-default" ng-repeat="rootCause in report.invRootCauses track by $index" 
+                         heading="{{rootCause.root_cause_name}}" is-open="status.rootCauses[$index]">
+                        <div class="form-style ristItems">
+                            <div class="col-md-12">
+                                <div class="form-group block">
+                                    <div ng-repeat="param in rootCause.parameters">
+                                        <input type="checkbox" ng-model="param.causeChoice"
+                                              ng-required="report_labels['root_cause_param_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"><span>{{param.root_cause_param_name}}</span>
+                                              <input type="text" class="form-control noFloat  otherstatus" id="exampleInputEmail3" ng-model="report.other_behaviours" 
+                                              ng-if="rootCause.root_cause_name == 'Behaviours' && param.root_cause_param_name == 'Other' && param.causeChoice == true " ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()" ng-required>
+                                              <input type="text" class="form-control noFloat otherstatus" id="exampleInputEmail3" ng-model="report.other_actions" 
+                                              ng-if="rootCause.root_cause_name == 'Actions' && param.root_cause_param_name == 'Other' && param.causeChoice == true  "  ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()" ng-required>
+                                              <input type="text" class="form-control noFloat  otherstatus" id="exampleInputEmail3" ng-model="report.other_inactions" 
+                                              ng-if="rootCause.root_cause_name == 'Inactions' && param.root_cause_param_name == 'Other' && param.causeChoice == true " ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()" ng-required>
+                                              <input type="text" class="form-control noFloat otherstatus" id="exampleInputEmail3" ng-model="report.other_conditions" 
+                                              ng-if="rootCause.root_cause_name == 'Conditions' && param.root_cause_param_name == 'Other' && param.causeChoice == true "  ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()" ng-required>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="form-style" ng-if="report_labels['investigation_root_cause_note']['is_hidden'] === 'No' || custom">
+            <div class="form-group block blockLabel">
+                <label>{{report_labels['investigation_root_cause_note']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['investigation_root_cause_note'])" uib-tooltip="{{report_labels['investigation_root_cause_note']['help_me_name']}}"
+                       ng-if="report_labels['investigation_root_cause_note']['help_me_name'] && report_labels['investigation_root_cause_note']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['investigation_root_cause_note'])" ng-if="custom && report_labels['investigation_root_cause_note']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <textarea class="form-control" ng-model="report.investigation_root_cause_note"
+                          ng-required="report_labels['investigation_root_cause_note']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+            </div>
+        </div>
+    
+    </form>

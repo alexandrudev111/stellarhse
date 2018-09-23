@@ -1,0 +1,34 @@
+    <h2>Add/Edit locations <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+     
+     <uib-tabset active="activeForm">
+      
+        <uib-tab index="0" heading="All locations">
+            <div ng-include="'app/modules/adminToolsModule/views/AllLocations.html'"></div>
+        </uib-tab>
+        
+        <uib-tab index="1" heading="Country history">
+
+            <div ng-include="'app/modules/adminToolsModule/views/countryHistory.html'"></div>
+
+        </uib-tab>   
+        
+        <uib-tab index="2" heading="Province/State history">
+
+            <div ng-include="'app/modules/adminToolsModule/views/StateHistory.html'"></div>
+
+        </uib-tab>
+               
+        <uib-tab index="3" heading="City history" ng-hide="show_city_history">
+
+            <div ng-include="'app/modules/adminToolsModule/views/AreaHistory.html'"></div>
+
+        </uib-tab>
+            
+        <uib-tab index="4" heading="Community history" ng-hide="show_community_histoy">
+
+            <div ng-include="'app/modules/adminToolsModule/views/SiteHistory.html'"></div>
+
+        </uib-tab>         
+
+     </uib-tabset>

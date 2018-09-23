@@ -1,0 +1,224 @@
+<h2>{{notified_labels['NotificationAssignmentsHeader']['default_field_label']}} <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+    alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+
+<form action="" class="formMargin notificationFrom" name="notificationForm" novalidate>
+<!-- <form action="" class="form-inline formMargin notificationFrom"> -->
+<div class="form-group selectNotification" >
+<label for="notificationType">1. Create this notification assignment based on:</label>
+<select id="notificationType" class="form-control" ng-model="assignedNotification.choosedNotificationModule"
+ng-options="notificationType.id as notificationType.name for notificationType in notificationModulesTypes"
+ng-change="getFilterFields()">
+</select>
+</div>
+<div class="clearfix"></div>
+
+<div class="form-group radioStyle">
+<label for="notificationTo">2. Send this notification to:</label>
+<input type="radio" name="Notification" ng-model="assignedNotification.choosedNotifiedCategory" value="group"> <span> Group </span>
+<input type="radio" name="Notification" ng-model="assignedNotification.choosedNotifiedCategory" value="user"> <span> Person </span>
+
+
+<div class="form-group choosedNotificationTo" ng-if="assignedNotification.choosedNotifiedCategory === 'user'">
+<label> Name:</label>
+<!-- <div id="ParentCustomer" ng-repeat="notifiedSelectedIndividual in assignedNotification.individulals track by $index" ng-init="individualIndex = $index"> -->
+<div id="ParentCustomer" class="notificationStyle EmployeeName">
+<ui-select class="form-control" ng-model="assignedNotification.notifiedSelectedUser" theme="bootstrap" on-select="onSelectNotifiedValue($item)"
+ng-class="{'required':assignedNotification.notifiedSelectedUser == null}" required>
+<ui-select-match placeholder="Employee name">{{$select.selected.full_name}}</ui-select-match>
+<ui-select-choices refresh="getNotifiedEmployees($select.search)" refresh-delay="0" 
+         repeat="emp in notifiedEmployees | filter: $select.search ">
+<div>{{emp.full_name}}</div>
+</ui-select-choices>
+</ui-select>
+<!-- <button class="btn btn-danger" ng-click="removeIndividual(individualIndex, notifiedSelectedIndividual)" ng-hide="individualIndex == 0">Remove</button> -->
+</div>
+
+</div>
+
+
+<div class="form-group choosedNotificationTo" ng-if="assignedNotification.choosedNotifiedCategory === 'group'">
+<label for="">Name:</label>
+<ui-select class="form-control" ng-model="assignedNotification.notifiedSelectedGroup" theme="bootstrap" on-select="onSelectNotifiedValue($item)"
+ng-class="{'required':assignedNotification.notifiedSelectedGroup == null}" required>
+<ui-select-match placeholder="Group name">{{$select.selected.name}}</ui-select-match>
+<ui-select-choices refresh="getNotifiedGroups($select.search)" refresh-delay="0" 
+     repeat="group.id as group in notifiedGroups | filter: $select.search ">
+<div>{{group.name}}</div>
+</ui-select-choices>
+</ui-select>
+</div>
+
+</div>
+
+<div class="clearfix"></div>
+<div class="form-group selectNotification" >
+<label for="notificationType">3. Choose the notification type:</label>
+<select id="notificationType" class="form-control" ng-model="assignedNotification.choosedNotificationType"
+ng-options="notificationType.code as notificationType.name for notificationType in notificationTypes"
+ng-change="getFilterFieldsByType()">
+</select>
+</div>
+
+
+</form>
+
+<div class="clearfix"></div>
+<h2 class="label wrapping">4. Send notifications for reports that contain all of the following triggers:</h2>
+<span>Note: Select a maximum of four triggers. Ensure the triggers you choose are mandatory fields on your report form. </span>
+<div class="insideAccordion form-style">
+<uib-accordion close-others="oneAtATime" is-open="status.openTheBigOne">
+
+<div  uib-accordion-group class="panel-default" heading="Click to see category and filters" is-open="status.addNewNotification" >
+
+<div class="accStyle" ng-repeat="filter in assignedNotification.notifiedFilterFields track by $index" ng-init="filterIndex = $index">
+<uib-accordion close-others="oneAtATime" ng-click="closeOtherAccordions(filter.field_name)">
+<div  uib-accordion-group class="panel-default" heading="{{filter.field_label}}" is-open="status.filterStatus[filter.field_name]" >
+<div ng-scrollbars ng-scrollbars-config="config">
+<table class="table table-bordered">
+ <tr>
+     <td>
+         <span>
+             <input type="checkbox" ng-model="filter.choosed"
+         ng-change="getFilterValues(filter, null)"><span>{{filter.field_label}}</span></span>
+         <!-- <span ng-if="filter.field_name==='impact_sub_type_id'"><input type="checkbox" 
+             ng-model="filter.choosed"><span>{{filter.field_label}}</span></span> -->
+         <div class="clearfix"></div>
+         <!-- <span class="red">(See Email Notification Templates 1 & 2)</span> -->
+     </td>
+     <td ng-if="filter.choosed && filter.field_name !== 'location1_id' && 
+     filter.field_name !== 'location2_id' && filter.field_name !== 'location3_id' && 
+     filter.field_name !== 'location4_id' && filter.field_name !== 'risk_level' && 
+     filter.field_name !== 'CorrectiveActionsHeader' && filter.field_name !== 'impact_type_id'">
+         <div ng-repeat="value in filter.filterValues track by $index">
+             <input type="checkbox" ng-model="value.choosed"
+             ng-change="populateSummary()"><span>{{value.name}}
+         </div>
+     </td>
+     <td ng-if="filter.choosed && (filter.field_name === 'location1_id' || 
+     filter.field_name === 'location2_id' || filter.field_name === 'location3_id' || 
+     filter.field_name === 'location4_id')">
+         <div ng-repeat="value in filter.filterValues track by $index">
+         <input type="checkbox" ng-model="value.choosed"
+         ng-change="populateSummary()"><span>{{value.name}} {{value.parent_name}}</div>
+     </td>
+     <td ng-if="filter.choosed && filter.field_name === 'risk_level'">
+         <div ng-repeat="value in filter.filterValues track by value.id">
+         <input type="checkbox" ng-model="value.choosed"
+         ng-change="populateSummary()"><span>{{value.name}}</div>
+     </td>
+     <td ng-if="filter.choosed && filter.field_name === 'impact_type_id'">
+         <div ng-repeat="value in filter.filterValues track by value.id">
+         <input type="checkbox" ng-model="value.choosed"
+         ng-change="getSubImpactValues(filter,value)"><span>{{value.name}}</div>
+     </td>
+ </tr>
+</table>
+</div>
+</div>
+</uib-accordion>
+</div>
+
+<h2 ng-if="assignedNotification.choosedNotificationType === 'special'">
+{{notified_labels['EscalatedNotificationParameteHeader']['default_field_label']}}</h2>
+
+<div class="accStyle" ng-init="filterIndex = $index"
+ng-if="assignedNotification.choosedNotificationType === 'special'">
+<uib-accordion close-others="oneAtATime">
+<div  uib-accordion-group class="panel-default" heading="{{assignedNotification.notifiedFilterEscalatedFields['expired_corrective_actions_header']['field_label']}}" is-open="status.ExpiredCorrectiveActions" >
+<div ng-scrollbars ng-scrollbars-config="config">
+<table class="table table-bordered">
+ <tr>
+     <td><input type="checkbox"  ng-model="assignedNotification.notifiedFilterEscalatedFields['expired_corrective_actions_header']['choosed']">
+         <span>{{assignedNotification.notifiedFilterEscalatedFields['expired_corrective_actions_header']['field_label']}}</span>
+ <div class="clearfix"></div>
+ <!-- <span class="red">(See Email Notification Templates 23)</span></td> -->
+     <td ng-if="assignedNotification.notifiedFilterEscalatedFields['expired_corrective_actions_header']['choosed']"><label>{{assignedNotification.notifiedFilterEscalatedFields['DaysStart']['field_label']}}: </label>
+         <input type="text" class="form-control" ng-model="assignedNotification.notifiedFilterEscalatedFields['expired_corrective_actions_header']['start']"></td>
+     <td ng-if="assignedNotification.notifiedFilterEscalatedFields['expired_corrective_actions_header']['choosed']"><label>{{assignedNotification.notifiedFilterEscalatedFields['DaysFreq']['field_label']}}: </label> 
+         <input type="text" class="form-control" ng-model="assignedNotification.notifiedFilterEscalatedFields['expired_corrective_actions_header']['freq']"> </td>
+ </tr>
+</table>
+</div>
+</div>
+
+<div  uib-accordion-group class="panel-default" heading="{{assignedNotification.notifiedFilterEscalatedFields['InvestigationClosedHeader']['field_label']}}" is-open="status.InvestigationsnotyetClosed" 
+ng-if="assignedNotification.choosedNotificationTypeCode === 'ABCanTrack'">
+<div ng-scrollbars ng-scrollbars-config="config">
+<table class="table table-bordered">
+ <tr>
+     <td><input type="checkbox" ng-model="assignedNotification.notifiedFilterEscalatedFields['InvestigationClosedHeader']['choosed']"><span>{{assignedNotification.notifiedFilterEscalatedFields['InvestigationClosedHeader']['field_label']}}</span>
+ <div class="clearfix"></div>
+ <!-- <span class="red">(See Email Notification Templates 23)</span></td> -->
+     <td ng-if="assignedNotification.notifiedFilterEscalatedFields['InvestigationClosedHeader']['choosed']"><label>{{assignedNotification.notifiedFilterEscalatedFields['DaysStartInc']['field_label']}}: </label>
+         <input type="text" class="form-control" ng-model="assignedNotification.notifiedFilterEscalatedFields['InvestigationClosedHeader']['start']"></td>
+     <td ng-if="assignedNotification.notifiedFilterEscalatedFields['InvestigationClosedHeader']['choosed']"><label>{{assignedNotification.notifiedFilterEscalatedFields['DaysFreqInc']['field_label']}}:  </label> 
+         <input type="text" class="form-control" ng-model="assignedNotification.notifiedFilterEscalatedFields['InvestigationClosedHeader']['freq']"> </td>
+ </tr>
+</table>
+</div>
+</div>
+
+<div  uib-accordion-group class="panel-default" heading="{{assignedNotification.notifiedFilterEscalatedFields['OverdueTraining']['field_label']}}" is-open="status.OverdueTraining" 
+ng-if="assignedNotification.choosedNotificationTypeCode === 'Training'">
+<div ng-scrollbars ng-scrollbars-config="config">
+<table class="table table-bordered">
+ <tr>
+     <td><input type="checkbox" ng-model="assignedNotification.notifiedFilterEscalatedFields['OverdueTraining']['choosed']"><span>{{assignedNotification.notifiedFilterEscalatedFields['OverdueTraining']['field_label']}}</span>
+ <div class="clearfix"></div>
+ <!-- <span class="red">(See Email Notification Templates 23)</span></td> -->
+     <td ng-if="assignedNotification.notifiedFilterEscalatedFields['OverdueTraining']['choosed']"><label>{{assignedNotification.notifiedFilterEscalatedFields['TrainingDaysStart']['field_label']}}: </label>
+         <input type="text" class="form-control" ng-model="assignedNotification.notifiedFilterEscalatedFields['OverdueTraining']['start']"></td>
+     <td ng-if="assignedNotification.notifiedFilterEscalatedFields['OverdueTraining']['choosed']"><label>{{assignedNotification.notifiedFilterEscalatedFields['TrainingDaysFreq']['field_label']}}:  </label> 
+         <input type="text" class="form-control" ng-model="assignedNotification.notifiedFilterEscalatedFields['OverdueTraining']['freq']"> </td>
+ </tr>
+</table>
+</div>
+</div>
+
+<div  uib-accordion-group class="panel-default" heading="{{assignedNotification.notifiedFilterEscalatedFields['ExpiryDateNotification']['field_label']}}" is-open="status.ExpiryDateNotification" 
+ng-if="assignedNotification.choosedNotificationTypeCode === 'Training'">
+<div ng-scrollbars ng-scrollbars-config="config">
+<table class="table table-bordered">
+ <tr>
+     <td><input type="checkbox" ng-model="assignedNotification.notifiedFilterEscalatedFields['ExpiryDateNotification']['choosed']"><span>{{assignedNotification.notifiedFilterEscalatedFields['ExpiryDateNotification']['field_label']}}</span>
+ <div class="clearfix"></div>
+ <!-- <span class="red">(See Email Notification Templates 23)</span></td> -->
+     <td ng-if="assignedNotification.notifiedFilterEscalatedFields['ExpiryDateNotification']['choosed']"><label>{{assignedNotification.notifiedFilterEscalatedFields['ExpiryDaysStart']['field_label']}}: </label>
+         <input type="text" class="form-control" ng-model="assignedNotification.notifiedFilterEscalatedFields['ExpiryDateNotification']['start']"></td>
+     <td ng-if="assignedNotification.notifiedFilterEscalatedFields['ExpiryDateNotification']['choosed']"><label>{{assignedNotification.notifiedFilterEscalatedFields['ExpiryDaysFreq']['field_label']}}:  </label> 
+         <input type="text" class="form-control" ng-model="assignedNotification.notifiedFilterEscalatedFields['ExpiryDateNotification']['freq']"> </td>
+ </tr>
+</table>
+</div>
+</div>
+</uib-accordion>
+</div>
+</div>
+</uib-accordion>
+
+<a ng-click="closeIt()" class="cursor" class="pull-right"> <i class="fa fa-align-justify" aria-hidden="true"></i>
+</a>
+</div>
+<!-- </div> -->
+
+
+<div class="clearfix"></div>
+<form action="">
+<div class="form-style filterStyle">
+<label for="">5. Review your selected triggers:</label>
+<textarea class="form-control" ng-model="notificationSummary" disabled>
+
+</textarea>
+
+</div>
+
+
+</form>
+<div class="form-style filterStyle">
+<h2 class="label align">6. Customize your email message</h2>
+</div>
+<div class="bordered"  ng-include="'app/modules/manageNotificationModule/views/newReportNotification.html'"></div>
+</div>
+
+<button class="btn btn-primary pull-right" ui-sref="manageNotification">Cancel</button>
+<button class="btn btn-primary pull-right" ng-click="updateNotification()" ng-disabled="disableFilters || disableFiltersValues || disableEscalatedFiltersValues || notificationForm.$invalid">Submit</button>

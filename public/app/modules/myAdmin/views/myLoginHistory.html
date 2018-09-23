@@ -1,0 +1,13 @@
+<h2>My login history <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+
+<div class="toolbar">
+        
+        <a href=""  uib-tooltip="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
+
+    </div>
+    
+
+<div>
+<div id="grid1" ui-grid="myLoginHistory" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+</div>

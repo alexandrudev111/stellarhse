@@ -1,0 +1,368 @@
+<div  class="accNewStyle correctiveStyle">
+    
+        <button class="btn btn-primary pull-right" ng-click="addNewAction()"><i class="fa fa-plus"></i> Add action</button>
+        <div class="clearfix"></div>
+        <uib-accordion class="accordionIcon" close-others="oneAtATime" ng-repeat="action in report.correctiveActions track by $index" ng-init="actionIndex = $index">
+            <i class="pull-right fa fa-close" style="color:#000" ng-click="removeAction(actionIndex)"
+               ng-hide="actionIndex == 0"></i>
+            <div uib-accordion-group class="panel-default" is-open="status.correctiveAction[actionIndex]" heading="{{action.heading}}">
+                <form class="form-inline">
+                    <div class="form-style ">
+                        <div class="row">    
+                            <div class="col-md-5 bottomCloseIcon">
+                                <div class="form-group NewMtop" ng-if="report_labels['corrective_action_priority_id']['is_hidden'] === 'No' || custom">
+                                    <label for="exampleInputEmail3">{{report_labels['corrective_action_priority_id']['field_label']}}
+                                        <a href="" ng-click="openHelp(report_labels['corrective_action_priority_id'])" uib-tooltip="{{report_labels['corrective_action_priority_id']['help_me_name']}}"
+                                           ng-if="report_labels['corrective_action_priority_id']['help_me_name'] && report_labels['corrective_action_priority_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                                        <a href="" ng-click="editField(report_labels['corrective_action_priority_id'], 'common')" ng-if="custom && report_labels['corrective_action_priority_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                                    <span ng-repeat="priority in correctiveActionPriorities">
+                                        <input type="radio" value="{{priority.corrective_action_priority_id}}" 
+                                               ng-model="action.corrective_action_priority_id"
+                                               ng-required="report_labels['corrective_action_priority_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"> <span>
+                                            {{priority.corrective_action_priority_name}}</span>
+                                    </span>
+                                    <a href="" ng-click="clearPriority(action)"><i class="fa fa-close"></i></a>
+                                    <!--                                                     <input type="radio"> <span>High</span>
+                                                                                            <input type="radio"> <span>Medium</span>
+                                                                                            <input type="radio"> <span>Low</span>-->
+                                </div>
+                            </div>
+    
+                            <div class="col-md-7 bottomCloseIcon">
+                                <div class="form-group pull-right NewMtop" ng-if="report_labels['corrective_action_status_id']['is_hidden'] === 'No' || custom">
+                                    <label for="exampleInputEmail3">{{report_labels['corrective_action_status_id']['field_label']}}
+                                        <a href="" ng-click="openHelp(report_labels['corrective_action_status_id'])" uib-tooltip="{{report_labels['corrective_action_status_id']['help_me_name']}}"
+                                           ng-if="report_labels['corrective_action_status_id']['help_me_name'] && report_labels['corrective_action_status_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                                        <a href="" ng-click="editField(report_labels['corrective_action_status_id'], 'common')" ng-if="custom && report_labels['corrective_action_status_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                                    <span ng-repeat="status in correctiveActionStatues" ng-class="{'statusEnabled': status.field_code === 'closed' && action.statusDisabled === false}">
+                                        <input type="radio" value="{{status.corrective_action_status_id}}" ng-if="status.field_code !== 'closed'"
+                                               ng-model="action.corrective_action_status_id" ng-change="getCorrectiveActionStatus(actionIndex, status, action)"
+                                               ng-required="report_labels['corrective_action_status_id']['is_mandatory']=='Yes'" 
+                                               ng-disabled = "disabeldTrue">
+                                        <input type="radio" value="{{status.corrective_action_status_id}}" ng-if="status.field_code === 'closed'"
+                                            ng-model="action.corrective_action_status_id" ng-change="getCorrectiveActionStatus(actionIndex, status, action,'sm')"
+                                            ng-required="report_labels['corrective_action_status_id']['is_mandatory']=='Yes'" 
+                                            ng-disabled = "disabeldTrue || !reportPermissions.closeaction"> 
+                                            
+                                        <span>{{status.corrective_action_status_name}}</span>
+                                    </span>
+                                    <a href="" ng-click="clearStatus(action, actionIndex)"><i class="fa fa-close"></i></a>
+                                    <!--                                                     <input type="radio"> <span>Open</span>
+                                                                                            <input type="radio"> <span>Delay</span>
+                                                                                            <input type="radio"> <span>closed</span>-->
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    
+                    <div class="form-style">
+                        <div class="form-group" ng-if="report_labels['assigned_to_id']['is_hidden'] === 'No' || custom">
+                            <label for="exampleInputEmail3">{{report_labels['assigned_to_id']['field_label']}}
+                                <a href="" ng-click="openHelp(report_labels['assigned_to_id'])" uib-tooltip="{{report_labels['assigned_to_id']['help_me_name']}}"
+                                   ng-if="report_labels['assigned_to_id']['help_me_name'] && report_labels['assigned_to_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                                <a href="" ng-click="editField(report_labels['assigned_to_id'])" ng-if="custom && report_labels['assigned_to_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                            <!--<input type="text" class="form-control" id="exampleInputEmail3" placeholder="Assigned to" >-->
+                            <ui-select ng-model="action.assigned_to" theme="bootstrap" ng-change="getAssignToName(actionIndex)"
+                                       ng-required="report_labels['assigned_to_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue">
+                                <ui-select-match allow-clear="true" placeholder="Assigned to">{{$select.selected.full_name}}, {{$select.selected.position}}, {{$select.selected.org_name}}</ui-select-match>
+                                <ui-select-choices refresh="getCorrectiveActionEmployees('assigntoname', $select.search, actionIndex)" refresh-delay="0" 
+                                                   repeat="employee in action.correctiveActionAssignedEmployees | filter: $select.search ">
+                                    <div>{{employee.full_name}}</div>
+                                </ui-select-choices>
+                            </ui-select>
+                            <button class="btn btn-primary actionassignto" ng-click="openAdd()" ng-disabled="initializeReport.actionAssignTo || action.correctiveActionAssignedEmployees.length != 0" uib-tooltip="Name not found - add person/employee to database."><i class="fa fa-plus"></i></button>
+                            <!--<a href="" ng-click="openAdd()"><i class="fa fa-plus"></i></a>-->
+
+                          
+
+
+                        </div>
+                        
+                        <div class="form-group">
+                            <span ng-if="report_labels['corrective_action_supervisor']['is_hidden'] === 'No' || custom">
+                                <label for="exampleInputEmail3">{{report_labels['corrective_action_supervisor']['field_label']}}
+                                    <a href="" ng-click="openHelp(report_labels['corrective_action_supervisor'])" uib-tooltip="{{report_labels['corrective_action_supervisor']['help_me_name']}}"
+                                       ng-if="report_labels['corrective_action_supervisor']['help_me_name'] && report_labels['corrective_action_supervisor']['help_me_description']"><i class="fa fa-question"></i></a>
+                                    <a href="" ng-click="editField(report_labels['corrective_action_supervisor'])" ng-if="custom && report_labels['corrective_action_supervisor']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                                <input type="text" class="form-control" placeholder="Assigned to supervisor" ng-model="action.assigned_to.supervisor_name"
+                                       ng-required="report_labels['corrective_action_supervisor']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue">
+                                <!--                        <ui-select ng-model="action.assigned_to" theme="bootstrap">
+                                                            <ui-select-match placeholder="Assigned to Supervisor">{{$select.selected.supervisor_name}}</ui-select-match>
+                                                            <ui-select-choices refresh="getCorrectiveActionEmployees('assigntosupervisor', $select.search, actionIndex)" refresh-delay="0" 
+                                                                               repeat="employee in action.correctiveActionAssignedEmployees | filter: $select.search ">
+                                                                <div>{{employee.supervisor_name}}</div>
+                                                            </ui-select-choices>
+                                                        </ui-select>-->
+                            </span>
+                            <span class="pull-right alsoNotified" ng-if="report_labels['supervisor_notify']['is_hidden'] === 'No' || custom">
+                                <input type="checkbox" ng-model="action.supervisor_notify" ng-disabled="!action.assigned_to.supervisor_name"
+                                       ng-required="report_labels['supervisor_notify']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"/> 
+                                <span>{{report_labels['supervisor_notify']['field_label']}}
+                                    <a href="" ng-click="openHelp(report_labels['supervisor_notify'])" uib-tooltip="{{report_labels['supervisor_notify']['help_me_name']}}"
+                                       ng-if="report_labels['supervisor_notify']['help_me_name'] && report_labels['supervisor_notify']['help_me_description']"><i class="fa fa-question"></i></a>
+    
+                                    <a href="" ng-click="editField(report_labels['supervisor_notify'])" ng-if="custom && report_labels['supervisor_notify']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></span>
+                            </span>
+                        </div>
+                        
+                        
+                        <div class="clearfix"></div>
+                          <div ng-if="report_labels['notified_id']['is_hidden'] === 'No' || custom">
+                        <div class="form-group" ng-repeat="notifyPerson in action.notified_to track by $index" ng-init="notifyPersonIndex = $index">
+                            <label for="exampleInputEmail3">{{report_labels['notified_id']['field_label']}}
+                                <a href="" ng-click="openHelp(report_labels['notified_id'])" uib-tooltip="{{report_labels['notified_id']['help_me_name']}}"
+                                   ng-if="report_labels['notified_id']['help_me_name'] && report_labels['notified_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                                <a href="" ng-click="editField(report_labels['notified_id'])" ng-if="custom && report_labels['notified_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                            <!--<input type="text" class="form-control" id="exampleInputEmail3" placeholder="Also notified">--> 
+                            <ui-select ng-model="notifyPerson" theme="bootstrap" ng-change="getNotifyToName(notifyPerson, notifyPersonIndex, actionIndex)"
+                                       ng-required="report_labels['notified_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue">
+                                       <!-- allow-clear="true" -->
+                                <ui-select-match allow-clear="true" placeholder="Also notified">{{$select.selected.selectedValue}}</ui-select-match>
+                                <ui-select-choices refresh="getCorrectiveActionEmployees('notifytoname', $select.search, actionIndex, notifyPersonIndex)" refresh-delay="0" 
+                                                   repeat="employee in action.correctiveActionNotifiededEmployees[notifyPersonIndex] | filter: $select.search ">
+                                    <div>{{employee.full_name}}</div>
+                                </ui-select-choices>
+                            </ui-select>
+                            <!--<a href="" ng-click="openAdd()"><i class="fa fa-plus"></i></a>-->
+                            <button class="btn btn-primary actionassignto" ng-click="openAdd()" ng-disabled="initializeReport.actionNotifyTo || action.correctiveActionNotifiededEmployees[notifyPersonIndex].length != 0" uib-tooltip="Name not found - add person/employee to database."><i class="fa fa-plus"></i></button>
+                            <button class="btn btn-primary showButton btnmTop" ng-click="removeNotifyPerson(actionIndex, notifyPersonIndex)" ng-hide="notifyPersonIndex == 0">Remove</button>
+
+
+                        </div>
+                         <button class="btn btn-primary" ng-click="addNewNotifiedTo(actionIndex)">More</button>
+                    </div>
+
+                       
+                    </div>
+                    
+                    
+
+                   
+                    <div class="clearfix"></div>
+
+                    <div class="form-style">      
+                        <div class="form-group dateStyle" ng-if="report_labels['start_date']['is_hidden'] === 'No' || custom">
+                            <label for="exampleInputEmail3">{{report_labels['start_date']['field_label']}}
+                                <a href="" ng-click="openHelp(report_labels['start_date'])" uib-tooltip="{{report_labels['start_date']['help_me_name']}}"
+                                   ng-if="report_labels['start_date']['help_me_name'] && report_labels['start_date']['help_me_description']"><i class="fa fa-question"></i></a>
+                                <a href="" ng-click="editField(report_labels['start_date'])" ng-if="custom && report_labels['start_date']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                            <!--                            <input type="text" class="form-control" placeholder="Select" 
+                                                               my-datepicker ng-model="action.start_date">-->
+                            <p class="input-group">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="action.start_date" 
+                                       is-open="datePopUps.correctiveActions[actionIndex].start_date" datepicker-options="dateOptions" close-text="Close" 
+                                       ng-click="datePopUps.correctiveActions[actionIndex].start_date = !datePopUps.correctiveActions[actionIndex].start_date" ng-change="checkCorrectiveActionDates(action)"
+                                       alt-input-formats="altInputFormats" placeholder="Select date"
+                                       ng-required="report_labels['start_date']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"/>
+                                <span class="input-group-btn calenderIcon">
+                                    <button type="button" class="btn btn-default " ng-click="datePopUps.correctiveActions[actionIndex].start_date = !datePopUps.correctiveActions[actionIndex].start_date"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+
+
+                        <div class="form-group dateStyle" ng-if="report_labels['target_end_date']['is_hidden'] === 'No' || custom">
+                            <label for="exampleInputEmail3">{{report_labels['target_end_date']['field_label']}}
+                                <a href="" ng-click="openHelp(report_labels['target_end_date'])" uib-tooltip="{{report_labels['target_end_date']['help_me_name']}}"
+                                   ng-if="report_labels['target_end_date']['help_me_name'] && report_labels['target_end_date']['help_me_description']"><i class="fa fa-question"></i></a>
+                                <a href="" ng-click="editField(report_labels['target_end_date'])" ng-if="custom && report_labels['target_end_date']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                            <!--                            <input type="text" class="form-control" placeholder="Select" 
+                                                               my-datepicker ng-model="action.target_end_date"> -->
+                            <p class="input-group">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="action.target_end_date" 
+                                       is-open="datePopUps.correctiveActions[actionIndex].target_end_date" datepicker-options="dateOptions" close-text="Close" 
+                                       ng-click="datePopUps.correctiveActions[actionIndex].target_end_date = !datePopUps.correctiveActions[actionIndex].target_end_date" ng-change="checkCorrectiveActionDates(action)" 
+                                       alt-input-formats="altInputFormats" placeholder="Select date "
+                                       ng-required="report_labels['target_end_date']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"/>
+                                <span class="input-group-btn calenderIcon">
+                                    <button type="button" class="btn btn-default " ng-click="datePopUps.correctiveActions[actionIndex].target_end_date = !datePopUps.correctiveActions[actionIndex].target_end_date"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+
+                        <div class="form-group dateStyle" ng-if="report_labels['actual_end_date']['is_hidden'] === 'No' || custom">
+                            <label>{{report_labels['actual_end_date']['field_label']}}
+                                <a href="" ng-click="openHelp(report_labels['actual_end_date'])" uib-tooltip="{{report_labels['actual_end_date']['help_me_name']}}"
+                                   ng-if="report_labels['actual_end_date']['help_me_name'] && report_labels['actual_end_date']['help_me_description']"><i class="fa fa-question"></i></a>
+                                <a href="" ng-click="editField(report_labels['actual_end_date'])" ng-if="custom && report_labels['actual_end_date']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                            <!--                            <input type="text" class="form-control statusDisabled" placeholder="Select" 
+                                                               my-datepicker ng-model="action.actual_end_date" ng-disabled="action.statusDisabled" 
+                                                               ng-class="{'statusEnabled': action.statusDisabled === false}"> -->
+                            <p class="input-group">
+                                <input type="text" class="form-control statusDisabled" uib-datepicker-popup="{{format}}" ng-model="action.actual_end_date" 
+                                       is-open="datePopUps.correctiveActions[actionIndex].actual_end_date" datepicker-options="dateOptions" close-text="Close" 
+                                       ng-click="datePopUps.correctiveActions[actionIndex].actual_end_date = !datePopUps.correctiveActions[actionIndex].actual_end_date" ng-change="checkCorrectiveActionDates(action)" 
+                                       alt-input-formats="altInputFormats" placeholder="Select date"  ng-disabled="action.statusDisabled"
+                                       ng-class="{'statusEnabled': action.statusDisabled === false}"
+                                       ng-required="report_labels['actual_end_date']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"/>
+                                <span class="input-group-btn calenderIcon">
+                                    <button type="button" class="btn btn-default " ng-click="datePopUps.correctiveActions[actionIndex].actual_end_date = !datePopUps.correctiveActions[actionIndex].actual_end_date"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--                    <div class="form-style">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail3">Assigned to:</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Assigned to">
+                                                </div>
+                        
+                        
+                                                <a href="" ng-click="openAdd()"><i class="fa fa-plus"></i></a>
+                        
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail3">Supervisor:</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Also notified"> 
+                        
+                                                </div>
+                        
+                        
+                                                <button class="btn btn-primary">More</button>
+                                                <div class="clearfix"></div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail3">Also notified:</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Also notified"> 
+                                                    <a href="" ng-click="openAdd()"><i class="fa fa-plus"></i></a>
+                                                    <button class="btn btn-primary">More</button>
+                                                </div>
+                        
+                        
+                                            </div>-->
+        <div class="form-group" ng-if="report_labels['estimated_cost']['is_hidden'] === 'No' || custom">
+                            <label for="exampleInputEmail3">{{report_labels['estimated_cost']['field_label']}}
+                                <a href="" ng-click="openHelp(report_labels['estimated_cost'])" uib-tooltip="{{report_labels['estimated_cost']['help_me_name']}}"
+                                   ng-if="report_labels['estimated_cost']['help_me_name'] && report_labels['estimated_cost']['help_me_description']"><i class="fa fa-question"></i></a>
+                                <a href="" ng-click="editField(report_labels['estimated_cost'])" ng-if="custom && report_labels['estimated_cost']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                            <input type="number" name="estimated_cost" class="form-control " id="exampleInputEmail3" placeholder="Estimated cost" 
+                                   ng-model="action.estimated_cost"
+                                   ng-required="report_labels['estimated_cost']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()" ng-pattern='/^([0-9]{0,8})?(\.[0-9]{1,2})?$/'  onKeyPress="if(this.value.length==11) return false;"> $ 
+                                   <span class="costValid" ng-show="reportForm.estimated_cost.$invalid">
+                                       Enter value from 00000000.00 to 99999999.99
+                                   </span> 
+
+                        </div>
+
+                        <div class="form-group" ng-if="report_labels['actual_cost']['is_hidden'] === 'No' || custom">
+                            <label for="exampleInputEmail3">{{report_labels['actual_cost']['field_label']}}
+                                <a href="" ng-click="openHelp(report_labels['actual_cost'])" uib-tooltip="{{report_labels['actual_cost']['help_me_name']}}"
+                                   ng-if="report_labels['actual_cost']['help_me_name'] && report_labels['actual_cost']['help_me_description']"><i class="fa fa-question"></i></a>
+                                <a href="" ng-click="editField(report_labels['actual_cost'])" ng-if="custom && report_labels['actual_cost']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                            <input type="number" name="actual_cost" class="form-control" id="exampleInputEmail3" placeholder="Actual cost" 
+                                   ng-model="action.actual_cost"
+                                   ng-required="report_labels['actual_cost']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()" ng-pattern='/^([0-9]{0,8})?(\.[0-9]{1,2})?$/'  onKeyPress="if(this.value.length==11) return false;">  $
+                                   <span class="costValid" ng-show="reportForm.actual_cost.$invalid">
+                                       Enter value from 00000000.00 to 99999999.99
+                                   </span>
+                            <!--ng-disabled="action.statusDisabled"-->
+                            <!--ng-class="{'statusEnabled': action.statusDisabled === false}"--> 
+
+                        </div>
+
+    
+                        <div class="clearfix"></div>
+                        <div class="form-style topBorder">
+                            <div class="form-group selectWidth" ng-if="(report_labels['related_hazard_id']['is_hidden'] === 'No' || custom) && (reportType == 'hazard' ||reportType == 'inspection')">
+                            <label for="exampleInputEmail3">{{report_labels['related_hazard_id']['field_label']}}
+                                <a href="" ng-click="openHelp(report_labels['related_hazard_id'])" uib-tooltip="{{report_labels['related_hazard_id']['help_me_name']}}"
+                                   ng-if="report_labels['related_hazard_id']['help_me_name'] && report_labels['related_hazard_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                                <a href="" ng-click="editField(report_labels['related_hazard_id'])" ng-if="custom && report_labels['related_hazard_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                               <select class="form-control" ng-model="action.related_hazard_id" 
+                                        ng-options="effect.effects_sub_type_id as effect.related_hazard for effect in relatedHazard"
+                                        ng-change="updateResultStatusId(action)"  ng-disabled = "disabeldTrue"
+                                        >
+                                    <option value="" selected>Select One</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                        <!-- ng-required="report_labels['event_type_id']['is_mandatory']=='Yes'" -->
+
+               
+                       
+                        <div class="clearfix"></div>
+    
+                        <div class="form-style" ng-if="report_labels['task_description']['is_hidden'] === 'No' || custom">
+    
+                            <div class="form-group block">
+                                <label for="exampleInputEmail3">{{report_labels['task_description']['field_label']}}
+                                    <a href="" ng-click="openHelp(report_labels['task_description'])" uib-tooltip="{{report_labels['task_description']['help_me_name']}}"
+                                       ng-if="report_labels['task_description']['help_me_name'] && report_labels['task_description']['help_me_description']"><i class="fa fa-question"></i></a>
+                                    <a href="" ng-click="editField(report_labels['task_description'])" ng-if="custom && report_labels['task_description']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                                <textarea name="" class="form-control" ng-model="action.task_description"
+                                          ng-required="report_labels['task_description']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"></textarea>
+    
+                            </div>
+    
+    
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-style" ng-if="report_labels['out_come_follow_up']['is_hidden'] === 'No' || custom">
+    
+                            <div class="form-group block">
+                                <label for="exampleInputEmail3">{{report_labels['out_come_follow_up']['field_label']}}
+                                    <a href="" ng-click="openHelp(report_labels['out_come_follow_up'])" uib-tooltip="{{report_labels['out_come_follow_up']['help_me_name']}}"
+                                       ng-if="report_labels['out_come_follow_up']['help_me_name'] && report_labels['out_come_follow_up']['help_me_description']"><i class="fa fa-question"></i></a>
+                                    <a href="" ng-click="editField(report_labels['out_come_follow_up'])" ng-if="custom && report_labels['out_come_follow_up']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                                <textarea name="" class="form-control" ng-model="action.out_come_follow_up"
+                                          ng-required="report_labels['out_come_follow_up']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"></textarea>
+    
+                            </div>
+    
+    
+                        </div>
+    
+                        <div class="clearfix"></div>
+                        <div class="form-style" ng-if="report_labels['desired_results']['is_hidden'] === 'No' || custom">
+    
+                            <div class="form-group radio">
+                                <label for="exampleInputEmail3">{{report_labels['desired_results']['field_label']}}
+                                    <a href="" ng-click="openHelp(report_labels['desired_results'])" uib-tooltip="{{report_labels['desired_results']['help_me_name']}}"
+                                       ng-if="report_labels['desired_results']['help_me_name'] && report_labels['desired_results']['help_me_description']"><i class="fa fa-question"></i></a>
+                                    <a href="" ng-click="editField(report_labels['desired_results'])" ng-if="custom && report_labels['desired_results']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                                <div class="form-group">
+                                    <input type="radio" ng-model="action.desired_results" value="1"
+                                           ng-required="report_labels['desired_results']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue">Yes
+                                </div>
+                                <div class="form-group">
+                                    <input type="radio" ng-model="action.desired_results" value="0"
+                                           ng-required="report_labels['desired_results']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"> No
+    
+                                </div>
+    
+    
+                                <a href="" class="pull-left" ng-click="clearCompleteTask(action)"><i class="fa fa-close"></i></a>
+    
+                            </div>
+    
+    
+                        </div>
+    
+    
+                        <div class="clearfix"></div>
+                        <div class="form-style" ng-if="report_labels['comments']['is_hidden'] === 'No' || custom">
+    
+                            <div class="form-group block">
+                                <label for="exampleInputEmail3">{{report_labels['comments']['field_label']}}
+                                    <a href="" ng-click="openHelp(report_labels['comments'])" uib-tooltip="{{report_labels['comments']['help_me_name']}}"
+                                       ng-if="report_labels['comments']['help_me_name'] && report_labels['comments']['help_me_description']"><i class="fa fa-question"></i></a>
+                                    <a href="" ng-click="editField(report_labels['comments'])" ng-if="custom && report_labels['comments']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+                                <textarea class="form-control" ng-model="action.comments"
+                                          ng-required="report_labels['comments']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"></textarea>
+    
+                            </div>
+    
+    
+                        </div>
+    
+                    </div>
+                    
+                <div ng-include="'app/modules/coreReportModule/views/actionsCustom.html'"></div>
+                </form>
+    
+    
+            </div>
+    
+        </uib-accordion>
+    </div>

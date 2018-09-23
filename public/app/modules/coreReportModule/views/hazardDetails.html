@@ -1,0 +1,95 @@
+<div  class="accNewStyle headingNoMargin">
+    <!--<button class="btn btn-primary pull-right ng-scope"><i class="fa fa-plus"></i>Add Hazard Details</button>-->
+
+    <div class="clearfix"></div>
+    <div ng-if="report_labels['type_and_subtype']['is_hidden'] === 'No' || custom">
+        <h2>{{report_labels['type_and_subtype']['field_label']}}</h2>
+        <a href="" class="HeadingIcon HeadingIconmargin" ng-click="openHelp(report_labels['type_and_subtype'])" uib-tooltip="{{report_labels['type_and_subtype']['help_me_name']}}"
+           ng-if="report_labels['type_and_subtype']['help_me_name'] && report_labels['type_and_subtype']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" class="" ng-click="editField(report_labels['type_and_subtype'], 'hazInsp')" ng-if="custom && report_labels['type_and_subtype']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> 
+
+        <div class="clearfix"></div>
+        <uib-accordion class="accordionIcon" close-others="oneAtATime">
+            <div uib-accordion-group class="panel-default" ng-repeat="effectsType in report.effectsTypes track by $index" 
+                 heading="{{effectsType.effects_type_name}}" is-open="status.effectType[$index]">
+                 
+                
+                 
+                <form class="form-inline">
+                    <div class="form-style">
+                        <div class="form-group block" ng-repeat="effectsSubType in effectsType.effects_sub_types">
+                            <input type="checkbox" class="form-control" name="Risk" ng-model="effectsSubType.effects_sub_type_choice"
+                                   ng-required="report_labels['type_and_subtype']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateRelatedHazard(effectsSubType, 'updateEffect')"> <span>{{effectsSubType.effects_sub_type_name}}</span>
+                            <!-- ng-change="updateRelatedHazard(effectsSubType, 'update')" -->
+                            <span class="pull-right " ng-repeat="status in correctiveStatus">
+                                        <input type="radio" value="{{status.status_id}}" 
+                                               ng-model="effectsSubType.effects_sub_type_status_id"
+                                               ng-required="report_labels['corrective_action_result_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"> <span>
+                                            {{status.status_Name}}</span>
+                                    </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </uib-accordion>
+        <uib-accordion close-others="oneAtATime" ng-if="report_labels['notes']['is_hidden'] === 'No' || custom" class="accordionIcon">
+            <div class="accordionIcons">
+                <a href="" ng-click="openHelp(report_labels['notes'])" uib-tooltip="{{report_labels['notes']['help_me_name']}}" ng-if="report_labels['notes']['help_me_name'] && report_labels['notes']['help_me_description']" tooltip-placement="left"></a>
+                <a href="" ng-click="editField(report_labels['notes'], 'hazInspInc')" ng-if="custom && report_labels['notes']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a>
+            </div>
+            <div uib-accordion-group class="panel-default" is-open="status.Causenotes">
+                <uib-accordion-heading>
+                        {{report_labels['Cause_notes']['field_label']}}</label>        
+                </uib-accordion-heading>
+                <div class="form-style ristItems">
+                    <div class="clearfix"></div>
+                    <textarea class="form-control" ng-model="report.hazard_note" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+                </div>
+            </div>
+        </uib-accordion>
+    </div>
+    <div class="styleH2" ng-if="report_labels['cause_types_and_subtypes']['is_hidden'] === 'No' || custom">
+        <h2>{{report_labels['cause_types_and_subtypes']['field_label']}}</h2>
+        <a href=""  class="HeadingIcon HeadingIconmargin" ng-click="openHelp(report_labels['cause_types_and_subtypes'])" uib-tooltip="{{report_labels['cause_types_and_subtypes']['help_me_name']}}"
+           ng-if="report_labels['cause_types_and_subtypes']['help_me_name'] && report_labels['cause_types_and_subtypes']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['cause_types_and_subtypes'], 'hazInsp')" ng-if="custom && report_labels['cause_types_and_subtypes']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> 
+
+        <div class="clearfix"></div>
+        <uib-accordion close-others="oneAtATime">
+            <div uib-accordion-group class="panel-default" ng-repeat="causeType in report.causeTypes track by $index" 
+                 heading="{{causeType.cause_types_name}}" is-open="status.causeType[$index]">
+                <form class="form-inline">
+                    <div class="form-style">
+                        <div class="form-group block" ng-repeat="causeSubType in causeType.cause_sub_types">
+                            <input type="checkbox" class="form-control" name="Risk" ng-model="causeSubType.cause_sub_types_choice"
+                                   ng-required="report_labels['cause_types_and_subtypes']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateRelatedHazard(causeSubType, 'updateCause')" > <span>{{causeSubType.cause_sub_types_name}}</span>
+                            <!-- ng-change="updateRelatedHazard(effectsSubType, 'update')" -->
+                            <span class="pull-right " ng-repeat="status in correctiveStatus">
+                                        <input type="radio" value="{{status.status_id}}" 
+                                               ng-model="causeSubType.cause_sub_type_status_id"
+                                               ng-required="report_labels['corrective_action_result_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"> <span>
+                                            {{status.status_Name}}</span>
+                                    </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </uib-accordion>
+        <uib-accordion close-others="oneAtATime" ng-if="report_labels['Cause_notes']['is_hidden'] === 'No' || custom" class="accordionIcon">
+            <div class="accordionIcons">
+                <a href="" ng-click="openHelp(report_labels['Cause_notes'])" uib-tooltip="{{report_labels['Cause_notes']['help_me_name']}}" ng-if="report_labels['Cause_notes']['help_me_name'] && report_labels['Cause_notes']['help_me_description']" tooltip-placement="left"></a>
+                <a href="" ng-click="editField(report_labels['Cause_notes'], 'hazInspInc')" ng-if="custom && report_labels['Cause_notes']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a>
+            </div>
+            <div uib-accordion-group class="panel-default" is-open="status.Causenotes">
+                <uib-accordion-heading>
+                        {{report_labels['Cause_notes']['field_label']}}</label>        
+                </uib-accordion-heading>
+                <div class="form-style ristItems">
+                    <div class="clearfix"></div>
+                    <textarea class="form-control" ng-model="report.hazard_cause_note" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+                </div>
+            </div>
+        </uib-accordion>
+        
+    </div>
+</div>

@@ -1,0 +1,31 @@
+
+    <h2>Manage Groups </h2>
+    <div class="toolbar">
+            <!-- ng-if="permissions.myadmintools.createnewgrouppasedold" -->
+        <a href="#/addGroup" uib-tooltip="Add group"><i class="fa fa-plus" aria-hidden="true"></i></a>
+
+        <a href=""  uib-tooltip="Edit group" ng-click="editGroup()"><i class="fa fa-edit" aria-hidden="true"></i></a>
+
+        <a href="" uib-tooltip="Delete group" ng-click="deleteGroup()"><i class="fa fa-remove" ></i></a>
+
+        <a href="" ng-click="clearSearch()" uib-tooltip="Clear"><i class="fa fa-history"></i></a>
+
+        <a href=""  uib-tooltip="Activate group" ng-click="activateGroup()" ng-if="selectedRecord.is_active === 'Inactive'">
+            <i class="fa fa-unlock" aria-hidden="true"></i>
+        </a>
+
+        <a href=""  uib-tooltip="Deactivate group" ng-click="deactivateGroup()" ng-if="selectedRecord.is_active === 'Active'">
+            <i class="fa fa-lock" aria-hidden="true"></i>
+        </a>   
+        <!-- ng-if="permissions.myadmintools.reassignmemberstodiffgroups" -->
+        <a href="" uib-tooltip="Reassign Users" ng-click="openUsersPopUp()"><i class="fa fa-exchange" aria-hidden="true"></i></a>     
+        <a ng-if="permissions.myadmintools.exportreport" href="" ng-click="downloadCSV()" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+        <a href="" ng-click="openHelp()"  uib-tooltip="Help"><i class="fa fa-question"></i></a>
+        <!-- <a href="" ng-click="downloadPDF()" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a>  -->
+
+
+    </div>
+
+    <div>
+        <div id="grid1" ui-grid="ManageGroupsOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+    </div>

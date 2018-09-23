@@ -1,0 +1,15 @@
+
+    <h2> View/manage current KPIs and charts
+                     <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+
+    <uib-tabset active="activeForm" cg-busy="{promise:promise,backdrop:true}">
+
+    <uib-tab index="0" heading="Favorite KPIs and charts">
+        <div ng-include="'app/modules/analyticsModule/views/favoriteKPI.html'" ></div>
+    </uib-tab>
+    <uib-tab index="1" heading="KPI and charts menu">
+        <div ng-include="'app/modules/analyticsModule/views/menuKPI.html'"></div>
+    </uib-tab>
+
+</uib-tabset>

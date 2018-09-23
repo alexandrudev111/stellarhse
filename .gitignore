@@ -1,0 +1,17 @@
+/logs/*
+!/logs/README.md
+/composer.phar
+/composer.lock
+/public/.htaccess
+/nbproject/
+/public/app/app.min.js
+/public/app/app.min.js.map
+/src/data/
+/src/stellar.log
+.idea/
+.vscode/
+vendor/
+public/node_modules/
+src/stellar.log
+node_modules/
+/vendor

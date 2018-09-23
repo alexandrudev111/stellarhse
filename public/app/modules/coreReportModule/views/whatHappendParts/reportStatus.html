@@ -1,0 +1,17 @@
+<div class="pull-right" ng-if="report_labels['report_status_id']['is_hidden'] === 'No' || custom" >
+    <label for="exampleInputEmail3">{{report_labels['report_status_id']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['report_status_id'])" uib-tooltip="{{reporst_labels['report_status_id']['help_me_name']}}"
+           ng-if="report_labels['report_status_id']['help_me_name'] && report_labels['report_status_id']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['report_status_id'])" ng-if="custom && report_labels['report_status_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+    
+     <span ng-repeat="status in reportStatus">
+        <input type="radio" value="{{status.report_status_id}}" 
+        ng-model="report.report_status_id" 
+        ng-required="report_labels['report_status_id']['is_mandatory']=='Yes'" 
+        ng-disabled = "disabeldTrue" ng-change="checkReportStatus()">
+	    <span>{{status.report_status_name}}</span>
+	</span>
+    <div class="clearfix"></div>
+    <span>{{reportStatusMesssage}}</span>
+    
+</div>

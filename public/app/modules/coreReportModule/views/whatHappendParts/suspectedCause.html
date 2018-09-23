@@ -1,0 +1,9 @@
+<!--{{labels.whatHappened.suspectedCause}}-->
+<div class="form-group block" ng-if="report_labels['suspected_cause']['is_hidden'] === 'No' || custom">
+    <label for="exampleInputPassword3"> {{report_labels['suspected_cause']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['suspected_cause'])" uib-tooltip="{{report_labels['suspected_cause']['help_me_name']}}"
+           ng-if="report_labels['suspected_cause']['help_me_name'] && report_labels['suspected_cause']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['suspected_cause'])" ng-if="custom && report_labels['suspected_cause']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+    <textarea  class="form-control" placeholder="Describe suspected cause(s)" ng-model="report.report_suspected_cause"
+               ng-required="report_labels['suspected_cause']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+</div>

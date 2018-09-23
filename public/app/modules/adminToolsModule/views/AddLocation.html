@@ -1,0 +1,99 @@
+<h2>Add location <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+<div class="clearfix"></div>
+<!--<p class="alert alert-warning">
+    
+    To add a location, follow the sequence by selecting from or adding to location level 1, then level 2 and so on. If you click on a dropdown and the location you want is not there, click Add, type in the location name and then click Submit to save your changes. You can also edit and delete locations using the same sequence with the edit and delete options.
+
+
+</p>-->
+
+<form action=""  class="form-inline addPeople chooseCountry formStylePadding ">
+    <div class="form-style styleSelect">
+        <div class="col-md-6 block" >
+            <div class="form-group">
+                <label>{{locationLabels.addCountry}}:</label>
+                <select  class="form-control" ng-options="l1.location1_id as l1.location1_name for l1 in locations1"
+                         ng-model="selectedLocation.location1_id" ng-if="loca1_checker">
+                    <option ng-model="selectedLocation.location1_id" value="" selected>Please select one.</option>
+                </select>
+                <input type="text" ng-model="selectedLocation.location1_name" ng-if="!loca1_checker">
+                <a href="" class="btn btn-primary" ng-if="!loca1_checker" ng-click="showHideForAddAndEdit('!loca1_checker')"> {{locationLabels.Cancel}} </a>
+                <a href="" class="btn btn-primary" ng-if="loca1_checker" ng-click="showHideForAddAndEdit('loca1_checker')"> {{locationLabels.Add}} </a>
+                <a href="" class="btn btn-primary" ng-if="loca1_checker" ng-click="editLocations('locations1')"> {{locationLabels.Edit}} </a>
+                <a href="" class="btn btn-primary" ng-if="loca1_checker" ng-click="delLocation(1 , selectedLocation.location1_id)"> {{locationLabels.Delete}} </a>
+                <span style="color: red"    class="validationMsg"   >{{enter_country}}</span>
+            </div>
+        </div>
+        
+        <div class="col-md-6 block">
+            <div class="form-group">
+                <label>{{locationLabels.addProvince}}:</label>
+                <select  class="form-control" ng-options="l2.location2_id as l2.location2_name for l2 in locations2"
+                         ng-model="selectedLocation.location2_id" ng-if="loca2_checker">
+                    <option ng-model="selectedLocation.location2_id" value="" selected>Please select one.</option>
+<!--                    <option value="">Alberta</option>
+                    <option value="">Manitoba</option>-->
+                </select>
+                <input type="text" ng-model="selectedLocation.location2_name" ng-if="!loca2_checker">
+                <a href="" class="btn btn-primary" ng-if="!loca2_checker" ng-click="showHideForAddAndEdit('!loca2_checker')"> {{locationLabels.Cancel}} </a>
+                <a href="" class="btn btn-primary" ng-if="loca2_checker" ng-click="showHideForAddAndEdit('loca2_checker')"> {{locationLabels.Add}} </a>
+                <a href="" class="btn btn-primary" ng-if="loca2_checker" ng-click="editLocations('locations2')"> {{locationLabels.Edit}} </a>
+                <a href="" class="btn btn-primary" ng-if="loca2_checker" ng-click="delLocation(2,selectedLocation.location2_id)"> {{locationLabels.Delete}} </a>
+                <span style="color: red"    class="validationMsg"   >{{enter_province}}</span>
+            </div>
+        </div>
+        
+        <div class="col-md-6 block" ng-if="locationLabels.location_type == 'area' || locationLabels.location_type=='site' ">
+            <div class="form-group">
+                <label>{{locationLabels.addArea}}:</label>
+                <select  class="form-control" ng-options="l3.location3_id as l3.location3_name for l3 in locations3"
+                         ng-model="selectedLocation.location3_id" ng-if="loca3_checker">
+                    <option ng-model="selectedLocation.location3_id" value="" selected>Please select one.</option>
+<!--                    <option value="">Alberta</option>
+                    <option value="">Manitoba</option>-->
+                </select>
+                <input type="text" ng-model="selectedLocation.location3_name" ng-if="!loca3_checker">
+                <a href="" class="btn btn-primary" ng-if="!loca3_checker" ng-click="showHideForAddAndEdit('!loca3_checker')"> {{locationLabels.Cancel}} </a>
+                <a href="" class="btn btn-primary" ng-if="loca3_checker" ng-click="showHideForAddAndEdit('loca3_checker')"> {{locationLabels.Add}} </a>
+                <a href="" class="btn btn-primary" ng-if="loca3_checker" ng-click="editLocations('locations3')"> {{locationLabels.Edit}} </a>
+                <a href="" class="btn btn-primary" ng-if="loca3_checker" ng-click="delLocation(3,selectedLocation.location3_id)"> {{locationLabels.Delete}} </a>
+                <span style="color: red"    class="validationMsg"   >{{enter_area}}</span>
+            </div>
+        </div>
+        <div class="col-md-6 block" ng-if="locationLabels.location_type=='site'">
+            <div class="form-group">
+                <label>{{locationLabels.addSite}}:</label>
+                <select  class="form-control" ng-options="l4.location4_id as l4.location4_name for l4 in locations4"
+                         ng-model="selectedLocation.location4_id" ng-if="loca4_checker">
+                    <option ng-model="selectedLocation.location4_id" value="" selected>Please select one.</option>
+<!--                    <option value="">Site One</option>
+                    <option value="">Site Two</option>-->
+                </select>
+                <input type="text" ng-model="selectedLocation.location4_name" ng-if="!loca4_checker">
+                <a href="" class="btn btn-primary" ng-if="!loca4_checker" ng-click="showHideForAddAndEdit('!loca4_checker')"> {{locationLabels.Cancel}} </a>
+                <a href="" class="btn btn-primary" ng-if="loca4_checker" ng-click="showHideForAddAndEdit('loca4_checker')"> {{locationLabels.Add}} </a>
+                <a href="" class="btn btn-primary" ng-if="loca4_checker" ng-click="editLocations('locations4')"> {{locationLabels.Edit}} </a>
+                <a href="" class="btn btn-primary" ng-if="loca4_checker" ng-click="delLocation(4 , selectedLocation.location4_id)"> {{locationLabels.Delete}} </a>
+                <span style="color: red"    class="validationMsg"   >{{enter_site}}</span>
+            </div>
+        </div>
+        
+
+         <div class="clearfix"></div>
+         
+         
+        <div class="clearfix"></div>
+         <button class="btn btn-primary pull-right" ng-click="submit()">Submit</button>
+         <button class="btn btn-primary pull-right" ng-click="cancelAdd()">Cancel</button>
+        
+        
+
+ </div>
+    
+    
+    
+    
+    
+    
+</form>

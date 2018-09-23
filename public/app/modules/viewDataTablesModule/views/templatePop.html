@@ -1,0 +1,115 @@
+<div class="newPopupWidth" >
+    <div class="modal-header">
+        <h3 class="modal-title">Email / Print report</h3>
+    </div>
+    <div class="modal-body file">
+
+<div class="alert alert-danger col-md-6 col-md-offset-3">
+    
+    This feature is not yet ready for testing. check back soon!
+</div>
+
+       <div class="clearfix"></div>
+       <div class="col-md-12 listStyle">
+            <div class="accStyle" ng-init="filterIndex = $index">
+                <label >Choose template</label>
+                <div id="accordions-pane">
+                    <uib-accordion close-others="oneAtATime" class="accordions">
+                    <div  ng-repeat='(key, group) in reportObject.templatesTypes' uib-accordion-group class="panel-default" heading="{{ group.org_name }}" is-open="isOpenArr[key].isOpen" >
+                            <div ng-scrollbars ng-scrollbars-config="config">
+                                <ul class="list-unstyled"  id="{{ group.org_id }}" >
+<!--                                    <li ng-repeat='(key, value) in default_templates' class="templateClass">
+                                        <a ng-click="applyDefaultFields(value.template_id)">{{value.template_name}}</a>
+                                        <input type="checkbox" value="{{value.template_id}}" ng-model="default_field.checked[value.template_id]">{{value.template_name}}
+                                    </li>-->
+                                </ul>
+                            </div>
+                    </div> 
+                    </uib-accordion>
+                </div>
+            </div>
+        </div>
+       
+        <input type="hidden" id="TemplateId" value="0">
+<!--        <div class="col-md-6 formStyle removeBodyHeight" id="div_EmailTemplateBody">
+            <form action="">
+
+                <div class="clearfix"></div>
+                <div class="form-group" >
+                    <label for="allorgstempName">Template name </label>
+                    <input type="text" id="allorgstempName" class="form-control" placeholder="template name ... " >
+                </div>
+                <div class="form-group">
+                    <label >Title</label>
+                    <input type="text" class="form-control" id="TemplateName" ng-model="templateObject.name">
+                </div>
+                <div class="form-group">
+                    <label  class="reportStyle">Template type:</label>
+                    <select id="TemplateTypeId"  class="form-control" >
+                        <option ng-repeat="templateType in allTemplateTypes" value="{{ templateType.template_type_id }}"  ng-selected="{{ templateType.template_type_code === defaultTempType}}">{{ templateType.template_type_name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label >Body</label>
+                    <input type="hidden" id="TemplateId" value="0">
+                    <input type="hidden" id="RepIncidentId" value="0">
+                    <input type="hidden" id="TemplateTypeCode" value="MyTemplate">
+                    <input type="hidden" id="TemplateTypeId" value="MyTemplate">
+                    <input type="hidden" id="Old_TemplateTypeCode" value="MyTemplate">
+                    <input type="hidden" id="populateTemp" value="false">
+                    <textarea id="TemplateBody" style="height: 400px; display: none;" aria-hidden="true"></textarea>
+                    <textarea ui-tinymce="tinymceOptions"  class="form-control" ng-model="templateObject.body"></textarea>
+                    
+                </div>
+            </form>
+            <button class="btn btn-primary pull-right hidden" ng-click="previewEmail()">Preview</button>
+        </div>
+        <div class="col-md-3 listStyle">
+                
+            <div class="form-group">
+                <label  class="reportStyle">Report type:</label>
+                <select id="notificationType" class="form-control" ng-model="reportObject.report_type"
+                        ng-options="a.product_code as a.product_name for a in products"
+                        ng-change="getFilterFields()">
+                </select>
+                                <select  class="form-control">
+                                    <option value="">Incident Report</option>
+                                </select>
+            </div>
+            <label >Choose The fields to add to your template</label>
+            <div class="accStyle" ng-init="filterIndex = $index">
+                <uib-accordion close-others="oneAtATime">
+                    <div  uib-accordion-group class="panel-default" ng-repeat="(key, tab) in report_tabs" 
+                          heading="{{tab.sub_tab_label}}" is-open="status.fieldStatus[key]" ng-click="closeOtherFieldAccordions(key)">
+                        <div ng-scrollbars ng-scrollbars-config="config">
+                            <ul class="list-unstyled">
+                                <li ng-if="tab.field_block"><input type="checkbox" ng-model="tab.checked">{{tab.sub_tab_label}}</li>
+                                <li ng-if="!tab.field_block" ng-repeat="(key2, field) in tab.report_labels">
+                                    <input type="checkbox" ng-model="field.checked">{{field.field_label}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </uib-accordion>
+            </div>
+            <button class="btn btn-primary pull-right" ng-click="applyFields()">Apply</button>
+        </div>-->
+
+        <div class="clearfix"></div>
+        <div class="pull-left">
+            <button class="btn btn-primary pull-right" type="button" ng-disabled="disableEmail" id="btnOpenInWord">Open Selected report</button>
+            <button class="btn btn-primary pull-right" type="button" ng-disabled="disableEmail" id="btnAttachToEmail">Email Selected Report</button>
+        </div>
+
+<!--        <button class="btn btn-primary pull-right" type="button" id="btnAddNewUserTemplate">Save as New Template</button>
+        <button class="btn btn-primary pull-right" type="button" id="btnSaveUserTemplate">Save changes Template</button>
+
+
+        <button class="btn btn-primary pull-right" type="button" id="btnDeleteUserTemplate">Delete</button>
+        <button class="btn btn-primary pull-right" type="button" ng-click="resetFormVariables()">Clear</button>-->
+    </div>
+
+
+    
+</div>
+

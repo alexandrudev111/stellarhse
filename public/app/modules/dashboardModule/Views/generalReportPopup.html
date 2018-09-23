@@ -1,0 +1,85 @@
+<div class="modal-header">
+    <h3 class="modal-title">Report details</h3>
+</div>
+<div class="modal-body">
+
+    <div class="form-group col-md-6">
+        <label>{{all_mod_data[3].label}} :</label>
+        <span>{{selected_report.report_number}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+
+
+
+    <div class="form-group col-md-6">
+        <label>{{all_mod_data[0].label}} :</label>
+        <span>{{selected_report.date}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+
+
+    <div class="form-group col-md-6">
+        <label>Status:</label>
+        <span>{{selected_report.status}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+
+    <div class="form-group col-md-6">
+        <label>{{all_mod_data[4].label}}:</label>
+        <span>{{selected_report.reported_by}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+
+    <div class="form-group col-md-6">
+        <label>{{all_mod_data[5].label}}:</label>
+        <span>{{selected_report.Location}}</span>
+    </div>
+    <div class="form-group col-md-6">
+        <label>{{all_mod_data[2].label}}:</label>
+        <span>{{selected_report.ReportType}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+
+
+    <div class="form-group col-md-6">
+        <label>Operation Type:</label>
+        <span>{{selected_report.operation_type_name}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+    <div class="form-group col-md-6">
+        <label>Main Impact Category:</label>
+        <span>{{selected_report.main_impact}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+
+
+    <div class="form-group col-md-6">
+        <label>Contractor:</label>
+        <span>{{selected_report.contractor_name}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+    <div class="form-group col-md-6">
+        <label>Customer:</label>
+        <span>{{selected_report.customer_name}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+
+
+    <div class="form-group autoHeight col-md-6">
+        <label>Describe in details what happened:</label>
+        <span>{{selected_report.desc}}</span>
+        <!--<textarea  class="form-control" ng-disabled="true"> </textarea>-->
+    </div>
+
+    <div class="form-group autoHeight col-md-6">
+        <label>Summary of investigation of findings :</label>
+        <span>{{selected_report.investigation_summary}}</span>
+        <!--<textarea  class="form-control" ng-disabled="true"> </textarea>-->
+    </div>
+
+    <div class="clearfix"></div>
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="cancel()"> Ok </button>
+    <button class="btn btn-primary pull-right" type="button" ng-click="cancel()">Cancel</button>
+</div>
+

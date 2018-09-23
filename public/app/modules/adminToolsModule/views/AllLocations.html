@@ -1,0 +1,44 @@
+<p> Choose the number of location levels you need, e.g., Country, Province/State, City, Address equals 4 levels.</p>
+
+<div class="formStyle locationLevel ">  
+
+    <form class="">
+        <div class="form-group col-md-12">
+            <label for="">Location levels:</label>
+            <select class="form-control"    ng-options="l.value as l.title for l in locationLevels" 
+                    required  ng-model="allLocations.selected_level" ng-disabled="disabled">
+            </select>
+        </div>
+        <div class="formInlineStyle col-md-12">
+            <label for="">Label your location levels:</label>
+            <div class="form-group ">
+                <input type="text" class="form-control" ng-model="allLocations.location1_label">
+            </div>
+            <div class="form-group" ng-if="allLocations.selected_level === 2 || allLocations.selected_level === 3 || allLocations.selected_level === 4">
+                <input type="text" class="form-control" ng-model="allLocations.location2_label">
+            </div>
+            <div class="form-group " ng-if="allLocations.selected_level === 3 || allLocations.selected_level === 4">
+                <input type="text" class="form-control" ng-model="allLocations.location3_label">
+            </div>
+            <div class="form-group " ng-if="allLocations.selected_level === 4">
+                <input type="text" class="form-control" ng-model="allLocations.location4_label">
+            </div>
+
+            <button class="btn btn-primary" ng-click="addLocationLevel()">Save</button>
+            <button class="btn btn-primary" ng-click="cancelLocationLevel()">Cancel</button>
+        </div>
+    </form>
+
+</div>
+<div class="clearfix"></div>
+<p>Manage your locations in the table below using tools in the toolbar. </p>
+<div class="clearfix"></div>
+<div class="toolbar">
+    <a ng-click="openAddLocation();" uib-tooltip="Add location"><i class="fa fa-plus"></i></a>
+    <a ng-click="editLocation();" uib-tooltip="Edit location"><i class="fa fa-edit"></i></a>
+    <a href="" ng-click="clearSearch()" uib-tooltip="Clear search"><i class="fa fa-history"></i></a>
+    <a href="" ng-click="downloadCSV()" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+    <!--<a href="" ng-click="downloadPDF()" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a> -->
+    <a href="" ng-click="openHelp()"  uib-tooltip="Help"><i class="fa fa-question"></i></a>
+</div>
+<div id="grid1" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>

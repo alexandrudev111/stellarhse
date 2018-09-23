@@ -1,0 +1,427 @@
+			
+<div ng-controller="sidebarController" class="sidebar">
+    <uib-accordion close-others="oneAtATime">
+       
+    <div class="message treeStyle"  ng-show="check && checkAnalytics && checkAdmin && checkHSE && checkmyProfile && checkManageHSeProgram && checkLearningCenter" ng-hide="checkHSeProgram" >
+           
+        <div ng-include="'app/modules/hseProgramModule/views/hseTree.html'"  ng-controller="HseProgramController"></div>
+      
+    </div>
+       
+    <div class="message treeStyle"  ng-show="check && checkAnalytics && checkAdmin && checkHSE && checkmyProfile && checkHSeProgram && checkLearningCenter" ng-hide="checkManageHSeProgram" >
+        
+        <div ng-include="'app/modules/adminToolsModule/manageHseProgramModule/views/manageHseTree.html'"  ng-controller="ManageHseProgramController"></div>
+   
+    </div>
+       
+    <div class="myAdminTools" ng-show="check && checkAnalytics && checkAdmin && checkHSeProgram && checkHSE && checkManageHSeProgram && checkLearningCenter" ng-hide="checkmyProfile">    
+        <ul class="list-unstyled">
+            <li ng-if="Myaccount.fullmamangeprofile || user.permissions[0]"><a href="#/myProfile">My Profile</a></li>
+            <li ng-if="Myaccount.accessloginhistory || user.permissions[1]"><a href="#/myLoginHistory">My Log-in History</a></li>
+            <li ng-if="Myaccount.fullnotificationemail"><a href="#/myEmailNotification">My Email Notification</a></li>
+            <li ng-if="Myaccount.fulltrainingrecords"><a href="#/myTrainingRecords">My Training Records</a></li>
+            <li ng-if="Myaccount.fullcorrectiveaction"><a href="#/myFollowUpActions">My Corrective/Follow-up Actions</a></li>
+        </ul>
+       </div>
+       
+           
+        
+            
+<div ng-show="check && checkAnalytics && checkAdmin && checkHSeProgram && checkmyProfile && checkManageHSeProgram && checkLearningCenter" ng-hide="checkHSE"  uib-accordion-group class="panel-default" heading="Create Reports" is-open="status.isFirstOpen" >
+
+            <ul class="list-unstyled">
+                <li  ng-show="products.Hazard" ng-class="{'active': isActive}" ng-click="activeButton()" > 
+                    <a href="#/createhazardreport" ><i class="fa fa-file-text-o" aria-hidden="true"></i>Hazard ID</a>
+                </li>
+                <li  ng-show="products.ABCanTrack"  ng-class="{'active': isActive2}" ng-click="activeButton2()"  >
+                    <a href="#/addincident"><i class="fa fa-file-text-o" aria-hidden="true"></i>Incident</a>
+                </li>
+                <li  ng-show="products.Inspection" ng-class="{'active': isActive3}" ng-click="activeButton3()" >
+                    <a href="#/createinspectionreport"><i class="fa fa-file-text-o" aria-hidden="true"></i>Inspection</a>
+                </li>
+                <li  ng-show="products.SafetyMeeting" ng-class="{'active': isActive4}" ng-click="activeButton4()" >
+                    <a href="#/createsafetymeetingreport"><i class="fa fa-file-text-o" aria-hidden="true"></i>Safety Meeting</a>
+                </li>
+                <li  ng-show="products.Training" ng-class="{'active': isActive5}" ng-click="activeButton5()" >
+                    <a href="#/createtrainingreport"><i class="fa fa-file-text-o" aria-hidden="true"></i>Training</a>
+                </li>
+                <li  ng-show="products.MaintenanceManagement" ng-class="{'active': isActive6}" ng-click="activeButton6()" >
+                    <a href="#/createmaintenancereport"><i class="fa fa-file-text-o" aria-hidden="true"></i>Maintenance</a>
+                </li>
+            </ul>
+        </div>
+
+
+        <!--<div ng-show="check && checkAnalytics && checkAdmin && checkHSeProgram" ng-hide="checkHSE"   uib-accordion-group class="panel-default" heading="View Data and Find Reports" is-open="status.isSecondOpen" >
+            <ul class="list-unstyled">
+                <li> <a href="#/viewDataTables"><i class="fa fa-file-text-o" aria-hidden="true"></i>
+                        View Data Tables</a></li>
+                <li><a href="#/searchForReport"><i class="fa fa-file-text-o" aria-hidden="true"></i>
+                        Search for a Report</a></li>
+            </ul>
+        </div>-->
+
+
+        <div ng-show="check && checkAnalytics && checkAdmin && checkHSeProgram && checkmyProfile && checkManageHSeProgram && checkLearningCenter" ng-hide="checkHSE" class="menuElement"  >
+            <ul class="list-unstyled">
+                <!--<li><a href="#/searchForReport">
+                        Find And Updated Report</a></li>-->
+                        <li> <a href="#/viewDataTables">Edit Reports and Access Data</a></li>
+                <!-- <li> <a ui-sref="viewDataTables({moduleType:1})">Edit Reports and Access Data</a></li> -->
+            </ul>
+        </div>
+
+
+        <!--<div ng-show="check && checkAnalytics && checkAdmin && checkHSeProgram"  ng-hide="checkHSE"   uib-accordion-group class="panel-default" heading="View Email and Log-in History" is-open="status.isFifthOpen">
+ 
+             <ul class="list-unstyled">
+                 <li> <a href="#/viewEmail"><i class="fa fa-file-text-o" aria-hidden="true"></i>
+                         View Email and Log-in History</a></li>
+             </ul>
+         </div>-->
+        <!--<div ng-show="check && checkAnalytics && checkAdmin && checkHSeProgram" ng-hide="checkHSE"   uib-accordion-group class="panel-default" heading="View Email Notifications History" is-open="status.isSixOpen">
+            This content is straight in the template.
+        </div>-->
+
+
+        <!--<div ng-show="check && checkAnalytics && checkAdmin && checkHSeProgram" ng-hide="checkHSE"   uib-accordion-group class="panel-default" heading="Access System Training and Support" is-open="status.isSevenOpen">
+            This content is straight in the template.
+        </div>
+
+        <div ng-show="check && checkAnalytics && checkAdmin && checkHSeProgram" ng-hide="checkHSE" uib-accordion-group class="panel-default" heading="Find Company Procedures for HSE Tracking" is-open="status.isEightOpen">
+            This content is straight in the template.
+        </div>-->
+
+        <div ng-show="check && checkAnalytics && checkHSE && checkHSeProgram && checkmyProfile && checkManageHSeProgram && checkLearningCenter" ng-hide="checkAdmin"  uib-accordion-group class="panel-default manageAdministrator" heading="My Administrative Tools" is-open="status.isNineOpen ">
+
+            <ul class="list-unstyled">
+                <li ng-if="myadmintools.updatecompanydetailsbilling" ng-class="{'active': isActive9}" ng-click="activeButton9()">
+                    <a href="#/MyCompanyInfo">
+                        <i class="fa fa-file-text-o" aria-hidden="true">   </i>
+                        My Company Info
+                    </a>
+                </li>
+
+                <li ng-class="{'active': isActive10}" ng-click="activeButton10()" ng-hide="user.org_code==='sandbox'">
+
+                    <a href="" data-ui-sref="customers"   >
+                        <i class="fa fa-file-text-o" aria-hidden="true" ></i>
+                        Manage Customers
+                    </a>
+                </li>
+              
+
+
+              
+                <li ng-if="myadmintools.manage_procedures" ng-class="{'active': isActive11}" ng-click="activeButton11()">
+                    <a href="#/ManageTrackingHSE"><i class="fa fa-file-text-o" aria-hidden="true"></i>Customize HSE Tracking Report Forms</a></li>
+                      
+                <li ng-if="myadmintools.add_edithsedocuments" ng-class="{'active': isActive12}" ng-click="activeButton12()">
+                    <a href="" ng-click="clickManageHseProgram()" data-ui-sref="ManageHSEDocuments"><i class="fa fa-file-text-o" aria-hidden="true"></i>Manage HSE Program Documents</a></li>
+               
+               
+                
+                <li ng-if="myadmintools.fullactionemail_template_notification" ng-class="{'active': isActive13}" ng-click="activeButton13()">
+                    <a href="#/manageNotification"><i class="fa fa-file-text-o" aria-hidden="true"></i>Create and Manage Notifications</a></li>
+                
+                <li ng-if="myadmintools.manage_people" ng-class="{'active': isActive14}" ng-click="activeButton14()" ng-hide="user.org_code==='sandbox'"> 
+
+                    <a href="#/ManagePeople" ng-click="OpenSub()"><i class="fa fa-file-text-o" aria-hidden="true"></i>
+                       Manage People and User Groups</a>
+                </li>
+                
+                <li ng-if="myadmintools.manage_people" ng-hide="user.org_code==='sandbox'"> 
+                    <a href="#/manage_document" ng-click="OpenSub()"><i class="fa fa-file-text-o" aria-hidden="true"></i>
+                       Manage Report Templates </a>
+                </li>
+
+                <!--               <li> 
+                    <a  ng-click="OpenReport()"><i class="fa fa-file-text-o" aria-hidden="true"></i>
+                        Custom Fields </a>
+
+
+                        <ul class="subItems list-unstyled" ng-show="openit">
+                            <li ng-show="products.Hazard">
+                                <a href="#/hazard"><i class="fa fa-file-text-o" aria-hidden="true"></i> hazard</a>
+                            </li>
+                            
+                            <li ng-show="products.ABCanTrack" >
+                                <a href="#/incident"><i class="fa fa-file-text-o" aria-hidden="true"></i> incident</a>
+                            </li>
+
+
+                            <li ng-show="products.Inspection">
+                                <a href="#/inspection"><i class="fa fa-file-text-o" aria-hidden="true"></i> inspection</a>
+                            </li>
+
+
+                            <li ng-show="products.SafetyMeeting">
+                                <a href="#/safetyMeeting"><i class="fa fa-file-text-o" aria-hidden="true"></i> safety Meeting</a>
+                            </li>
+
+                            <li ng-show="products.Training">
+                                <a href="#/training"><i class="fa fa-file-text-o" aria-hidden="true"></i> training</a>
+                            </li>
+                            <li ng-show="products.MaintenanceManagement">
+                                <a href="#/maintenance"><i class="fa fa-file-text-o" aria-hidden="true"></i> maintenance</a>
+                            </li>
+
+
+                        </ul>
+                </li> -->
+                <!--                <li><a href="#/customFields"><i class="fa fa-file-text-o" aria-hidden="true"></i>Custom Fields</a></li>
+
+                                
+                
+                <li  ng-show="products.Hazard"> 
+                    <a href="#/hazardcustomFields"><i class="fa fa-file-text-o" aria-hidden="true"></i>Hazard Custom Fields</a>
+                </li>           
+                        </ul>
+                </li>
+                 <li><a href="#/customFields"><i class="fa fa-file-text-o" aria-hidden="true"></i>Custom Fields</a></li>
+                                
+                                <li><a href="#/hazardcustomFields"><i class="fa fa-file-text-o" aria-hidden="true"></i>Hazard Custom Fields</a></li>-->
+                <!--           <li>
+                                    <a href="#/OperationType"><i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                        Operation Types </a>
+                                </li>-->
+                <!--
+                <li ng-show="permissions.AddThirdparties">
+                    <a href="#/thirdParties"><i class="fa fa-file-text-o" aria-hidden="true"></i>
+                        Third Parties </a>
+                </li>
+                <li>
+                    <a href="#/ThirdPartiesHistory"><i class="fa fa-file-text-o" aria-hidden="true"></i>Third Parties History</a>
+                </li>
+
+                <li  ng-show="permissions.AddLocations"><a href="#/Location"><i class="fa fa-file-text-o" aria-hidden="true"></i>Locations</a></li>
+
+                <li><a href="#/ManageTraining"><i class="fa fa-file-text-o" aria-hidden="true"></i>Manage Training</a></li>
+                
+                <li><a href="#/ManageCompanyProcedure"><i class="fa fa-file-text-o" aria-hidden="true"></i>Manage Company Procedures</a></li>
+                
+                <li><a href="#/ManageMessagesandNotes"><i class="fa fa-file-text-o" aria-hidden="true"></i>Manage Messages and Notes</a></li>
+
+              
+                <!--Ends of Administrative Tools list Items-->
+            </ul>
+        </div>
+        <!--
+        <div uib-accordion-group ng-hide="check" ng-show="checkAnalytics && checkHSE && checkAdmin && checkHSeProgram && checkmyProfile"  class="panel-default  manageDashboard" heading="Dashboard Tools" is-open="status.isTenOpen">
+
+            <ul class="list-unstyled">
+                <li ng-if="permissions.Dashboard.addtodashboard">
+                    <a href="">
+                        <i class="fa fa-file-text-o" aria-hidden="true">   </i>
+                        Add to dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="">
+                        <i class="fa fa-file-text-o" aria-hidden="true">   </i>
+                        Edit Selection
+                    </a>
+                </li>
+                <li ng-if="permissions.Dashboard.removefromdashboard">
+                    <a href="">
+                        <i class="fa fa-file-text-o" aria-hidden="true">   </i>
+                        Remove From dashboard
+                    </a>
+                </li>
+                <li ng-if="permissions.Dashboard.resetdefault">
+                    <a href="">
+                        <i class="fa fa-file-text-o" aria-hidden="true">   </i>
+                        Reset to defaults
+                    </a>
+                </li>
+            </ul>
+        </div>
+        -->
+        <div uib-accordion-group  ng-show="check && checkHSE && checkAdmin && checkHSeProgram && checkmyProfile && checkManageHSeProgram && checkLearningCenter" ng-hide="checkAnalytics" class="panel-default  manageDashboard" heading="Analytics" is-open="status.isElevenOpen">
+            <ul class="list-unstyled">
+                <!--<li>
+                    <a href=""  data-ui-sref="externalData">
+                        <i class="fa fa-file-text-o" aria-hidden="true">   </i>
+                        External Data
+                    </a>
+                </li>  -->
+
+                <li ng-class="{'active': isActive7}" ng-click="activeButton7()">
+                    <a href=""  data-ui-sref="ManageKPIFactor">
+                        <i class="fa fa-file-text-o" aria-hidden="true">   </i>
+                        Manage KPI Factors & External Data
+                    </a>
+                </li>
+               <!--<li>
+                    <a href=""  data-ui-sref="currentMetrics">
+                        <i class="fa fa-file-text-o" aria-hidden="true">   </i>
+                        Current Metrics
+                    </a>
+                </li>-->
+
+<!--                <li>
+                    <a href=""  data-ui-sref="stateTableGrid">
+                        <i class="fa fa-file-text-o" aria-hidden="true">   </i>
+                        Statical Tables
+                    </a>
+                </li>-->
+                <li ng-if="Analytics.accessaddeditdefaultfavorite" ng-class="{'active': isActive8}" ng-click="activeButton8()">
+                    <a href=""  data-ui-sref="chartgrid">
+                        <i class="fa fa-file-text-o" aria-hidden="true">   </i>
+                        View/Manage Current KPIs and Charts
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </uib-accordion>
+
+
+    <div class="message" ng-hide="check" ng-show="checkAnalytics && checkHSE && checkAdmin && checkHSeProgram && checkmyProfile && checkManageHSeProgram && checkLearningCenter" ng-scrollbars ng-scrollbars-config="config">
+        <h2>Current HSE Metrics</h2>
+        <ul>
+            <li>This Year :</li>
+            <li><span>Incidents By Risk Ranking : </span><span> 3 high , 15 medium , 7 Low</span></li>
+            <li><span>Over Incident Rate : </span><span> 2.9</span></li>
+            <li><span>TRIF Rate : </span> <span> 3</span></li>
+            <li><span>LTI Frequency : </span><span> 4</span></li>
+        </ul>
+
+
+        <ul>
+            <li>This Quarter : </li>
+            <li><span>Incidents By Risk Ranking : </span><span> 3 high , 15 medium , 7 Low</span></li>
+            <li><span>Over Incident Rate : </span> <span> 2.9</span></li>
+            <li><span>TRIF Rate : </span> <span> 3</span></li>
+            <li><span>LTI Frequency : </span> <span> 4</span></li>
+        </ul>
+
+        <ul>
+            <li>This Month :</li>
+            <li><span>Incidents By Risk Ranking :</span><span> 3 high , 15 medium , 7 Low</span></li>
+            <li><span>Over Incident Rate : </span> <span> 2.9</span></li>
+            <li><span>TRIF Rate : </span> <span> 3</span></li>
+            <li><span>LTI Frequency : </span> <span> 4</span></li>
+        </ul>
+
+
+        <ul>
+            <li>This Week :</li>
+            <li><span>Incidents By Risk Ranking :</span><span> 3 high , 15 medium , 7 Low</span></li>
+            <li><span>Over Incident Rate : </span> <span> 2.9</span></li>
+            <li><span>TRIF Rate : </span> <span> 3</span></li>
+            <li><span>LTI Frequency : </span> <span> 4</span></li>
+        </ul>
+
+
+
+    </div>
+    
+    
+    
+       <div class="showLearningStyle"  ng-hide="showLearningCenter" ng-show="checkAnalytics && checkHSE && checkAdmin && checkHSeProgram && checkmyProfile && checkManageHSeProgram && check">
+           
+           <h2>Get quick answers:</h2>
+           
+           
+           <div class="showLinks">
+           
+            <script type="text/ng-template" id="myPopoverTemplate.html">
+                
+                <p>This Canadian made HSE software solution was created by Alliance Borealis Canada Corp. (www.abcanada.com) to enable companies to efficiently:</p>
+                <ul>
+                    <li>Track key leading and lagging HSE indicators</li>
+                    <li>Analyze and share data through stats, charts and key performance indicators</li>
+                    <li>Manage safety docs with version controls and audit trails</li>
+                    <li>Standardize HSE management processes at corporate and enterprise levels</li>
+                    <li>Inform, remind and track users through assigned activities like corrective actions </li>           
+                </ul>
+    </script>
+          
+          
+  <script type="text/ng-template" id="Recommendedtraining.html">
+                
+                <ul>
+                    <li>Administrator’s Orientation</li>
+                    <li>Dashboard tools</li>
+                    <li>HSE Program Overview and Maintenance</li>
+                    <li>HSE Tracking Tools – Creating and editing reports</li>
+                    <li>HSE Tracking Tools – Customizing report forms</li>
+                     <li>HSE Tracking Tools – Managing shared data elements</li>
+                    <li>Analytics</li>
+                    <li>Manage notification assignments and templates</li>
+                    <li>Manage people, groups and accounts</li>            
+                </ul>
+    </script>
+         
+<script type="text/ng-template" id="Supervisors.html">
+                
+                <ul>
+                    <li>Manager’s Orientation</li>
+                    <li>Dashboard tools</li>
+                    <li>HSE Program Overview and Maintenance</li>
+                    <li>HSE Tracking Tools – Creating and editing reports</li>
+                     <li>HSE Tracking Tools – data tables</li>
+                    <li>Analytics</li>           
+                </ul>
+    </script>
+         
+         
+<script type="text/ng-template" id="GeneralUsers.html">
+                
+                <ul>
+                    <li>Basic User’s Orientation</li>
+                    <li>Dashboard tools</li>
+                    <li>HSE Program Overview and Maintenance</li>
+                    <li>HSE Tracking Tools – Creating and editing reports</li>
+                     <li>HSE Tracking Tools – data tables</li>     
+                </ul>
+    </script>
+          
+           
+            <h3> Frequently asked question:</h3>
+              
+              <ul class="list-unstyled">
+                  <li><a href="" uib-popover-template="dynamicPopover.templateUrl" popover-title="What is STELLAR HSE?" popover-placement="right" popover-trigger="mouseenter">What is STELLAR HSE?</a></li>
+                  
+                  <li><a href="" uib-popover="If your users are not receiving email notifications from STELLAR HSE, first check the notification assignment to make sure it is set up correctly, and double-check that the recipients’ email addresses in the STELLAR HSE database are correctly entered. Next, tell your users to check their junk mail folders and to make sure they identify stellarhse.com as a safe sender. If this problem is widespread through your company, you should ask your email network manager to adjust the spam filtering to allow emails from stellarhse.com to pass through. " popover-title="Email notifications: Why are people not receiving them?" popover-placement="right" popover-trigger="mouseenter">Email notifications: Why are people not receiving them?</a></li>
+                  
+                  <li><a href="" uib-popover="If you want to print a single report, go to the appropriate data table in the HSE Tracking module and find the report you want to print. Select it and then click on the Print/Email tool in the toolbar. Select the appropriate template and choose whether you want to print the report or attach it to an email. Then click ok. If you don’t see this option in your data tables, it means your account does not include permission to use this feature. Contact your system administrator for help. If you want to print the data in a data table, use the Export to CSV tool in the toolbar, and then print the exported document." popover-title="HSE Tracking Reports: How can I get a printable copy?" popover-placement="right" popover-trigger="mouseenter">HSE Tracking Reports: How can I get a printable copy?</a></li>
+                  
+                  
+                  <li><a href=""  uib-popover="STELLAR HSE tracking report forms are designed to be very customizable. To find out how, what the video on “Customizing report forms.” You can also find a list of all the different types of fields used in these forms under the Printable Guides section of this Learning Center." popover-title="HSE Tracking Reports: How can I make changes to the fields I see?" popover-placement="right" popover-trigger="mouseenter">HSE Tracking Reports: How can I make changes to the fields I see?</a></li>
+                  
+                  <li><a href="" uib-popover="Scroll down to the mini-desktop on your dashboard and click on the tab for My Recent Reports. You’ll also find the same table on the HSE Tracking Module landing page. You can search for your report in either of those places. However, if you are looking for a draft report that you have not yet submitted to the database, you can find it by selecting the same report type under the Create a report menu. A pop-up will appear giving you the option to continue working on your draft, or you can discard it and start over." popover-title="HSE Tracking Reports: How do I find the last report I worked on?" popover-placement="right" popover-trigger="mouseenter">HSE Tracking Reports: How do I find the last report I worked on?</a></li>
+                  
+                  
+                  <li><a href="" uib-popover="If you see a locks beside a report, it means it has been locked by the last person who opened it. They may be actively working on it, or they may have saved but not submitted recent changes to the report. Blue locks are your locks and you can open those reports and continue working on them. Red locks belong to others users. You can see who it is by placing your cursor over the lock. If you need to get access to a report that has been locked by another user, you should contact that person directly so they can submit their work. However, if you can’t reach them, contact your administrator to have them unlock the report for you. Unfortunately any work done by the other user will be lost when the report is unlocked this way. To prevent that from happening to your work, it’s always the best practice to submit your work on reports rather than saving them as drafts. " popover-title="HSE Tracking Reports: What are the red and blue locks for?" popover-placement="right" popover-trigger="mouseenter">HSE Tracking Reports: What are the red and blue locks for?</a></li>
+                  
+                  
+                   <li><a href="" uib-popover="Don’t worry, STELLAR HSE keeps track of your work even when you don’t submit it. If you started a new report and forgot to submit it, just select the same report type under the Create a report menu. A pop-up will appear giving you the option to continue working on your draft, or you can discard it and start over. If you were editing a report that had already been submitted, you’ll see it in the appropriate data table with a blue lock beside it. Simply open it and continue where you left off. " popover-title="HSE Tracking Reports: What happens if I forget to submit my work?" popover-placement="right" popover-trigger="mouseenter">HSE Tracking Reports: What happens if I forget to submit my work?</a></li>
+                   
+                   
+                   <li><a href=""  uib-popover="Some fields do not allow open text entries. These fields include names and related details for people,  contractors, customers, training providers and equipment, as well as location fields. Instead, they are designed to auto-populate from related databases of information. All you have to do is start typing in the field and it will offer matching items for you to choose from. If the information you want is not coming up, you can use the plus sign beside the field to add it to the database. If you don’t see a plus sign, that means your account has not been assigned permission to use this feature and you’ll need to contact your administrator to update the database for you." popover-title="HSE Tracking Reports: Why won’t the information I’m entering save properly?" popover-placement="right" popover-trigger="mouseenter">HSE Tracking Reports: Why won’t the information I’m entering save properly?</a></li>
+                   
+                   
+                   <li><a href="" uib-popover="Click on your name in the top right corner of STELLAR HSE and select My Account. Your personal profile will be the first thing that pops up and you can make changes as needed. If you find that these fields are locked, contact your administrator for help as this data may be coming directly from your company’s human resources database.  " popover-title="My personal information: How do I update it?" popover-placement="right" popover-trigger="mouseenter">My personal information: How do I update it?</a></li>
+                   
+                   
+                   <li><a href="" uib-popover="If you want more or fewer permissions, contact your system administrator for help." popover-title="Permissions: How can I get mine changed?" popover-placement="right" popover-trigger="mouseenter">Permissions: How can I get mine changed?</a></li>
+                   
+                   
+                   
+                       <li><a href="" uib-popover-template="dynamicPopover2.templateUrl" popover-title="Recommended training videos for Administrators and in-house Trainers:" popover-placement="right" popover-trigger="mouseenter">Recommended training videos for Administrators and in-house Trainers:</a></li>
+                       
+                       
+                       <li><a href="" uib-popover-template="dynamicPopover3.templateUrl" popover-title="Recommended training videos for Managers and Supervisors:" popover-placement="right" popover-trigger="mouseenter">Recommended training videos for Managers and Supervisors:</a></li>
+                       
+                       
+                       <li><a href="" uib-popover-template="dynamicPopover4.templateUrl" popover-title="Recommended training videos for General Users:" popover-placement="right" popover-trigger="mouseenter">Recommended training videos for General Users:</a></li>
+                       
+              </ul>
+              
+              </div>
+               
+           </div>
+           
+</div>

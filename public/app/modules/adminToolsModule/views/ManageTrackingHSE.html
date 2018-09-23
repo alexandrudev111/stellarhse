@@ -1,0 +1,191 @@
+<h2>Customize HSE tracking report forms: <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                                              alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+<div class="form-style  noBorder questionStyle">
+    <div class="form-group form-inline">
+        <label >What would you like to do ?</label>
+        <select class="form-control fullWidth" ng-change="changeShownData()" ng-model="hse_tracking_report_choice">
+            <option value="">-Please select -</option>
+            <option value="form_fields">Customize forms fields</option>
+            <option value="custom_fields">Add custom fields</option>
+            <option value="form_locations">Define locations</option>
+            <option value="operation_types">Define operation types</option>
+            <option value="third_parties">Add/edit third parties</option>
+            <option value="trainning_provider">Add/edit training providers</option>
+            <option value="form_equipment">Add/edit equipment</option>
+        </select>
+    </div>
+
+</div>
+<div id="formFields" ng-if="form_fields" ng-controller="manageHseTracking">
+    <h2>Customize form fields</h2>
+
+    <div class="toolbar">
+
+        <a href="" ng-click="CustomizeFormFields()"  uib-tooltip="Customize form fields"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+
+    </div>
+
+
+    <div id="grid1" ui-grid="reportOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+
+
+
+</div>
+
+
+<div id="CustomFields" ng-if= "custom_fields" ng-controller="manageHseTracking">
+
+
+    <div class="toolbar">
+
+        <a href="" ng-click="AddCustomFields()"  uib-tooltip="Add custom fields"><i class="fa fa-plus" aria-hidden="true"></i></a>
+
+    </div>
+
+
+    <div id="grid1" ui-grid="reportOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+
+
+
+</div>
+
+
+<div id="trainningProvider" ng-controller="trainningProviderCtrl" ng-if="trainning_provider">
+
+    <!--    <h2>Manage Training</h2>    
+        <div class="toolbar">
+             ng-click="addTrainingProvider()"
+            <a  href="#/addTraining" uib-tooltip="Add Training"><i class="fa fa-plus"></i></a>
+            <a href="#/editTraining"  uib-tooltip="Edit Training"><i class="fa fa-edit"></i></a>
+            <a href=""  uib-tooltip="Delete Training"><i class="fa fa-remove red"></i></a>-->
+
+
+
+
+
+    <uib-tabset active="trainingTab">
+
+        <uib-tab index="0" heading="Training Provider">
+            <div ng-controller="trainningProviderCtrl">
+                <div class="toolbar">
+                    <a  href="" ng-click="addTrainingProvider()" uib-tooltip="Add training"><i class="fa fa-plus"></i></a>
+                    <a href="" ng-click="editTrainingProvider()" uib-tooltip="Edit training"><i class="fa fa-edit"></i></a>
+                    <a href="" ng-click="deleteTrainingProvider()"  uib-tooltip="Delete training"><i class="fa fa-remove red"></i></a>
+
+
+                    <a href="" ng-click="clearSearch()" uib-tooltip="Clear search"><i class="fa fa-history"></i></a>
+                    <a href=""  ng-click="downloadCSV()" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+                    <!-- <a href="" ng-click="downloadPDF()" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a> -->
+                    <a href="" ng-click="trainingProviderHistory()"  uib-tooltip="Training history"><i class="fa fa-info-circle"></i></a>
+                    <a href="" ng-click="openHelp()" uib-tooltip="Help"><i class="fa fa-question"></i></a>
+
+                </div>
+
+                <div id="grid1" ui-grid="trainignOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+            </div>
+
+
+
+        </uib-tab>
+
+        <uib-tab index="1" heading="Training Type">
+
+            <div ng-controller="trainingTypeCtrl">
+                <div class="toolbar">
+                    <a  href="#/addTrainingType" ng-click="addTrainingType()" uib-tooltip="Add training"><i class="fa fa-plus"></i></a>
+                    <a href="" ng-click="editTrainingType()"  uib-tooltip="Edit Training"><i class="fa fa-edit"></i></a>
+                    <a href="" ng-click="deleteTrainingType()"  uib-tooltip="Delete training"><i class="fa fa-remove red"></i></a>
+
+                    <a href="" ng-click="clearSearch()" uib-tooltip="Clear search"><i class="fa fa-history"></i></a>
+                    <a href=""  ng-click="downloadCSV()" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+                    <a href="" ng-click="downloadPDF()" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a> 
+                    <a href="" ng-click="trainingTypeHistory()"  uib-tooltip="Training history"><i class="fa fa-info-circle"></i></a>
+                    <a href="" ng-click="openHelp()" uib-tooltip="Help"><i class="fa fa-question"></i></a>
+
+                </div>
+
+                <div id="grid1" ui-grid="trainignOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+            </div>
+
+
+        </uib-tab>   
+
+
+
+    </uib-tabset>  
+
+</div>
+
+
+
+<div id="opertationType" ng-if="operation_types" ng-controller="operationTypeCtrl">
+    <div class="toolbar">
+        <a href="#"  uib-tooltip="Add operation type"><i class="fa fa-plus"></i></a>
+        <a href="#"  uib-tooltip="Edit operation type"><i class="fa fa-edit"></i></a>
+        <a href="#"  uib-tooltip="Delete operation type"><i class="fa fa-close"></i></a>
+    </div>
+    <div id="grid1" ui-grid="operationType" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div> 
+</div>
+
+<div id="ThirdPraties" ng-controller="thirdPartiesCtrl" ng-if="third_parties">
+    <div class="toolbar">
+        <a ng-click="openAddThirdParty();" uib-tooltip="Add third party"><i class="fa fa-plus"></i></a>
+        <a ng-click="editThirdParty();" uib-tooltip="Edit third party"><i class="fa fa-edit"></i></a>
+        <a href="" ng-click="deleteThirdParty()" uib-tooltip="Delete item"><i class="fa fa-remove red" ></i></a>
+        <a href="" ng-click="clearSearch()" uib-tooltip="Clear search"><i class="fa fa-history"></i></a>
+        <a href="" ng-click="downloadCSV()" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+        <a href="" ng-click="downloadPDF()" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a> 
+        <a href="#/ThirdPartiesHistory"  uib-tooltip="Third party history"><i class="fa fa-info-circle"></i></a>
+        <a href="" ng-click="openHelp()"  uib-tooltip="Help"><i class="fa fa-question"></i></a>
+        <!--ng-click="thirdPartyHistory()"-->
+    </div>
+    <div id="grid1" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+</div>
+
+<div id="ThirdHistory" ng-controller="thirdPartiesHistoryCtrl" ng-if="third_parties"> 
+
+    <h2>Third Parties History:</h2>
+    <div class="toolbar">
+        <a href="" ng-click="downloadCSV()" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+        <a href="" ng-click="downloadPDF()" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a>
+        <a href="" ng-click="clearSearch()" uib-tooltip="Clear search"><i class="fa fa-history"></i></a>
+        <a href="" ng-click="openHelp()"  uib-tooltip="Help"><i class="fa fa-question"></i></a>
+    </div>
+
+    <div id="grid1" ui-grid="gridOptionsHistory" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+</div>
+
+<div id="location" ng-controller="allLocationsCtrl" ng-if="form_locations">
+    <uib-tabset active="activeForm">
+        <uib-tab index="0" heading="All Locations">
+            <div ng-include="'app/modules/adminToolsModule/views/AllLocations.html'"></div>
+        </uib-tab>
+        <uib-tab index="1" heading="Country history">
+            <div ng-include="'app/modules/adminToolsModule/views/countryHistory.html'"></div>
+        </uib-tab>   
+        <uib-tab index="2" heading="Province/State history">
+            <div ng-include="'app/modules/adminToolsModule/views/StateHistory.html'"></div>
+        </uib-tab>
+        <uib-tab index="3" heading="City history" ng-hide="show_city_history">
+            <div ng-include="'app/modules/adminToolsModule/views/AreaHistory.html'"></div>
+        </uib-tab>
+        <uib-tab index="4" heading="Community history" ng-hide="show_community_histoy">
+            <div ng-include="'app/modules/adminToolsModule/views/SiteHistory.html'"></div>
+        </uib-tab>         
+    </uib-tabset>
+</div>
+
+<!-- equipment -->
+<div id="equipment" ng-controller="equipmentsCtrl" ng-if="form_equipment">
+    <div class="toolbar">
+        <a  href="" ng-click="addEquipment()" uib-tooltip="Add equipment"><i class="fa fa-plus"></i></a>
+        <a href="" ng-click="editEquipment()" uib-tooltip="Edit equipment"><i class="fa fa-edit"></i></a>
+        <a href=""  ng-click="deleteEquipment()" uib-tooltip="Delete equipment"><i class="fa fa-remove red"></i></a>
+        <a href="" ng-click="clearSearch()" uib-tooltip="Clear Search"><i class="fa fa-history"></i></a>
+        <a href=""  ng-click="downloadCSV()" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+        <a href="" ng-click="downloadPDF()" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a> 
+        <a href="" ng-click="manageEquipmentHistory()" uib-tooltip="Training history"><i class="fa fa-info-circle"></i></a>
+        <a href="" ng-click="openHelp()" uib-tooltip="Help"><i class="fa fa-question"></i></a>
+    </div>
+    <div id="grid1" ui-grid="EquipmentOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+</div>

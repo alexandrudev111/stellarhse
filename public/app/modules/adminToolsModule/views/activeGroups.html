@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h3 class="modal-title" ng-bind-html="msgTitle" ></h3>
+</div>
+<div class="modal-body file">
+
+    <div class="col-md-12">
+        <h2>Reassign the following people :</h2>
+        <ul class="list-unstyled" ng-repeat="ap in active_people">
+            <li>{{ap.first_name + ' ' + ap.last_name}}  </li>
+        </ul>
+    </div>
+
+
+
+    <div class="col-md-12">
+        <h2>Select the appropriate group.</h2>
+        <div class="row" ng-repeat="g in group_active">
+            <div class="form-group col-md-4 ">
+                <input type="radio" ng-model="selectedGroup.group_id" name="active_groups" value="{{g.group_id}}"> <span>{{g.group_name}}</span>            
+            </div>
+            <div class="col-md-8">
+                <p ng-bind-html="g.description"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="assignReassignFunc()" >Submit</button>
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="cancel()" >Cancel</button>
+</div>
+
+

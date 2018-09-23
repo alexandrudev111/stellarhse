@@ -1,0 +1,74 @@
+<div class="modal-header">
+    <h3 class="modal-title"> Incomplete action summary</h3>
+</div>
+<div class="modal-body">
+ <div class="form-group col-md-6">
+        <label >{{all_mod_data[3].label}}:</label>
+        <span>{{selected_action.report_number}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+
+
+
+    <div class="form-group col-md-6">
+        <label>{{all_mod_data[0].label}}:</label>
+        <span>{{selected_action.report_date}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+    
+    <div class="form-group col-md-6">
+        <label>{{all_mod_data[8].label}}:</label>
+        <span>{{selected_action.PriorityName}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+
+
+
+    <div class="form-group col-md-6">
+        <label>{{all_mod_data[15].label}}:</label>
+        <span>{{selected_action.supervisor}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+    
+    
+     <div class="form-group col-md-6">
+        <label>{{all_mod_data[13].label}} :</label>
+        <span>{{selected_action.assigned_to}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+
+    <div class="form-group col-md-6">
+        <label>{{all_mod_data[14].label}}  :</label>
+        <span>{{selected_action.also_notified}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+    
+      <div class="form-group col-md-6">
+        <label>start Date:</label>
+        <span>{{selected_action.start_date}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+      <div class="form-group col-md-6">
+        <label>Target End Date:</label>
+        <span>{{selected_action.target_end_date}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="form-group autoHeight col-md-6">
+        <label>Task Description:</label>
+        <span>{{selected_action.task_description}}</span>
+        <!--<textarea type="text" class="form-control"> </textarea>-->
+    </div>
+    
+      <div class="form-group autoHeight col-md-6">
+        <label>Comments:</label>
+        <span>{{selected_action.comments}}</span>
+          <!--<textarea type="text" class="form-control"> </textarea>-->
+    </div>
+
+<div class="clearfix"></div>
+    <button class="btn btn-primary pull-right" type="button" ng-click="cancel()">Ok</button>
+    <button class="btn btn-primary pull-right" type="button" ng-click="cancel()">Cancel</button>
+</div>
+

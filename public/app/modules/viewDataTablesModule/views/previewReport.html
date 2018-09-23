@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <button class="close" style="color: #FFFFFF !important" ng-click="close()">&times;</button>
+    <h3 class="modal-title">{{ msg.title }}</h3>
+</div>
+<div class="modal-body">
+
+    <div class="modal-body">
+        <html>
+
+        <body>
+            <div ng-bind-html="msg.body"> </div>
+        </body>
+
+        </html>
+
+    </div>
+    <div class="clearfix"></div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="close()">
+            <i class="fa fa-check"></i> Close</button>
+
+    </div>

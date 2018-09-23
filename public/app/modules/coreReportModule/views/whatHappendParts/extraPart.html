@@ -1,0 +1,49 @@
+
+<div class="form-group block blockLabel" ng-if="report_labels['initial_action_taken']['is_hidden'] === 'No' || custom">
+    <label for="exampleInputPassword3"> {{report_labels['initial_action_taken']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['initial_action_taken'])" uib-tooltip="{{report_labels['initial_action_taken']['help_me_name']}}"
+           ng-if="report_labels['initial_action_taken']['help_me_name'] && report_labels['initial_action_taken']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['initial_action_taken'])" ng-if="custom && report_labels['initial_action_taken']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+    <textarea  class="form-control" placeholder="Describe initial actions" ng-model="report.initial_action_token"
+               ng-required="report_labels['initial_action_taken']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+</div>
+<!-- <div class="form-group radio block" ng-if="report_labels['status_id']['is_hidden'] === 'No' || custom">
+    <label ng-class="{'required':report_labels['status_id']['is_mandatory'] == 'Yes' && report.hazard_status == null}"> 
+        {{report_labels['status_id']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['status_id'])" uib-tooltip="{{report_labels['status_id']['help_me_name']}}"
+           ng-if="report_labels['status_id']['help_me_name'] && report_labels['status_id']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['status_id'], 'hazInsp')" ng-if="custom && report_labels['status_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+    <div class="form-group" ng-repeat="hs in hazardStatuses">
+        <input type="radio" value="{{hs.status_id}}" class="form-control" name="status" ng-model="report.hazard_status"
+               ng-required="report_labels['status_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"> 
+        {{hs.status_Name}} 
+    </div>
+    <a href="" class="pull-left" ng-click="clearReportStatus()"><i class="fa fa-close"></i></a>
+</div> -->
+<div class="clearfix"></div>
+<!--<div class="form-group radio block" ng-if="report_labels['are_additional_corrective_actions_required']['is_hidden'] === 'No' || custom">
+    <label for="exampleInputPassword3"> {{report_labels['are_additional_corrective_actions_required']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['are_additional_corrective_actions_required'])" uib-tooltip="{{report_labels['are_additional_corrective_actions_required']['help_me_name']}}"
+           ng-if="report_labels['are_additional_corrective_actions_required']['help_me_name'] && report_labels['are_additional_corrective_actions_required']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['are_additional_corrective_actions_required'])" ng-if="custom && report_labels['are_additional_corrective_actions_required']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+    <div class="form-group">
+        <input type="radio" class="form-control" name="corrective" ng-model="report.are_additional_corrective_actions_required" value="Yes"
+               ng-required="report_labels['are_additional_corrective_actions_required']['is_mandatory']=='Yes'"> Yes 
+    </div>
+    <div class="form-group ">
+        <input type="radio" class="form-control" name="corrective" ng-model="report.are_additional_corrective_actions_required" value="No"
+               ng-required="report_labels['operation_type_id']['is_mandatory']=='Yes'">  No
+
+    </div>
+    <a href="" class="pull-left" ng-click="clearCorrective()"><i class="fa fa-close"></i></a>
+</div>
+<div class="clearfix"></div>
+<div class="form-group block blockLabel" ng-if="report_labels['recommended_corrective_actions_summary']['is_hidden'] === 'No' || custom">
+    <label for="exampleInputPassword3"> {{report_labels['recommended_corrective_actions_summary']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['recommended_corrective_actions_summary'])" uib-tooltip="{{report_labels['recommended_corrective_actions_summary']['help_me_name']}}"
+           ng-if="report_labels['recommended_corrective_actions_summary']['help_me_name'] && report_labels['recommended_corrective_actions_summary']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['recommended_corrective_actions_summary'])" ng-if="custom && report_labels['recommended_corrective_actions_summary']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+    <textarea  class="form-control" placeholder="Summarize recommended actions" ng-model="report.recommended_corrective_actions_summary"
+               ng-required="report_labels['recommended_corrective_actions_summary']['is_mandatory']=='Yes'"></textarea>
+</div>-->

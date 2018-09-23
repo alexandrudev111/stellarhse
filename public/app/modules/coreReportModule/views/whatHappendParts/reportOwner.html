@@ -1,0 +1,55 @@
+<div class="clearfix"></div>
+   <div class="pull-left" ng-if="report_labels['report_owner']['is_hidden'] === 'No' || custom" >
+    <label for="exampleInputEmail3">{{report_labels['report_owner']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['report_owner'])" uib-tooltip="{{reporst_labels['report_owner']['help_me_name']}}"
+           ng-if="report_labels['report_owner']['help_me_name'] && report_labels['report_owner']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['report_owner'])" ng-if="custom && report_labels['report_owner']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+     <span class="pull-left" ng-repeat="owner in reportOwners">
+        <input type="radio" value="{{owner.id}}" 
+        ng-model="report.report_owner" 
+        ng-required="report_labels['report_owner']['is_mandatory']=='Yes'" 
+        ng-disabled = "disabeldTrue" ng-change="checkReportOwner()">
+	    <span>{{owner.name}}</span>
+	</span>
+   
+
+    <ui-select class="form-control customerNewStyle" ng-if="contractorOwner" id="              exampleInputPassword3" on-select=" onContractorOwnerSelected($item)" ng-model="contractorReportOwner" theme="bootstrap"  
+        ng-disabled = "disabeldTrue"  ng-class="{'required':contractorReportOwner == null }">
+
+<!--     <ui-select class="form-control customerNewStyle" ng-if="contractorOwner" id="              exampleInputPassword3" on-select=" onContractorOwnerSelected($item)" ng-model="contractorReportOwner" theme="bootstrap"  
+               
+             ng-required="report_labels['rep_name']['is_mandatory']=='Yes'"
+              ng-class="{'required':(report_labels['rep_name']['is_mandatory']=='Yes' && contractorReportOwner == {} )}"
+        ng-disabled = "disabeldTrue" required="required"> -->
+
+        <ui-select-match allow-clear="true" placeholder="Contractor name">{{$select.selected.third_party_name}}</ui-select-match>
+
+
+        <ui-select-choices refresh="getReportOwnerInvolved($select.search,'Contractor')" refresh-delay="0" 
+                           repeat="tp.third_party_id as tp in contractor_owners | filter: $select.search">
+            <div>{{tp.third_party_name}}</div>
+        </ui-select-choices>
+    </ui-select>
+    <label for="exampleInputPassword3" class="customerLabel" ng-if="contractorOwner ">{{report_labels['sponser_id']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['sponser_id'])" uib-tooltip="{{report_labels['sponser_id']['help_me_name']}}"
+           ng-if="report_labels['sponser_id']['help_me_name'] && report_labels['sponser_id']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['sponser_id'])" ng-if="custom && report_labels['sponser_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+    <input type="text" ng-if="contractorOwner" class="form-control noFloating" placeholder="Contractor's Sponser" ng-model="contractorReportOwner.sponser_name"
+
+           ng-required='true' ng-disabled="true"  ng-change="updateDreaftReport()"/> 
+    <ui-select class="form-control customerNewStyle" ng-if="customerOwner" id="exampleInputPassword3" ng-model="customerReportOwner" theme="bootstrap" on-select="onCustomerOwnerSelected($item)"   ng-disabled = "disabeldTrue" ng-class="{'required':customerReportOwner == null }">
+        <ui-select-match allow-clear="true" placeholder="Enter name">{{$select.selected.third_party_name}}</ui-select-match>
+
+        <ui-select-choices refresh="getReportOwnerInvolved($select.search,'Customer')" refresh-delay="0" 
+                           repeat="tp.third_party_id as tp in customer_owners | filter: $select.search ">
+            <div>{{tp.third_party_name}}</div>
+        </ui-select-choices>
+    </ui-select>
+    <label for="exampleInputPassword3" class="customerLabel" ng-if="customerOwner">{{report_labels['sponser_id']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['sponser_id'])" uib-tooltip="{{report_labels['sponser_id']['help_me_name']}}"
+           ng-if="report_labels['sponser_id']['help_me_name'] && report_labels['sponser_id']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['sponser_id'])" ng-if="custom && report_labels['sponser_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+    <input type="text" ng-if="customerOwner" class="form-control noFloating" placeholder="Customer's sponser" ng-model="customerReportOwner.sponser_name"
+            ng-required='true' ng-disabled="true"  ng-change="updateDreaftReport()"/> 
+
+</div>

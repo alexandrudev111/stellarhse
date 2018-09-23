@@ -1,0 +1,42 @@
+<div >
+    <div class="col-md-8">
+        <form class="form-inline">
+            <div class="form-group editSubject">
+                <label for="">Subject Line :</label>
+                <input type="text" class="form-control" ng-model="emailtemplates.subject">
+            </div>
+           <!--<div class="noWidth col-md-6">
+                <a href="" class="btn btn-primary pull-right">Add attachments</a>
+                <a href="" class="btn btn-primary pull-right" ng-click="addFullReport()">Add full report</a>
+            </div>-->
+        </form>
+        <textarea ui-tinymce="tinymceOptions" ng-model="emailtemplates.body" class="form-control" id="emailBody"></textarea>
+        <button class="btn btn-primary pull-right" ng-click="previewEmail()">Preview</button>
+
+    </div>
+    <div class="col-md-4 listStyle">
+        <label for="">Choose The fields to add to your email template</label>
+        <uib-accordion close-others="oneAtATime">
+            <div  uib-accordion-group class="panel-default" ng-repeat="(key, tab) in report_tabs" 
+                  heading="{{tab.sub_tab_label}}" is-open="status.fieldStatus[key]" ng-click="closeOtherFieldAccordions(key)">
+                <div ng-scrollbars ng-scrollbars-config="config">
+                    <ul class="list-unstyled">
+                        <li ng-if="tab.field_block"><input type="checkbox" ng-model="tab.checked">{{tab.sub_tab_label}}</li>
+                        <li ng-if="!tab.field_block" ng-repeat="(key2, field) in tab.report_labels">
+                            <input type="checkbox" ng-model="field.checked">{{field.field_label}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </uib-accordion>
+        <!-- <ul class="list-unstyled" ng-repeat="(key, tab) in report_tabs"><b>{{tab.sub_tab_label}}</b>
+            <li ng-repeat="(key2, field) in tab.report_labels"><input type="checkbox" ng-model="field.checked">{{field.field_label}}</li>
+        </ul> -->
+
+
+
+   <button class="btn btn-primary pull-right" ng-click="applyFields()">Apply</button>
+    
+</div>
+
+</div>

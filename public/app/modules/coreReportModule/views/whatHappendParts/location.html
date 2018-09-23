@@ -1,0 +1,116 @@
+<!--{{labels.whatHappened.location}}-->
+<div ng-if="report_labels['location']['is_hidden'] === 'No' || custom">
+    <h2>{{report_labels['location']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['location'])" uib-tooltip="{{report_labels['location']['help_me_name']}}"
+           ng-if="report_labels['location']['help_me_name'] && report_labels['location']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['location'])" ng-if="custom"><i class="fa fa-edit"></i></a></h2>
+
+    <div class="form-group" ng-if="report_labels['location1_id']['is_hidden'] === 'No' || custom">
+        <label>{{report_labels['location1_id']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['location1_id'])" uib-tooltip="{{report_labels['location1_id']['help_me_name']}}"
+               ng-if="report_labels['location1_id']['help_me_name'] && report_labels['location1_id']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['location1_id'])" ng-if="custom && report_labels['location1_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+        <ui-select ng-model="report.location1" theme="bootstrap" on-select='location1_id()' 
+                   ng-required="report_labels['location1_id']['is_mandatory']=='Yes' || report_labels['location']['is_mandatory']=='Yes'"
+                   ng-class="{'required':(report_labels['location1_id']['is_mandatory'] == 'Yes' || report_labels['location']['is_mandatory']=='Yes') && report.location1 == null}" ng-disabled = "disabeldTrue">
+            <ui-select-match allow-clear="true" placeholder="Country">{{$select.selected.location1_name}}</ui-select-match>
+            <ui-select-choices refresh="getLocations1($select.search)" refresh-delay="0" 
+                               repeat="location in locations1 | filter: $select.search ">
+                <div>{{location.location1_name}}</div>
+            </ui-select-choices>
+        </ui-select>
+        <button class="btn btn-primary" ng-click="openLoc()" ng-disabled="initializeReport.location1 || locations1.length != 0" uib-tooltip="Location not found - add location to database."><i class="fa fa-plus"></i></button>
+        <!--<a href="" ng-click="openLoc()" ng-class="{disabled: report.location1_id != null}"><i class="fa fa-plus" aria-hidden="true" uib-tooltip="Location not found - add location to database."></i></a>-->
+
+    </div>
+
+
+    <div class="form-group" ng-if="report_labels['location2_id']['is_hidden'] === 'No' || custom">
+        <label>{{report_labels['location2_id']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['location2_id'])" uib-tooltip="{{report_labels['location2_id']['help_me_name']}}"
+               ng-if="report_labels['location2_id']['help_me_name'] && report_labels['location2_id']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['location2_id'])" ng-if="custom && report_labels['location2_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+        <ui-select ng-model="report.location2" theme="bootstrap" on-select='onSelectLocation2()'
+                   ng-required="report_labels['location2_id']['is_mandatory']=='Yes' || report_labels['location']['is_mandatory']=='Yes'"
+                   ng-class="{'required':(report_labels['location2_id']['is_mandatory'] == 'Yes' || report_labels['location']['is_mandatory']=='Yes') && report.location2 == null}" ng-disabled = "disabeldTrue">
+
+            <ui-select-match allow-clear="true" placeholder="Province/state">{{$select.selected.location2_name}}</ui-select-match>
+
+            <ui-select-choices refresh="getLocations2($select.search)" refresh-delay="0" 
+                               repeat="location in locations2 | filter: $select.search ">
+
+                <div>{{location.location2_name}}</div>
+
+            </ui-select-choices>
+
+        </ui-select>
+        <button class="btn btn-primary" ng-click="openLoc()" ng-disabled="initializeReport.location2 || locations2.length != 0" uib-tooltip="Location not found - add location to database."><i class="fa fa-plus"></i></button>
+        <!--<a href="" ng-click="openLoc()" ng-class="{disabled: report.location2_id != null}"><i class="fa fa-plus" aria-hidden="true" uib-tooltip="Location not found - add location to database."></i></a>-->
+
+    </div>
+
+
+    <div class="form-group" ng-if="(report_labels['location3_id']['is_hidden'] === 'No' || custom ) && hideLocation3 == false">
+        <label>{{report_labels['location3_id']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['location3_id'])" uib-tooltip="{{report_labels['location3_id']['help_me_name']}}"
+               ng-if="report_labels['location3_id']['help_me_name'] && report_labels['location3_id']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['location3_id'])" ng-if="custom && report_labels['location3_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+        <ui-select ng-model="report.location3" theme="bootstrap" on-select='onSelectLocation3()'
+                   ng-required="report_labels['location3_id']['is_mandatory']=='Yes' || report_labels['location']['is_mandatory']=='Yes'"
+                   ng-class="{'required':(report_labels['location3_id']['is_mandatory'] == 'Yes' || report_labels['location']['is_mandatory']=='Yes') && report.location3 == null}" ng-disabled = "disabeldTrue">
+
+            <ui-select-match allow-clear="true" placeholder="Area">{{$select.selected.location3_name}}</ui-select-match>
+
+            <ui-select-choices refresh="getLocations3($select.search)" refresh-delay="0" 
+                               repeat="location in locations3 | filter: $select.search ">
+
+                <div>{{location.location3_name}}</div>
+
+            </ui-select-choices>
+
+        </ui-select>
+        <!--<input type="text" class="form-control" placeholder="Area" />-->
+
+        <button class="btn btn-primary" ng-click="openLoc()" ng-disabled="initializeReport.location3 || locations3.length != 0" uib-tooltip="Location not found - add location to database."><i class="fa fa-plus"></i></button>
+        <!--<a href="" ng-click="openLoc()" ng-class="{disabled: report.location3_id != null}"><i class="fa fa-plus" aria-hidden="true" uib-tooltip="Location not found - add location to database."></i></a>-->
+
+    </div>
+
+    <div class="form-group" ng-if="(report_labels['location4_id']['is_hidden'] === 'No' || custom ) && hideLocation4 == false">
+        <label>{{report_labels['location4_id']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['location4_id'])" uib-tooltip="{{report_labels['location4_id']['help_me_name']}}"
+               ng-if="report_labels['location4_id']['help_me_name'] && report_labels['location4_id']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['location4_id'])" ng-if="custom && report_labels['location4_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+
+        <ui-select ng-model="report.location4" theme="bootstrap" on-select='onSelectLocation4()'
+                   ng-required="report_labels['location4_id']['is_mandatory']=='Yes' || report_labels['location']['is_mandatory']=='Yes'"
+                   ng-class="{'required':(report_labels['location4_id']['is_mandatory'] == 'Yes' || report_labels['location']['is_mandatory']=='Yes') && report.location4 == null}" ng-disabled = "disabeldTrue">
+
+            <ui-select-match allow-clear="true" placeholder="Site">{{$select.selected.location4_name}}</ui-select-match>
+
+            <ui-select-choices refresh="getLocations4($select.search)" refresh-delay="0" 
+                               repeat="location in locations4 | filter: $select.search ">
+
+                <div>{{location.location4_name}}</div>
+
+            </ui-select-choices>
+
+        </ui-select>
+        <!--<input type="text" class="form-control" placeholder="Site" />-->
+        <button class="btn btn-primary" ng-click="openLoc()" ng-disabled="initializeReport.location4 || locations4.length != 0" uib-tooltip="Location not found - add location to database."><i class="fa fa-plus"></i></button>
+        <!--<a href="" ng-click="openLoc()" ng-class="{disabled: report.location4_id != null}"><i class="fa fa-plus" aria-hidden="true" uib-tooltip="Location not found - add location to database."></i></a>-->
+    </div>
+
+    <div class="form-group" ng-if="report_labels['other_location']['is_hidden'] === 'No' || custom">
+        <label>{{report_labels['other_location']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['other_location'])" uib-tooltip="{{report_labels['other_location']['help_me_name']}}"
+               ng-if="report_labels['other_location']['help_me_name'] && report_labels['other_location']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['other_location'])" ng-if="custom && report_labels['other_location']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+        <input type="text" class="form-control" placeholder="details" ng-model="report.other_location"
+               ng-required="report_labels['other_location']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"/>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="modal-header">
+        <button class="close" style="color: #FFFFFF !important" ng-click="close()">&times;</button>
+        <h3 class="modal-title">Save to</h3>
+    </div>
+    <div class="modal-body">
+    
+        
+        <form>
+            <div class="clearfix"></div>
+            <div class="form-group" >
+                <label for="allorgsmenu" class="control-label">Organization</label>
+                <select id="allorgsmenu" class="form-control" ng-model="selectedOrg">
+                    <option ng-repeat="org in allorgs" value="{{ org.org_id }}" ng-selected="{{ org.org_id === orgId}}">{{ org.org_name}}</option>
+                </select>
+            </div>
+            
+            
+        </form>
+    
+    </div>
+    <div class="clearfix"></div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="save()"><i class="fa fa-check"></i> Submit</button>
+    
+    </div>

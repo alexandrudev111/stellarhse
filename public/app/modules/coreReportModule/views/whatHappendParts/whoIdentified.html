@@ -1,0 +1,203 @@
+<!--{{labels.whatHappened.whoIdentified}}-->
+<div ng-if="report_labels['identified_by']['is_hidden'] === 'No' || custom">
+    <h2> {{report_labels['identified_by']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['identified_by'])" uib-tooltip="{{report_labels['identified_by']['help_me_name']}}"
+           ng-if="report_labels['identified_by']['help_me_name'] && report_labels['identified_by']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['identified_by'])" ng-if="custom && report_labels['identified_by']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></h2>
+        <!-- <button class="btn btn-success" ng-click="contactToReportedBy()" >
+            Contact by email
+        </button> -->
+    <!--Name-->
+    <div class="form-group empName" ng-if="report_labels['rep_name']['is_hidden'] === 'No' || custom">
+        <label>{{report_labels['rep_name']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['rep_name'])" uib-tooltip="{{report_labels['rep_name']['help_me_name']}}"
+               ng-if="report_labels['rep_name']['help_me_name'] && report_labels['rep_name']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['rep_name'])" ng-if="custom && report_labels['rep_name']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+        <ui-select class="form-control" id="exampleInputPassword3" ng-model="whoIdentified" theme="bootstrap" on-select="onSelectWhoIdentified($item)"
+                   ng-required="report_labels['rep_name']['is_mandatory']=='Yes' || report_labels['identified_by']['is_mandatory']=='Yes'"
+                   ng-class="{'required':(report_labels['rep_name']['is_mandatory']=='Yes' || report_labels['identified_by']['is_mandatory']=='Yes') && whoIdentified == null}" ng-disabled = "disabeldTrue">
+            <ui-select-match allow-clear="true" placeholder="Name">{{$select.selected.full_name}}</ui-select-match>
+            <ui-select-choices refresh="getReportedByUser($select.search,'employee_name',0, true)"  repeat="emp.employee_id as emp in whoIdentifiedEmployees | filter: $select.search "  >
+                <div>{{emp.full_name}}</div>
+            </ui-select-choices>
+        </ui-select>
+       <!--  refresh="getReportedByUser($select,'employee_name',0, true, whoIdentifiedEmployees)" 
+                                repeat=" emp in (whoIdentifiedEmployees|filter: {full_name : $select.search }) track by emp.employee_id"
+
+
+        repeat=" emp in (whoIdentifiedEmployees|filter: {employee_id : $select.search })" refresh="getReportedByUser($select.search,'employee_name',0, true)"        -->
+        <!--<a href="" ng-click="openAdd()" ng-class="{disabled: whoIdentified != null}"><i class="fa fa-plus" aria-hidden="true" uib-tooltip="Name not found - add person/employee to database"></i></a>-->
+        <button class="btn btn-primary showBtn" ng-click="openAdd()" ng-disabled="initializeReport.whoIdentifiedEmployee || whoIdentifiedEmployees.length != 0" uib-tooltip="Name not found - add person/employee to database."><i class="fa fa-plus"></i></button>
+    </div>
+    <!--ID-->
+    <div class="form-group helfWidth" ng-if="report_labels['rep_id']['is_hidden'] === 'No' || custom">
+        <label>{{report_labels['rep_id']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['rep_id'])" uib-tooltip="{{report_labels['rep_id']['help_me_name']}}"
+               ng-if="report_labels['rep_id']['help_me_name'] && report_labels['rep_id']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['rep_id'])" ng-if="custom && report_labels['rep_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+        <!--<ui-select class="form-control" id="exampleInputPassword3" ng-model="whoIdentified.employee_id" theme="bootstrap" on-select="onSelectWhoIdentifiedHazard($item)">
+            <ui-select-match placeholder="ID">{{$select.selected.emp_id}}</ui-select-match>
+            <ui-select-choices refresh="getReportedByUser($select.search,'emp_id')" refresh-delay="0" repeat="emp.employee_id as emp in employees | filter: $select.search ">
+                <div>{{emp.emp_id}}</div>
+            </ui-select-choices>
+        </ui-select>-->
+        <input type="text" class="form-control" placeholder="ID" ng-model="whoIdentified.emp_id" ng-change="whoIdentifiedChanged(whoIdentified.emp_id, 'emp_id')"
+               ng-required="report_labels['rep_id']['is_mandatory']=='Yes' || report_labels['identified_by']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"/>
+
+    </div>
+    <!--Position-->
+    <div class="form-group" ng-if="report_labels['rep_position']['is_hidden'] === 'No' || custom">
+        <label>{{report_labels['rep_position']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['identified_by'])" uib-tooltip="{{report_labels['identified_by']['help_me_name']}}"
+               ng-if="report_labels['rep_position']['help_me_name'] && report_labels['rep_position']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['rep_position'])" ng-if="custom && report_labels['rep_position']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+        <!--<ui-select class="form-control" id="exampleInputPassword3" ng-model="whoIdentified.employee_id" theme="bootstrap" on-select="onSelectWhoIdentifiedHazard($item)">
+            <ui-select-match placeholder="Position">{{$select.selected.position}}</ui-select-match>
+            <ui-select-choices refresh="getReportedByUser($select.search,'position')" refresh-delay="0" repeat="emp.employee_id as emp in employees | filter: $select.search ">
+                <div>{{emp.position}}</div>
+            </ui-select-choices>
+        </ui-select>-->
+        <input type="text" class="form-control" placeholder="Position" ng-model="whoIdentified.position" ng-change="whoIdentifiedChanged(whoIdentified.position, 'position')"
+               ng-required="report_labels['rep_position']['is_mandatory']=='Yes' || report_labels['identified_by']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"/>
+
+    </div>
+
+    <div class="form-group" ng-if="report_labels['rep_crew']['is_hidden'] === 'No' || custom">
+        <label>{{report_labels['rep_crew']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['rep_crew'])" uib-tooltip="{{report_labels['rep_crew']['help_me_name']}}"
+               ng-if="report_labels['rep_crew']['help_me_name'] && report_labels['rep_crew']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['rep_crew'])" ng-if="custom && report_labels['rep_crew']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+        <!-- <ui-select class="form-control" id="exampleInputPassword3" ng-model="whoIdentified.employee_id" theme="bootstrap" on-select="onSelectWhoIdentifiedHazard($item)">
+             <ui-select-match placeholder="Crew">{{$select.selected.crew_name}}</ui-select-match>
+             <ui-select-choices refresh="getReportedByUser($select.search,'crew_name')" refresh-delay="0" repeat="emp.employee_id as emp in employees | filter: $select.search ">
+                 <div>{{emp.crew_name}}</div>
+             </ui-select-choices>
+         </ui-select>-->
+        <!-- <input type="text" class="form-control" placeholder="Crew" ng-model="whoIdentified.crew_name" ng-change="whoIdentifiedChanged(whoIdentified.crew_name, 'crew_name')"
+               ng-required="report_labels['rep_crew']['is_mandatory']=='Yes' || report_labels['identified_by']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"/> -->
+        <select class="form-control" ng-model="whoIdentified.crew_id" id="reportType"
+            ng-options="crew.crew_id as crew.crew_name for crew in crews"
+            ng-change="whoIdentifiedChanged(whoIdentified.crew_id, 'crew_name')"
+            ng-required="report_labels['rep_crew']['is_mandatory']=='Yes' || report_labels['identified_by']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue">
+            <option value="" selected>Select one</option>
+        </select>
+    </div>
+    <div class="form-group" ng-if="report_labels['rep_department']['is_hidden'] === 'No' || custom">
+        <label>{{report_labels['rep_department']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['rep_department'])" uib-tooltip="{{report_labels['rep_department']['help_me_name']}}"
+               ng-if="report_labels['rep_department']['help_me_name'] && report_labels['rep_department']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['rep_department'])" ng-if="custom && report_labels['rep_department']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+       <!--  <input type="text" class="form-control" placeholder="Department" ng-model="whoIdentified.department" ng-change="whoIdentifiedChanged(whoIdentified.department, 'department')"
+               ng-required="report_labels['rep_department']['is_mandatory']=='Yes' || report_labels['identified_by']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"/> -->
+
+        <select class="form-control " ng-model="whoIdentified.department_id"
+                ng-options="department.department_responsible_id as department.department_responsible_name for department in departments" ng-change="whoIdentifiedChanged(whoIdentified.department_id, 'department')"
+                ng-required="report_labels['rep_department']['is_mandatory']=='Yes' || report_labels['identified_by']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue">
+
+            <option value="" selected>Select one</option>
+        </select>
+    </div>
+    <!--Email-->
+    <div class="form-group" ng-if="report_labels['rep_email']['is_hidden'] === 'No' || custom">
+        <label>{{report_labels['rep_email']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['rep_email'])" uib-tooltip="{{report_labels['rep_email']['help_me_name']}}"
+               ng-if="report_labels['rep_email']['help_me_name'] && report_labels['rep_email']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['rep_email'])" ng-if="custom && report_labels['rep_email']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+        <!-- <ui-select class="form-control" id="exampleInputPassword3"  ng-model="whoIdentified.employee_id" theme="bootstrap" on-select="onSelectWhoIdentifiedHazard($item)">
+             <ui-select-match placeholder="Email">{{$select.selected.email}}</ui-select-match>
+             <ui-select-choices refresh="getReportedByUser($select.search,'email')" refresh-delay="0" repeat="emp.employee_id as emp in employees | filter: $select.search ">
+                 <div>{{emp.email}}</div>
+             </ui-select-choices>
+         </ui-select>-->
+        <span style="color:red;">{{whoIdentified.whoIdentifiedEmailError}}</span>
+        <input type="text" class="form-control" placeholder="Email" ng-model="whoIdentified.email" ng-change="whoIdentifiedChanged(whoIdentified.email, 'email')" ng-blur="checkEmail(whoIdentified, whoIdentified.email)"
+               ng-required="report_labels['rep_email']['is_mandatory']=='Yes' || report_labels['identified_by']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"/>
+
+    </div>
+    <!--Company-->
+    <div class="form-group" ng-if="report_labels['rep_company']['is_hidden'] === 'No' || custom">
+        <label>{{report_labels['rep_company']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['rep_company'])" uib-tooltip="{{report_labels['rep_company']['help_me_name']}}"
+               ng-if="report_labels['rep_company']['help_me_name'] && report_labels['rep_company']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['rep_company'])" ng-if="custom && report_labels['rep_company']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+        <!-- <ui-select class="form-control" id="exampleInputPassword3" ng-model="whoIdentified.employee_id" theme="bootstrap" on-select="onSelectWhoIdentifiedHazard($item)">
+             <ui-select-match placeholder="Company">{{$select.selected.org_name}}</ui-select-match>
+             <ui-select-choices refresh="getReportedByUser($select.search,'org_name')" refresh-delay="0" repeat="emp.employee_id as emp in employees | filter: $select.search ">
+                 <div>{{emp.org_name}}</div>
+             </ui-select-choices>
+         </ui-select>-->
+
+        <input type="text" class="form-control" placeholder="Company" ng-model="whoIdentified.company" ng-change="whoIdentifiedChanged(whoIdentified.org_name, 'org_name')"
+               ng-required="report_labels['rep_company']['is_mandatory']=='Yes' || report_labels['identified_by']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"/>
+
+    </div>
+    <!--Primary Phone-->
+    <div class="form-group helfWidth" ng-if="report_labels['rep_primary_phone']['is_hidden'] === 'No' || custom">
+        <label>{{report_labels['rep_primary_phone']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['rep_primary_phone'])" uib-tooltip="{{report_labels['rep_primary_phone']['help_me_name']}}"
+               ng-if="report_labels['rep_primary_phone']['help_me_name'] && report_labels['rep_primary_phone']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['rep_primary_phone'])" ng-if="custom && report_labels['rep_primary_phone']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+        <!-- <ui-select class="form-control" id="exampleInputPassword3" ng-model="whoIdentified.employee_id" theme="bootstrap" on-select="onSelectWhoIdentifiedHazard($item)">
+             <ui-select-match placeholder="Enter Phone">{{$select.selected.primary_phone}}</ui-select-match>
+             <ui-select-choices refresh="getReportedByUser($select.search,'primary_phone')" refresh-delay="0" repeat="emp.employee_id as emp in employees | filter: $select.search ">
+                 <div>{{emp.primary_phone}}</div>
+             </ui-select-choices>
+         </ui-select>-->
+
+        <input type="text" class="form-control" ng-model="whoIdentified.primary_phone" ng-change="whoIdentifiedChanged(whoIdentified.primary_phone, 'primary_phone')" ui-mask="999-999-9999"
+               ng-required="report_labels['rep_primary_phone']['is_mandatory']=='Yes' || report_labels['identified_by']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"/>
+
+    </div>
+    <!--Alternate Phone-->
+    <div class="form-group helfWidth" ng-if="report_labels['rep_alternate_phone']['is_hidden'] === 'No' || custom">
+        <label>{{report_labels['rep_alternate_phone']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['rep_alternate_phone'])" uib-tooltip="{{report_labels['rep_alternate_phone']['help_me_name']}}"
+               ng-if="report_labels['rep_alternate_phone']['help_me_name'] && report_labels['rep_alternate_phone']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['rep_alternate_phone'])" ng-if="custom && report_labels['rep_alternate_phone']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+        <!--<ui-select class="form-control" id="exampleInputPassword3" ng-model="whoIdentified.employee_id" theme="bootstrap" on-select="onSelectWhoIdentifiedHazard($item)">
+            <ui-select-match placeholder="Enter Phone">{{$select.selected.alternate_phone}}</ui-select-match>
+            <ui-select-choices refresh="getReportedByUser($select.search,'alternate_phone')" refresh-delay="0" repeat="emp.employee_id as emp in employees | filter: $select.search ">
+                <div>{{emp.alternate_phone}}</div>
+            </ui-select-choices>
+        </ui-select>-->
+
+        <input type="text" class="form-control" ng-model="whoIdentified.alternate_phone" ng-change="whoIdentifiedChanged(whoIdentified.alternate_phone, 'alternate_phone')" ui-mask="999-999-9999"
+               ng-required="report_labels['rep_alternate_phone']['is_mandatory']=='Yes' || report_labels['identified_by']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"/>
+    </div>
+    <!--Supervisor-->
+    <div class="form-group" ng-if="report_labels['rep_supervisor']['is_hidden'] === 'No' || custom">
+        <label>{{report_labels['rep_supervisor']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['rep_supervisor'])" uib-tooltip="{{report_labels['rep_supervisor']['help_me_name']}}"
+               ng-if="report_labels['rep_supervisor']['help_me_name'] && report_labels['rep_supervisor']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['rep_supervisor'])" ng-if="custom && report_labels['rep_supervisor']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+        <!--<ui-select class="form-control" id="exampleInputPassword3" ng-model="whoIdentified.employee_id" theme="bootstrap" on-select="onSelectWhoIdentifiedHazard($item)">
+            <ui-select-match placeholder="Supervisor">{{$select.selected.supervisor_name}}</ui-select-match>
+            <ui-select-choices refresh="getReportedByUser($select.search,'supervisor_name')" refresh-delay="0" repeat="emp.employee_id as emp in employees | filter: $select.search ">
+                <div>{{emp.supervisor_name}}</div>
+            </ui-select-choices>
+        </ui-select>-->
+        <input type="text" class="form-control" placeholder="Supervisor name" ng-model="whoIdentified.supervisor_name" ng-change="whoIdentifiedChanged(whoIdentified.supervisor_name, 'supervisor_name')"
+               ng-required="report_labels['rep_supervisor']['is_mandatory']=='Yes' || report_labels['identified_by']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue"/>
+               
+<!--               <span class="noMtop" >
+                                <input ng-model="action.supervisor_notify"  disabled="disabled" aria-invalid="false" type="checkbox"> 
+                                <span>Notify supervisor
+                                     </span>
+                            </span>  ng-if="report_labels['rep_supervisor_notify']['is_hidden'] === 'No' || custom"-->
+            <span class="noMtop notifyIcon" >
+
+                <input type="checkbox" ng-model="whoIdentified.rep_supervisor_notify" aria-invalid="false"  ng-required="report_labels['rep_supervisor_notify']['is_mandatory']=='Yes'" ng-disabled = "!whoIdentified.supervisor_name || disabeldTrue"/> 
+
+                <span>{{report_labels['rep_supervisor_notify']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['rep_supervisor_notify'])" uib-tooltip="{{report_labels['rep_supervisor_notify']['help_me_name']}}"
+                    ng-if="report_labels['rep_supervisor_notify']['help_me_name'] && report_labels['rep_supervisor_notify']['help_me_description']"><i class="fa fa-question"></i></a>
+    
+                    <a href="" class="nobg" ng-click="editField(report_labels['supervisor_notify'])" ng-if="custom && report_labels['supervisor_notify']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a>
+                </span>
+            </span>
+               
+    </div>
+    
+    
+</div>

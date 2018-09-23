@@ -1,0 +1,61 @@
+<div  class="CustomizationField" ng-if="action.actionCustomField.length > 0 && showCutomFields">
+   <h2>Custom Fields: <a href=""  uib-tooltip="The following fields have been added to address specific concerns not already covered elsewhere in the form."><i class="fa fa-question"></i></a> </h2>
+    <div ng-repeat="field in action.actionCustomField track by $index" ng-init="actionCustomIndex = $index" >
+
+        <div class="clearfix"></div>
+        <div ng-if="field.component =='textbox'" class="form-group">
+                <label for="">{{field.label}}  
+                <a ng-if="field.description " href=""  uib-tooltip="{{field.description}}"><i class="fa fa-question"></i></a>  </label>
+                <input type="text"  class="form-control" placeholder="{{field.placeholder}}" ng-change="updateDreaftReport()" ng-required="{{field.required}}" ng-model="field.choice"  ng-disabled = "disabeldTrue">
+        </div>
+
+        <div ng-if="field.component =='textarea'" class="form-group textAreaFullWidth">
+                <label for="">{{field.label}}  
+                <a ng-if="field.description " href=""  uib-tooltip="{{field.description}}"><i class="fa fa-question"></i></a>  </label>
+                <textarea class="form-control"  placeholder="{{field.placeholder}}" ng-change="updateDreaftReport()" ng-model="field.choice" ng-required="{{field.required}}" ng-disabled = "disabeldTrue"></textarea>
+        </div>
+        
+        <div  ng-if="field.component =='select'" class="form-group">
+            <label for="">{{field.label}}  
+                <a ng-if="field.description " href=""  uib-tooltip="{{field.description}}"><i class="fa fa-question"></i></a>  </label>
+            <select  class="form-control" ng-change="updateDreaftReport()"  ng-model="field.choice"  ng-disabled = "disabeldTrue" ng-required="{{field.required}}">
+                <option value="">{{field.placeholder}}</option>
+                <option ng-repeat="(key, value) in field.options" value="{{key}}" >{{value}}</option>
+            </select>
+        </div>
+        
+        <div  ng-if="field.component =='checkbox'" class="form-group">
+            
+            <label for="">{{field.label}}  
+                <a ng-if="field.description " href=""  uib-tooltip="{{field.description}}"><i class="fa fa-question"></i></a>  </label>
+            <div class="form-group" ng-repeat="(key, value) in field.options" >
+                <input type="checkbox" class="form-control" value="{{key}}" ng-change="updateDreaftReport()"  ng-disabled="disabeldTrue" ng-required="{{field.required}}"  ng-model="field.choice[key]"> 
+                {{value}}
+            </div>
+        </div>
+        
+        <div  ng-if="field.component =='radiobutton'" class="form-group">
+            <label for="">{{field.label}}</label>
+            <span ng-repeat="(key, value) in field.options">
+                   <input type='radio'  value="{{key}}" ng-change="updateDreaftReport()"  ng-model="field.choice"  ng-disabled="disabeldTrue" ng-required="{{field.required}}"> {{value}}
+            </span>
+        </div>
+        <div  ng-if="field.component =='calendar'" class="form-group">
+            <label for="">{{field.label}}  
+                <a ng-if="field.description " href=""  uib-tooltip="{{field.description}}"><i class="fa fa-question"></i></a>  </label>
+            <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="field.choice" 
+                       is-open="datePopUps.actionCustomIndex[actionIndex][actionCustomIndex].date" datepicker-options="dateOptions" close-text="Close" 
+                       ng-click="datePopUps.actionCustomIndex[actionIndex][actionCustomIndex].date= !datePopUps.actionCustomIndex[actionIndex][actionCustomIndex].date"
+                       alt-input-formats="altInputFormats" placeholder="{{field.placeholder}}" ng-required="{{field.required}}"
+                        ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"/>
+                <span class="input-group-btn calenderIcon">
+                    <button type="button" class="btn btn-default " ng-click="datePopUps.actionCustomIndex[actionIndex][actionCustomIndex].date= !datePopUps.actionCustomIndex[actionIndex][actionCustomIndex].date"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+        </div>
+        
+        
+        <!--<h1>{{field.id}}</h1>-->
+    </div>
+</div>

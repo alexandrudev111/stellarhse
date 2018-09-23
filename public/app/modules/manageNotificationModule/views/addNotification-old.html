@@ -1,0 +1,236 @@
+
+<h2>{{notified_labels['NotificationAssignmentsHeader']['default_field_label']}}</h2>   
+
+<div class="searchSection ng-scope">
+    <form class="form-inline">
+        <div class="form-style">
+            <div class="form-group" >
+
+                <input type="radio" class="form-control" name="notified" ng-model="notifiedType" value="person"><span>Person notified</span>
+
+                <input type="radio" class="form-control" name="notified" ng-model="notifiedType" value="group"><span>Group notified</span>
+
+            </div>
+            <div class="form-group" ng-if="notifiedType === 'person'">
+                <label class="ng-binding">Employee name:</label>
+                <!--<input type="text"  class="form-control" required>-->
+                <ui-select class="form-control" ng-model="notifiedTypeValue" theme="bootstrap" on-select="onSelectNotifiedValue($item)"
+                           ng-class="{'required':notifiedTypeValue == null}" required>
+                    <ui-select-match placeholder="Enter Name">{{$select.selected.full_name}}</ui-select-match>
+                    <ui-select-choices refresh="getNotifiedEmployees($select.search)" refresh-delay="0" 
+                                       repeat="emp.employee_id as emp in notifiedEmployees | filter: $select.search ">
+                        <div>{{emp.full_name}}</div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group" ng-if="notifiedType === 'group'">
+                <label class="ng-binding">Group name:</label>
+                <!--<input type="text"  class="form-control" required>-->
+                <ui-select class="form-control" ng-model="notifiedTypeValue" theme="bootstrap" on-select="onSelectNotifiedValue($item)"
+                           ng-class="{'required':notifiedTypeValue == null}" required>
+                    <ui-select-match placeholder="Enter Name">{{$select.selected.group_name}}</ui-select-match>
+                    <ui-select-choices refresh="getNotifiedGroups($select.search)" refresh-delay="0" 
+                                       repeat="group.group_id as group in notifiedGroups | filter: $select.search ">
+                        <div>{{group.group_name}}</div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+
+            <button class="btn btn-primary" ui-sref="manageNotification">Cancel</button>
+            <button class="btn btn-primary" ng-click="saveNotification()">Submit</button>
+        </div>
+    </form>
+
+</div>
+
+<div class="clearfix"></div>
+<h2>{{notified_labels['GeneralNotificationParametersHeader']['default_field_label']}}</h2>
+<div class="clearfix"></div>
+
+<div class="insideAccordion">
+    <uib-accordion close-others="oneAtATime">
+        <div  uib-accordion-group class="panel-default" heading="Country" is-open="status.Country" >
+
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <input type="checkbox" ng-model="notificationAssignment.country"
+                               ng-change="getCountries()"><span>Country</span>
+                        <div class="clearfix"></div>
+                        <span class="red">(See Email Notification Templates 1 & 2)</span>
+                    </td>
+                    <td ng-if="notificationAssignment.country"><input type="checkbox"><span>Canada</span></td>
+                    <td ng-if="notificationAssignment.country"> 
+                        <input type="radio"><span>New reports</span>
+                        <input type="radio"><span>Updated reports</span>
+                        <input type="radio"><span>New and Updated reports</span>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div  uib-accordion-group class="panel-default" heading="Province" is-open="status.Province" >
+
+            <table class="table table-bordered">
+                <tr>
+                    <td><input type="checkbox"><span>Province/State</span>
+                        <div class="clearfix"></div>
+                        <span class="red">(See Email Notification Templates 3 & 4)</span></td>
+                    <td><input type="checkbox"><span>Alberta</span></td>
+                    <td> <input type="radio"><span>New reports</span>
+                        <input type="radio"><span>Updated reports</span>
+                        <input type="radio"><span>New and Updated reports</span></td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div  uib-accordion-group class="panel-default" heading="City" is-open="status.City" >
+
+            <table class="table table-bordered">
+                <tr>
+                    <td><input type="checkbox"><span>City</span>
+                        <div class="clearfix"></div>
+                        <span class="red">(See Email Notification Templates 5 & 6)</span></td>
+                    <td><input type="checkbox"><span>Billings (Montana, United Statess)</span></td>
+                    <td> <input type="radio"><span>New reports</span>
+                        <input type="radio"><span>Updated reports</span>
+                        <input type="radio"><span>New and Updated reports</span></td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div  uib-accordion-group class="panel-default" heading="Community" is-open="status.Community" >
+
+            <table class="table table-bordered">
+                <tr>
+                    <td><input type="checkbox"><span>Community</span>
+                        <div class="clearfix"></div>
+                        <span class="red">(See Email Notification Templates 7 & 8)</span></td>
+                    <td><input type="checkbox"><span>Charlie's Restaurant (Calgary, Alberta, Canada)</span></td>
+                    <td> <input type="radio"><span>New reports</span>
+                        <input type="radio"><span>Updated reports</span>
+                        <input type="radio"><span>New and Updated reports</span></td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div  uib-accordion-group class="panel-default" heading="Incident Type" is-open="status.IncidentType" >
+
+            <table class="table table-bordered">
+                <tr>
+                    <td><input type="checkbox"><span>Incident Type</span>
+                        <div class="clearfix"></div>
+                        <span class="red">(See Email Notification Templates 9 & 10)</span></td>
+                    <td><input type="checkbox"><span>Complaint</span></td>
+                    <td> <input type="radio"><span>New reports</span>
+                        <input type="radio"><span>Updated reports</span>
+                        <input type="radio"><span>New and Updated reports</span></td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div  uib-accordion-group class="panel-default" heading="Operation type" is-open="status.Operationtype" >
+
+            <table class="table table-bordered">
+                <tr>
+                    <td><input type="checkbox"><span>Operation type</span>
+                        <div class="clearfix"></div>
+                        <span class="red">(See Email Notification Templates 11 & 12)</span></td>
+                    <td><input type="checkbox"><span>Construction</span></td>
+                    <td> <input type="radio"><span>New reports</span>
+                        <input type="radio"><span>Updated reports</span>
+                        <input type="radio"><span>New and Updated reports</span></td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div  uib-accordion-group class="panel-default" heading="Main impact category" is-open="status.Mainimpactcategory" >
+
+            <table class="table table-bordered">
+                <tr>
+                    <td><input type="checkbox"><span>Main impact category</span>
+                        <div class="clearfix"></div>
+                        <span class="red">(See Email Notification Templates 13 & 14)</span></td>
+                    <td><input type="checkbox"><span>Damage/Loss</span></td>
+                    <td> <input type="radio"><span>New reports</span>
+                        <input type="radio"><span>Updated reports</span>
+                        <input type="radio"><span>New and Updated reports</span></td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div  uib-accordion-group class="panel-default" heading="Incident Severity" is-open="status.IncidentSeverity" >
+
+            <table class="table table-bordered">
+                <tr>
+                    <td><input type="checkbox"><span>Incident Severity</span>
+                        <div class="clearfix"></div>
+                        <span class="red">(See Email Notification Templates 15 & 16)</span></td>
+                    <td><input type="checkbox"><span>Catastrophic</span></td>
+                    <td> <input type="radio"><span>New reports</span>
+                        <input type="radio"><span>Updated reports</span>
+                        <input type="radio"><span>New and Updated reports</span></td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div  uib-accordion-group class="panel-default" heading="Corrective Actions" is-open="status.CorrectiveActions" >
+
+            <table class="table table-bordered">
+                <tr>
+                    <td><input type="checkbox"><span>Corrective Actions</span>
+                        <div class="clearfix"></div>
+                        <span class="red">(See Email Notification Templates 21 & 22)</span></td>
+
+                    <td> <input type="radio"><span>New corrective actions</span>
+                        <input type="radio"><span>Updated corrective actions</span>
+                        <input type="radio"><span>New and Updated corrective actions</span></td>
+                </tr>
+            </table>
+
+        </div>
+
+    </uib-accordion>
+
+    <h2>{{notified_labels['EscalatedNotificationParameteHeader']['default_field_label']}}</h2>
+
+    <uib-accordion close-others="oneAtATime">
+        <div  uib-accordion-group class="panel-default" heading="Expired Corrective Actions" is-open="status.ExpiredCorrectiveActions" >
+
+            <table class="table table-bordered">
+                <tr>
+                    <td><input type="checkbox"><span>Expired Corrective Actions</span>
+                        <div class="clearfix"></div>
+                        <span class="red">(See Email Notification Templates 23)</span></td>
+                    <td><label for="">Number of days after expiry: </label><input type="text" class="form-control"></td>
+                    <td><label for="">Frequency of email reminder (days): </label> <input type="text" class="form-control"> </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div  uib-accordion-group class="panel-default" heading="Investigations not yet Closed" is-open="status.InvestigationsnotyetClosed" >
+
+            <table class="table table-bordered">
+                <tr>
+                    <td><input type="checkbox"><span>Investigations not yet Closed</span>
+                        <div class="clearfix"></div>
+                        <span class="red">(See Email Notification Templates 23)</span></td>
+                    <td><label for="">Number of days from Incident Date: </label><input type="text" class="form-control"></td>
+                    <td><label for="">Frequency of email reminder (days):  </label> <input type="text" class="form-control"> </td>
+                </tr>
+            </table>
+
+        </div>
+
+    </uib-accordion>
+
+</div>

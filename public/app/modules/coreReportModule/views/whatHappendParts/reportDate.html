@@ -1,0 +1,17 @@
+<!--{{labels.whatHappened.reportDate}}-->
+<div ng-if="report_labels['date']['is_hidden'] === 'No' || custom">
+    <label class="labelStyle">{{report_labels['date']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['date'])" uib-tooltip="{{report_labels['date']['help_me_name']}}"
+           ng-if="report_labels['date']['help_me_name'] && report_labels['date']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['date'])" ng-if="custom && report_labels['date']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a> </label>
+    <!--<a href="" ng-click="editField()"><i class="fa fa-edit"></i></a></label>-->
+    <p class="input-group">
+        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="report.report_date" is-open="datePopUps.report_date" 
+               datepicker-options="dateOptions" max="" close-text="Close" ng-click="datePopUps.report_date = !datePopUps.report_date" 
+               alt-input-formats="altInputFormats" placeholder="Select Date"
+               ng-required="report_labels['date']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"/>
+        <span class="input-group-btn calenderIcon">
+            <button type="button" class="btn btn-default " ng-click="datePopUps.report_date = !datePopUps.report_date"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+    </p>
+</div>

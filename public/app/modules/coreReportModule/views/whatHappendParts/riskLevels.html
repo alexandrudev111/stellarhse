@@ -1,0 +1,103 @@
+<div class="form-style riskLevel bottomCloseIcon">
+   <div class="riskLevelStyle">
+    <h2>
+        <span>{{report_labels['risk_level']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['risk_level'])" uib-tooltip="{{report_labels['risk_level']['help_me_name']}}"
+               ng-if="report_labels['risk_level']['help_me_name'] && report_labels['risk_level']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['risk_level'])" ng-if="custom && report_labels['risk_level']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></span>  <div class="progress prog">
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{riskLevelTotal}}" aria-valuemin="4" aria-valuemax="25" 
+                 style="width:{{(riskLevelTotal * 100 / 25)}}%" ng-class="{'progressBarRed': riskLevelTotal >= 19, 'progressBarOrange': (riskLevelTotal >= 12 && riskLevelTotal < 19),'progressBarYellow': (riskLevelTotal >= 5 && riskLevelTotal < 12), 'progressBarGreen': riskLevelTotal < 5}">
+                {{riskLevelTotal}} / 25
+            </div>
+            <span class="selectParam"></span>
+        </div></h2>
+    <div class="form-group block" ng-if="report_labels['risk_level_type_id']['is_hidden'] === 'No' || custom">
+        <label ng-class="{'required':(report_labels['risk_level_type_id']['is_mandatory'] == 'Yes' || report_labels['risk_level']['is_mandatory']=='Yes') && report.riskLevelsValues.hazard_exist == null}">
+            {{report_labels['risk_level_type_id']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['risk_level_type_id'])" uib-tooltip="{{report_labels['risk_level_type_id']['help_me_name']}}"
+               ng-if="report_labels['risk_level_type_id']['help_me_name'] && report_labels['risk_level_type_id']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['risk_level_type_id'], 'hazInspInc')" ng-if="custom && report_labels['risk_level_type_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+        <span  class="pull-left" ng-repeat="riskLevel in riskLevels.impact">
+            <input type="radio" ng-model="report.riskLevelsValues.impact" value="{{riskLevel.risk_level_sup_type_id}}"
+                   ng-change="calculateRiskLevel(null)" ng-disabled="!reportPermissions.risklevel || disabeldTrue"
+                   ng-required="report_labels['risk_level_type_id']['is_mandatory']=='Yes' || report_labels['risk_level']['is_mandatory']=='Yes'" >
+            {{riskLevel.risk_level_sup_type_name}}
+        </span> 
+
+        <a href="" class="pull-left" ng-click="clear1()"><i class="fa fa-close"></i></a>
+
+        <!--            <input type="radio"> <span>Medium</span>
+                    <input type="radio"> <span>Low</span>-->
+    </div>
+
+    <div class="form-group block" ng-if="report_labels['risk_level_sup_type_id']['is_hidden'] === 'No' || custom">
+        <label ng-class="{'required':(report_labels['risk_level_sup_type_id']['is_mandatory'] == 'Yes' || report_labels['risk_level']['is_mandatory']=='Yes') && report.riskLevelsValues.worker_exposure == null}"> 
+            {{report_labels['risk_level_sup_type_id']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['risk_level_sup_type_id'])" uib-tooltip="{{report_labels['risk_level_sup_type_id']['help_me_name']}}"
+               ng-if="report_labels['risk_level_sup_type_id']['help_me_name'] && report_labels['risk_level_sup_type_id']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['risk_level_sup_type_id'], 'hazInspInc')" ng-if="custom && report_labels['risk_level_sup_type_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+        <span  class="pull-left" ng-repeat="riskLevel in riskLevels.likelyhood">
+            <input type="radio" ng-model="report.riskLevelsValues.likelyhood" value="{{riskLevel.risk_level_sup_type_id}}"
+                   ng-change="calculateRiskLevel(null)" ng-disabled="!reportPermissions.risklevel || disabeldTrue"
+                   ng-required="report_labels['risk_level_sup_type_id']['is_mandatory']=='Yes' || report_labels['risk_level']['is_mandatory']=='Yes'" >
+            <span>{{riskLevel.risk_level_sup_type_name}}</span>
+
+        </span>
+
+
+        <a href="" class="pull-left" ng-click="clear2()"><i class="fa fa-close"></i></a>
+
+
+        <!--            <input type="radio"><span>High</span>
+                    <input type="radio"> <span>Medium</span>
+                    <input type="radio"> <span>Low</span>-->
+    </div>
+
+
+<!--     <div class="form-group block" ng-if="report_labels['severity_of_potential_consequences']['is_hidden'] === 'No' || custom">
+        <label ng-class="{'required':(report_labels['severity_of_potential_consequences']['is_mandatory'] == 'Yes' || report_labels['risk_level']['is_mandatory']=='Yes') && report.riskLevelsValues.potential_consequences == null}"> 
+            {{report_labels['severity_of_potential_consequences']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['severity_of_potential_consequences'])" uib-tooltip="{{report_labels['severity_of_potential_consequences']['help_me_name']}}"
+               ng-if="report_labels['severity_of_potential_consequences']['help_me_name'] && report_labels['severity_of_potential_consequences']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['severity_of_potential_consequences'], 'hazInspInc')" ng-if="custom && report_labels['severity_of_potential_consequences']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+        <span class="pull-left"  ng-repeat="riskLevel in riskLevels.potential_consequences">
+            <input type="radio" ng-model="report.riskLevelsValues.potential_consequences" value="{{riskLevel.risk_level_value}}"
+                   ng-change="calculateRiskLevel(null)" ng-disabled="!reportPermissions.risklevel"
+                   ng-required="report_labels['severity_of_potential_consequences']['is_mandatory']=='Yes' || report_labels['risk_level']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue">
+            <span>{{riskLevel.risk_level_degree}}</span>
+        </span>
+
+
+        <a href="" class="pull-left" ng-click="clear3()"><i class="fa fa-close"></i></a> -->
+
+        <!--            <input type="radio"><span>High</span>
+                    <input type="radio"> <span>Medium</span>
+                    <input type="radio"> <span>Low</span>-->
+    <!-- </div> -->
+
+    <div class="form-group block" ng-if="report_labels['should_work_stopped']['is_hidden'] === 'No' || custom">
+        <label ng-class="{'required':report_labels['should_work_stopped']['is_mandatory'] == 'Yes' && report.should_work_stopped == null}">
+            {{report_labels['should_work_stopped']['field_label']}}
+            <a href="" ng-click="openHelp(report_labels['should_work_stopped'])" uib-tooltip="{{report_labels['should_work_stopped']['help_me_name']}}"
+               ng-if="report_labels['should_work_stopped']['help_me_name'] && report_labels['should_work_stopped']['help_me_description']"><i class="fa fa-question"></i></a>
+            <a href="" ng-click="editField(report_labels['should_work_stopped'])" ng-if="custom && report_labels['should_work_stopped']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+        <span class="pull-left" >
+            <input type="radio" class="form-control" name="Certifications" ng-model="report.should_work_stopped" value="Yes"
+                ng-disabled="(!reportPermissions.shouldworkstopped) || disabeldTrue"
+                ng-required="report_labels['should_work_stopped']['is_mandatory']=='Yes' || report_labels['risk_level']['is_mandatory']=='Yes'" > Yes 
+        </span>
+        <span class="pull-left">
+            <input type="radio" class="form-control" name="Certifications" ng-model="report.should_work_stopped" value="No"
+                ng-disabled="!reportPermissions.shouldworkstopped || disabeldTrue"
+                ng-required="report_labels['should_work_stopped']['is_mandatory']=='Yes' || report_labels['risk_level']['is_mandatory']=='Yes'">  No
+        </span>
+
+        <a href="" class="pull-left" ng-click="clear4()"><i class="fa fa-close"></i></a>
+
+    </div>
+
+</div>
+</div>

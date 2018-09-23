@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h3 class="modal-title">Share chart</h3>
+</div>
+<div class="modal-body shareIT">
+    <h2> Share with :</h2>
+    <div class="contentCheckboxs">
+        <div class="form-group " ng-repeat="s in share_options">
+            <input ng-model="selectedMetric.shared_to_id[s.shared_to_id]" name="share_options" ng-checked="{{s.matched_choice}}" type="checkbox" value="{{s.shared_to_id}}"> <span>{{s.shared_to_name}}</span>
+            <!--<input  type="text" class="form-control">-->
+            <ui-select ng-if="s.field_code === 'anotherusersdashboards'" class="form-control shareStyle SharemTop showMatched"  ng-model="selectedMetric.specific_user_id_dashboard" theme="bootstrap" >
+                <ui-select-match placeholder="Enter User Name">{{$select.selected.full_name|| selectedMetric.user_dashboard}}</ui-select-match>
+                <ui-select-choices refresh="getActiveEmployees($select.search)" refresh-delay="0" 
+                                   repeat="emp.employee_id as emp in activeEmployees | filter: $select.search ">
+                    <div>{{emp.full_name}}</div>
+                </ui-select-choices>
+            </ui-select>
+    
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="shareFunc()">Submit</button>
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="cancel()">Cancel</button>
+</div>

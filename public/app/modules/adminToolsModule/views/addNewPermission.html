@@ -1,0 +1,579 @@
+  
+    <div class="managePeopleStyle" ng-controller="PermissionCtrl" >
+<h2>Manage Groups and Permissions: <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+<h3>Add edit groups and permissions</h3>
+
+<form action="">
+     <div class="col-md-12">
+    <div class="form-group">
+        <label for="">
+            
+            Enter/edit group
+        </label>
+        <input type="text" class="form-control">
+    </div>
+    </div>
+     <div class="col-md-12">
+    <div class="form-group">
+        <label for="">
+         Describe group
+        </label>
+        <textarea class="form-control"></textarea>
+    </div>
+    </div>
+     <div class="col-md-12">
+    <div class="col-md-4">
+        <label for="">
+         Select group type
+        </label>
+        <select class="form-control">
+            <option value="">Basic level 1</option>
+            <option value="">Basic level 2</option>
+            <option value="">Basic level 3</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+      <table>
+      <tr>
+       <td> 
+        <label for="">
+         Select module type
+        </label>
+           </td>
+           
+           <td>
+            <span>
+                <input type="checkbox"> Analytics
+            </span>
+            <div class="clearfix"></div>
+            <span>
+                <input type="checkbox"> Hazard ID
+            </span>
+            <div class="clearfix"></div>
+            <span>
+                <input type="checkbox"> HSE Program
+            </span>
+            <div class="clearfix"></div>
+             <span>
+                <input type="checkbox"> Incident
+            </span>
+            <div class="clearfix"></div>
+            <span>
+                <input type="checkbox"> Inspection
+            </span>
+            <div class="clearfix"></div>
+                 
+            <span>
+                <input type="checkbox"> Maintenance 
+            </span>
+              <div class="clearfix"></div>     
+            <span>
+                <input type="checkbox"> Safety Meetings 
+            </span>
+            
+              <div class="clearfix"></div>       
+            <span>
+                <input type="checkbox"> Training 
+            </span><div class="clearfix"></div>
+        </td>
+        </tr>
+        </table>
+    </div>
+    <div class="col-md-4">
+        
+        
+    </div>
+    </div>
+    <div class="col-md-12">
+        <label for="">Edit permission</label>
+        
+ <div class="insideAccordion form-style">
+    <uib-accordion close-others="oneAtATime" is-open="status.permisionContainer">
+    
+    <div  uib-accordion-group class="panel-default" heading="Click to see permissions by module" is-open="status.Permision" >
+       
+        <div class="accStyle" >
+            <uib-accordion close-others="oneAtATime" >
+                <div  uib-accordion-group class="panel-default" heading="Administration"  >
+                   <div ng-scrollbars ng-scrollbars-config="config">
+                   
+                   
+                   
+                    </div>
+                </div>
+                
+                <div  uib-accordion-group class="panel-default" heading="Analytics"  >
+                   <div ng-scrollbars ng-scrollbars-config="config">
+                   
+                   
+                   
+                    </div>
+                </div>
+                
+                
+                <div  uib-accordion-group class="panel-default" heading="Dashboard"  >
+                   <div ng-scrollbars ng-scrollbars-config="config">
+                   
+                   
+                   
+                    </div>
+                </div>
+                
+                <div  uib-accordion-group class="panel-default" heading="Hazard ID"  >
+                   <div ng-scrollbars ng-scrollbars-config="config">
+                   
+                   
+                   
+                    </div>
+                </div>
+                
+                
+                <div  uib-accordion-group class="panel-default" heading="HSE Program"  >
+                   <div ng-scrollbars ng-scrollbars-config="config">
+                   
+                   
+                   
+                    </div>
+                </div>
+                
+                
+                <div  uib-accordion-group class="panel-default" heading="Incidents"  >
+                 
+                <div class="subAccordion">
+                   
+               <uib-accordion close-others="oneAtATime" >
+                <div  uib-accordion-group class="panel-default" heading="Default data tables"  >
+                
+                <input type="checkbox">Select All
+                 
+                 <table class="table table-bordered"> 
+                    
+                                    <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>definition</th>
+                                        </tr>
+                                    </thead>                    
+                     <tr>
+                         <td><input type="checkbox"> All training reports</td>
+                         <td></td>
+                     </tr>
+                     
+                      <tr>
+                         <td><input type="checkbox"> My training reports</td>
+                         <td></td>
+                     </tr>
+                     
+                     
+                     <tr>
+                         <td><input type="checkbox"> Training record Versions</td>
+                         <td></td>
+                     </tr>
+                     
+                     
+                     <tr>
+                         <td><input type="checkbox"> All follow-up actions</td>
+                         <td></td>
+                     </tr>
+                     <tr>
+                         <td><input type="checkbox"> Follow-up action email log</td>
+                         <td></td>
+                     </tr>
+                     <tr>
+                         <td><input type="checkbox"> Supporting documents</td>
+                         <td></td>
+                     </tr>
+                     <tr>
+                         <td><input type="checkbox"> Deleted training Reports</td>
+                         <td></td>
+                     </tr>
+                     <tr>
+                         <td><input type="checkbox"> People involved</td>
+                         <td></td>
+                     </tr>
+                     <tr>
+                         <td><input type="checkbox"> Training providers</td>
+                         <td></td>
+                     </tr>                    
+                 </table>                  
+                  </div>
+                  
+                  
+                   <div  uib-accordion-group class="panel-default" heading="Read-only access to all reports"  >
+                 
+                 <table class="table table-bordered">    
+                        <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>definition</th>
+                                        </tr>
+                                    </thead>                   
+                     <tr>
+                         <td><input type="checkbox"> Can access and view all reports and all report tabs and fields in read-only mode.</td>
+                         <td></td>
+                     </tr>                    
+                 </table>                  
+                  </div>
+                  
+                  
+                  
+                   <div  uib-accordion-group class="panel-default" heading="Create and edit own reports using fields on the selected tabs"  >
+                 
+                <input type="checkbox">Select all
+                
+                 <table class="table table-bordered">    
+                    
+                                         <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>Definition</th>
+                                        </tr>
+                                    </thead>  
+                                                     
+                     <tr>
+                         <td><input type="checkbox"> What happened?</td>
+                         <td>
+                           
+                            <h2><span>What Happened?:</span> Provides a general description of the incident.</h2>
+                            </td>
+
+
+                     </tr>
+                     
+                     <tr>
+                         <td><input type="checkbox">Impacts</td>
+                         <td><h2><span>Impacts:</span>
+    Provides details on the negative outcomes (e.g., injuries, damages, fines).</h2></td>
+                     </tr>
+                     
+                     
+                     <tr>
+                         <td><input type="checkbox">Investigation</td>
+                         <td><h2><span>Investigation: </span>
+
+    Captures the details of the investigation and root cause findings.</h2></td>
+                     </tr>
+                     
+                         
+                   
+
+
+                     
+                      <tr>
+                         <td><input type="checkbox">People involved</td>
+                         <td><h2><span>People Involved:</span> 
+
+    Identifies who was involved and how.</h2></td>
+                     </tr> 
+                     
+
+                        <tr>
+                         <td><input type="checkbox">Observations & analysis</td>
+                         <td><h2><span>Observations & Analysis:</span>
+
+    Captures more detailed information about what the conditions at the time of the incident and potential causes.</h2></td>
+                     </tr> 
+                      <tr>
+                         <td><input type="checkbox">Corrective actions</td>
+                        <td><h2><span>Corrective actions:</span> 
+
+    Allows for assignment of specific corrective actions and includes email notifications and reminders.</h2>
+</td>
+                    
+                     </tr>
+                     
+                     
+                      <tr>
+                         <td><input type="checkbox"> Supporting documents</td>
+                         <td><h2><span>Supporting documents:</span>
+
+    Allows uploading of documents related to the incident (e.g., photographs, witness statements, receipts for damage repairs).</h2></td>
+                     </tr>
+                    
+                 </table>                  
+                  </div>
+                  
+                  
+                  
+                   <div  uib-accordion-group class="panel-default" heading="Read-only access to reports created by others and restricted to the following tabs of the form"  >
+                 
+                 
+                <input type="checkbox">Select all
+                
+                 <table class="table table-bordered">   
+                    
+                                          <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>definition</th>
+                                        </tr>
+                                    </thead>                    
+                     <tr>
+                         <td> <input type="checkbox"> What happened?</td>
+                         <td></td>
+                     </tr>
+                      <tr>
+                         <td> <input type="checkbox"> Follow-up actions</td>
+                         <td></td>
+                     </tr>
+                     
+                      <tr>
+                         <td> <input type="checkbox"> Supporting documents</td>
+                         <td></td>
+                     </tr>
+                    
+                 </table>                  
+                  </div>
+                  
+                  
+                  
+                  
+                   
+                   <div  uib-accordion-group class="panel-default" heading="Read-write access to reports created by other users and restricted to the fields on the selected tabs"  >
+                 
+                <input type="checkbox">Select all
+                
+                 <table class="table table-bordered">       
+                    
+                                      <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>definition</th>
+                                        </tr>
+                                    </thead>  
+                                                  
+                     <tr>
+                         <td><input type="checkbox"> What happened?</td>
+                         <td></td>
+                     </tr>
+                     
+                      <tr>
+                         <td><input type="checkbox"> Follow-up actions</td>
+                         <td></td>
+                     </tr>
+                     
+                      <tr>
+                         <td><input type="checkbox"> Supporting documents</td>
+                         <td></td>
+                     </tr>
+                    
+                 </table>                  
+                  </div>
+                  
+                  
+                  
+                   <div  uib-accordion-group class="panel-default" heading="Limits to data access:"  >
+                 
+                 <table class="table table-bordered"> 
+                    
+                                            <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>definition</th>
+                                        </tr>
+                                    </thead>                      
+                     <tr>
+                         <td><input type="checkbox">Limits user access to reports created by other users according to location - does not affect user access to their own reports.</td>
+                         <td></td>
+                     </tr>
+                    
+                 </table>                  
+                  </div>
+                  
+                  
+                   <div  uib-accordion-group class="panel-default" heading="Read-write use of restricted fields"  >
+                 
+                 <table class="table table-bordered">  
+                    
+                                           <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>definition</th>
+                                        </tr>
+                                    </thead>  
+                                                       
+                     <tr>
+                         <td><input type="checkbox"> Trainee observed post-training to verify competence</td>
+                         <td></td>
+                     </tr>
+                     
+                     
+                      <tr>
+                         <td><input type="checkbox"> Date observed</td>
+                         <td></td>
+                     </tr>
+                     
+                     
+                      <tr>
+                         <td><input type="checkbox"> Observed by</td>
+                         <td></td>
+                     </tr>
+                     
+                     
+                     
+                     
+                      <tr>
+                         <td><input type="checkbox"> Observed by</td>
+                         <td></td>
+                     </tr>                   
+                                         
+                 </table>                  
+                  </div>
+                  
+                  
+                  
+                   <div  uib-accordion-group class="panel-default" heading="View previous versions of reports"  >
+                 
+                 <table class="table table-bordered">  
+                        <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>definition</th>
+                                        </tr>
+                                    </thead>  
+                                                       
+                     <tr>
+                         <td></td>
+                         <td></td>
+                     </tr>
+                    
+                 </table>                  
+                  </div>
+                  
+                  
+                  
+                  
+                 <div  uib-accordion-group class="panel-default" heading="Delete reports"  >
+                 
+                 <table class="table table-bordered">  
+                        <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>definition</th>
+                                        </tr>
+                                    </thead>                     
+                     <tr>
+                         <td></td>
+                         <td></td>
+                     </tr>
+                    
+                 </table>                  
+                  </div>
+                  
+                  
+                  
+                 <div  uib-accordion-group class="panel-default" heading="Delete locked reports">
+                 
+                 <table class="table table-bordered">  
+                        <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>definition</th>
+                                        </tr>
+                                    </thead>                     
+                     <tr>
+                         <td></td>
+                         <td></td>
+                     </tr>
+                    
+                 </table>                  
+                  </div>
+                  
+                  
+                  
+                   <div  uib-accordion-group class="panel-default" heading="Unlock reports">
+                 
+                 <table class="table table-bordered">  
+                        <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>definition</th>
+                                        </tr>
+                                    </thead>                     
+                     <tr>
+                         <td></td>
+                         <td></td>
+                     </tr>
+                    
+                 </table>                  
+                  </div>
+                  
+                  
+                  
+                  
+                  
+                   
+                   
+                   
+                  
+                  </uib-accordion>
+                   
+                   </div>
+                   
+                   
+                   
+                   
+                </div>
+                
+                <div  uib-accordion-group class="panel-default" heading="Inspections"  >
+                   <div ng-scrollbars ng-scrollbars-config="config">
+                   
+                   
+                   
+                    </div>
+                </div>
+                
+                <div  uib-accordion-group class="panel-default" heading="Maintenance "  >
+                   <div ng-scrollbars ng-scrollbars-config="config">
+                   
+                   
+                   
+                    </div>
+                </div>
+            </uib-accordion>
+        </div>
+    
+</div>
+</uib-accordion>
+
+</div>
+        
+    </div>
+    
+    
+</form>
+<div class="clearfix"></div>
+
+<div class="col-md-12">
+<label for="">Add/Remove group members (Users)</label>
+<div class="AddMembersUser">
+<div class="toolbar">
+        
+        <a href=""  uib-tooltip="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>
+        
+        <a href=""  uib-tooltip="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
+        
+        <a href=""  uib-tooltip="activate">  <i class="fa fa-lock" aria-hidden="true"></i></a>
+        
+       <a href=""  uib-tooltip="Deactivate">
+     <i class="fa fa-unlock" aria-hidden="true"></i>
+        </a>
+
+  
+
+    </div>
+    
+<div>
+<div id="grid1" ui-grid="myLoginHistory" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+</div>
+</div>
+</div>
+<div class="clearfix"></div>
+
+<button class="btn btn-primary pull-right">Apply</button>
+
+<button class="btn btn-primary pull-right">Cancel</button>
+
+
+</div>

@@ -1,0 +1,25 @@
+<!--{{labels.whatHappened.riskControls}}-->
+<uib-accordion close-others="oneAtATime" ng-if="report_labels['risk_control_id']['is_hidden'] === 'No' || custom" class="accordionIcon">
+    <div class="accordionIcons">     
+        <a href="" ng-click="openHelp(report_labels['risk_control_id'])" uib-tooltip="{{report_labels['risk_control_id']['help_me_name']}}"
+           ng-if="report_labels['risk_control_id']['help_me_name'] && report_labels['risk_control_id']['help_me_description']" tooltip-placement="left"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['risk_control_id'], 'hazInspInc')" ng-if="custom && report_labels['risk_control_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a>
+
+    </div>
+    <!--ng-class="{'required':report_labels['risk_control_id']['is_mandatory'] == 'Yes' && riskControlRequired}"-->
+    <div uib-accordion-group class="panel-default" is-open="status.risk">
+        <uib-accordion-heading>
+            <label ng-class="{'required':report_labels['risk_control_id']['is_mandatory'] == 'Yes' && riskControlRequired}"> 
+                {{report_labels['risk_control_id']['field_label']}}</label>        
+        </uib-accordion-heading>
+        <div class="form-style ristItems">
+            <div class="clearfix"></div>
+            <div class="form-group block" ng-repeat="riskControl in report.riskControls">
+                <input type="checkbox" class="form-control" name="Certifications" ng-model="riskControl.risk_control_choice"
+                       ng-required="report_labels['risk_control_id']['is_mandatory']=='Yes' && riskControlRequired"
+                       ng-change="checkRiskControlRequired()" ng-disabled = "disabeldTrue"> 
+                {{riskControl.risk_control_name}}
+            </div>
+        </div>
+    </div>
+</uib-accordion>

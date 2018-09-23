@@ -1,0 +1,34 @@
+ <uib-tabset active="activeForm">
+        <uib-tab index="0" heading="What happened?">
+            <div ng-include="'app/modules/trainingReportModule/views/whatHappend.html'"></div>
+        </uib-tab>
+
+        <uib-tab index="1" heading="People involved">
+
+            <div ng-include="'app/modules/coreReportModule/views/peopleInvolved.html'"></div>
+
+        </uib-tab>
+        
+        <uib-tab index="2" heading="Follow Up Actions">
+            <div ng-include="'app/modules/coreReportModule/views/remedialActions.html'"></div>
+            <!--  
+              <div ng-include="'app/modules/newReportSafetyModule/views/hazardDetails.html'"></div>-->
+
+        </uib-tab> 
+
+        <uib-tab index="3" heading="Supporting documents">
+
+            <div ng-include="'app/modules/coreReportModule/views/supportingDocuments.html'"></div>
+
+        </uib-tab>
+
+        <!--<uib-tab index="4" heading="Corrective actions">
+            
+            
+            <div ng-include="'app/modules/newReportSafetyModule/views/remedialActions.html'"></div>
+            
+        </uib-tab>
+        -->
+
+    </uib-tabset>
+

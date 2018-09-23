@@ -1,0 +1,87 @@
+<div class="modal-header mBottom">
+    <h3 class="modal-title">Metrics </h3>
+</div>
+
+<div cg-busy="{promise:promise,backdrop:true}">
+    <form  name="addMetric" class="form-inline manageCustomer formStylePadding">
+        <div class="form-style chartValidation">
+            <div class="form-group">
+                <label>KPI name.<b style="color: red">*</b></label>
+                <input type="text" class="form-control" required   ng-disabled="disabled" ng-model="selectedMetric.favorite_metrics_name">
+                <span style="color: red"    class="validationMsg">{{metrics_name_valid}}</span>
+            </div> 
+
+
+            <div class="form-group" ng-if="selectedMetric.corrective_all === '0' && products">
+                <label>Report type:</label>
+                <select class="form-control"  ng-disabled="disabled"
+                        ng-options="a.product_id as a.product_name for a in products"
+                        ng-model="selectedMetric.product_id"> 
+                    <option value="" selected>Please select one.</option>
+                </select>
+            </div>
+
+            <div class="form-group selectPeriod">
+                <label >Select period:</label>
+                <ui-select ng-disabled="disabled" ng-model="selectedMetric.period_items_id"  on-select="onSelectedPeriod($item)">
+                    <ui-select-match placeholder="select period">
+                        <span>{{$select.selected.period_items_name|| selectedMetric.period_items_name }}</span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="period in periodDates track by period.period_items_id">
+                        <span>{{period.period_items_name}}</span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+
+            <div class="form-group" ng-show="show_time_frame">
+                <label>Time frame:</label>
+                <input id="metrics_date" 
+                       placeholder="time frame" 
+                       type="text"
+                       ng-model="selectedMetric.time_frame"
+                       class="form-control">
+                <a href="" class="pull-left" ng-click="selectedMetric.time_frame = ''"><i class="fa fa-close"></i></a>
+            </div>
+
+            <div class="form-group ">
+                <label> Select scope:</label>     
+                <select class="form-control"  ng-disabled="disabled"
+                        ng-options="m.metrics_scope_id as m.metrics_scope_name for m in metricsScope"
+                        ng-model="selectedMetric.scope_id">               
+                </select>
+            </div>
+
+            <div class="form-group" ng-if="show_sub_impact">
+                <label>Sub impact:</label>
+                <!--<input  type="text" class="form-control">-->
+                <select class="form-control" ng-disabled="disabled"  
+                        ng-options="i.impact_sub_type_id as i.impact_sub_type_name for i in subTypes"
+                        ng-model="selectedMetric.sub_type_id">               
+                    <option  value="" selected>Please select one.</option>
+                </select>
+            </div>
+            
+            <div class="form-group buttonMTop">
+                <label >Formula calc.</label>
+                <span>{{selectedMetric.formula_calc}}</span>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-7" style=" margin-top: 10px; width: 100%">
+                     <button class="btn btn-primary mTop pull-right" ng-click="updateFun()" ng-show="disabled" >  
+                        <span>Update</span>
+                    </button>
+                    
+                    <button class="btn btn-primary mTop pull-right" ng-click="addMetricFunc()"   ng-show="!disabled" data-ng-disabled="addMetric.$invalid">  
+                        <span>Save & close</span>
+                    </button>
+
+                    <button class="btn btn-primary mTop pull-right" data-ui-sref="chartgrid"> 
+                        <span>Cancel</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

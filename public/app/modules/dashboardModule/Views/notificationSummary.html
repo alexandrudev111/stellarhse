@@ -1,0 +1,45 @@
+<div class="modal-header">
+    <h3 class="modal-title">Notification summary</h3>
+</div>
+<div class="modal-body">
+ <div class="form-group col-md-6">
+        <label>{{all_mod_data[3].label}}:</label>
+        <span>{{selected_notification.report_number}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+
+
+
+    <div class="form-group col-md-6">
+        <label> {{all_mod_data[0].label}}:</label>
+        <span>{{selected_notification.date}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+    
+    <div class="form-group col-md-6">
+        <label>{{all_mod_data[4].label}}:</label>
+        <span>{{selected_notification.reported_by}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+
+
+
+    <div class="form-group col-md-6">
+        <label>{{all_mod_data[12].label}}:</label>
+        <span>{{selected_notification.sent_to}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+    
+    
+     <div class="form-group col-md-6">
+        <label>{{all_mod_data[8].label}}:</label>
+        <span>{{selected_notification.PriorityName}}</span>
+        <!--<input type="text" class="form-control" ng-model="">-->
+    </div>
+
+
+<div class="clearfix"></div>
+    <button class="btn btn-primary pull-right" type="button" ng-click="cancel()">Ok</button>
+    <button class="btn btn-primary pull-right" type="button" ng-click="cancel()">Cancel</button>
+</div>
+

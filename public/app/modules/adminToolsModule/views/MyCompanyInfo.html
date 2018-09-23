@@ -1,0 +1,245 @@
+<!--ng-show="org_id == ''"--> 
+<h2> My company details: <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" >
+        </h2> 
+   
+
+   <form  name="addCustomer" class="form-inline manageCustomer formStylePadding">
+    <div class="form-style">
+       
+        
+        <div class="clearfix"></div>
+
+       <!-- <div class="row">
+            <div class="col-md-6">
+                <h2   ng-show="org_id">{{customerLabels.CompanyInfoTitle}} :</h2> 
+            </div>
+            <div class="preview previewSyle col-md-6">
+               
+            </div>
+
+        </div>-->
+ <h2 class="noMarginTop">{{customerLabels.CompanyInfoTitle}} :</h2> 
+        <div class="form-group col-md-3">
+          
+           
+            <label for="exampleInputPassword3">{{customerLabels.CompanyName}}:</label>
+            <input type="text" class="form-control" required     ng-disabled="disabled"    ng-model="selectedCustomer.org_name">
+            <span style="color: red"    class="validationMsg"   >{{org_name_valid}}</span>
+        </div>   
+
+        <div class="form-group pull-left">
+            <label for="exampleInputPassword3">{{customerLabels.SystemAdminName}}:</label>
+            <select class="form-control" 
+                    ng-options="a.employee_id as a.FullName for a in orgemployees"
+                    ng-disabled="disabled || org_id == ''"    ng-model="selectedCustomer.system_admin_id">
+            </select>       
+        </div>
+       <!-- <div class="form-group pull-left">
+            <label for="exampleInputPassword3"> {{customerLabels.Status}}:</label>           
+            <select class="form-control"   ng-disabled="disabled"    ng-model="selectedCustomer.is_active"
+                    ng-options="a.item_id as a.item_value for a in statuslist" >                
+            </select>         
+        </div>-->
+        <div class="clearfix"></div>
+        <div class="form-group col-md-5 AddressStyle">
+            <label for="exampleInputPassword3">{{customerLabels.CompanyStreetAddress}}:</label>
+            <input type="text" class="form-control"     ng-disabled="disabled"    ng-model="selectedCustomer.address">
+        </div>            
+        <div class="form-group pull-left">
+            <label for="exampleInputPassword3">{{customerLabels.CountryId}}:</label>
+            <select class="form-control" required    ng-disabled="disabled"    ng-model="selectedCustomer.country_id"
+                    ng-options="c.country_id as c.country_name for c in countries"          >                     
+            </select>
+        </div>
+        <div class="form-group pull-left">
+            <label for="exampleInputPassword3">{{customerLabels.ProvinceStateId}}:</label>
+            <select class="form-control" required      ng-disabled="disabled"    ng-model="selectedCustomer.province_id"
+                    ng-options="p.province_id as p.province_name for p in provinces"     >
+            </select>
+        </div>
+        <div class="form-group pull-left">
+            <label for="exampleInputPassword3">{{customerLabels.CityName}}:</label>
+            <select class="form-control"  required  ng-disabled="disabled"    ng-model="selectedCustomer.city_id"
+                    ng-options="c.city_id as c.city_name for c in cities" > 
+            </select>          
+        </div>
+        <div class="form-group  col-md-2 smallInput">
+            <label for="exampleInputPassword3">{{customerLabels.PostalCodeLBL}}:</label>
+            <input type="text" class="form-control"     ng-disabled="disabled"    ng-model="selectedCustomer.postal_code" >           
+        </div>
+        
+         <div class="form-group   smallInput">
+            <label for="exampleInputPassword3">Phone Number:</label>
+            <input type="text" class="form-control" ui-mask="999-999-9999"  ng-disabled="disabled"    ng-model="selectedCustomer.phone" >           
+        </div>
+
+
+        <div class="clearfix"></div>
+       <!-- <div class="form-group ">
+            <label for=""> {{customerLabels.SelectLanguageLbl}}:</label>
+            <div class="form-group" ng-repeat="language in languagelist" >
+                <input type="radio" class="form-control" name="languages"  value="{{language.language_id}}" ng-disabled="org_id != '' || disabled"    ng-model="selectedCustomer.language_id"> 
+                {{language.language_name}} 
+            </div>
+        </div>-->
+        <span class="form-group checkbox removeLabel"   ng-hide="true"   >
+            <input type="checkbox" class="pull-left"  ng-true-value="'1'" ng-false-value="'0'"  ng-model="selectedCustomer.show_customer"> <span>{{customerLabels.ShowCustomerInIncForm}}</span>
+        </span>
+
+    </div>
+    <div class="form-style checkbox block packages">
+        <h2>{{customerLabels.MyModules}}:</h2>
+        <div class="col-md-4">
+            <p><label>{{customerLabels.ABCanTrackTitle}}<b style="color: red">*</b>:</label>
+
+            <span class="clearfix"></span>
+
+            <span class="CheckStyle" ng-repeat="product in productlist" ng-if="product.product_list_code == 'ABCanTrack'">
+                <input type="checkbox" ng-disabled="disabled"    ng-model="product.product_choice"> <label>{{product.product_name}}</label>
+            </span>
+            </p>
+        </div>
+
+        <div class="col-md-4">
+            <p><label>{{customerLabels.HSETitle}}:</label>
+            <span class="clearfix"></span>
+            <span class="CheckStyle" ng-repeat="product in productlist" ng-if="product.product_list_code == 'HSE' && product.product_code == 'HSE'">
+                <input type="checkbox" ng-disabled="true"> <label>{{product.product_name}}</label>
+            </span>
+
+            <span class="CheckStyle" ng-repeat="product in productlist" ng-if="product.product_list_code == 'HSE' && product_code !== 'HSE'">
+                <input type="radio" ng-disabled="true" name="libraHSE"   > <label>{{product.product_name}}</label>
+            </span>
+            </p>
+        </div>
+
+    </div>
+    <div class="form-style billingDetails">
+        <h2>{{customerLabels.BillingAddress}}:</h2>
+        <div class="form-group">
+            <label for="exampleInputPassword3">{{customerLabels.MailingAddress}}:</label>
+            <input class="form-control"  type="text"   ng-model="selectedCustomer.mailing_address" ng-disabled="disabled"  />
+
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword3">{{customerLabels.CountryId}}:</label>
+            <select class="form-control"    ng-options="c.country_id as c.country_name for c in countries"  
+                    ng-disabled="disabled"    ng-model="selectedCustomer.billing_country_id"      >
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword3">{{customerLabels.ProvinceStateId}}:</label>
+            <select class="form-control"     ng-disabled="disabled"    ng-model="selectedCustomer.billing_province_id" 
+                    ng-options="p.province_id as p.province_name for p in billing_provinces"   > 
+
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword3">{{customerLabels.CityName}}:</label>
+            <select class="form-control" ng-disabled="disabled"    ng-model="selectedCustomer.billing_city_id"  ng-options="c.city_id as c.city_name for c in billing_cities" > 
+            </select>
+        </div>
+        <div class="form-group  col-md-2 smallInput">
+            <label for="exampleInputPassword3" >{{customerLabels.PostalCodeLBL}}:</label>
+            <input type="text" class="form-control" ng-disabled="disabled"    ng-model="selectedCustomer.billing_postal_code">           
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <label for="exampleInputPassword3"> {{customerLabels.Email}}:</label>
+            <input class="form-control"  ng-disabled="disabled"    type="text" name="email"
+                   ng-model="selectedCustomer.email" ng-blur="validEmail()"/>   
+            <span class="validationMsg"   style="color: red"> {{checkEmail}}  </span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword3">{{customerLabels.BillingContact}}: </label>
+            <input type="text" class="form-control"  ng-disabled="disabled"    ng-model="selectedCustomer.billing_contact"/>           
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword3">{{customerLabels.BillingCycle}}: </label>
+            <input type="text" class="form-control"  ng-disabled="disabled"    ng-model="selectedCustomer.billing_cycle"   
+                   name="billing_cycle"    ng-pattern="/^([0-9]{1,11})[\.]{0,10}([0-9]){0,17}$/"     maxlength="8"/>     
+            <span class="validationMsg"  ng-show="addCustomer.billing_cycle.$error.pattern"   style="color: red">{{number_valid}}</span>
+        </div>
+        <div class="form-group" ng-show="false">
+            <label for="exampleInputPassword3">{{customerLabels.NoOfActiveUsers}}:</label>
+            <input type="text" class="form-control"    ng-disabled="disabled"  />           
+        </div>
+        <div class="form-group"  ng-show="false">
+            <label for="exampleInputPassword3"> {{customerLabels.CurrentBillingAmount}}:</label>
+            <input type="text" class="form-control"  ng-disabled="disabled"  >           
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword3">{{customerLabels.FirstBillingDate}}: </label>
+            <input type="text" class="form-control" my-datepicker   ng-disabled="disabled" readonly    ng-model="selectedCustomer.first_billing_date" />           
+            <a href="" class="pull-left" ng-click="selectedCustomer.first_billing_date = ''"   ng-show="!disabled"   ><i class="fa fa-close"></i></a>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword3">{{customerLabels.LastBillingDate}}:</label>
+            <input type="text" class="form-control" my-datepicker    ng-disabled="disabled"  readonly  ng-model="selectedCustomer.last_billing_date" />           
+            <a href="" class="pull-left" ng-click="selectedCustomer.last_billing_date = ''"  ng-show="!disabled"  ><i class="fa fa-close"></i></a>
+        </div>
+        
+         <div class="form-group   smallInput">
+            <label for="exampleInputPassword3">Phone Number:</label>
+            <input type="text" class="form-control" ui-mask="999-999-9999"  ng-disabled="disabled"    ng-model="selectedCustomer.phone" >           
+        </div>
+        
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="col-md-7" style=" margin-top: 10px; width: 100%">
+        <button class="btn btn-primary mTop pull-right" ng-click="addCompany()"  ng-show="selectedCustomer.org_id == '' || !disabled"
+                data-ng-disabled="addCustomer.$invalid">  
+            <span>{{customerLabels.Save}}</span>
+        </button>
+
+        <button class="btn btn-primary mTop pull-right" ng-click="updateInfo()" ng-show="disabled" >  
+            <span>{{customerLabels.Update}}</span>
+        </button>
+
+        <button class="btn btn-primary mTop pull-right" data-ui-sref="customers"> 
+            <i class="fa fa-backward"></i> <span>{{customerLabels.Cancel}}</span>
+        </button>
+    </div>
+</form>
+
+<div class="form-style noBorder">
+    <h2>{{customerLabels.CompanyLogo}}:</h2>
+    <p>{{customerLabels.EditCompanyLogoNote}}</p>
+    <form name="uploadLogo">
+        <div class="inforow2" style="width: 98%; padding: 0; margin: 0 1%">
+            <input  ngf-select="" 
+                    name="file"
+                    id="imageInput" 
+                    accept="image/*"
+                    ngf-max-size="1MB" ngf-max-height="180"  
+                    ngf-max-width="350"
+                    ng-model="selectedCustomer.logo" 
+                    style="float:left; width: 50%"
+                    type="file">
+
+            <label class="fileLayer" for="file">
+                <i class="fa fa-download" aria-hidden="true"></i>  <span >{{customerLabels.UploadLogo}}</span> 
+            </label>
+        </div>
+
+        <!--        <input ngf-select="" ng-model="selectedCustomer.logo"  name="file"  
+                       accept="image/*"
+                       ngf-max-size="1MB" ngf-max-height="180"  
+                       ngf-max-width="350" type="file"> -->
+
+        <div class="alert-warning"  ng-show="uploadLogo.$error.maxSize || uploadLogo.$error.maxWidth || uploadLogo.$error.maxHeight" 
+             ng-messages="uploadLogo.file.$errorMessage" role="alert">
+            <p class="help-block error-text" style="color: red" ng-message="ngf-validate">{{customerLabels.validatelogofile}}</p>
+        </div>
+
+        <div class="preview">
+            <img class="thumb"                   
+                 ngf-src="selectedCustomer.logo" 
+                 ngf-background="selectedCustomer.logo" 
+                 ngf-resize="{width: auto, height: auto, quality: 0.9}" >
+        </div>
+        <button  class="button btn btn-primary"   data-ng-disabled="uploadLogo.$invalid"   ng-click="uploadOrgLogo();" > <i class="fa fa-upload pull-left "></i>{{customerLabels.UploadNewLogo}}</button>
+    </form>
+</div>

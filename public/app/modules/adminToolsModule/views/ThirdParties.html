@@ -1,0 +1,34 @@
+<h2>Third parties: <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+<!--<div>
+    <span>{{thirdPartyLabels.thirdpartiesgridinst1}} </span> <br><br>
+    - <span>{{thirdPartyLabels.thirdpartiesgridinst2}} </span> <br>
+    - <span>{{thirdPartyLabels.thirdpartiesgridinst3}} </span> <br><br>
+    <span>{{thirdPartyLabels.thirdpartiesgridinst4}} </span> <br><br>
+    <span>{{thirdPartyLabels.thirdpartiesgridinst5}} </span> <br>
+    <span>{{thirdPartyLabels.thirdpartiesgridinst6}} </span> <br><br>
+</div>
+<div>
+
+</div>
+<div>
+    <input class="pull-left" type="checkbox" ng-model="nocustomercheck" ><span class="pull-left">{{thirdPartyLabels.havenocustomers}} </span>
+    <button class="btn btn-primary mTop pull-left" ng-click="submitCustomers()"  >  <span>{{thirdPartyLabels.Submit}}</span>
+    </button>
+    <button class="btn btn-primary pull-left" ng-click="cancelCustomers()" >{{thirdPartyLabels.Cancel}}</button>
+    <div class="clearfix"></div>
+    <div class="pull-left">When you check or uncheck this box, you must click submit to save your changes.</div>
+</div>
+-->
+<div class="toolbar">
+    <a ng-click="openAddThirdParty();" uib-tooltip="Add thirdparty"><i class="fa fa-plus"></i></a>
+    <a ng-click="editThirdParty();" uib-tooltip="Edit thirdarty"><i class="fa fa-edit"></i></a>
+    <a href="" ng-click="deleteThirdParty()" uib-tooltip="Delete Item"><i class="fa fa-remove red" ></i></a>
+    <a href="" ng-click="clearSearch()" uib-tooltip="Clear search"><i class="fa fa-history"></i></a>
+    <a href="" ng-click="downloadCSV()" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+    <!--<a href="" ng-click="downloadPDF()" uib-tooltip="Export PDF"><i class="fa fa-file-pdf-o"></i></a> -->
+    <a href="" ng-click="thirdPartyHistory()" uib-tooltip="Third party history"><i class="fa fa-info-circle"></i></a>
+    <a href="" ng-click="openHelp()"  uib-tooltip="Help"><i class="fa fa-question"></i></a>
+</div>
+<div id="grid1" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+

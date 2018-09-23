@@ -1,0 +1,23 @@
+<div class="col-md-8">
+    <form class="form-inline">
+    <div class="form-group">
+        <label for="">Edit the subject line :</label>
+        <input type="text" class="form-control" ng-model="emailtemplates[1].subject">
+    </div>
+    </form>
+     <textarea ui-tinymce="tinymceOptions" ng-model="emailtemplates[1].body" class="form-control"></textarea>
+     
+</div>
+<div class="col-md-4 list">
+   <label for="">Choose The fields to add to your email template</label>
+   <ul class="list-unstyled">
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+   </ul>
+   <button class="btn btn-primary">Preview</button>
+   <button class="btn btn-primary pull-right">Apply</button>
+    
+</div>

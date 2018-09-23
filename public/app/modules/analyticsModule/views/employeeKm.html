@@ -1,0 +1,8 @@
+<div class="toolbar">
+    <a href="" ng-if="permissions.Analytics.addeditkmdrived" ng-click="AddExternalData('kmEntered','employee_total_km');"  uib-tooltip="Add report"><i class="fa fa-plus"></i></a>
+    <a href="" ng-if="permissions.Analytics.addeditkmdrived" ng-click="EditExternalData(3)"  uib-tooltip="Edit report"><i class="fa fa-edit"></i></a>
+    <a href="" ng-click="clearFilters(3)" uib-tooltip="Clear"><i class="fa fa-history"></i></a>  
+    <a href="" ng-click="downloadCSV(3)" uib-tooltip="Export CSV"><i class="fa fa-file-excel-o"></i></a>
+</div>
+
+<div id="grid3" ui-grid="employeeKMOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>

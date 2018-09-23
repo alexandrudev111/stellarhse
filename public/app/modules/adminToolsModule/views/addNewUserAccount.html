@@ -1,0 +1,37 @@
+<h2>Add  new user account <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+<form action=""  class="form-inline addPeople formStylePadding">
+    <div class="form-style">
+
+        <div class="form-group">
+            <label>First Name:</label>
+            <input type="text" class="form-control" required >
+        </div>
+
+
+        <div class="form-group">
+            <label>Last name:</label>
+            <input type="text" class="form-control" required>
+        </div>
+
+          <div class="form-group">
+            <label>UserName:</label>
+            <input type="text" class="form-control" required>
+        </div>
+
+ <div class="form-group">
+                <label>Added by:</label>
+                <ui-select class="form-control"  ng-model="addedBy" theme="bootstrap" >
+                    <ui-select-match placeholder="Enter added by">{{$select.selected.full_name || selectedPerson.supervisor_name}}</ui-select-match>
+                    <ui-select-choices refresh="getActiveEmployees($select.search)" refresh-delay="0"  repeat="">
+                        <div>{{emp.full_name}}</div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <button class="btn btn-primary pull-right" >Submit</button>
+        <button class="btn btn-primary pull-right">cancel</button>
+
+
+</form>

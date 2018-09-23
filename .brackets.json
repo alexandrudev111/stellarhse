@@ -1,0 +1,11 @@
+{
+    "jscodehints.detectedExclusions": [
+        "C:/xampp/htdocs/stellarhse/vendor/phpunit/php-code-coverage/src/Report/Html/Renderer/Template/js/respond.min.js",
+        "C:/xampp/htdocs/stellarhse/vendor/phpunit/php-code-coverage/src/Report/Html/Renderer/Template/js/nv.d3.min.js",
+        "C:/xampp/htdocs/stellarhse/vendor/phpunit/php-code-coverage/src/Report/Html/Renderer/Template/js/html5shiv.min.js",
+        "C:/xampp/htdocs/stellarhse/vendor/phpunit/php-code-coverage/src/Report/Html/Renderer/Template/js/holder.min.js",
+        "C:/xampp/htdocs/stellarhse/public/app/app.js",
+        "C:/xampp/htdocs/stellarhse/public/bower_components/angular-chart.js/dist/angular-chart.min.js",
+        "C:/xampp/htdocs/stellarhse/public/app/modules/sidebarModule/sidebarModule.js"
+    ]
+}

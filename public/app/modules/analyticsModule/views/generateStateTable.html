@@ -1,0 +1,149 @@
+
+<div class="modal-header mBottom">
+    <h3 class="modal-title">Manage stats and sharts for: {{selectedChart.product_name}}</h3>
+</div>
+
+<div cg-busy="{promise:promise,backdrop:true}">
+    <form  name="addChart" class="form-inline manageCustomer formStylePadding">
+        <div class="form-style chartValidation">
+            <div class="form-group">
+                <label for="exampleInputPassword3">1. Give your report a name.<b style="color: red">*</b></label>
+                <input type="text" class="form-control" required    ng-model="selectedChart.stat_table_name">
+                <span style="color: red"    class="validationMsg">{{stat_table_name_valid}}</span>
+            </div> 
+
+            <div class="form-group">
+                <label for="exampleInputPassword3">2. Select period:</label>
+
+                <ui-select ng-model="selectedChart.period_items_value_id">
+                    <ui-select-match>
+                        <span>{{$select.selected.period_items_name}}</span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="period in periodDates track by period.period_items_value_id">
+                        <span>{{period.period_items_name}}</span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+
+            <div class="form-group">
+                <label>3. Select date range:</label>
+                <input id="incident_date"
+                       placeholder="time frame" 
+                       type="text"
+                       ng-model="selectedChart.time_frame"
+                       class="form-control">
+                <a href="" class="pull-left" ng-click="selectedChart.time_frame = ''"><i class="fa fa-close"></i></a>
+            </div>
+
+            <div class="form-group ">
+                <label for="exampleInputPassword3">4. Select scope:</label>
+                <select class="form-control" >                    
+                    <option value="">Company data</option>
+                    <option value="">Contractor data</option>
+                    <option value="">All</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>5. Select data fields to be included.<b style="color: red">*</b></label>
+                <select class="form-control"  required  ng-options="a.field_name as a.field_label for a in field1array"
+                        ng-model="selectedChart.field_name">    
+                    <option value="" selected>Please select one</option>
+                </select>
+                <div class="pull-left">
+                    <div class="form-group">
+                        <input type="radio" name="field1" class="form-control"> Left axis
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" name="field1"  class="form-control"> Bottom axis
+                    </div>
+                </div>
+                <select class="form-control"   ng-options="a.field_name as a.field_label for a in field2array"
+                        ng-model="selectedChart.field_name3">              
+                    <option value="" selected>Please select one</option>
+                </select>
+                <div class="pull-left">
+                    <div class="form-group">
+                        <input type="radio" name="field2" class="form-control"> Left axis
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" name="field2"  class="form-control"> Bottom axis
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="form-group buttonMTop">
+                <label for="">6. Choose the formula.<b style="color: red">*</b></label>
+                <div class="form-group" ng-repeat="formula in formulalist" >
+                    <input type="radio" class="form-control" name="formulas" ng-change="checkDecimalFields(formula.operation_code);" value="{{formula.operation_id}}"  ng-model="selectedChart.operation_id"> 
+                    {{formula.operation_name}} 
+                </div>
+                <div class="pull-right">
+                    <select class="form-control"  ng-if="!hideCount" required="!hideCount"
+                            ng-options="a.field_name as a.field_label for a in decimalarray"
+                            ng-model="selectedChart.field_name2">
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group RemoveBtnStyle ">
+                <label for="">7. Choose the output.<b style="color: red">*</b></label>
+                <button  class="btn btn-primary"  ng-click="generateChart('table');"  data-ng-disabled="addChart.$invalid"><img src="resources/images/Table.jpg" > </button>
+                <button  class="btn btn-primary"  ng-click="generateChart('column');" data-ng-disabled="addChart.$invalid" ><img src="resources/images/Column.jpg"> </button>
+                <button class="btn btn-primary"   ng-click="generateChart('line');"   data-ng-disabled="addChart.$invalid" ><img src="resources/images/Line.jpg"    > </button>
+                <button class="btn btn-primary"   ng-click="generateChart('bar');"    data-ng-disabled="addChart.$invalid" ><img src="resources/images/bar.jpg"    > </button>
+                <button class="btn btn-primary"   ng-click="generateChart('pie');"    data-ng-disabled="addChart.$invalid" ><img src="resources/images/Pie.jpg" ></button>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-7" style=" margin-top: 10px; width: 100%">
+                    <button class="btn btn-primary mTop pull-right" ng-click="addOrgChart(true)"   data-ng-disabled="addChart.$invalid">  
+                        <span>Save & close</span>
+                    </button>
+
+                    <button class="btn btn-primary mTop pull-right"  ng-click="addOrgChart(false)"    data-ng-disabled="addChart.$invalid">  
+                        <span>Save without closing current report</span>
+                    </button>
+
+                    <button class="btn btn-primary mTop pull-right" data-ui-sref="stateTableGrid"> 
+                        <span>Cancel</span>
+                    </button>
+                </div>
+            </div>
+            <div class="clearfix"></div>      
+            <div  class="form-group">
+                <label>If you make changes to your chart, click again on the output type to refresh it.</label>
+            </div>
+
+            <div id="div_OutPut" >
+                <div id="downloadType" ng-show="selectedChart.output_code == 'table'"  class="fontbold">
+                    <br>
+                    <label  id="lbl_chartsInst8">
+                        8. Choose your print option.
+                    </label>
+                    <div class="dropdownMenu">
+                        <img src="resources/images/export.jpg" id="exportImg" title="" ng-click="showhideDropDown()"  ng-show="selectedChart.output_code == 'table'" >
+                        <ul id="dropdown"  class="pull-left"  ng-show="ischecked">
+                            <li><a href="" ng-click ="exportTableToCSV('png');" id="downloadPNG"> Download PNG image</a></li>
+                            <li><a href="" ng-click ="exportTableToCSV('jpg');" id="downloadPNG"> Download JPG image</a></li>
+                            <li><a href="" ng-click ="exportTableToPDF();" id="downloadPDF">Download PDF Document</a></li>
+                            <li><a href="" ng-Click ="exportTableToCSV('csv');" id="downloadCSV">Download CSV</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <span id="tableTitle" ng-show="selectedChart.output_code == 'table'"   style="padding:0; margin:0 0 0 10px;  width: 100%; font-weight: bold; text-align: center;  float: left"></span>
+                <br>
+                <div id="gridDiv" class="tableStyle  tableScroller" style="padding:0; margin:0 0 0 10px"   ng-show="selectedChart.output_code == 'table'"  >    </div>
+
+                <div id="chartDiv"  ng-show="selectedChart.output_code !== 'table'"   style="float: left; width: 95%; margin: 10px 1%">               
+                    <div id="myChart" style="min-width: 310px; height: 400px;"></div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

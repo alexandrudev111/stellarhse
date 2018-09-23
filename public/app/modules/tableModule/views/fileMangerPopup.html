@@ -1,0 +1,29 @@
+<div id="modalwindow">
+    <div class="modal-header">
+        <h3 class="modal-title">File manager</h3>
+    </div>
+    <div class="modal-body customizationStyle filemanagerStyle">
+
+
+        <p> Choose the report number and then click on the "Choose files" icon and browse to select one or more documents to upload and attach to that report </p>
+
+        <form action="action" class="form-inline">
+            <div class="form-group">
+                <label>Number of report</label>
+                <select class="form-control" ng-options="n.report_number as n.report_number for n in reportNumbers"  
+                        ng-model="selectedItem.report_number" ng-change="changeReportNumber()">
+                </select> 
+            </div>
+        </form>
+        <div  class="clearfix"></div>   
+        <angular-filemanager></angular-filemanager>
+
+
+
+        <div class="clearfix"></div>
+
+        <button class="btn btn-primary pull-right" type="button" ng-click="submitReportFiles()">Submit</button>
+
+        <button class="btn btn-primary pull-right" type="button" ng-click="closemodal()">Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+ <!--
+ <div ngf-drop ngf-select ng-model="files" class="drop-box" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true" accept="image/*,application/pdf">Drop pdfs or images here or click to upload</div>
+ -->
+ 
+<h2>HSE program <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+ <p class="bolded">My recently viewed documents</p>
+<span class="currentPath"><span>Current path: </span> {{currentPath}}</span>
+ <div class="toolbar">
+    <a href="" ng-click="viewFile()"  uib-tooltip="View file"><i class="fa fa-eye"></i></a>
+    <a href="" ng-click="getVersions()" uib-tooltip="Get versions"><i class="fa fa-clone"></i></a>
+    <!-- <a href="" ng-click=""  uib-tooltip="Edit record"><i class="fa fa-edit"></i></a> -->
+</div>
+
+<div>
+<div id="grid1" ui-grid="HSEDocumentsOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+</div>
+

@@ -1,0 +1,61 @@
+<h2>Learning center<img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+
+<div class="clearfix"></div>
+<div class="grayBG FeaturedVideo">
+   <h3 class="text-center">Featured video</h3>
+    <div ng-scrollbars ng-scrollbars-config="config">
+    <div class="col-md-4">
+        <iframe src="https://player.vimeo.com/video/269100114"  frameborder="0" allowfullscreen></iframe>
+        <h3>Orientation for administrators and in-house Trainers</h3>
+
+    </div>
+    <div class="col-md-4">
+        <iframe src="https://player.vimeo.com/video/269290181" frameborder="0" allowfullscreen></iframe>
+<h3>Orientation for managers and supervisors</h3>
+    </div>
+    <div class="col-md-4">
+        <iframe src="https://player.vimeo.com/video/269528418"  frameborder="0" allowfullscreen></iframe>
+<h3>Orientation for general users</h3>
+    </div>
+    </div>
+    
+</div>
+
+
+
+
+<div class="clearfix"></div>
+<div class="VideosTab" cg-busy="{promise:promise,backdrop:true}">
+    <uib-tabset active="activeForm">
+
+
+        <uib-tab index="0" heading="All videos">
+            <div ng-include="'app/modules/userModule/views/AllVideos.html'"></div>
+
+        </uib-tab>   
+
+        <uib-tab index="1" heading="Orientation videos">
+
+            <div ng-include="'app/modules/userModule/views/oriental.html'"></div>
+
+        </uib-tab>             
+
+
+
+        <uib-tab index="2" heading="How-to video tutorials">
+
+            <div ng-include="'app/modules/userModule/views/videoTutorials.html'"></div>
+
+        </uib-tab>
+
+
+        <uib-tab index="3" heading="Printable tutorials">
+
+            <div ng-include="'app/modules/userModule/views/printable.html'"></div>
+
+        </uib-tab>
+
+    </uib-tabset>
+
+</div>

@@ -1,0 +1,23 @@
+
+<div class="form-group block checkbox" ng-if="report_labels['potential_impact_of_hazard']['is_hidden'] === 'No' || custom">
+    <label for="exampleInputPassword3"> {{report_labels['potential_impact_of_hazard']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['potential_impact_of_hazard'])" uib-tooltip="{{report_labels['potential_impact_of_hazard']['help_me_name']}}"
+           ng-if="report_labels['potential_impact_of_hazard']['help_me_name'] && report_labels['potential_impact_of_hazard']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['potential_impact_of_hazard'], 'hazInspInc')" ng-if="custom && report_labels['potential_impact_of_hazard']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+    <div class="form-group hAuto" ng-repeat="impactType in impactTypes" >
+        <input type="checkbox" class="form-control" name="Certifications" ng-model="impactType.impact_choice"
+            ng-required="report_labels['potential_impact_of_hazard']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"> 
+        {{impactType.impact_type_name}} 
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="form-group block" ng-if="report_labels['potential_impacts_description']['is_hidden'] === 'No' || custom">
+    <label for="exampleInputPassword3"> {{report_labels['potential_impacts_description']['field_label']}}
+        <a href="" ng-click="openHelp(report_labels['potential_impacts_description'])" uib-tooltip="{{report_labels['potential_impacts_description']['help_me_name']}}"
+           ng-if="report_labels['potential_impacts_description']['help_me_name'] && report_labels['potential_impacts_description']['help_me_description']"><i class="fa fa-question"></i></a>
+        <a href="" ng-click="editField(report_labels['potential_impacts_description'])" ng-if="custom && report_labels['potential_impacts_description']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+    <textarea  class="form-control" placeholder="Describe potential impacts " ng-model="report.potential_impacts_desc"
+            ng-required="report_labels['potential_impacts_description']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()"></textarea>
+</div>

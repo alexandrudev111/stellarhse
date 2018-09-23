@@ -1,0 +1,98 @@
+<div  class="accNewStyle cause">
+    <button class="btn btn-primary pull-right ng-scope" ng-click="addNewCause()"><i class="fa fa-plus"></i>Add New Cause</button>
+    <div class="clearfix"></div>
+    <uib-accordion class="accordionIcon" close-others="oneAtATime" ng-repeat="cause in report.incidentCauses track by $index" ng-init="causeIndex = $index">
+        <i class="pull-right fa fa-close" style="color:#000" ng-click="removeCause(causeIndex)"
+           ng-hide="causeIndex == 0"></i>
+        <div uib-accordion-group class="panel-default" heading="{{cause.heading}}" is-open="status.incidentCauses[causeIndex]">
+            <form class="form-inline" action="">
+                <div class="form-style block " ng-if="report_labels['type_of_energy_id']['is_hidden'] === 'No' || custom">
+                    <div class="form-group block labelFullWidth SelectSmallerWidth">
+                        <label>{{report_labels['type_of_energy_id']['field_label']}}
+                            <a href="" ng-click="openHelp(report_labels['type_of_energy_id'])" uib-tooltip="{{report_labels['type_of_energy_id']['help_me_name']}}"
+                               ng-if="report_labels['type_of_energy_id']['help_me_name'] && report_labels['type_of_energy_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                            <a href="" ng-click="editField(report_labels['type_of_energy_id'])" ng-if="custom && report_labels['type_of_energy_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                        <select class="form-control" ng-model="cause.scat_items_params_id"
+                                ng-options="contactType.scat_items_params_id as contactType.scat_items_params_name for contactType in scatContactTypes"
+                                ng-change="getSCATDirectCauses(cause.scat_items_params_id, cause)"
+                                ng-required="report_labels['type_of_energy_id']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue">
+                            <option value="" selected>Select One</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="clearfix"></div> 
+                <div class="form-style block">
+                    <div class="form-group block SelectSmallerWidth" ng-if="report_labels['immediate_cause_id']['is_hidden'] === 'No' || custom">
+                        <label>{{report_labels['immediate_cause_id']['field_label']}}
+                            <a href="" ng-click="openHelp(report_labels['immediate_cause_id'])" uib-tooltip="{{report_labels['immediate_cause_id']['help_me_name']}}"
+                               ng-if="report_labels['immediate_cause_id']['help_me_name'] && report_labels['immediate_cause_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                            <a href="" ng-click="editField(report_labels['immediate_cause_id'])" ng-if="custom && report_labels['immediate_cause_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                        <select class="form-control" ng-model="cause.scat_direct_cause_id"
+                                ng-options="directCause.scat_id as directCause.scat_param_name for directCause in cause.scatDirectCauses"
+                                ng-change="getSCATBasicCauses(cause.scat_direct_cause_id, cause)"
+                                ng-required="report_labels['immediate_cause_id']['is_mandatory']=='Yes' || cause.scat_items_params_id" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()">
+                            <option value="" selected>Select One</option>
+
+                        </select>
+
+                        <div class="form-group" ng-if="report_labels['immediate_cause_type']['is_hidden'] === 'No' || custom">
+                            <a href="" ng-click="openHelp(report_labels['immediate_cause_type'])" uib-tooltip="{{report_labels['immediate_cause_type']['help_me_name']}}"
+                               ng-if="report_labels['immediate_cause_type']['help_me_name'] && report_labels['immediate_cause_type']['help_me_description']"><i class="fa fa-question"></i></a>
+                            <a href="" ng-click="editField(report_labels['immediate_cause_type'])" ng-if="custom && report_labels['immediate_cause_type']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a>
+                            <input type="text" class="form-control" placeholder="Immediate Cause Type" 
+                                   ng-if="report_labels['immediate_cause_type']['is_hidden'] === 'No' || custom"
+                                   ng-model="cause.scatDirectCauseType" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()">
+                                   <!-- ng-required="report_labels['immediate_cause_type']['is_mandatory']=='Yes'" -->
+                        </div>
+                    </div>  
+                    <div class="form-group block SelectSmallerWidth" ng-if="report_labels['basic_cause_id']['is_hidden'] === 'No' || custom">
+                        <label>{{report_labels['basic_cause_id']['field_label']}}
+                            <a href="" ng-click="openHelp(report_labels['basic_cause_id'])" uib-tooltip="{{report_labels['basic_cause_id']['help_me_name']}}"
+                               ng-if="report_labels['basic_cause_id']['help_me_name'] && report_labels['basic_cause_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                            <a href="" ng-click="editField(report_labels['basic_cause_id'])" ng-if="custom && report_labels['basic_cause_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                        <select class="form-control" ng-model="cause.scat_basic_cause_id"
+                                ng-options="basicCause.scat_id as basicCause.scat_param_name for basicCause in cause.scatBasicCauses"
+                                ng-change="getSCATSubCauses(cause.scat_basic_cause_id, cause)"
+                                ng-required="report_labels['basic_cause_id']['is_mandatory']=='Yes' || cause.scat_items_params_id || 
+                                cause.scat_direct_cause_id" ng-disabled = "disabeldTrue">
+                            <option value="" selected>Select One</option>
+                        </select>
+
+                        <div class="form-group" ng-if="report_labels['basic_cause_type']['is_hidden'] === 'No' || custom">
+                            <a href="" ng-click="openHelp(report_labels['basic_cause_type'])" uib-tooltip="{{report_labels['basic_cause_type']['help_me_name']}}"
+                               ng-if="report_labels['basic_cause_type']['help_me_name'] && report_labels['basic_cause_type']['help_me_description']"><i class="fa fa-question"></i></a>
+                            <a href="" ng-click="editField(report_labels['basic_cause_type'])" ng-if="custom && report_labels['basic_cause_type']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a>
+                            <input type="text" class="form-control" placeholder="Basic Underlying Causes Type" 
+                                   ng-if="report_labels['basic_cause_type']['is_hidden'] === 'No' || custom"
+                                   ng-model="cause.scatBasicCauseType" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()">
+                                   <!-- ng-required="report_labels['basic_cause_type']['is_mandatory']=='Yes'" -->
+                        </div>
+                    </div> 
+                    <div class="form-group block SelectSmallerWidth" ng-if="report_labels['sub_cause_id']['is_hidden'] === 'No' || custom">
+                        <label>{{report_labels['sub_cause_id']['field_label']}}
+                            <a href="" ng-click="openHelp(report_labels['sub_cause_id'])" uib-tooltip="{{report_labels['sub_cause_id']['help_me_name']}}"
+                               ng-if="report_labels['sub_cause_id']['help_me_name'] && report_labels['sub_cause_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                            <a href="" ng-click="editField(report_labels['sub_cause_id'])" ng-if="custom && report_labels['sub_cause_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                        <select class="form-control" ng-model="cause.scat_sub_cause_id"
+                                ng-options="subCause.scat_id as subCause.scat_param_name for subCause in cause.scatSubCauses"
+                                ng-required="report_labels['sub_cause_id']['is_mandatory']=='Yes' || cause.scat_items_params_id || 
+                                cause.scat_direct_cause_id || cause.basic_cause_id" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()">
+                            <option value="" selected>Select One</option>
+
+                        </select>
+                    </div> 
+                    <div class="form-group block Basic" ng-if="report_labels['cause_comments']['is_hidden'] === 'No' || custom">
+                        <label>{{report_labels['cause_comments']['field_label']}}
+                            <a href="" ng-click="openHelp(report_labels['cause_comments'])" uib-tooltip="{{report_labels['cause_comments']['help_me_name']}}"
+                               ng-if="report_labels['cause_comments']['help_me_name'] && report_labels['cause_comments']['help_me_description']"><i class="fa fa-question"></i></a>
+                            <a href="" ng-click="editField(report_labels['cause_comments'])" ng-if="custom && report_labels['cause_comments']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                        <textarea class="form-control" ng-model="cause.comment"
+                                  ng-required="report_labels['cause_comments']['is_mandatory']=='Yes'" ng-disabled = "disabeldTrue" ng-change="updateDreaftReport()">
+
+                        </textarea>
+                    </div> 
+                </div>
+            </form>
+        </div>
+    </uib-accordion>
+</div>

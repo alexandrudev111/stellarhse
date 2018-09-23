@@ -1,0 +1,193 @@
+<form class="form-inline">
+    <div class="form-style">
+       
+       <div class="fixedwidth">
+        <div class="form-group">
+            <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportType.html'"></div>
+            <!--            <label for="exampleInputEmail3">Type of maintenance:</label>
+                        <select class="form-control" ng-model="report.maintenance_type_id"
+                                ng-options="type.maintenance_type_id as type.maintenance_type_name for type in maintenanceTypes">
+                            <option value="" selected>Select</option>
+                        </select>-->
+        </div>
+<!-- -->
+        <div class="form-group" ng-if="report_labels['maintenance_reason_id']['is_hidden'] === 'No' || custom" >
+            <label for="exampleInputEmail3"> {{report_labels['maintenance_reason_id']['field_label']}}
+                <a href="" ng-click="openHelp(report_labels['maintenance_reason_id'])" uib-tooltip="{{report_labels['maintenance_reason_id']['help_me_name']}}"
+                   ng-if="report_labels['maintenance_reason_id']['help_me_name'] && report_labels['maintenance_reason_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                <a href="" ng-click="editField(report_labels['maintenance_reason_id'])" ng-if="custom && report_labels['maintenance_reason_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+            <select class="form-control" id="exampleInputEmail3" ng-model="report.maintenance_reason_id" 
+                    ng-options="reason.maintenance_reason_id as reason.maintenance_reason_name for reason in maintenanceReason"
+                    ng-required="report_labels['maintenance_reason_id']['is_mandatory']=='Yes'">
+                <option value="" selected>Select One</option>
+            </select>
+        </div>
+        
+        
+        </div>
+<!--        <div class="form-group">
+            <label for="exampleInputEmail3">Reason for maintenance:</label>
+            <select class="form-control" ng-model="report.maintenance_reason_id"
+                    ng-options="reason.maintenance_reason_id as reason.maintenance_reason_name for reason in maintenanceReason">
+                <option value="" selected>Select</option>
+            </select>
+        </div>-->
+
+        <div class="form-group pull-right">
+            <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportTime.html'"></div>
+        </div>
+
+        <div class="form-group pull-right dateStyle">
+            <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportDate.html'"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group ">
+            <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportOwner.html'"></div>
+        </div>
+
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/whoIdentified.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="form-style location">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/location.html'"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+
+
+    <div class="form-style">
+        <div class="form-style">
+            <!--<div ng-include="'app/modules/coreReportModule/views/whatHappendParts/crewOperationType.html'"></div>-->
+
+            <div class="form-group" ng-if="report_labels['operation_type_id']['is_hidden'] === 'No' || custom">
+                <label  for="exampleInputPassword3">{{report_labels['operation_type_id']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['operation_type_id'])" uib-tooltip="{{report_labels['operation_type_id']['help_me_name']}}"
+                       ng-if="report_labels['operation_type_id']['help_me_name'] && report_labels['operation_type_id']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['operation_type_id'], 'exceptTraining')" ng-if="custom && report_labels['operation_type_id']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+                <select class="form-control" ng-model="report.operation_type_id"
+                        ng-options="operationType.operation_type_id as operationType.operation_type_name for operationType in operationTypes"
+                        ng-required="report_labels['operation_type_id']['is_mandatory']=='Yes'">
+                    <option value="" selected>Select</option>
+                </select>
+            </div>
+
+            <div class="form-group dateStyle" ng-if="report_labels['facility_location_last_maintenance']['is_hidden'] === 'No' || custom">
+                <label>{{report_labels['facility_location_last_maintenance']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['facility_location_last_maintenance'])" uib-tooltip="{{report_labels['facility_location_last_maintenance']['help_me_name']}}"
+                       ng-if="report_labels['facility_location_last_maintenance']['help_me_name'] && report_labels['facility_location_last_maintenance']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['facility_location_last_maintenance'])" ng-if="custom && report_labels['facility_location_last_maintenance']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+
+                <p class="input-group">
+                    <input type="text" name="lastMaintenance" class="form-control" uib-datepicker-popup="{{format}}" ng-model="report.Facility_location_last_maintenance" is-open="datePopUps.Facility_location_last_maintenance" 
+                           datepicker-options="dateOptions" close-text="Close" ng-click="datePopUps.Facility_location_last_maintenance = !datePopUps.Facility_location_last_maintenance" 
+                           alt-input-formats="altInputFormats" placeholder="Select "/>
+                    <span class="input-group-btn calenderIcon">
+                        <button type="button" class="btn btn-default " ng-click="datePopUps.Facility_location_last_maintenance = !datePopUps.Facility_location_last_maintenance"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <!--<input type="text" class="form-control"  my-datepicker ng-model="report.hazard_date" placeholder="Select ">-->
+        <!-- <p class="input-group">
+             <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="report.Facility_location_last_maintenance" is-open="datePopUps.Facility_location_last_maintenance" 
+                    datepicker-options="dateOptions" close-text="Close" ng-click="datePopUps.Facility_location_last_maintenance = !datePopUps.Facility_location_last_maintenance" 
+                    alt-input-formats="altInputFormats" placeholder="Select "/>
+             <span class="input-group-btn calenderIcon">
+                 <button type="button" class="btn btn-default " ng-click="datePopUps.Facility_location_last_maintenance = !datePopUps.Facility_location_last_maintenance"><i class="glyphicon glyphicon-calendar"></i></button>
+             </span>
+         </p>-->
+
+
+
+    </div>
+
+
+    <div class="clearfix"></div> 
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/thirdParties.html'"></div>
+    </div>
+
+    <div class="clearfix"></div> 
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/equipment.html'"></div>
+        <!--        <h2>Equipment undergoing maintenance:</h2>
+                <div id="equipmentConainer">
+                    <div id="ParentCustomer"  ng-repeat="equipment in report.equipment_involved track by $index" ng-init="equipmentIndex = $index">
+                        <div class="form-group">
+                            <label for="exampleInputPassword3">Equipment name:</label>
+                            <ui-select class="form-control" ng-model="equipment" theme="bootstrap" on-select="onEquipmentSelected($item,equipmentIndex)">
+                                <ui-select-match placeholder="Equipment name">{{$select.selected.equipment_name}}</ui-select-match>
+                                <ui-select-choices refresh="getEquipments($select.search, equipmentIndex)" refresh-delay="0" 
+                                                   repeat="e.equipment_id as e in equipments[equipmentIndex] | filter: $select.search">
+                                    <div>{{e.equipment_name}}</div>
+                                </ui-select-choices>
+                            </ui-select>
+                            <button class="btn btn-primary btnStyle" ng-click="openEquipment()" ng-disabled="initializeReport.equipment || equipments[equipmentIndex].length != 0" uib-tooltip="Equipment not found - add to database."><i class="fa fa-plus"></i></button>
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="exampleInputPassword3">Equipment type:</label>
+                            <input type="text" class="form-control" placeholder="Equipment type" ng-model="equipment.equipment_type"/>
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="exampleInputPassword3">Equipment category:</label>
+                            <input type="text" class="form-control" placeholder="Equipment category" ng-model="equipment.equipment_category_name" />
+                        </div>
+        
+                        <div class="form-group newWidth">
+                            <label for="exampleInputPassword3" >Equipment #:</label>
+                            <input type="text" class="form-control newInputWidth " placeholder="Equipment #" ng-model="equipment.equipment_number" />
+                        </div>
+                        <button class="btn btn-primary btnmTop" ng-click="removeEquipment(equipment, $index)" ng-hide="equipmentIndex == 0">Remove</button>
+                    </div>
+        
+                </div>
+                <button class="btn btnmTop" ng-click="newEquipment()">More</button>-->
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="form-style">
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/reportDescription.html'"></div>
+    </div>
+
+    <div class="form-style">
+        <div class="form-group block" ng-if="report_labels['unusual_findings_resulting_from_maintenance']['is_hidden'] === 'No' || custom">
+                <label  for="exampleInputPassword3">{{report_labels['unusual_findings_resulting_from_maintenance']['field_label']}}
+                    <a href="" ng-click="openHelp(report_labels['unusual_findings_resulting_from_maintenance'])" uib-tooltip="{{report_labels['unusual_findings_resulting_from_maintenance']['help_me_name']}}"
+                       ng-if="report_labels['unusual_findings_resulting_from_maintenance']['help_me_name'] && report_labels['unusual_findings_resulting_from_maintenance']['help_me_description']"><i class="fa fa-question"></i></a>
+                    <a href="" ng-click="editField(report_labels['unusual_findings_resulting_from_maintenance'])" ng-if="custom && report_labels['unusual_findings_resulting_from_maintenance']['is_editable'] === 'Yes'"><i class="fa fa-edit"></i></a></label>
+            <textarea  class="form-control" placeholder="Unusual findings resulting from maintenance" ng-model="report.unusual_findings_resulting_from_maintenance"></textarea>
+        </div>
+    </div>
+    <div class="form-style">
+<!--             <div class="form-group block">
+                <label for="followUpActions">Are additional follow-up actions required?</label>
+                <span class="pull-left">
+                    <input type="radio" class="form-control" name="followUpActions" ng-model="report.are_additional_followup_actions_required" value="1"> Yes 
+                </span>
+                <span class="pull-left">
+                    <input type="radio" class="form-control" name="followUpActions" ng-model="report.are_additional_followup_actions_required" value="0">  No
+                </span>
+    
+                <a href="" class="pull-left" ng-click="removeFollowUpAction()"><i class="fa fa-close"></i></a>
+            </div> -->
+        <div ng-include="'app/modules/coreReportModule/views/whatHappendParts/additionalActionSummary.html'"></div>
+
+
+    </div>
+
+    <!--    <div class="form-style">
+            <div class="form-group block">
+                <label for="exampleInputPassword3">Summary of recommended follow-up actions:</label>
+                <textarea  class="form-control" placeholder="Summary of recommended follow-up actions" ng-model="report.summary_of_recommended_followup_actions"></textarea>
+    
+            </div>
+        </div>-->
+</form>

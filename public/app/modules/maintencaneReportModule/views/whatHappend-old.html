@@ -1,0 +1,444 @@
+<form class="form-inline">
+    <div class="form-style">
+        <div class="form-group">
+            <label for="exampleInputEmail3">Type of maintenance:</label>
+            <select class="form-control" ng-model="report.maintenance_type_id"
+                    ng-options="type.maintenance_type_id as type.maintenance_type_name for type in maintenanceTypes">
+                <option value="" selected>Select</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail3">Reason for maintenance:</label>
+            <select class="form-control" ng-model="report.maintenance_reason_id"
+                    ng-options="reason.maintenance_reason_id as reason.maintenance_reason_name for reason in maintenanceReason">
+                <option value="" selected>Select</option>
+            </select>
+        </div>
+
+        <div class="form-group pull-right">
+            <label>Min:</label>
+            <select  class="form-control" ng-model="report.maintenance_minute">
+                <option value="00">00</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+                <option value="32">32</option>
+                <option value="33">33</option>
+                <option value="34">34</option>
+                <option value="35">35</option>
+                <option value="36">36</option>
+                <option value="37">37</option>
+                <option value="38">38</option>
+                <option value="39">39</option>
+                <option value="40">40</option>
+                <option value="41">41</option>
+                <option value="42">42</option>
+                <option value="43">43</option>
+                <option value="44">44</option>
+                <option value="45">45</option>
+                <option value="46">46</option>
+                <option value="47">47</option>
+                <option value="48">48</option>
+                <option value="49">49</option>
+                <option value="50">50</option>
+                <option value="51">51</option>
+                <option value="52">52</option>
+                <option value="53">53</option>
+                <option value="54">54</option>
+                <option value="55">55</option>
+                <option value="56">56</option>
+                <option value="57">57</option>
+                <option value="58">58</option>
+                <option value="59">59</option>
+            </select>
+        </div>
+
+        <div class="form-group pull-right">
+            <label>Hours:</label>
+            <select  class="form-control" ng-model="report.maintenance_hour">
+                <option value="00">00</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+            </select>
+        </div>
+
+
+        <div class="form-group pull-right dateStyle">
+            <label for="TrainingDate">Date of Training:</label>
+            <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="report.maintenance_date" is-open="datePopUps.report_date" 
+                       datepicker-options="dateOptions" close-text="Close" ng-click="datePopUps.report_date = !datePopUps.report_date" 
+                       alt-input-formats="altInputFormats" placeholder="Select "/>
+                <span class="input-group-btn calenderIcon">
+                    <button type="button" class="btn btn-default " ng-click="datePopUps.report_date = !datePopUps.report_date"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+        </div>
+
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-style">
+
+        <h2>Maintenance reported by:</h2>
+
+        <div class="form-group">
+            <label  for="exampleInputPassword3">Name:</label>
+            <ui-select class="form-control" id="exampleInputPassword3" ng-model="whoIdentified.employee_id" theme="bootstrap" on-select="onSelectWhoIdentifiedHazard($item)">
+                <ui-select-match placeholder="Enter Name">{{$select.selected.first_name}}</ui-select-match>
+                <ui-select-choices refresh="getReportedByUser($select.search,'employee_name',0, true)" refresh-delay="0" 
+                                   repeat="emp.employee_id as emp in whoIdentifiedEmployees | filter: $select.search ">
+                    <div>{{emp.full_name}}</div>
+                </ui-select-choices>
+            </ui-select>
+            <button class="btn btn-primary correct-size" ng-click="openAdd()" ng-disabled="initializeReport.whoIdentifiedEmployee || employees.length != 0" uib-tooltip="Location not found - add location to database."><i class="fa fa-plus"></i></button>
+        </div>
+
+
+        <div class="form-group helfWidth">
+            <label  for="exampleInputPassword3">ID:</label>
+            <input type="text" class="form-control" placeholder="Enter ID" ng-model="whoIdentified.emp_id" ng-change="whoIdentifiedChanged(whoIdentified.emp_id, 'emp_id')"/>
+        </div>
+
+        <div class="form-group">
+            <label  for="exampleInputPassword3">Position:</label>
+            <input type="text" class="form-control" placeholder="Enter Position" ng-model="whoIdentified.position" ng-change="whoIdentifiedChanged(whoIdentified.position, 'position')"/>
+        </div>
+
+        <div class="form-group">
+            <label  for="exampleInputPassword3">Crew:</label>
+            <input type="text" class="form-control" placeholder="Enter Crew" ng-model="whoIdentified.crew_name" ng-change="whoIdentifiedChanged(whoIdentified.crew_name, 'crew_name')"/>
+        </div>
+
+
+        <div class="form-group">
+            <label  for="exampleInputPassword3">Email:</label>
+            <span style="color:red;">{{whoIdentified.whoIdentifiedEmailError}}</span>
+            <input type="text" class="form-control" placeholder="Enter Email" ng-model="whoIdentified.email" ng-change="whoIdentifiedChanged(whoIdentified.email, 'email')" ng-blur="checkEmail(whoIdentified, whoIdentified.email)"/>
+        </div>
+
+
+
+        <div class="form-group">
+            <label  for="exampleInputPassword3">Company:</label>
+            <input type="text" class="form-control" placeholder="Enter Company" ng-model="whoIdentified.org_name" ng-change="whoIdentifiedChanged(whoIdentified.org_name, 'org_name')"/>
+        </div>
+
+
+        <div class="form-group helfWidth">
+            <label  for="exampleInputPassword3">Primary phone:</label>
+            <input type="text" class="form-control" ng-model="whoIdentified.primary_phone" ng-change="whoIdentifiedChanged(whoIdentified.primary_phone, 'primary_phone')" ui-mask="(999)-999-9999"/>
+        </div>
+
+
+
+        <div class="form-group helfWidth">
+            <label  for="exampleInputPassword3">Alternate phone:</label>
+            <input type="text" class="form-control" ng-model="whoIdentified.alternate_phone" ng-change="whoIdentifiedChanged(whoIdentified.alternate_phone, 'alternate_phone')" ui-mask="(999)-999-9999"/>
+        </div>
+
+
+        <div class="form-group helfWidth">
+            <label  for="exampleInputPassword3">Supervisor:</label>
+            <input type="text" class="form-control" placeholder="Supervisor name" ng-model="whoIdentified.supervisor_name" ng-change="whoIdentifiedChanged(whoIdentified.supervisor_name, 'supervisor_name')"/>
+        </div>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="form-style">
+        <h2>Facility/location undergoing maintenance:</h2>
+        <div class="form-group">
+            <label  for="exampleInputPassword3">Country:</label>
+            <ui-select ng-model="report.location1_id" theme="bootstrap">
+                <ui-select-match placeholder="Enter Country">{{$select.selected.location1_name}}</ui-select-match>
+                <ui-select-choices refresh="getLocations1($select.search)" refresh-delay="0" 
+                                   repeat="location.location1_id as location in locations1 | filter: $select.search ">
+                    <div>{{location.location1_name}}</div>
+                </ui-select-choices>
+            </ui-select>
+            <button class="btn btn-primary correct-size" ng-click="openLoc()" ng-disabled="initializeReport.location1 || locations1.length != 0" uib-tooltip="Location not found - add location to database."><i class="fa fa-plus"></i></button>
+        </div>
+
+        <div class="form-group">
+            <label  for="exampleInputPassword3">Province/State:</label>
+            <ui-select ng-model="report.location2_id" theme="bootstrap" on-select='onSelectLocation2()'>
+                <ui-select-match placeholder="Enter Province/State">{{$select.selected.location2_name}}</ui-select-match>
+                <ui-select-choices refresh="getLocations2($select.search)" refresh-delay="0" 
+                                   repeat="location.location2_id as location in locations2 | filter: $select.search ">
+                    <div>{{location.location2_name}}</div>
+                </ui-select-choices>
+            </ui-select>
+            <button class="btn btn-primary correct-size" ng-click="openLoc()" ng-disabled="initializeReport.location2 || locations2.length != 0" uib-tooltip="Location not found - add location to database."><i class="fa fa-plus"></i></button>
+        </div>
+
+
+        <div class="form-group">
+            <label  for="exampleInputPassword3">City:</label>
+            <ui-select ng-model="report.location3_id" theme="bootstrap" on-select='onSelectLocation3()'>
+                <ui-select-match placeholder="Enter Area">{{$select.selected.location3_name}}</ui-select-match>
+                <ui-select-choices refresh="getLocations3($select.search)" refresh-delay="0" 
+                                   repeat="location.location3_id as location in locations3 | filter: $select.search ">
+                    <div>{{location.location3_name}}</div>
+                </ui-select-choices>
+            </ui-select>
+            <button class="btn btn-primary correct-size" ng-click="openLoc()" ng-disabled="initializeReport.location3 || locations3.length != 0" uib-tooltip="Location not found - add location to database."><i class="fa fa-plus"></i></button>
+        </div>
+
+
+        <div class="form-group">
+            <label  for="exampleInputPassword3">Street:</label>
+            <ui-select ng-model="report.location4_id" theme="bootstrap" on-select='onSelectLocation4()'>
+                <ui-select-match placeholder="Enter Site">{{$select.selected.location4_name}}</ui-select-match>
+                <ui-select-choices refresh="getLocations4($select.search)" refresh-delay="0" 
+                                   repeat="location.location4_id as location in locations4 | filter: $select.search ">
+                    <div>{{location.location4_name}}</div>
+                </ui-select-choices>
+            </ui-select>
+            <button class="btn btn-primary correct-size" ng-click="openLoc()" ng-disabled="initializeReport.location4 || locations4.length != 0" uib-tooltip="Location not found - add location to database."><i class="fa fa-plus"></i></button>
+        </div>
+
+
+
+        <div class="form-group otherLocation">
+            <label  for="exampleInputPassword3">Other location details:</label>
+            <input type="text" class="form-control" placeholder="Enter details" ng-model="report.other_location"/>
+        </div>
+
+
+    </div>
+
+    <div class="clearfix"></div>
+
+
+
+    <div class="form-style">
+
+
+        <div class="form-group Crewinvolved">
+            <label  for="exampleInputPassword3">Crew involved:</label>
+            <select class="form-control" ng-model="report.crew_id"
+                    ng-options="crew.crew_id as crew.crew_name for crew in crews">
+                <option value="" selected>Select</option>
+            </select>        </div>
+
+        <div class="form-group">
+            <label  for="exampleInputPassword3">Operation type:</label>
+
+            <select class="form-control" ng-model="report.operation_type_id"
+                    ng-options="operationType.operation_type_id as operationType.operation_type_name for operationType in operationTypes">
+                <option value="" selected>Select</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label  for="exampleInputPassword3">Facility/location last maintenance:</label>
+
+            <!--<input type="text" class="form-control" my-datepicker ng-model="report.Facility_location_last_maintenance" />-->
+            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="report.Facility_location_last_maintenance" is-open="datePopUps.maintenance_date" 
+                   datepicker-options="dateOptions" close-text="Close" ng-click="datePopUps.maintenance_date = !datePopUps.maintenance_date" 
+                   alt-input-formats="altInputFormats" placeholder="Select "/>
+           <!-- <span class="input-group-btn calenderIcon">
+                <button type="button" class="btn btn-default " ng-click="datePopUps.maintenance_date = !datePopUps.maintenance_date"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>-->
+        </div>
+
+    </div>
+
+    <div class="clearfix"></div> 
+
+    <div class="form-style">
+        <h2>Third-parties involved:</h2>
+        <div id="contractorParent"  ng-repeat="contractor in contractors_involved track by $index" ng-init="contractorIndex = $index">
+            <div class="cloneContractor">
+
+                <div class="form-group" >
+                    <label  for="exampleInputPassword3">Contractor:</label>
+                    <ui-select class="form-control" id="exampleInputPassword3" ng-model="contractor" theme="bootstrap" on-select="onContractorThirdPartySelected($item,$index)">
+                        <ui-select-match placeholder="Enter Name">{{$select.selected.third_party_name}}</ui-select-match>
+                        <ui-select-choices refresh="getThirdpartiesInvolved($select.search,'Contractor', contractorIndex)" refresh-delay="0" 
+                                           repeat="tp.third_party_id as tp in contractor_thirdparties[contractorIndex] | filter: $select.search">
+                            <div>{{tp.third_party_name}}</div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <button class="btn btn-primary" ng-click="opencontractor()" ng-disabled="initializeReport.thirdPartyContract || contractor_thirdparties[contractorIndex].length != 0" uib-tooltip="Contractor not found - add to database."><i class="fa fa-plus"></i></button>
+                </div>
+
+                <div class="form-group helfWidth">
+                    <label for="exampleInputPassword3">Contractor's job #:</label>
+                    <input type="text" class="form-control" placeholder="Contractor's Job #" ng-model="contractor.jop_number"/>
+
+                </div>
+
+                <div class="form-group">
+                    <label  for="exampleInputPassword3">Contractor's representative:</label>
+                    <input type="text" class="form-control" placeholder="Enter Name" ng-model="contractor.contact_name" ng-change="contractorThirdPartyNameChanged(contractorIndex)"/>
+                </div>
+
+                <button class="btn btn-danger" ng-click="removeContractor($index, contractor)" ng-hide="contractorIndex == 0">Remove</button>
+
+            </div>
+        </div>
+
+        <button class="btn btn-primary btnmTop" ng-click="newContract()">More</button>
+        <div class="clearfix"></div>
+        <div id="ParentCustomer" ng-repeat="customer in customer_involved track by $index" ng-init="customerIndex = $index">
+
+            <div class="clonecustomer">
+                <div class="form-group">
+                    <label for="exampleInputPassword3">Customer:</label>
+                    <ui-select class="form-control" id="exampleInputPassword3" ng-model="customer" theme="bootstrap" on-select="onCustomerThirdPartySelected($item,customerIndex)">
+                        <ui-select-match placeholder="Enter Name">{{$select.selected.third_party_name}}</ui-select-match>
+                        <ui-select-choices refresh="getThirdpartiesInvolved($select.search,'Customer', customerIndex)" refresh-delay="0" 
+                                           repeat="tp.third_party_id as tp in customer_thirdparties[customerIndex] | filter: $select.search ">
+                            <div>{{tp.third_party_name}}</div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <button class="btn btn-primary" ng-click="opencustomer()" ng-disabled="initializeReport.thirdPartyCustomer || customer_thirdparties[customerIndex].length != 0" uib-tooltip="Customer not found - add to database."><i class="fa fa-plus"></i></button>
+                </div>
+                <div class="form-group helfWidth">
+                    <label  for="exampleInputPassword3">Customer's job's:</label>
+
+                    <input type="text" class="form-control" placeholder="Customer's job's" ng-model="customer.jop_number"/>
+
+                </div>
+
+                <div class="form-group">
+                    <label  for="exampleInputPassword3">Customer's representative:</label>
+                    <input type="text" class="form-control" placeholder="Enter Name" ng-model="customer.contact_name" ng-change="customerThirdPartyNameChanged(customerIndex)"/>
+                </div>
+                <button class="btn btn-danger" ng-click="removeCustomer($index, customer)" ng-hide="customerIndex == 0">Remove</button>
+            </div>
+
+        </div>
+        <button class="btn btn-primary btnmTop" ng-click="newCustomer()">More</button>
+    </div>
+
+    <div class="clearfix"></div> 
+    <div class="form-style">
+        <h2>Equipment undergoing maintenance:</h2>
+        <div id="equipmentConainer">
+            <div id="ParentCustomer"  ng-repeat="equipment in report.equipment_involved track by $index" ng-init="equipmentIndex = $index">
+                <div class="form-group">
+                    <label for="exampleInputPassword3">Equipment name:</label>
+                    <ui-select class="form-control" ng-model="equipment" theme="bootstrap" on-select="onEquipmentSelected($item,equipmentIndex)">
+                        <ui-select-match placeholder="Equipment name">{{$select.selected.equipment_name}}</ui-select-match>
+                        <ui-select-choices refresh="getEquipments($select.search, equipmentIndex)" refresh-delay="0" 
+                                           repeat="e.equipment_id as e in equipments[equipmentIndex] | filter: $select.search">
+                            <div>{{e.equipment_name}}</div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <button class="btn btn-primary btnStyle" ng-click="openEquipment()" ng-disabled="initializeReport.equipment || equipments[equipmentIndex].length != 0" uib-tooltip="Equipment not found - add to database."><i class="fa fa-plus"></i></button>
+                    <!--<a href="" class="btn btn-primary btnStyle" ng-click="openEquipment(equipmentIndex)" ng-class="{disabled: equipment != null}"><i class="fa fa-plus" uib-tooltip="Equipment not found - add to database."></i></a>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword3">Equipment type:</label>
+                    <input type="text" class="form-control" placeholder="Equipment type" ng-model="equipment.equipment_type"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword3">Equipment category:</label>
+                    <input type="text" class="form-control" placeholder="Equipment category" ng-model="equipment.equipment_category_name" />
+                </div>
+
+                <div class="form-group newWidth">
+                    <label for="exampleInputPassword3" >Equipment #:</label>
+                    <input type="text" class="form-control newInputWidth " placeholder="Equipment #" ng-model="equipment.equipment_number" />
+                </div>
+                <button class="btn btn-primary btnmTop" ng-click="removeEquipment(equipment, $index)" ng-hide="equipmentIndex == 0">Remove</button>
+            </div>
+
+        </div>
+        <button class="btn btnmTop" ng-click="newEquipment()">More</button>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="form-style">
+        <div class="form-group block">
+            <label for="exampleInputPassword3">Description of maintenance:</label>
+            <textarea  class="form-control" placeholder="Describe  meeting" ng-model="report.maintenance_description"></textarea>
+        </div>
+    </div>
+
+    <div class="form-style">
+        <div class="form-group block">
+            <label for="exampleInputPassword3">Unusual findings resulting from maintenance:</label>
+            <textarea  class="form-control" placeholder="Unusual findings resulting from maintenance" ng-model="report.unusual_findings_resulting_from_maintenance"></textarea>
+        </div>
+    </div>
+
+    <div class="form-style">
+        <div class="form-group block">
+            <label for="followUpActions">Are additional follow-up actions required?</label>
+            <span class="pull-left">
+                <input type="radio" class="form-control" name="followUpActions" ng-model="report.are_additional_followup_actions_required" value="Yes"> Yes 
+            </span>
+            <span class="pull-left">
+                <input type="radio" class="form-control" name="followUpActions" ng-model="report.are_additional_followup_actions_required" value="No">  No
+            </span>
+
+            <a href="" class="pull-left" ng-click="removeFollowUpAction()"><i class="fa fa-close"></i></a>
+        </div>
+
+    </div>
+
+    <div class="form-style">
+        <div class="form-group block">
+            <label for="exampleInputPassword3">Summary of recommended follow-up actions:</label>
+            <textarea  class="form-control" placeholder="Summary of recommended follow-up actions" ng-model="report.summary_of_recommended_followup_actions"></textarea>
+
+        </div>
+    </div>
+</form>

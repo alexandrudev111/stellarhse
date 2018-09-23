@@ -1,0 +1,232 @@
+<div class="modal-header">
+
+    <h3 class="modal-title">Training summary</h3>
+</div>
+<div class="modal-body">
+
+    <div class="form-group col-md-6">
+        <label>{{training_data[0].label}}</label>
+        <span>{{selected_training.date}}</span>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label>{{training_data[2].label}} </label>
+        <span>{{selected_training.training_duration}}</span>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label>{{training_data[4].label}}</label>
+        <span>{{selected_training.training_assigned_by}}</span>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label>{{training_data[5].label}} </label>
+        <span>{{selected_training.training_provided_by}}</span>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="cancel()"> Ok </button>
+    <button class="btn btn-primary pull-right" type="button" ng-click="cancel()">Cancel</button>
+</div>
+
+
+
+    <h3 class="modal-title">view training Actions</h3>
+</div>
+<div class="modal-body labelStyle">
+   <div class="form-style">
+    <div class="form-group col-md-6">
+        <label for="">Training type:</label>
+        <input type="text" class="form-control" ng-model="" disabled>
+    </div>
+    
+ <div class="form-group col-md-6">
+        <label for="">Report #:</label>
+        <input type="text" class="form-control" ng-model="" disabled>
+    </div>
+    
+    <div class="form-group col-md-6 popupDate">
+        <label for="">Date training to be completed by:</label>
+        <p class="input-group">
+           <input type="text" class="form-control" placeholder="Select" my-datepicker  disabled>
+            <span class="input-group-btn calenderIcon">
+            <button type="button" class="btn btn-default " ><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+        </p>
+    </div>
+
+   
+
+    <div class="form-group col-md-6">
+        <label for="">Training assigned to:</label>
+     
+        <input type="text" class="form-control" ng-model="" disabled>
+    </div>
+
+
+
+    <div class="form-group col-md-6">
+        <label for="">Supervisor notified:</label>
+        <input type="checkbox" disabled >
+    </div>
+    <div class="clearfix"></div>
+    <h2 class="headingDesign">Training provided by:</h2>
+
+    
+    <div class="form-group col-md-6">
+        <label for="">Staff member name:</label>
+        <select class="form-control" disabled>
+        <option value=""></option>
+        <option value=""></option>
+        </select>
+       </div>
+    
+
+    <div class="form-group col-md-6">
+        <label for="">Third Party Name:</label>
+        <ui-select ng-model="ThirdParty" theme="bootstrap" ng-change="" ng-required="" disabled>
+            <!-- allow-clear="true" -->
+            <ui-select-match placeholder="Third Party">{{$select.selected.selectedValue}}</ui-select-match>
+            <ui-select-choices refresh="" refresh-delay="0" repeat=" ">
+                <div>{{employee.full_name}}</div>
+            </ui-select-choices>
+        </ui-select>
+    </div>
+    
+    
+         <div class="form-group col-md-6">
+        <label for="">Address:</label>
+        <input type="text" class="form-control" disabled>
+    </div>
+    
+     <div class="form-group col-md-6">
+        <label for="">City:</label>
+        <input type="text" class="form-control" disabled>
+    </div>
+    
+     <div class="form-group col-md-6">
+        <label for="">Province/State:</label>
+        <input type="text" class="form-control" disabled>
+    </div>
+    
+     <div class="form-group col-md-6">
+        <label for="">Contact name:</label>
+        <input type="text" class="form-control" disabled>
+    </div>
+    
+    
+     <div class="form-group col-md-6">
+        <label for="">Phone number:</label>
+        <input type="text" class="form-control" disabled>
+    </div>
+    
+    <div class="form-group col-md-6">
+        <label for="">Website:</label>
+        <input type="text" class="form-control" disabled>
+    </div>
+    <div class="clearfix"></div>
+
+   
+   <div class="form-group col-md-6">
+        <label for="">Evidence of completion required:</label>
+        <input type="text" class="form-control" disabled>
+    </div>
+     <div class="form-group col-md-6">
+        <label for="">Duration of training:</label>
+        <input type="number" class="form-control" disabled>
+    </div>
+    
+       <div class="form-group col-md-6 popupDate">
+        <label for="">Date training completed:</label>
+        <p class="input-group">
+            <input type="text" class="form-control" placeholder="Select" my-datepicker ng-model="action.start_date" disabled>
+            <span class="input-group-btn calenderIcon">
+            <button type="button" class="btn btn-default " ><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+        </p>
+    </div>
+     <div class="form-group col-md-6">
+        <label for="">Level achieved:</label>
+         <select class="form-control" disabled>
+        <option value=""></option>
+        <option value=""></option>
+        </select>
+    </div>
+    
+    <div class="form-group col-md-6">
+        <label for="">Course mark:</label>
+        <input type="number" class="form-control" disabled>
+    </div>
+    
+    
+        <div class="form-group col-md-6">
+        <label for="">Quality of training:</label>
+        <input type="number" class="form-control" disabled>
+    </div>
+    
+    
+      <div class="form-group autoHeight col-md-12">
+        <label for="">Comments:</label>
+        <textarea class="form-control" disabled></textarea>
+    </div>
+     <div class="form-group labelNewWidth col-md-12">
+        <label for="">Trainee observed post-training to verify competence:</label>
+        <span>
+      <input  type="radio" disabled> <span>Yes</span>
+        </span>
+
+        <span>
+      <input  type="radio" disabled> <span> No</span>
+        </span>
+    </div>
+     <div class="form-group col-md-6 popupDate">
+        <label for="">Date observed:</label>
+        <p class="input-group">
+            <input type="text" class="form-control" placeholder="Select" my-datepicker ng-model="action.start_date" disabled>
+            <span class="input-group-btn calenderIcon">
+            <button type="button" class="btn btn-default " ><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+        </p>
+    </div>
+    
+    
+    
+   
+
+    <div class="form-group col-md-6">
+        <label for="">Observed by:</label>
+         <select name="" id="" class="form-control" disabled>
+             <option value=""></option>
+             <option value=""></option>
+             <option value=""></option>
+         </select>
+        
+    </div>
+
+
+
+    <div class="form-group autoHeight col-md-12">
+        <label for="">Observations:</label>
+        <textarea type="text" class="form-control" disabled> </textarea>
+    </div>
+
+</div>
+    <div class="clearfix"></div>
+
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="ok()">Submit</button>
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="ok()">Cancel</button>
+
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="ok()">update</button>
+
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="ok()">Upload attachments</button>
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="ok()">Print </button>
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="ok()">Open related report</button>
+</div>
+

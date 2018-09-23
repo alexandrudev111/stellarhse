@@ -1,0 +1,804 @@
+/**
+ * @license Highcharts
+ *
+ * (c) 2009-2016 Torstein Honsi
+ *
+ * License: www.highcharts.com/license
+ */
+/* line 33, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  line-height: normal;
+  z-index: 0;
+  /* #1072 */
+  -webkit-tap-highlight-color: transparent;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+  font-size: 12px; }
+
+/* line 45, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-root text {
+  stroke-width: 0; }
+
+/* line 48, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-strong {
+  font-weight: bold; }
+
+/* line 51, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-emphasized {
+  font-style: italic; }
+
+/* line 54, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-anchor {
+  cursor: pointer; }
+
+/* line 57, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-background {
+  fill: #ffffff; }
+
+/* line 60, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-plot-border, .highcharts-plot-background {
+  fill: none; }
+
+/* line 63, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-label-box {
+  fill: none; }
+
+/* line 66, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-button-box {
+  fill: inherit; }
+
+/* Titles */
+/* line 71, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-title {
+  fill: #333333;
+  font-size: 1.5em; }
+
+/* line 75, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-subtitle {
+  fill: #666666; }
+
+/* Axes */
+/* line 80, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-axis-line {
+  fill: none;
+  stroke: #ccd6eb; }
+
+/* line 84, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-yaxis .highcharts-axis-line {
+  stroke-width: 0; }
+
+/* line 87, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-axis-title {
+  fill: #666666; }
+
+/* line 90, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-axis-labels {
+  fill: #666666;
+  cursor: default;
+  font-size: 0.9em; }
+
+/* line 95, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-grid-line {
+  fill: none;
+  stroke: #e6e6e6; }
+
+/* line 99, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-xaxis-grid .highcharts-grid-line {
+  stroke-width: 0; }
+
+/* line 102, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-tick {
+  stroke: #ccd6eb; }
+
+/* line 105, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-yaxis .highcharts-tick {
+  stroke-width: 0; }
+
+/* line 108, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-minor-grid-line {
+  stroke: #f2f2f2; }
+
+/* line 111, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-crosshair-thin {
+  stroke-width: 1px;
+  stroke: #cccccc; }
+
+/* line 115, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-crosshair-category {
+  stroke: #ccd6eb;
+  stroke-opacity: 0.25; }
+
+/* Credits */
+/* line 122, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-credits {
+  cursor: pointer;
+  fill: #999999;
+  font-size: 0.7em;
+  transition: fill 250ms, font-size 250ms; }
+
+/* line 128, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-credits:hover {
+  fill: black;
+  font-size: 1em; }
+
+/* Tooltip */
+/* line 134, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-tooltip {
+  cursor: default;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: stroke 150ms; }
+
+/* line 140, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-tooltip text {
+  fill: #333333; }
+
+/* line 143, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-tooltip .highcharts-header {
+  font-size: 0.85em; }
+
+/* line 146, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-tooltip-box {
+  stroke-width: 1px;
+  fill: #f7f7f7;
+  fill-opacity: 0.85; }
+
+/* line 151, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-tooltip-box .highcharts-label-box {
+  fill: #f7f7f7;
+  fill-opacity: 0.85; }
+
+/* line 156, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-selection-marker {
+  fill: #335cad;
+  fill-opacity: 0.25; }
+
+/* line 161, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-graph {
+  fill: none;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round; }
+
+/* line 167, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-state-hover .highcharts-graph {
+  stroke-width: 3; }
+
+/* line 170, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-state-hover path {
+  transition: stroke-width 50;
+  /* quick in */ }
+
+/* line 173, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-state-normal path {
+  transition: stroke-width 250ms;
+  /* slow out */ }
+
+/* Legend hover affects points and series */
+/* line 181, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+g.highcharts-series,
+.highcharts-point,
+.highcharts-markers,
+.highcharts-data-labels {
+  transition: opacity 250ms; }
+
+/* line 187, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-legend-series-active g.highcharts-series:not(.highcharts-series-hover),
+.highcharts-legend-point-active .highcharts-point:not(.highcharts-point-hover),
+.highcharts-legend-series-active .highcharts-markers:not(.highcharts-series-hover),
+.highcharts-legend-series-active .highcharts-data-labels:not(.highcharts-series-hover) {
+  opacity: 0.2; }
+
+/* Series options */
+/* Default colors */
+/* line 195, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-color-0 {
+  fill: #7cb5ec;
+  stroke: #7cb5ec; }
+
+/* line 195, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-color-1 {
+  fill: #434348;
+  stroke: #434348; }
+
+/* line 195, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-color-2 {
+  fill: #90ed7d;
+  stroke: #90ed7d; }
+
+/* line 195, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-color-3 {
+  fill: #f7a35c;
+  stroke: #f7a35c; }
+
+/* line 195, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-color-4 {
+  fill: #8085e9;
+  stroke: #8085e9; }
+
+/* line 195, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-color-5 {
+  fill: #f15c80;
+  stroke: #f15c80; }
+
+/* line 195, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-color-6 {
+  fill: #e4d354;
+  stroke: #e4d354; }
+
+/* line 195, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-color-7 {
+  fill: #2b908f;
+  stroke: #2b908f; }
+
+/* line 195, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-color-8 {
+  fill: #f45b5b;
+  stroke: #f45b5b; }
+
+/* line 195, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-color-9 {
+  fill: #91e8e1;
+  stroke: #91e8e1; }
+
+/* line 202, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-area {
+  fill-opacity: 0.75;
+  stroke-width: 0; }
+
+/* line 206, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-markers {
+  stroke-width: 1px;
+  stroke: #ffffff; }
+
+/* line 210, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-point {
+  stroke-width: 1px; }
+
+/* line 213, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-dense-data .highcharts-point {
+  stroke-width: 0; }
+
+/* line 217, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-data-label {
+  font-size: 0.9em;
+  font-weight: bold; }
+
+/* line 221, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-data-label-box {
+  fill: none;
+  stroke-width: 0; }
+
+/* line 225, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-data-label text {
+  fill: #333333; }
+
+/* line 228, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-data-label-connector {
+  fill: none; }
+
+/* line 231, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-halo {
+  fill-opacity: 0.25;
+  stroke-width: 0; }
+
+/* line 235, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-series:not(.highcharts-pie-series) .highcharts-point-select {
+  fill: #cccccc;
+  stroke: #000000; }
+
+/* line 239, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-column-series rect.highcharts-point {
+  stroke: #ffffff; }
+
+/* line 243, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-column-series .highcharts-point {
+  transition: fill-opacity 250ms; }
+
+/* line 246, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-column-series .highcharts-point-hover {
+  fill-opacity: 0.75;
+  transition: fill-opacity 50ms; }
+
+/* line 250, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-pie-series .highcharts-point {
+  stroke-linejoin: round;
+  stroke: #ffffff; }
+
+/* line 254, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-pie-series .highcharts-point-hover {
+  fill-opacity: 0.75;
+  transition: fill-opacity 50ms; }
+
+/* line 258, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-funnel-series .highcharts-point {
+  stroke-linejoin: round;
+  stroke: #ffffff; }
+
+/* line 262, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-funnel-series .highcharts-point-hover {
+  fill-opacity: 0.75;
+  transition: fill-opacity 50ms; }
+
+/* line 266, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-funnel-series .highcharts-point-select {
+  fill: inherit;
+  stroke: inherit; }
+
+/* line 270, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-pyramid-series .highcharts-point {
+  stroke-linejoin: round;
+  stroke: #ffffff; }
+
+/* line 274, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-pyramid-series .highcharts-point-hover {
+  fill-opacity: 0.75;
+  transition: fill-opacity 50ms; }
+
+/* line 278, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-pyramid-series .highcharts-point-select {
+  fill: inherit;
+  stroke: inherit; }
+
+/* line 282, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-solidgauge-series .highcharts-point {
+  stroke-width: 0; }
+
+/* line 285, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-treemap-series .highcharts-point {
+  stroke-width: 1px;
+  stroke: #e6e6e6;
+  transition: stroke 250ms, fill 250ms, fill-opacity 250ms; }
+
+/* line 290, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-treemap-series .highcharts-point-hover {
+  stroke: #999999;
+  transition: stroke 25ms, fill 25ms, fill-opacity 25ms; }
+
+/* line 295, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-treemap-series .highcharts-above-level {
+  display: none; }
+
+/* line 298, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-treemap-series .highcharts-internal-node {
+  fill: none; }
+
+/* line 301, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-treemap-series .highcharts-internal-node-interactive {
+  fill-opacity: 0.15;
+  cursor: pointer; }
+
+/* line 305, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-treemap-series .highcharts-internal-node-interactive:hover {
+  fill-opacity: 0.75; }
+
+/* Legend */
+/* line 312, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-legend-box {
+  fill: none;
+  stroke-width: 0; }
+
+/* line 316, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-legend-item text {
+  fill: #333333;
+  font-weight: bold;
+  cursor: pointer;
+  stroke-width: 0; }
+
+/* line 322, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-legend-item:hover text {
+  fill: #000000; }
+
+/* line 325, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-legend-item-hidden * {
+  fill: #cccccc !important;
+  stroke: #cccccc !important;
+  transition: fill 250ms; }
+
+/* line 330, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-legend-nav-active {
+  fill: #003399;
+  cursor: pointer; }
+
+/* line 334, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-legend-nav-inactive {
+  fill: #cccccc; }
+
+/* line 337, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-legend-title-box {
+  fill: none;
+  stroke-width: 0; }
+
+/* Loading */
+/* line 343, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-loading {
+  position: absolute;
+  background-color: #ffffff;
+  opacity: 0.5;
+  text-align: center;
+  z-index: 10;
+  transition: opacity 250ms; }
+
+/* line 351, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-loading-hidden {
+  height: 0 !important;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 250ms, height 250ms step-end; }
+
+/* line 357, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-loading-inner {
+  font-weight: bold;
+  position: relative;
+  top: 45%; }
+
+/* Plot bands and polar pane backgrounds */
+/* line 364, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-plot-band, .highcharts-pane {
+  fill: #000000;
+  fill-opacity: 0.05; }
+
+/* line 368, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-plot-line {
+  fill: none;
+  stroke: #999999;
+  stroke-width: 1px; }
+
+/* Highcharts More and modules */
+/* line 375, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-boxplot-box {
+  fill: #ffffff; }
+
+/* line 378, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-boxplot-median {
+  stroke-width: 2px; }
+
+/* line 381, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-bubble-series .highcharts-point {
+  fill-opacity: 0.5; }
+
+/* line 384, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-errorbar-series .highcharts-point {
+  stroke: #000000; }
+
+/* line 387, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-gauge-series .highcharts-data-label-box {
+  stroke: #cccccc;
+  stroke-width: 1px; }
+
+/* line 391, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-gauge-series .highcharts-dial {
+  fill: #000000;
+  stroke-width: 0; }
+
+/* line 395, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-polygon-series .highcharts-graph {
+  fill: inherit;
+  stroke-width: 0; }
+
+/* line 399, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-waterfall-series .highcharts-graph {
+  stroke: #333333;
+  stroke-dasharray: 1, 3; }
+
+/* line 403, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-sankey-series .highcharts-point {
+  stroke-width: 0; }
+
+/* line 406, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-sankey-series .highcharts-link {
+  transition: fill 250ms, fill-opacity 250ms;
+  fill-opacity: 0.5; }
+
+/* line 410, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-sankey-series .highcharts-point-hover.highcharts-link {
+  transition: fill 50ms, fill-opacity 50ms;
+  fill-opacity: 1; }
+
+/* Highstock */
+/* line 416, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-navigator-mask-outside {
+  fill-opacity: 0; }
+
+/* line 419, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-navigator-mask-inside {
+  fill: #6685c2;
+  /* navigator.maskFill option */
+  fill-opacity: 0.25;
+  cursor: ew-resize; }
+
+/* line 424, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-navigator-outline {
+  stroke: #cccccc;
+  fill: none; }
+
+/* line 428, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-navigator-handle {
+  stroke: #cccccc;
+  fill: #f2f2f2;
+  cursor: ew-resize; }
+
+/* line 433, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-navigator-series {
+  fill: #335cad;
+  stroke: #335cad; }
+
+/* line 437, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-navigator-series .highcharts-graph {
+  stroke-width: 1px; }
+
+/* line 440, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-navigator-series .highcharts-area {
+  fill-opacity: 0.05; }
+
+/* line 443, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-navigator-xaxis .highcharts-axis-line {
+  stroke-width: 0; }
+
+/* line 446, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-navigator-xaxis .highcharts-grid-line {
+  stroke-width: 1px;
+  stroke: #e6e6e6; }
+
+/* line 450, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-navigator-xaxis.highcharts-axis-labels {
+  fill: #999999; }
+
+/* line 453, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-navigator-yaxis .highcharts-grid-line {
+  stroke-width: 0; }
+
+/* line 456, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-scrollbar-thumb {
+  fill: #cccccc;
+  stroke: #cccccc;
+  stroke-width: 1px; }
+
+/* line 461, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-scrollbar-button {
+  fill: #e6e6e6;
+  stroke: #cccccc;
+  stroke-width: 1px; }
+
+/* line 466, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-scrollbar-arrow {
+  fill: #666666; }
+
+/* line 469, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-scrollbar-rifles {
+  stroke: #666666;
+  stroke-width: 1px; }
+
+/* line 473, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-scrollbar-track {
+  fill: #f2f2f2;
+  stroke: #f2f2f2;
+  stroke-width: 1px; }
+
+/* line 478, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-button {
+  fill: #f7f7f7;
+  stroke: #cccccc;
+  cursor: default;
+  stroke-width: 1px;
+  transition: fill 250ms; }
+
+/* line 485, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-button text {
+  fill: #333333; }
+
+/* line 488, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-button-hover {
+  transition: fill 0ms;
+  fill: #e6e6e6;
+  stroke: #333333; }
+
+/* line 493, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-button-pressed {
+  font-weight: bold;
+  fill: #e6ebf5;
+  stroke: #335cad; }
+
+/* line 498, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-button-disabled text {
+  fill: #cccccc; }
+
+/* line 501, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-range-selector-buttons .highcharts-button {
+  stroke-width: 0; }
+
+/* line 504, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-range-label rect {
+  fill: none; }
+
+/* line 507, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-range-label text {
+  fill: #666666; }
+
+/* line 510, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-range-input rect {
+  fill: none; }
+
+/* line 513, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-range-input text {
+  fill: #333333; }
+
+/* line 516, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+input.highcharts-range-selector {
+  position: absolute;
+  border: 0;
+  width: 1px;
+  /* Chrome needs a pixel to see it */
+  height: 1px;
+  padding: 0;
+  text-align: center;
+  left: -9em;
+  /* #4798 */ }
+
+/* line 525, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-crosshair-label text {
+  fill: #ffffff;
+  font-size: 1.1em; }
+
+/* line 529, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-crosshair-label .highcharts-label-box {
+  fill: inherit; }
+
+/* line 534, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-candlestick-series .highcharts-point {
+  stroke: #000000;
+  stroke-width: 1px; }
+
+/* line 538, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-candlestick-series .highcharts-point-up {
+  fill: #ffffff; }
+
+/* line 541, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-ohlc-series .highcharts-point-hover {
+  stroke-width: 3px; }
+
+/* line 544, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-flags-series .highcharts-point .highcharts-label-box {
+  stroke: #999999;
+  fill: #ffffff;
+  transition: fill 250ms; }
+
+/* line 549, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-flags-series .highcharts-point-hover .highcharts-label-box {
+  stroke: #000000;
+  fill: #ccd6eb; }
+
+/* line 553, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-flags-series .highcharts-point text {
+  fill: #000000;
+  font-size: 0.9em;
+  font-weight: bold; }
+
+/* Highmaps */
+/* line 560, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-map-series .highcharts-point {
+  transition: fill 500ms, fill-opacity 500ms, stroke-width 250ms;
+  stroke: #cccccc; }
+
+/* line 564, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-map-series .highcharts-point-hover {
+  transition: fill 0ms, fill-opacity 0ms;
+  fill-opacity: 0.5;
+  stroke-width: 2px; }
+
+/* line 569, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-mapline-series .highcharts-point {
+  fill: none; }
+
+/* line 572, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-heatmap-series .highcharts-point {
+  stroke-width: 0; }
+
+/* line 575, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-map-navigation {
+  font-size: 1.3em;
+  font-weight: bold;
+  text-align: center; }
+
+/* line 580, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-coloraxis {
+  stroke-width: 0; }
+
+/* line 583, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-coloraxis-marker {
+  fill: #999999; }
+
+/* line 586, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-null-point {
+  fill: #f7f7f7; }
+
+/* 3d charts */
+/* line 591, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-3d-frame {
+  fill: transparent; }
+
+/* Exporting module */
+/* line 596, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-contextbutton {
+  fill: #ffffff;
+  /* needed to capture hover */
+  stroke: none;
+  stroke-linecap: round; }
+
+/* line 601, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-contextbutton:hover {
+  fill: #e6e6e6;
+  stroke: #e6e6e6; }
+
+/* line 605, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-button-symbol {
+  stroke: #666666;
+  stroke-width: 3px; }
+
+/* line 609, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-menu {
+  border: 1px solid #999999;
+  background: #ffffff;
+  padding: 5px 0;
+  box-shadow: 3px 3px 10px #888; }
+
+/* line 615, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-menu-item {
+  padding: 0.5em 1em;
+  background: none;
+  color: #333333;
+  cursor: pointer;
+  transition: background 250ms, color 250ms; }
+
+/* line 622, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-menu-item:hover {
+  background: #335cad;
+  color: #ffffff; }
+
+/* Drilldown module */
+/* line 628, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-drilldown-point {
+  cursor: pointer; }
+
+/* line 631, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-drilldown-data-label text, .highcharts-drilldown-axis-label {
+  cursor: pointer;
+  fill: #003399;
+  font-weight: bold;
+  text-decoration: underline; }
+
+/* No-data module */
+/* line 639, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-no-data text {
+  font-weight: bold;
+  font-size: 12px;
+  fill: #666666; }
+
+/* Drag-panes module */
+/* line 646, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-axis-resizer {
+  cursor: ns-resize;
+  stroke: black;
+  stroke-width: 2px; }
+
+/* Bullet type series */
+/* line 653, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-bullet-target {
+  stroke-width: 0; }
+
+/* Lineargauge type series */
+/* line 658, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-lineargauge-target {
+  stroke-width: 1px;
+  stroke: #333333; }
+
+/* line 662, C:/xampp/htdocs/stellarhse/public/bower_components/highcharts/css/highcharts.scss */
+.highcharts-lineargauge-target-line {
+  stroke-width: 1px;
+  stroke: #333333; }
+
+/*# sourceMappingURL=highcharts.css.map */

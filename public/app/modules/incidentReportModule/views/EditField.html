@@ -1,0 +1,81 @@
+<div class="modal-header">
+    <h3 class="modal-title">Edit field</h3>
+</div>
+<div class="modal-body">
+<div class="row">
+    <div class="form-group col-md-6">
+        <label for="">Field label</label>
+        <input type="text" class="form-control">
+    </div>
+
+
+
+    <div class="form-group col-md-6">
+        <label for="">Help title</label>
+        <input type="text" class="form-control">
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="form-group col-md-6">
+        <label for="">Field type</label>
+        <input type="text" class="form-control" readonly>
+    </div>
+
+
+
+    <div class="form-group col-md-6">
+        <label for="">Field description</label>
+        <input type="text" class="form-control" readonly>
+    </div>
+    </div>
+    
+    <div class="row">
+     <div class="form-group col-md-12 noHeight">
+        <label for="">Help</label>
+        <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" class="form-control"></textarea>
+    </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row radioStyle">
+    <div class="form-group col-md-6">
+        <label for="">Mandatory</label>
+       <span> <input type="radio" > <span>yes</span></span>
+       <span><input type="radio" >  <span>no</span></span>
+    </div>
+
+
+
+    <div class="form-group col-md-6">
+        <label for="">Hidden</label>
+        <span><input type="radio" > <span> yes</span></span>
+        <span><input type="radio" > <span> no</span></span>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-12 grid-style popGrid">
+       
+        
+        <div class="toolbar">
+        <a href="#/addPeople"><i class="fa fa-plus"></i></a>
+        <a href="#/editPeople"><i class="fa fa-edit"></i></a>
+        <a href="#/"><i class="fa fa-close"></i></a>
+        <a href="" ng-click="downloadCSV()"><i class="fa fa-file-excel-o"></i></a>
+        <a href="" ng-click="downloadPDF()"><i class="fa fa-file-pdf-o"></i></a>
+        <!--<a href="" ng-click="clearFilters()"><i class="fa fa-trash-o"></i></a>-->
+    </div>
+        
+          <div id="grid1" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns  ></div>
+    <div ng-if='columnChanged'>
+        Column Visibility Changed - name: {{ columnChanged.name }} visible: {{ columnChanged.visible }}
+    </div>
+    
+        
+    </div>
+
+  </div>
+
+ <button class="btn btn-primary pull-right" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary pull-right" type="button" ng-click="ok()">Submit</button>
+</div>
+

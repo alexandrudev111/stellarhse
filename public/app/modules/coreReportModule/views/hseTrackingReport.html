@@ -1,0 +1,17 @@
+<h2>HSE tracking tools <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                           alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+
+<p class="startPoint">Select a recent report from the table below or use the links in the left navigation  for additional options</p>
+<!--
+<div class="alert alert-info startPoint">
+    Comming Soon... fun and useful facts about tracking HSE activities. 
+</div>
+-->
+
+<h3>All recent reports</h3>
+<div>
+    <div class="toolbar">
+
+    </div> 
+    <div id="grid1" ui-grid="allRescentReportOptions" ui-grid-exporter ui-grid-selection ui-grid-move-columns class="grid" ui-grid-pagination="" ui-grid-auto-resize ui-grid-resize-columns></div>
+</div>

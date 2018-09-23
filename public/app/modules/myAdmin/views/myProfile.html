@@ -1,0 +1,201 @@
+<h2>My Profile <img ng-controller="navController"   class="thumb pull-right img-{{currentOrg.org_id}}" src="{{currentOrg.logourl}}" 
+                    alt="{{currentOrg.org_name}}" title="{{currentOrg.org_name}}" ></h2>
+<div class="content">
+
+    <form action="" class="form-inline addPeople formStylePadding ng-pristine ng-scope ng-valid-mask ng-invalid ng-invalid-required">
+        <div class="form-style">
+            <h2>Person details:</h2>
+
+            <div class="form-group">
+                <label class="ng-binding">First Name:</label>
+                <input type="text" class="form-control" ng-required="" ng-model="selectedUser.first_name">
+            </div>
+
+
+            <div class="form-group">
+                <label class="ng-binding">Last Name:</label>
+                <input type="text" class="form-control"  required="" ng-model="selectedUser.last_name">
+            </div>
+            <div class="form-group">
+                <label class="ng-binding">Company:</label>
+                <input type="text" class="form-control" ng-model="selectedUser.company">
+            </div>
+            <div class="form-group">
+                <label class="ng-binding">Crew assignment:</label>
+                <select class="form-control" ng-options="cl.crew_id as cl.crew_name for cl in crewList"  
+                    ng-model="selectedUser.crew_id" ng-disabled="disabled">
+                <option ng-model="selectedUser.crew_id" value="" selected>Please select one.</option>
+            </select>                    
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="ng-binding">Position:</label>
+                <input type="text" class="form-control" required ng-model="selectedUser.position">
+            </div>
+
+
+            <div class="form-group">
+                <label class="ng-binding">Classification:</label>
+                <select class="form-control"  ng-disabled="disabled" ng-options="cf.classification_id  as cf.classification_name for cf in classificationList"  
+                    ng-model="selectedUser.classification_id">
+                <option ng-model="selectedUser.classification_id" value="" selected>Please select one.</option>
+            </select>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label class="ng-binding">Department:</label>
+                <select class="form-control"  ng-disabled="disabled" ng-options="dept.department_responsible_id  as dept.department_responsible_name for dept in DepartmentList"  
+                    ng-model="selectedUser.department">
+                <option ng-model="selectedUser.department" value="" selected>Please select one.</option>
+            </select>
+            </div>
+
+            <div class="form-group">
+                <label class="ng-binding">Role:</label>
+                <select class="form-control"  ng-disabled="disabled" ng-options="rl.role_id  as rl.role_name for rl in RoleList"  
+                    ng-model="selectedUser.role_id">
+                <option ng-model="selectedUser.role_id" value="" selected>Please select one.</option>
+            </select>
+            </div>
+
+
+            <div class="form-group">
+                <label class="ng-binding"> Employee ID:</label>
+
+                <input type="text" class="form-control" ng-model="selectedUser.emp_id">           
+            </div>
+            <div class="form-group">
+                <label class="ng-binding">Phone:</label>
+                <input type="text" class="form-control" ui-mask="999-999-9999" ng-model="selectedUser.primary_phone">         
+            </div>
+
+            <div class="form-group">
+                <label class="ng-binding">Alternate Phone:</label>
+                <input type="text" class="form-control" ui-mask="999-999-9999" ng-model="selectedUser.alternate_phone">         
+            </div>
+
+            <div class="form-group">
+                <label class="ng-binding">Email:</label>
+                <input type="text" class="form-control" ng-model="selectedUser.user_name"> 
+            </div>
+
+            <div class="form-group">
+                <label class="ng-binding">Supervisor:</label>
+                <ui-select class="form-control"  ng-model="selectedUser.supervisor_id" theme="bootstrap" >
+                    <ui-select-match placeholder="Enter Supervisor Name">{{$select.selected.full_name|| selectedUser.supervisor_name}}</ui-select-match>
+                    <ui-select-choices refresh="getActiveEmployees($select.search)" refresh-delay="0" 
+                                       repeat="emp.employee_id as emp in activeEmployees | filter: $select.search ">
+                        <div>{{emp.full_name}}</div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+
+
+        <div class="packages subHeadingStyle borderTop">
+
+            <div class="form-style">
+                <h2>Location details:</h2>
+                <div class="clearfix"></div>
+                <div class="form-group locationWidth">
+                    <label class="ng-binding">Country</label>
+                    <select class="form-control" required    ng-disabled="disabled"    ng-model="selectedUser.country_id"
+                            ng-options="c.country_id as c.country_name for c in countries"          >                     
+                    </select>       
+                </div>
+
+
+
+                <div class="form-group locationWidth">
+                    <label class="ng-binding"> Province/State:</label>
+
+                    <select class="form-control"     ng-disabled="disabled"    ng-model="selectedUser.province_id" 
+                    ng-options="p.province_id as p.province_name for p in provinces"   > 
+
+            </select>       
+                </div>
+
+
+                <div class="form-group locationWidth">
+                    <label class="ng-binding"> City:</label>
+
+                   <select class="form-control" ng-disabled="disabled"    ng-model="selectedUser.city_id"  ng-options="c.city_id as c.city_name for c in cities" > 
+            </select>        
+                </div>
+
+                <div class="form-group locationWidth">
+                    <label class="ng-binding">Address:</label>
+                    <input type="text" class="form-control" ng-model="selectedUser.address"> 
+                </div>
+
+                <div class="form-group">
+                    <label class="ng-binding">Postal/Zip Code:</label>
+                    <input type="text" class="form-control" ng-model="selectedUser.postal_code"> 
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="borderTop">
+
+
+            <div class="changePassword subHeadingStyle form-style">
+                <h2>Change Password</h2>
+                <div class="form-group">
+                    <label class="ng-binding">Old Password:</label>
+                    <input type="password" class="form-control"  ng-model="currentPass"> 
+                </div>
+
+                <div class="form-group">
+                    <label class="ng-binding">New Password:</label>
+                    <input type="password" class="form-control" ng-model="newPass"> 
+                </div>
+
+
+                <div class="form-group">
+                    <label class="ng-binding">Repeat Password:</label>
+                    <input type="password" class="form-control" ng-model="confirmPass"> 
+                </div>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="borderTop paddig">
+
+
+            <div class="form-group ">
+                <label class="ng-binding"> User Group: </label>
+                <select class="form-control" required ng-disabled="true" ng-options="group.group_id  as group.group_name for group in GroupList"  
+                    ng-model="selectedUser.group_id">
+                <option ng-model="selectedUser.group_id" value="" selected >Please select one.</option>
+            </select>
+
+            </div>
+
+            <div class="form-group ">
+                <label class="ng-binding"> User Name: </label>
+                <input class="form-control " ng-readonly="true"  readonly="readonly" type="text" ng-model="selectedUser.user_name">
+            </div>
+
+
+        </div>
+
+        <div class="clearfix"></div>
+
+
+
+        <button class="btn btn-primary pull-right" ng-click="updateProfile()">Submit</button>
+
+        <button class="btn btn-primary pull-right">Cancel</button>
+    </form>
+
+</div>
+

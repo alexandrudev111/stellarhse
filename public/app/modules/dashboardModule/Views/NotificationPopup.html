@@ -1,0 +1,67 @@
+<div class="modal-header">
+    <h3 class="modal-title">View notification  actions</h3>
+</div>
+<div class="modal-body labelStyle">
+   <div class="form-style">
+  
+     <div class="form-group col-md-6 popupDate">
+        <label for="">Date sent:</label>
+        <p class="input-group">
+           <input type="text" class="form-control" placeholder="Select" my-datepicker  disabled>
+            <span class="input-group-btn calenderIcon">
+            <button type="button" class="btn btn-default " ><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+        </p>
+    </div>
+    
+ <div class="form-group col-md-6">
+        <label for="">Sent from:</label>
+        <input type="text" class="form-control" ng-model="" disabled>
+    </div>
+    
+    
+     <div class="form-group col-md-6">
+        <label for="">Sent to:</label>
+        <input type="text" class="form-control" ng-model="" disabled>
+    </div>
+    
+    
+        <div class="form-group col-md-6">
+        <label for="">CC:</label>
+        <input type="text" class="form-control" ng-model="" disabled>
+    </div>
+    
+    
+
+    <div class="form-group  col-md-12">
+        <label for="">subject line:</label>
+        <input type="text" class="form-control" ng-model="" disabled>
+    </div>
+    
+    <div class="form-group attachments  col-md-12">
+        <label for="">Attachments:</label>
+        <div  class="form-control" disabled> </div>
+    </div>
+    
+     <div class="form-group autoHeight col-md-12">
+        <label for="">Content:</label>
+        <textarea  class="form-control" disabled> </textarea>
+    </div>
+    
+    
+    
+
+</div>
+    <div class="clearfix"></div>
+
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="">Make as Read</button>
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="ok()">Cancel</button>
+
+
+    
+    <button class="btn btn-primary pull-right" type="button" ng-click="ok()">Print </button>
+
+    <button class="btn btn-primary pull-right" type="button" ng-click="ok()">Open related report</button>
+</div>
